@@ -47,7 +47,7 @@ public class Reset extends ResetHelper
 		run("C:\\sabs_zapd\\bin\\sabs_set.exe","C:\\sabs_zapd\\bin");	
 		
 		SABSSetwindow().waitForExistence(15.0,2.0);
-		
+		SABSSetwindow().maximize();
 		Menutree().doubleClick(atName("Управление БД"));		
 			
 		Menutree().doubleClick(atName("Восстановление БД из страховой копии БД"));

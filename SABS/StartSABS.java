@@ -43,7 +43,7 @@ public class StartSABS extends StartSABSHelper
 
 			// Window: purs_loader.exe: 044582002 ос аюмйю пняяхх гюоюдмне
 			SABSwindow().waitForExistence(15.0, 2.0);
-
+			SABSwindow().maximize();
 		} catch(Exception e) {
 			e.printStackTrace();
 			Log.msg(e);
