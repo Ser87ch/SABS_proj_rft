@@ -23,7 +23,7 @@ public class StartSABS extends StartSABSHelper
 			String user = (String) args[0];
 			String pwd = (String) args[1];
 			String sign = (String) args[2];
-			run("C:\\sabs_zapd\\bin\\purs_loader.exe","C:\\sabs_zapd\\bin");
+			run(Settings.path + "\\purs_loader.exe",Settings.path + "\\bin");
 			Log.msg("САБС запущен.");
 
 			Loginwindow().inputKeys(user + "{ENTER}" + pwd + "{ENTER}");

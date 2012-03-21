@@ -39,8 +39,7 @@ public class NewData extends NewDataHelper
 		
 		Init.mkDataFolder();
 		
-		Settings.readXML(Settings.testProj + "default\\general.xml", true);
-		Settings.loadFromDB();
+		Settings.readXML(Settings.testProj + "default\\general.xml");
 		Settings.GenDoc.readXML(Settings.testProj + "default\\gen\\gendoc.xml");
 
 		PayDocList pl = new PayDocList();

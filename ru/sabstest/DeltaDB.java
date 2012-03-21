@@ -422,10 +422,8 @@ public class DeltaDB {
 
 	public static void createXMLSettings()
 	{
-		createXMLSettings(Settings.fullfolder + "settings\\deltadb.xml");
+		createXMLSettings(Settings.testProj + "settings\\deltadb.xml");
 	}
-
-
 
 	public static void readXMLSettings(String src)
 	{		

@@ -44,7 +44,7 @@ public class RunM extends RunMHelper
 			Settings.testProj = (String) args[0];
 
 		Init.load();
-		Settings.readXML(Settings.fullfolder + "settings\\general.xml");	
+		Settings.readXML(Settings.testProj + "settings\\general.xml");	
 
 		if(isreset)
 			callScript("SABS.Reset");
@@ -62,7 +62,7 @@ public class RunM extends RunMHelper
 		if(isdeltadb)
 		{
 			Log.msg("Начало логирования изменений в БД.");
-			DeltaDB.readXMLSettings(Settings.fullfolder + "settings\\deltadb.xml");
+			DeltaDB.readXMLSettings(Settings.testProj + "settings\\deltadb.xml");
 			DeltaDB.createDBLog();
 		}
 
@@ -71,7 +71,7 @@ public class RunM extends RunMHelper
 		if(iscontrspack)
 		{
 			Log.msg("Запущен скрипт по контролю S пакета.");
-			Settings.ContrES.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\contres.xml");
+			Settings.ContrES.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\contres.xml");
 			callScript("SABS.VFD",new String[]{Settings.ContrES.key});
 			callScript("SABS.StartSABS",new String[]{Settings.ContrES.user, Settings.ContrES.pwd, Settings.ContrES.sign});
 			callScript("ObrProvod.Vvod.ContrSpack");
@@ -82,7 +82,7 @@ public class RunM extends RunMHelper
 		if(isobrspack)
 		{
 			Log.msg("Запущен скрипт по обработке S пакета.");
-			Settings.FormES.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\formes.xml");
+			Settings.FormES.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\formes.xml");
 			callScript("SABS.VFD",new String[]{Settings.FormES.key});
 			callScript("SABS.StartSABS",new String[]{Settings.FormES.user, Settings.FormES.pwd, Settings.FormES.sign});
 			callScript("ObrProvod.Vvod.ObrSpack");			
@@ -94,7 +94,7 @@ public class RunM extends RunMHelper
 		if(iscontrrpack)
 		{
 			Log.msg("Запущен скрипт по контролю R пакета.");
-			Settings.ContrES.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\contres.xml");
+			Settings.ContrES.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\contres.xml");
 			callScript("SABS.VFD",new String[]{Settings.ContrES.key});
 			callScript("SABS.StartSABS",new String[]{Settings.ContrES.user, Settings.ContrES.pwd, Settings.ContrES.sign});
 			callScript("ObrProvod.Vvod.ContrRpack");

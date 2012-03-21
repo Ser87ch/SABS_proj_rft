@@ -66,7 +66,7 @@ public class Settings{
 
 	public static void createXML()
 	{
-		createXML(Settings.fullfolder + "settings\\general.xml");
+		createXML(Settings.testProj + "settings\\general.xml");
 	}
 
 	public static void createXML(String fl)
@@ -78,28 +78,14 @@ public class Settings{
 		XML.createNode(doc, rootElement, "server", Settings.server);			
 		XML.createNode(doc, rootElement, "db", Settings.db);
 		XML.createNode(doc, rootElement, "user", Settings.user);
-		XML.createNode(doc, rootElement, "pwd", Settings.pwd);
-		XML.createNode(doc, rootElement, "path", Settings.path);
-		XML.createNode(doc, rootElement, "bik", Settings.bik);			
-		//	XML.createNode(doc, rootElement, "ks", Settings.ks);
-		XML.createNode(doc, rootElement, "operdate", Settings.operDate);
-		XML.createNode(doc, rootElement, "testproj", Settings.testProj);
-		XML.createNode(doc, rootElement, "folder", Settings.folder);
-		XML.createNode(doc, rootElement, "fullfolder", Settings.fullfolder);
-		XML.createNode(doc, rootElement, "datafolder", Settings.datafolder);
+		XML.createNode(doc, rootElement, "pwd", Settings.pwd);		
 
 		XML.createXMLFile(doc, fl);
 		Log.msg("XML c общими настройками " + fl + " создан.");
 		XML.validate(Settings.testProj + "XMLSchema\\settings\\general.xsd", fl);
 	}
 
-
-
 	public static void readXML(String src)
-	{
-		readXML(src, false);
-	}
-	public static void readXML(String src, boolean init)
 	{
 		XML.validate(Settings.testProj + "XMLSchema\\settings\\general.xsd",src);
 
@@ -108,18 +94,8 @@ public class Settings{
 		db = XML.getChildValueString("db", eElement);	
 		user = XML.getChildValueString("user", eElement);	
 		pwd = XML.getChildValueString("pwd", eElement);
-		testProj = XML.getChildValueString("testproj", eElement);	
-		if(!init)
-		{						
-			path = XML.getChildValueString("path", eElement);	
-			bik = XML.getChildValueString("bik", eElement);	
-			operDate = XML.getChildValueDate("operdate", eElement);	
-
-			folder = XML.getChildValueString("folder", eElement);	
-			fullfolder = XML.getChildValueString("fullfolder", eElement);
-			datafolder = XML.getChildValueString("datafolder", eElement);
-		}
-
+					
+		Settings.loadFromDB();
 		Log.msg("XML c общими настройками " + src + " загружен в программу.");		
 	}
 
@@ -132,7 +108,7 @@ public class Settings{
 
 		public static void createXML()
 		{
-			createXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\gendoc.xml");
+			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\gendoc.xml");
 		}
 
 		public static void createXML(String fl)
@@ -172,7 +148,7 @@ public class Settings{
 
 		public static void createXML()
 		{
-			createXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\pervvod.xml");
+			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\pervvod.xml");
 		}
 
 		public static void createXML(String fl)
@@ -216,7 +192,7 @@ public class Settings{
 
 		public static void createXML()
 		{
-			createXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\contrvvod.xml");
+			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\contrvvod.xml");
 		}
 
 		public static void createXML(String fl)
@@ -261,7 +237,7 @@ public class Settings{
 
 		public static void createXML()
 		{
-			createXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\formes.xml");
+			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\formes.xml");
 		}
 
 		public static void createXML(String fl)
@@ -305,7 +281,7 @@ public class Settings{
 
 		public static void createXML()
 		{
-			createXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\contres.xml");	
+			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\contres.xml");	
 		}
 
 		public static void createXML(String fl)
@@ -348,7 +324,7 @@ public class Settings{
 
 		public static void createXML()
 		{
-			createXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\genrpack.xml");
+			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\genrpack.xml");
 		}
 
 		public static void createXML(String fl)
@@ -398,7 +374,7 @@ public class Settings{
 
 		public static void createXML()
 		{
-			createXML(Settings.fullfolder + "settings\\" + Settings.obrfolder + "\\genspack.xml");
+			createXML(Settings.testProj + "settings\\" + Settings.obrfolder + "\\genspack.xml");
 		}
 
 		public static void createXML(String fl)

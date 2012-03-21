@@ -43,7 +43,7 @@ public class Run extends RunHelper
 			Settings.testProj = (String) args[0];
 
 		Init.load();
-		Settings.readXML(Settings.fullfolder + "settings\\general.xml");				
+		Settings.readXML(Settings.testProj + "settings\\general.xml");				
 
 		if(isreset)
 			callScript("SABS.Reset");
@@ -52,7 +52,7 @@ public class Run extends RunHelper
 		if(isdeltadb)
 		{
 			Log.msg("Начало логирования изменений в БД.");
-			DeltaDB.readXMLSettings(Settings.fullfolder + "settings\\deltadb.xml");
+			DeltaDB.readXMLSettings(Settings.testProj + "settings\\deltadb.xml");
 			DeltaDB.createDBLog();
 		}
 
@@ -67,7 +67,7 @@ public class Run extends RunHelper
 		if(ispervvod)
 		{
 			Log.msg("Запущен скрипт по первичному вводу документов.");
-			Settings.PerVvod.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\pervvod.xml");
+			Settings.PerVvod.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\pervvod.xml");
 			callScript("SABS.VFD",new String[]{Settings.PerVvod.key});
 			callScript("SABS.StartSABS",new String[]{Settings.PerVvod.user, Settings.PerVvod.pwd, Settings.PerVvod.sign});		
 			callScript("PrProvod.PervVvod.Vvod", new Object[]{ pl});
@@ -79,7 +79,7 @@ public class Run extends RunHelper
 		if(iscontrvvod)
 		{
 			Log.msg("Запущен скрипт по контрольному вводу документов.");
-			Settings.ContrVvod.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\contrvvod.xml");
+			Settings.ContrVvod.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\contrvvod.xml");
 			callScript("SABS.VFD",new String[]{Settings.ContrVvod.key});
 			callScript("SABS.StartSABS",new String[]{Settings.ContrVvod.user, Settings.ContrVvod.pwd, Settings.ContrVvod.sign});
 			callScript("PrProvod.PervVvod.ContrVvod", new Object[]{ pl});
@@ -115,7 +115,7 @@ public class Run extends RunHelper
 		if(isformes)
 		{
 			Log.msg("Запущен скрипт по формирования ЭС.");
-			Settings.FormES.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\formes.xml");
+			Settings.FormES.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\formes.xml");
 			callScript("SABS.VFD",new String[]{Settings.FormES.key});
 			callScript("SABS.StartSABS",new String[]{Settings.FormES.user, Settings.FormES.pwd, Settings.FormES.sign});
 			callScript("PrProvod.PervVvod.FormES");
@@ -126,7 +126,7 @@ public class Run extends RunHelper
 		if(iscontres)
 		{
 			Log.msg("Запущен скрипт по контролю ЭС.");
-			Settings.ContrES.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\contres.xml");
+			Settings.ContrES.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\contres.xml");
 			callScript("SABS.VFD",new String[]{Settings.ContrES.key});
 			callScript("SABS.StartSABS",new String[]{Settings.ContrES.user, Settings.ContrES.pwd, Settings.ContrES.sign});
 			callScript("PrProvod.PervVvod.ContrES");
@@ -165,7 +165,7 @@ public class Run extends RunHelper
 		if(isgenrpack)
 		{
 			Log.msg("Запущен скрипт по созданию R пакета.");
-			Settings.GenRpack.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\genrpack.xml");
+			Settings.GenRpack.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\genrpack.xml");
 
 			Pack.createRpack();
 
@@ -187,14 +187,14 @@ public class Run extends RunHelper
 		if(isdeltadbr)
 		{
 			Log.msg("Начало логирования изменений в БД.");
-			DeltaDB.readXMLSettings(Settings.fullfolder + "settings\\deltadb.xml");
+			DeltaDB.readXMLSettings(Settings.testProj + "settings\\deltadb.xml");
 			DeltaDB.createDBLog();
 		}
 		//контроль R-пакета
 		if(iscontrrpack)
 		{
 			Log.msg("Запущен скрипт по контролю R пакета.");
-			Settings.ContrES.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\contres.xml");
+			Settings.ContrES.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\contres.xml");
 			sleep(5);
 			callScript("SABS.VFD",new String[]{Settings.ContrES.key});
 			callScript("SABS.StartSABS",new String[]{Settings.ContrES.user, Settings.ContrES.pwd, Settings.ContrES.sign});
@@ -206,7 +206,7 @@ public class Run extends RunHelper
 		if(isobrrpack)
 		{
 			Log.msg("Запущен скрипт по обработке R пакета.");
-			Settings.FormES.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\formes.xml");
+			Settings.FormES.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\formes.xml");
 			callScript("SABS.VFD",new String[]{Settings.FormES.key});
 			callScript("SABS.StartSABS",new String[]{Settings.FormES.user, Settings.FormES.pwd, Settings.FormES.sign});
 			callScript("PrProvod.PervVvod.ObrRpack");			

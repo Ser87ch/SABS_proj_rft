@@ -44,7 +44,7 @@ public class Reset extends ResetHelper
 		Pack.clearFolder(new File(Settings.path + "\\post\\oPuI"));
 		Log.msg("Папка " + Settings.path + "\\post\\oPuI очищена.");
 		
-		run("C:\\sabs_zapd\\bin\\sabs_set.exe","C:\\sabs_zapd\\bin");	
+		run(Settings.path + "\\bin\\sabs_set.exe",Settings.path + "\\bin");	
 		
 		SABSSetwindow().waitForExistence(15.0,2.0);
 		SABSSetwindow().maximize();

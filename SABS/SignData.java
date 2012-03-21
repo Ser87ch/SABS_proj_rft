@@ -39,8 +39,7 @@ public class SignData extends SignDataHelper
 		
 		Log.createGen();
 		
-		Settings.readXML(Settings.testProj + "default\\general.xml", true);
-		Settings.loadFromDB();
+		Settings.readXML(Settings.testProj + "default\\general.xml");		
 		Settings.GenSpack.readXML(Settings.testProj + "default\\gen\\genspack.xml");		
 		
 		File dir = new File(Settings.testProj + "data\\");
