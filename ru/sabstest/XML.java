@@ -79,7 +79,7 @@ public class XML {
 			Log.msg(e);
 		}
 		return root;
-		
+
 	}
 
 	public static void validate(String xsd, String xml)
@@ -104,35 +104,53 @@ public class XML {
 
 	public static String getChildValueString(String sTag, Element root) 
 	{
-		String s;
-		s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
-		return s == null ? "" : s;
+		try{
+			String s;
+			s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
+			return s == null ? "" : s;
+		}catch(Exception e){
+			return "";
+		}
 	}
 
 	public static int getChildValueInt(String sTag, Element root) 
 	{
-		String s;
-		s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
-		return s == null ? 0 : Integer.parseInt(s);
+		try{
+			String s;
+			s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
+			return s == null ? 0 : Integer.parseInt(s);
+		}catch(Exception e){
+			return 0;
+		}
 	}
 
 	public static Date getChildValueDate(String sTag, Element root) 
 	{
-		String s;
-		s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
-		return s == null ? new Date(0) : Date.valueOf(s);
+		try{
+			String s;
+			s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
+			return s == null ? new Date(0) : Date.valueOf(s);
+		}catch(Exception e){
+			return new Date(0);
+		}
 	}
 
-	public static float getChildValueFloat(String sTag, Element root) {
-		String s;
-		s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
-		return s == null ? 0 : Float.parseFloat(s);
+	public static float getChildValueFloat(String sTag, Element root) 
+	{
+		try{
+			String s;
+			s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
+			return s == null ? 0 : Float.parseFloat(s);
+		}catch(Exception e){
+			return 0;
+		}
 	}
 
 	public static Element createNode(Document doc, Element rootElement, String tag, String value)
 	{
 		Element el = doc.createElement(tag);
-		el.appendChild(doc.createTextNode(value));
+		if(value != null)
+			el.appendChild(doc.createTextNode(value));
 		rootElement.appendChild(el);
 		return el;
 	}
@@ -140,7 +158,8 @@ public class XML {
 	public static Element createNode(Document doc, Element rootElement, String tag, Date value)
 	{
 		Element el = doc.createElement(tag);
-		el.appendChild(doc.createTextNode(new SimpleDateFormat("yyyy-MM-dd").format(value)));
+		if(value != null)
+			el.appendChild(doc.createTextNode(new SimpleDateFormat("yyyy-MM-dd").format(value)));
 		rootElement.appendChild(el);
 		return el;
 	}
@@ -164,7 +183,8 @@ public class XML {
 	public static Element createNode(Document doc, Element rootElement, String tag, VidPlat value)
 	{
 		Element el = doc.createElement(tag);
-		el.appendChild(doc.createTextNode(value.toString()));
+		if(value != null)
+			el.appendChild(doc.createTextNode(value.toString()));
 		rootElement.appendChild(el);
 		return el;
 	}
