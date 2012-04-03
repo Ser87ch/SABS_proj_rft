@@ -1,6 +1,9 @@
 package ru.sabstest;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -20,6 +23,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
+import org.apache.xerces.impl.dv.util.Base64;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -237,4 +241,26 @@ public class XML {
 		if(value != null && !value.equals(""))
 			el.setAttribute(attrName, value);
 	}
+
+	public static void createXMLFromBase64(String src, String trg)
+	{
+		Element root = XML.getXMLRootElement(src);
+		Element n = (Element) root.getElementsByTagName("sen:Object").item(0);
+		String encodedxml = n.getTextContent();
+		
+		String xml = new String(Base64.decode(encodedxml));
+
+		try{
+			FileWriter fstream = new FileWriter(trg);
+			BufferedWriter out = new BufferedWriter(fstream);	
+			out.write(xml);
+			out.flush();
+			fstream.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+			Log.msg(e);
+		}
+	}	
 }
