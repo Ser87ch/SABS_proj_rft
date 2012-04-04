@@ -18,21 +18,27 @@ import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 
 public class CreateSignedXML extends CreateSignedXMLHelper
 {
-	
+
 	public void testMain(Object[] args) 
 	{
 		String profile = (String) args[0];			
 		String dest = (String) args[1];				
-		
+
 		sleep(2);
 		run(Settings.path + "\\bin\\ConvXML.exe",Settings.path + "\\bin");
-		
+
 		sleep(2);
 		run(Settings.path + "\\bin\\clienXML.exe -i  My c:\\ 0",Settings.path + "\\bin");
-		
+
 		selectProfilecomboBox().click(atText(profile));
 		okbutton().click();		
 		
+		if(loadKeywindow().exists())
+		{
+			nextbutton().click();
+			readybutton().click();
+		}
+
 		sleep(2);
 		run(Settings.path + "\\bin\\clienXML.exe -wd " + dest + " C:\\  999",Settings.path + "\\bin");
 	}

@@ -20,15 +20,65 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>CreateSignedXML</b><br>
- * Generated     : <b>2012/04/04 14:01:11</b><br>
+ * Generated     : <b>2013/04/04 15:48:29</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  апреля 04, 2012
+ * @since  апреля 04, 2013
  * @author Admin
  */
 public abstract class CreateSignedXMLHelper extends RationalTestScript
 {
+	/**
+	 * ЗагрузкаКлючаСНосителя: with default state.
+	 *		.text : Загрузка ключа с носителя
+	 * 		.class : #32770
+	 * 		.processName : ConvXML.exe
+	 * 		.name : Загрузка ключа с носителя
+	 */
+	protected TopLevelSubitemTestObject loadKeywindow() 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("loadKeywindow"));
+	}
+	/**
+	 * ЗагрузкаКлючаСНосителя: with specific test context and state.
+	 *		.text : Загрузка ключа с носителя
+	 * 		.class : #32770
+	 * 		.processName : ConvXML.exe
+	 * 		.name : Загрузка ключа с носителя
+	 */
+	protected TopLevelSubitemTestObject loadKeywindow(TestObject anchor, long flags) 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("loadKeywindow"), anchor, flags);
+	}
+	
+	/**
+	 * Далее: with default state.
+	 *		.text : Далее >
+	 * 		.class : .Pushbutton
+	 * 		.name : Далее >
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject nextbutton() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("nextbutton"));
+	}
+	/**
+	 * Далее: with specific test context and state.
+	 *		.text : Далее >
+	 * 		.class : .Pushbutton
+	 * 		.name : Далее >
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject nextbutton(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("nextbutton"), anchor, flags);
+	}
+	
 	/**
 	 * OK: with default state.
 	 *		.text : OK
@@ -52,6 +102,31 @@ public abstract class CreateSignedXMLHelper extends RationalTestScript
 	{
 		return new GuiTestObject(
                         getMappedTestObject("okbutton"), anchor, flags);
+	}
+	
+	/**
+	 * Готово: with default state.
+	 *		.text : Готово
+	 * 		.class : .Pushbutton
+	 * 		.name : Готово
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject readybutton() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("readybutton"));
+	}
+	/**
+	 * Готово: with specific test context and state.
+	 *		.text : Готово
+	 * 		.class : .Pushbutton
+	 * 		.name : Готово
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject readybutton(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("readybutton"), anchor, flags);
 	}
 	
 	/**
