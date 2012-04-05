@@ -33,7 +33,7 @@ public class PaymentDocumentList {
 
 	}
 
-	
+
 
 	public int length()
 	{
@@ -72,8 +72,8 @@ public class PaymentDocumentList {
 		return str;
 	}
 
-	
-	
+
+
 
 	public void createSpack(String fl)
 	{
@@ -239,13 +239,13 @@ public class PaymentDocumentList {
 		pdList.add(pd);
 	}
 
-	
+
 	public void generateFromXML(String src)
 	{
-		
-		XML.validate(Settings.testProj + "\\XMLschema\\generation.xsd", src);
+
+		XML.validate(Settings.testProj + "\\XMLschema\\settings\\generation.xsd", src);
 		Element root = XML.getXMLRootElement(src);
-		
+
 		if(root.getNodeName().equals("PacketEPD"))
 		{
 			pdList = new ArrayList<PaymentDocument>();
@@ -263,7 +263,7 @@ public class PaymentDocumentList {
 			for(int i = 0; i < nl.getLength(); i++)
 			{
 				Element ed = (Element) nl.item(i);
-				
+
 				int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
 				for(int j = 0; j < quantity; j++)
 				{
@@ -279,41 +279,80 @@ public class PaymentDocumentList {
 
 		}
 	}
-	
-	
-	public void insertIntoDB(String filename)
+
+
+	public void insertIntoDbUfebs(String filename)
 	{
 		try
 		{
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
-			
+
 			String query = "INSERT INTO [dbo].[UFEBS_Pacet]\r\n" + 
-					"( [ID_Depart], [ID_ARM], [User_Insert], [InOutMode], \r\n" + 
-					"[Date_Oper], [pacno], [pacdate], [Author], [Receiver], [Quantity],\r\n" + 
-					" [SumPac], [SystCode], [sTime], [Type], [FileName], [KodErr], [KodObr],\r\n" + 
-					" [KodDocum], [Time_Inp], [MSGID], [ErrorTxt], [Mesto], [MesFrom], [MesType],\r\n" + 
-					" [MesPrior], [MesFName], [MesTime], [SlKonv], [Pridenti], [Shifr], [Upakovka],\r\n" + 
-					" [OID], [WriteSig], [Verify], [Pr_ufebs], [Forme221], [IEdNo], [IEdDate],\r\n" + 
-					" [IEdAuth], [Esc_Key], [Esc_key2], [Seanc], [FilePath], [ManName], [QueName], [KcoiKgur], [TypeObr])\r\n" + 
-					"VALUES(null, 2, null, 0,\r\n" + 
-					DB.toString(Settings.operDate) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edQuantity) + ",\r\n" + 
-					DB.toString(sum) + ", " + DB.toString(systemCode) + ", null, 0, " + DB.toString(filename) + ", 0, 0, \r\n" + 
-					" 0, null, null, null, '458200200000', '458200200100', 1, \r\n" +  //Mesto MesFrom?
-					" 5, null, '20120202', 3, 1, 1, 1,\r\n" + 
-					" 0, 1, 3, 0, 1, null, null,\r\n" + 
-					" null, null, null, 20, '', NULL, NULL, NULL, NULL)";			
+			"( [ID_Depart], [ID_ARM], [User_Insert], [InOutMode], \r\n" + 
+			"[Date_Oper], [pacno], [pacdate], [Author], [Receiver], [Quantity],\r\n" + 
+			" [SumPac], [SystCode], [sTime], [Type], [FileName], [KodErr], [KodObr],\r\n" + 
+			" [KodDocum], [Time_Inp], [MSGID], [ErrorTxt], [Mesto], [MesFrom], [MesType],\r\n" + 
+			" [MesPrior], [MesFName], [MesTime], [SlKonv], [Pridenti], [Shifr], [Upakovka],\r\n" + 
+			" [OID], [WriteSig], [Verify], [Pr_ufebs], [Forme221], [IEdNo], [IEdDate],\r\n" + 
+			" [IEdAuth], [Esc_Key], [Esc_key2], [Seanc], [FilePath], [ManName], [QueName], [KcoiKgur], [TypeObr])\r\n" + 
+			"VALUES(null, 2, null, 0,\r\n" + 
+			DB.toString(Settings.operDate) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edQuantity) + ",\r\n" + 
+			DB.toString(sum) + ", " + DB.toString(systemCode) + ", null, 0, " + DB.toString(filename) + ", 0, 0, \r\n" + 
+			" 0, null, null, null, '458200200000', " + DB.toString(edAuthor) + ", 1, \r\n" +  //Mesto MesFrom?
+			" 5, null, '20120202', 3, 1, 1, 1,\r\n" + 
+			" 0, 1, 3, 0, 1, null, null,\r\n" + 
+			" null, null, null, 20, '', NULL, NULL, NULL, NULL)";			
 			db.st.executeUpdate(query);
 			db.close();
-			
+
 			int idPacet = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_PACET) from dbo.UFEBS_Pacet"));
-			
+
 			ListIterator <PaymentDocument> iter = pdList.listIterator();
 			while(iter.hasNext())
 			{
-				iter.next().insertIntoDB(idPacet, edNo, edDate, edAuthor, filename);
+				iter.next().insertIntoDbUfebs(idPacet, edNo, edDate, edAuthor, filename);
 			}			
-			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.msg(e);			
+		}
+	}
+
+	public void insertIntoDbVer(String filename)
+	{
+		try
+		{
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();
+
+			String query =  "INSERT INTO [dbo].[epay_Packet]\r\n" + 
+			"([ID_Depart], [ID_ARM], [User_Insert], [InOutMode],\r\n" + 
+			" [Date_Oper], [EDNo], [EDDate], [EDAuthor], [EDReceiver], [EDQuantity],\r\n" + 
+			" [Summa], [SystemCode], [sTime], [Type], [FileName], [KodErr], [KodObr],\r\n" + 
+			" [KodDocum], [Time_Inp], [MSGID], [ErrorTxt], [Mesto], [MesFrom], [MesType],\r\n" + 
+			" [MesPrior], [MesFName], [MesTime], [SlKonv], [Pridenti], [Shifr], [Upakovka],\r\n" + 
+			" [OID], [WriteSig], [Verify], [Pr_ufebs], [Forme221], [IEdNo], [IEdDate], \r\n" + 
+			"[IEdAuth], [Esc_Key], [Esc_key2], [Seanc], [FilePath], [ManName], [QueName], [KcoiKgur], [TypeObr])\r\n" + 
+			"VALUES(null, 2, null, 0,\r\n" + 
+			DB.toString(Settings.operDate) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edQuantity) + ",\r\n" + 
+			DB.toString(sum) + ", " + DB.toString(systemCode) + ", null, 0, " + DB.toString(filename) + ", 0, 0, \r\n" + 
+			" 0, null, null, null, '458200200000', " + DB.toString(edAuthor) + ", 1, \r\n" +  //Mesto MesFrom?
+			" 5, null, '20120202', 3, 1, 1, 1,\r\n" + 
+			" 0, 1, 3, 0, 1, null, null,\r\n" + 
+			" null, null, null, 20, '', NULL, NULL, NULL, NULL)";			
+			db.st.executeUpdate(query);
+			db.close();			 
+
+			int idPacet = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_PACKET) from dbo.epay_Packet"));
+
+			ListIterator <PaymentDocument> iter = pdList.listIterator();
+			while(iter.hasNext())
+			{
+				iter.next().insertIntoDbVer(idPacet, filename);
+			}			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.msg(e);			

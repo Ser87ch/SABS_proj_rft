@@ -81,9 +81,15 @@ public class PaymentWarrant extends PaymentDocument {
 	}
 
 	@Override
-	public void insertIntoDB(int idPacet, int pEDNo, Date pacDate, String pAuthor, String filename) 
+	public void insertIntoDbUfebs(int idPacet, int pEDNo, Date pacDate, String pAuthor, String filename) 
 	{
 		
+		
+	}
+
+	@Override
+	public void insertIntoDbVer(int idPacet, String filename) {
+		// TODO Auto-generated method stub
 		
 	}
 }

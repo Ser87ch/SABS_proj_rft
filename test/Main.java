@@ -11,13 +11,13 @@ import ru.sabstest.*;
 
 
 public class Main {
-	enum Test {INIT, GEN, PERVVOD,DDB,RPACK,SPACK,CMP,CMPDELTA,O,ED}
+	enum Test {INIT, GEN, PERVVOD,DDB,RPACK,SPACK,CMP,CMPDELTA,O,ED,VER}
 
 	public static void main(String[] args)
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.O;
+		Test t = Test.VER;
 		switch(t)
 		{
 
@@ -125,6 +125,25 @@ public class Main {
 			pdl.add(PaymentDocument.createDocFromXML("C:\\ED105.xml"));
 			pdl.createEPD("C:\\new.xml");
 
+			break;
+		}
+		case VER:
+		{
+			Init.load();
+			Settings.readXML("C:\\stend.xml");
+			
+			PaymentDocumentList pdl = new PaymentDocumentList();
+			pdl.generateFromXML("C:\\gen1.xml");
+			pdl.createEPD("C:\\1.xml");
+			pdl.insertIntoDbVer("1.xml");
+			
+			pdl.generateFromXML("C:\\gen2.xml");
+			pdl.createEPD("C:\\2.xml");
+			pdl.insertIntoDbVer("2.xml");
+			
+			pdl.generateFromXML("C:\\gen3.xml");
+			pdl.createEPD("C:\\3.xml");
+			pdl.insertIntoDbVer("3.xml");
 			break;
 		}
 		}
