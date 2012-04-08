@@ -1,5 +1,6 @@
 package SABS;
 import resources.SABS.CreateSignedXMLHelper;
+import ru.sabstest.DB;
 import ru.sabstest.PaymentDocumentList;
 import ru.sabstest.Settings;
 
@@ -21,12 +22,16 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 
 	public void testMain(Object[] args) 
 	{
-		String profile = (String) args[0];			
+		String profile = (String) args[0];		
+		String key = (String) args[0];
+		String profile2 = (String) args[0];
+		String key2 = (String) args[0];
 		String dest = (String) args[1];				
 
 		sleep(2);
 		run(Settings.path + "\\bin\\ConvXML.exe",Settings.path + "\\bin");
 
+		callScript("SABS.VFD",new String[]{key});
 		sleep(2);
 		run(Settings.path + "\\bin\\clienXML.exe -i  My c:\\ 0",Settings.path + "\\bin");
 
@@ -41,6 +46,24 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 
 		sleep(2);
 		run(Settings.path + "\\bin\\clienXML.exe -wd " + dest + " C:\\  999",Settings.path + "\\bin");
+		
+		DB.insertPacetForReadUfebs("testtest.xml");
+		
+		callScript("SABS.VFD",new String[]{key2});
+		sleep(2);
+		run(Settings.path + "\\bin\\clienXML.exe -i  My c:\\ 0",Settings.path + "\\bin");
+
+		selectProfilecomboBox().click(atText(profile2));
+		okbutton().click();		
+		
+		if(loadKeywindow().exists())
+		{
+			nextbutton().click();
+			readybutton().click();
+		}
+		
+		sleep(2);
+		run(Settings.path + "\\bin\\clienXML.exe -kd " + dest + " C:\\  999",Settings.path + "\\bin");
 	}
 }
 

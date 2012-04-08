@@ -1,5 +1,6 @@
 package test;
 import resources.test.TestHelper;
+import ru.sabstest.DB;
 import ru.sabstest.PaymentDocumentList;
 import ru.sabstest.Settings;
 
@@ -30,9 +31,10 @@ public class Test extends TestHelper
 		pdl.createEPD("C:\\test1.xml");
 		pdl.insertIntoDbUfebs("testtest.xml");
 		
-		callScript("SABS.VFD",new String[]{Settings.Sign.keyobr});
+			
+		callScript("SABS.CreateSignedXML",new String[]{Settings.Sign.signobr,Settings.Sign.keyobr, Settings.Sign.signcontr, Settings.Sign.keycontr, "C:\\"});
 		
-		callScript("SABS.CreateSignedXML",new String[]{Settings.Sign.signobr, "C:\\"});
+		
 		
 	}
 }

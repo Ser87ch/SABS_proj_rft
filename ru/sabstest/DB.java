@@ -104,7 +104,43 @@ public class DB implements Closeable{
 		}
 		return value;
 	}
-	
+
+	public static void insertPacetForReadUfebs(String filename)
+	{
+		try {
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();
+
+			String query = "INSERT INTO [dbo].[UFEBS_Pacet]\r\n" + 
+			"( [ID_Depart], [ID_ARM], [User_Insert], [InOutMode], [FileName], [Mesto], [KodObr]) \r\n" +					
+			"VALUES(null, 2, null, 0, " + DB.toString(filename) + ", 'R', 0)";			
+			db.st.executeUpdate(query);
+			db.close();			
+
+		} catch(Exception e) {
+			e.printStackTrace();
+			Log.msg(e);
+		}
+
+	}
+
+	public static void insertPacetForReadVer(String filename)
+	{
+		try {
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();
+			String query = "INSERT INTO [dbo].[epay_Pacet]\r\n" + 
+			"( [ID_Depart], [ID_ARM], [User_Insert], [InOutMode], [FileName], [Mesto], [KodObr]) \r\n" +					
+			"VALUES(null, 2, null, 0, " + DB.toString(filename) + ", 'R', 0)";			
+			db.st.executeUpdate(query);
+			db.close();	
+		} catch(Exception e) {
+			e.printStackTrace();
+			Log.msg(e);
+		}
+
+	}
+
 	public static String toString(String s)
 	{
 		if(s == null || s.equals(""))
@@ -112,7 +148,7 @@ public class DB implements Closeable{
 		else
 			return "'" + s + "'";
 	}
-	
+
 	public static String toString(int s)
 	{
 		if(s == 0)
@@ -120,7 +156,7 @@ public class DB implements Closeable{
 		else
 			return Integer.toString(s);
 	}
-	
+
 	public static String toString(Date s)
 	{
 		if(s == null)
@@ -128,5 +164,5 @@ public class DB implements Closeable{
 		else
 			return "'" + new SimpleDateFormat("yyyy-MM-dd").format(s) + "'";
 	}
-	
+
 }
