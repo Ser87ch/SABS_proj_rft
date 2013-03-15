@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VomData L=".VomData">
+  <vomtdatas L=".Vector">
+    <E L=".VomVpTestData">
+      <vomvptd>itemcount</vomvptd>
+      <vomvpnl>vp.statusbar.itemcount</vomvpnl>
+      <vomvptdata L=".TestDataText">
+        <Data L=".MaskedPropSet">
+          <MP L=".MProp">
+            <Prop>data</Prop>
+            <Val>5</Val>
+            <Mask>False</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>ignoreCase</Prop>
+            <Val Z="False" />
+            <Mask>True</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>whiteSpaceMode</Prop>
+            <Val L=".TextWhiteSpace">
+              <Mode>0</Mode>
+            </Val>
+            <Mask>True</Mask>
+          </MP>
+        </Data>
+      </vomvptdata>
+    </E>
+    <E L=".VomVpTestData">
+      <vomvptd>items</vomvptd>
+      <vomvpnl>vp.statusbar.items</vomvpnl>
+      <vomvptdata L=".TestDataList">
+        <Data L=".MaskedPropSet">
+          <MP L=".MProp">
+            <Prop>ordered</Prop>
+            <Val Z="True" />
+            <Mask>True</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>elementCount</Prop>
+            <Val I="5" />
+            <Mask>False</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>data</Prop>
+            <Val L=".TestDataElementList">
+              <E L=".TestDataElement">
+                <E>Подключение</E>
+                <Mask>False</Mask>
+              </E>
+              <E L=".TestDataElement">
+                <E>SER-ADA508913EF\ATLANT\\sabs_zapd</E>
+                <Mask>False</Mask>
+              </E>
+              <E L=".TestDataElement">
+                <E>1.33.1.1924</E>
+                <Mask>False</Mask>
+              </E>
+              <E L=".TestDataElement">
+                <E>[4] Ткаченко О.В.</E>
+                <Mask>False</Mask>
+              </E>
+              <E L=".TestDataElement">
+                <E>03.02.2012</E>
+                <Mask>False</Mask>
+              </E>
+            </Val>
+            <Mask>False</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>elementCount</Prop>
+            <Val I="5" />
+            <Mask>False</Mask>
+          </MP>
+        </Data>
+      </vomvptdata>
+    </E>
+    <E L=".VomVpTestData">
+      <vomvptd>non_blank_items</vomvptd>
+      <vomvpnl>vp.statusbar.non_blank_items</vomvpnl>
+      <vomvptdata L=".TestDataList">
+        <Data L=".MaskedPropSet">
+          <MP L=".MProp">
+            <Prop>ordered</Prop>
+            <Val Z="True" />
+            <Mask>True</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>elementCount</Prop>
+            <Val I="5" />
+            <Mask>False</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>data</Prop>
+            <Val L=".TestDataElementList">
+              <E L=".TestDataElement">
+                <E>Подключение</E>
+                <Mask>False</Mask>
+              </E>
+              <E L=".TestDataElement">
+                <E>SER-ADA508913EF\ATLANT\\sabs_zapd</E>
+                <Mask>False</Mask>
+              </E>
+              <E L=".TestDataElement">
+                <E>1.33.1.1924</E>
+                <Mask>False</Mask>
+              </E>
+              <E L=".TestDataElement">
+                <E>[4] Ткаченко О.В.</E>
+                <Mask>False</Mask>
+              </E>
+              <E L=".TestDataElement">
+                <E>03.02.2012</E>
+                <Mask>False</Mask>
+              </E>
+            </Val>
+            <Mask>False</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>elementCount</Prop>
+            <Val I="5" />
+            <Mask>False</Mask>
+          </MP>
+        </Data>
+      </vomvptdata>
+    </E>
+    <E L=".VomVpTestData">
+      <vomvptd>non_blank_items_count</vomvptd>
+      <vomvpnl>vp.statusbar.non_blank_items_count</vomvpnl>
+      <vomvptdata L=".TestDataText">
+        <Data L=".MaskedPropSet">
+          <MP L=".MProp">
+            <Prop>data</Prop>
+            <Val>5</Val>
+            <Mask>False</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>ignoreCase</Prop>
+            <Val Z="False" />
+            <Mask>True</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>whiteSpaceMode</Prop>
+            <Val L=".TextWhiteSpace">
+              <Mode>0</Mode>
+            </Val>
+            <Mask>True</Mask>
+          </MP>
+        </Data>
+      </vomvptdata>
+    </E>
+    <E L=".VomVpTestData">
+      <vomvptd>text</vomvptd>
+      <vomvpnl>pdfsupport.winproxy.text</vomvpnl>
+      <vomvptdata L=".TestDataText">
+        <Data L=".MaskedPropSet">
+          <MP L=".MProp">
+            <Prop>data</Prop>
+            <Val />
+            <Mask>False</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>ignoreCase</Prop>
+            <Val Z="False" />
+            <Mask>True</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>whiteSpaceMode</Prop>
+            <Val L=".TextWhiteSpace">
+              <Mode>0</Mode>
+            </Val>
+            <Mask>True</Mask>
+          </MP>
+        </Data>
+      </vomvptdata>
+    </E>
+  </vomtdatas>
+  <vompdatas L=".Hashtable" />
+</VomData>

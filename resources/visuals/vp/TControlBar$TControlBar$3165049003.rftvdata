@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VomData L=".VomData">
+  <vomtdatas L=".Vector">
+    <E L=".VomVpTestData">
+      <vomvptd>text</vomvptd>
+      <vomvpnl>pdfsupport.winproxy.text</vomvpnl>
+      <vomvptdata L=".TestDataText">
+        <Data L=".MaskedPropSet">
+          <MP L=".MProp">
+            <Prop>data</Prop>
+            <Val />
+            <Mask>False</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>ignoreCase</Prop>
+            <Val Z="False" />
+            <Mask>True</Mask>
+          </MP>
+          <MP L=".MProp">
+            <Prop>whiteSpaceMode</Prop>
+            <Val L=".TextWhiteSpace">
+              <Mode>0</Mode>
+            </Val>
+            <Mask>True</Mask>
+          </MP>
+        </Data>
+      </vomvptdata>
+    </E>
+  </vomtdatas>
+  <vompdatas L=".Hashtable" />
+</VomData>

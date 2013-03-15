@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>SABS_proj_rft</name>
+	<comment></comment>
+	<projects>
+		<project>SABS_proj_rft_logs</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.rational.test.ft.wswplugin.testnature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>com.rational.test.ft.wswplugin.tmnature</nature>
+	</natures>
+	<variableList>
+		<variable>
+			<name>lib</name>
+			<value>file:/C:/workspace/SABS_proj_rft/lib</value>
+		</variable>
+	</variableList>
+</projectDescription>

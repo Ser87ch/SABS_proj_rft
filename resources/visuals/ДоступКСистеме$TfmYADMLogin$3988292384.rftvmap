@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjectMap L=".ObjectMap">
+  <Attribute L=".Attribute">
+    <Name>.NextId</Name>
+    <Value>19</Value>
+  </Attribute>
+  <Attribute L=".Attribute">
+    <Name>.LastSharedId</Name>
+    <Value>-1</Value>
+  </Attribute>
+  <Attribute L=".Attribute">
+    <Name>.TopObjs</Name>
+    <Value L=".TopLevelIds">
+      <Id>0.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+    </Value>
+  </Attribute>
+  <Attribute L=".Attribute">
+    <Name>.MtoSet</Name>
+    <Value L=".ObjectMapSet">
+      <MTO L=".MTO">
+        <Id>0.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>ДоступКСистеме</Name>
+        <SimpleName>Доступ к системе</SimpleName>
+        <Parent />
+        <TO>TopLevelSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>TfmYADMLogin</Class>
+        <Role>Window</Role>
+        <Proxy>TopLevelWindowProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>0</X>
+              <Y>0</Y>
+              <W>367</W>
+              <H>265</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>ДоступКСистеме$TfmYADMLogin$4211878828</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.processName</Key>
+          <Val L=".processName">
+            <ProcessName>purs_loader.exe</ProcessName>
+          </Val>
+          <Wt>100</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val L=".caption">
+            <Caption>Доступ к системе</Caption>
+          </Val>
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#owner</Key>
+          <Val>I.2i0AmY1Pz4jTBLg1HDF8sVV8</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val>Доступ к системе</Val>
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>1.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>версия13311924</Name>
+        <SimpleName>версия 1.33.1.1924</SimpleName>
+        <Parent>0.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>TEdit</Class>
+        <Role>Window</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>103</X>
+              <Y>110</Y>
+              <W>193</W>
+              <H>21</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>версия13311924$TEdit$435480697</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>2.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>Text</Name>
+        <SimpleName>Text</SimpleName>
+        <Parent>1.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>.Text</Class>
+        <Role>Text</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>105</X>
+              <Y>112</Y>
+              <W>189</W>
+              <H>17</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>Text$.Text$305650830</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>3.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>TPanel</Name>
+        <SimpleName>TPanel</SimpleName>
+        <Parent>0.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>TPanel</Class>
+        <Role>Window</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>3</X>
+              <Y>229</Y>
+              <W>361</W>
+              <H>33</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>TPanel$TPanel$2955373263</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>4.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>Выход</Name>
+        <SimpleName>Выход</SimpleName>
+        <Parent>3.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>TButton</Class>
+        <Role>Window</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>265</X>
+              <Y>233</Y>
+              <W>88</W>
+              <H>24</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>Выход$TButton$129208938</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val L=".caption">
+            <Caption>Выход</Caption>
+          </Val>
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val>Выход</Val>
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>5.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>Выход</Name>
+        <SimpleName>Выход</SimpleName>
+        <Parent>4.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>.Pushbutton</Class>
+        <Role>Button</Role>
+        <Proxy>ButtonProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>265</X>
+              <Y>233</Y>
+              <W>88</W>
+              <H>24</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>Выход$.Pushbutton$3766592053</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val L=".caption">
+            <Caption>Выход</Caption>
+          </Val>
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val>Выход</Val>
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>6.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>OK</Name>
+        <SimpleName>OK</SimpleName>
+        <Parent>3.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>TButton</Class>
+        <Role>Window</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>167</X>
+              <Y>233</Y>
+              <W>88</W>
+              <H>24</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>OK$TButton$3469787383</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>1</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val L=".caption">
+            <Caption>OK</Caption>
+          </Val>
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val>OK</Val>
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>7.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>OK</Name>
+        <SimpleName>OK</SimpleName>
+        <Parent>6.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>.Pushbutton</Class>
+        <Role>Button</Role>
+        <Proxy>ButtonProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>167</X>
+              <Y>233</Y>
+              <W>88</W>
+              <H>24</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>OK$.Pushbutton$2774114487</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val L=".caption">
+            <Caption>OK</Caption>
+          </Val>
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val>OK</Val>
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>8.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>TPanel</Name>
+        <SimpleName>TPanel</SimpleName>
+        <Parent>0.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>TPanel</Class>
+        <Role>Window</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>3</X>
+              <Y>132</Y>
+              <W>361</W>
+              <H>97</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>TPanel$TPanel$3340786265</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>1</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>9.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>ИзменитьПароль</Name>
+        <SimpleName>Изменить пароль</SimpleName>
+        <Parent>8.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>TCheckBox</Class>
+        <Role>Window</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>102</X>
+              <Y>203</Y>
+              <W>169</W>
+              <H>17</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>ИзменитьПароль$TCheckBox$1015770438</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val L=".caption">
+            <Caption>Изменить пароль</Caption>
+          </Val>
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val>Изменить пароль</Val>
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>A.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>ИзменитьПароль</Name>
+        <SimpleName>Изменить пароль</SimpleName>
+        <Parent>9.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>ToggleGUITestObject</TO>
+        <Dom>Win</Dom>
+        <Class>.Checkbutton</Class>
+        <Role>CheckBox</Role>
+        <Proxy>CheckBoxProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>102</X>
+              <Y>203</Y>
+              <W>169</W>
+              <H>17</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>ИзменитьПароль$.Checkbutton$3516953420</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val L=".caption">
+            <Caption>Изменить пароль</Caption>
+          </Val>
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val>Изменить пароль</Val>
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>B.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>TEdit</Name>
+        <SimpleName>TEdit</SimpleName>
+        <Parent>8.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>TEdit</Class>
+        <Role>Window</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>102</X>
+              <Y>170</Y>
+              <W>215</W>
+              <H>21</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>TEdit$TEdit$435480697</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>C.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>Text</Name>
+        <SimpleName>Text</SimpleName>
+        <Parent>B.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>.Text</Class>
+        <Role>Text</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>104</X>
+              <Y>172</Y>
+              <W>211</W>
+              <H>17</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>Text$.Text$305650830</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>D.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>TEdit</Name>
+        <SimpleName>TEdit</SimpleName>
+        <Parent>8.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>TEdit</Class>
+        <Role>Window</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>102</X>
+              <Y>141</Y>
+              <W>214</W>
+              <H>21</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>TEdit$TEdit$1861474543</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>1</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>E.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>Text</Name>
+        <SimpleName>Text</SimpleName>
+        <Parent>D.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>.Text</Class>
+        <Role>Text</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>104</X>
+              <Y>143</Y>
+              <W>210</W>
+              <H>17</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>Text$.Text$305650830</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>F.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>Система</Name>
+        <SimpleName>Система</SimpleName>
+        <Parent>0.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>.Menubar</Class>
+        <Role>MenuBar</Role>
+        <Proxy>MenubarProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>Система$.Menubar$4272417019</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val L=".caption">
+            <Caption>Система</Caption>
+          </Val>
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val>Система</Val>
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>G.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>Titlebar</Name>
+        <SimpleName>Titlebar</SimpleName>
+        <Parent>0.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>.Titlebar</Class>
+        <Role>Win</Role>
+        <Proxy>GenericProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>3</X>
+              <Y>3</Y>
+              <W>361</W>
+              <H>19</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>Titlebar$.Titlebar$1436988055</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val T="null" />
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>H.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>Закрыть</Name>
+        <SimpleName>Закрыть</SimpleName>
+        <Parent>G.2i0AmY1Pz4jTBLg1HDF8sVV8</Parent>
+        <TO>GuiTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>.Pushbutton</Class>
+        <Role>Button</Role>
+        <Proxy>ButtonProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#rectangle</Key>
+          <Val L=".VOMRectangles">
+            <vomIdMap L=".Hashtable">
+              <Key>0</Key>
+              <Val I="0" />
+            </vomIdMap>
+            <vomRect L=".Rect">
+              <X>346</X>
+              <Y>3</Y>
+              <W>18</W>
+              <H>18</H>
+            </vomRect>
+          </Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>Закрыть$.Pushbutton$2371438091</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.classIndex</Key>
+          <Val L=".Index">
+            <Index>0</Index>
+          </Val>
+          <Wt>50</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val L=".caption">
+            <Caption>Закрыть</Caption>
+          </Val>
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val>Закрыть</Val>
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+      <MTO L=".MTO">
+        <Id>I.2i0AmY1Pz4jTBLg1HDF8sVV8</Id>
+        <Name>purs_loader</Name>
+        <SimpleName>purs_loader</SimpleName>
+        <Parent />
+        <TO>TopLevelSubitemTestObject</TO>
+        <Dom>Win</Dom>
+        <Class>TApplication</Class>
+        <Role>Window</Role>
+        <Proxy>TopLevelWindowProxy</Proxy>
+        <Prop L=".MtoProp">
+          <Key>#crc</Key>
+          <Val>purs$loader$TApplication$792589768</Val>
+          <Wt>0</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.processName</Key>
+          <Val L=".processName">
+            <ProcessName>purs_loader.exe</ProcessName>
+          </Val>
+          <Wt>100</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.text</Key>
+          <Val L=".caption">
+            <Caption>purs_loader</Caption>
+          </Val>
+          <Wt>75</Wt>
+        </Prop>
+        <Prop L=".MtoProp">
+          <Key>.name</Key>
+          <Val>purs_loader</Val>
+          <Wt>75</Wt>
+        </Prop>
+      </MTO>
+    </Value>
+  </Attribute>
+  <Attribute L=".Attribute">
+    <Name>.PropSet</Name>
+    <Value L=".MapPropertySet">
+      <MapProperty L=".MapProperty">
+        <Name>rt.html_table_mapping_policy</Name>
+        <Value>Original</Value>
+      </MapProperty>
+    </Value>
+  </Attribute>
+</ObjectMap>
