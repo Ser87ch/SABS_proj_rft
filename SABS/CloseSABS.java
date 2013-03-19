@@ -27,6 +27,13 @@ public class CloseSABS extends CloseSABSHelper
 			if(SKADerbutton().exists())
 				SKADerbutton().click();
 			
+			if(SABSwindow().exists())
+			{
+				SABSwindow(ANY,MAY_EXIT).click(CLOSE_BUTTON);
+				Closebutton().click();
+			}
+				
+			
 			Log.msg("САБС закрыт.");
 			
 		} catch(Exception e) {
