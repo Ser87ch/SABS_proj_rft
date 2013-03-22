@@ -29,6 +29,7 @@ public class Settings{
 	public static final String obrfolder = "obr"; 
 
 
+
 	public static void loadFromDB()
 	{
 		try {
@@ -96,7 +97,7 @@ public class Settings{
 		db = XML.getChildValueString("db", eElement);	
 		user = XML.getChildValueString("user", eElement);	
 		pwd = XML.getChildValueString("pwd", eElement);
-					
+
 		Settings.loadFromDB();
 		Log.msg("XML c общими настройками " + src + " загружен в программу.");		
 	}
@@ -142,187 +143,109 @@ public class Settings{
 		}
 	}
 
-	public static class PerVvod{
-		public static String user = "";
-		public static String pwd = "";
-		public static String sign = "";
-		public static String key = "";
-
+	public static class Login
+	{
+		public static LoginInfo pervvod;
+		public static LoginInfo contrvvod;
+		public static LoginInfo formes; 
+		public static LoginInfo contres;
+		
 		public static void createXML()
 		{
-			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\pervvod.xml");
+			createXML(Settings.testProj + "settings\\login.xml");
 		}
 
 		public static void createXML(String fl)
 		{
 			Document doc = XML.createNewDoc();
-			Element rootElement = doc.createElement("pervvod");
+			Element rootElement = doc.createElement("login");
 			doc.appendChild(rootElement);
-
-			XML.createNode(doc, rootElement, "user", user);	
-			XML.createNode(doc, rootElement, "pwd", pwd);	
-			XML.createNode(doc, rootElement, "sign", sign);	
-			XML.createNode(doc, rootElement, "key", key);	
+			
+			Element login = doc.createElement("pervvod");
+			rootElement.appendChild(login);
+			XML.createNode(doc, rootElement, "user", pervvod.user);	
+			XML.createNode(doc, rootElement, "pwd", pervvod.pwd);	
+			XML.createNode(doc, rootElement, "sign", pervvod.sign);	
+			XML.createNode(doc, rootElement, "key", pervvod.key);	
+			
+			login = doc.createElement("contrvvod");
+			rootElement.appendChild(login);
+			XML.createNode(doc, rootElement, "user", contrvvod.user);	
+			XML.createNode(doc, rootElement, "pwd", contrvvod.pwd);	
+			XML.createNode(doc, rootElement, "sign", contrvvod.sign);	
+			XML.createNode(doc, rootElement, "key", contrvvod.key);	
+			
+			login = doc.createElement("formes");
+			rootElement.appendChild(login);
+			XML.createNode(doc, rootElement, "user", formes.user);	
+			XML.createNode(doc, rootElement, "pwd", formes.pwd);	
+			XML.createNode(doc, rootElement, "sign", formes.sign);	
+			XML.createNode(doc, rootElement, "key", formes.key);	
+			
+			login = doc.createElement("contres");
+			rootElement.appendChild(login);
+			XML.createNode(doc, rootElement, "user", contres.user);	
+			XML.createNode(doc, rootElement, "pwd", contres.pwd);	
+			XML.createNode(doc, rootElement, "sign", contres.sign);	
+			XML.createNode(doc, rootElement, "key", contres.key);	
 
 			XML.createXMLFile(doc, fl);
-			Log.msg("XML с настройками для первичного ввода докуметов " + fl + " создан.");				
+			Log.msg("XML с настройками пользователей " + fl + " создан.");				
 
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\" + Settings.pervfolder + "\\pervvod.xsd",fl);
+			XML.validate(Settings.testProj + "XMLSchema\\settings\\login.xsd",fl);
 		}
 
 		public static void readXML(String src)
 		{
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\" + Settings.pervfolder + "\\pervvod.xsd",src);
+			XML.validate(Settings.testProj + "XMLSchema\\settings\\login.xsd",src);
 
-			Element eElement = XML.getXMLRootElement(src);
+			Element root = XML.getXMLRootElement(src);
 
-			user = XML.getChildValueString("user", eElement);	
-			pwd = XML.getChildValueString("pwd", eElement);	
-			sign = XML.getChildValueString("sign", eElement);		
-			key = XML.getChildValueString("key", eElement);
+			Element login = (Element) root.getElementsByTagName("pervvod").item(0);
+			pervvod = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
+					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));
+			
+			login = (Element) root.getElementsByTagName("contrvvod").item(0);
+			contrvvod = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
+					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
+			
+			login = (Element) root.getElementsByTagName("formes").item(0);
+			formes = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
+					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
+			
+			login = (Element) root.getElementsByTagName("contres").item(0);
+			contres = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
+					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
+			
+			Log.msg("XML с настройками пользователей " + src + " загружен в программу.");
+		}
+		
+		public static class LoginInfo
+		{
+			public String user;
+			public String pwd;
+			public String sign;
+			public String key;
 
-			Log.msg("XML с настройками для первичного ввода документов " + src + " загружен в программу.");
+			LoginInfo(String user, String pwd, String sign, String key)
+			{
+				this.user = user;
+				this.pwd = pwd;
+				this.sign = sign;
+				this.key = key;
+			}
 		}
 	}
 
 
-	public static class ContrVvod{
-		public static String user = "";
-		public static String pwd = "";
-		public static String sign = "";
-		public static String key = "";
 
-		public static void createXML()
-		{
-			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\contrvvod.xml");
-		}
-
-		public static void createXML(String fl)
-		{
-			Document doc = XML.createNewDoc();
-			Element rootElement = doc.createElement("contrvvod");
-			doc.appendChild(rootElement);
-
-			XML.createNode(doc, rootElement, "user", user);	
-			XML.createNode(doc, rootElement, "pwd", pwd);	
-			XML.createNode(doc, rootElement, "sign", sign);	
-			XML.createNode(doc, rootElement, "key", key);	
-
-			XML.createXMLFile(doc, fl);
-
-			Log.msg("XML с настройками для контрольго ввода докуметов " + fl + " создан.");
-
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\" + Settings.pervfolder + "\\contrvvod.xsd",fl);
-		}
-
-		public static void readXML(String src)
-		{
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\" + Settings.pervfolder + "\\contrvvod.xsd",src);				
-
-			Element eElement = XML.getXMLRootElement(src);
-
-			user = XML.getChildValueString("user", eElement);	
-			pwd = XML.getChildValueString("pwd", eElement);	
-			sign = XML.getChildValueString("sign", eElement);	
-			key = XML.getChildValueString("key", eElement);	
-
-			Log.msg("XML с настройками для контрольного ввода документов " + src + " загружен в программу.");			
-		}
-	}
-
-
-	public static class FormES{
-		public static String user = "";
-		public static String pwd = "";
-		public static String sign = "";
-		public static String key = "";
-
-		public static void createXML()
-		{
-			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\formes.xml");
-		}
-
-		public static void createXML(String fl)
-		{
-			Document doc = XML.createNewDoc();
-			Element rootElement = doc.createElement("formes");
-			doc.appendChild(rootElement);
-
-			XML.createNode(doc, rootElement, "user", user);	
-			XML.createNode(doc, rootElement, "pwd", pwd);	
-			XML.createNode(doc, rootElement, "sign", sign);	
-			XML.createNode(doc, rootElement, "key", key);	
-
-			XML.createXMLFile(doc, fl);
-			Log.msg("XML с настройками для формирования ЭС " + fl + " создан.");
-
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\" + Settings.pervfolder + "\\formes.xsd",fl);			
-		}
-
-		public static void readXML(String src)
-		{			
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\" + Settings.pervfolder + "\\formes.xsd",src);
-
-			Element eElement = XML.getXMLRootElement(src);
-
-			user = XML.getChildValueString("user", eElement);	
-			pwd = XML.getChildValueString("pwd", eElement);	
-			sign = XML.getChildValueString("sign", eElement);		
-			key = XML.getChildValueString("key", eElement);		
-
-			Log.msg("XML с настройками для формирования ЭС " + src + " загружен в программу.");			
-		}
-	}
-
-	public static class ContrES{
-		public static String user = "";
-		public static String pwd = "";
-		public static String sign = "";
-		public static String key = "";
-
-
-		public static void createXML()
-		{
-			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\contres.xml");	
-		}
-
-		public static void createXML(String fl)
-		{
-			Document doc = XML.createNewDoc();
-			Element rootElement = doc.createElement("contres");
-			doc.appendChild(rootElement);
-
-			XML.createNode(doc, rootElement, "user", user);	
-			XML.createNode(doc, rootElement, "pwd", pwd);	
-			XML.createNode(doc, rootElement, "sign", sign);	
-			XML.createNode(doc, rootElement, "key", key);	
-
-			XML.createXMLFile(doc, fl);
-			Log.msg("XML с настройками для контроля ЭС " + fl + " создан.");
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\" + Settings.pervfolder + "\\contres.xsd", fl);
-		}
-
-		public static void readXML(String src)
-		{
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\" + Settings.pervfolder + "\\contres.xsd",src);
-
-			Element eElement = XML.getXMLRootElement(src);
-
-			user = XML.getChildValueString("user", eElement);	
-			pwd = XML.getChildValueString("pwd", eElement);	
-			sign = XML.getChildValueString("sign", eElement);		
-			key = XML.getChildValueString("key", eElement);
-
-			Log.msg("XML с настройками для контроля ЭС " + src + " загружен в программу.");			
-		}
-	}
 
 	public static class Sign{
 		public static String signobr = "";
 		public static String keyobr = "";
 		public static String signcontr = "";
 		public static String keycontr = "";
-		
+
 
 		public static void createXML()
 		{

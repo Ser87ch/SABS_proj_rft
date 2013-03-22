@@ -73,9 +73,9 @@ public class RunB extends RunBHelper
 		if(ispervvod)
 		{
 			Log.msg("Запущен скрипт по первичному вводу документов.");
-			Settings.PerVvod.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\pervvod.xml");
-			callScript("SABS.VFD",new String[]{Settings.PerVvod.key});
-			callScript("SABS.StartSABS",new String[]{Settings.PerVvod.user, Settings.PerVvod.pwd, Settings.PerVvod.sign});		
+			Settings.Login.readXML(Settings.testProj + "settings\\login.xml");
+			callScript("SABS.VFD",new String[]{Settings.Login.pervvod.key});
+			callScript("SABS.StartSABS",new String[]{Settings.Login.pervvod.user, Settings.Login.pervvod.pwd, Settings.Login.pervvod.sign});		
 			callScript("PrProvod.PervVvod.Vvod", new Object[]{ pl});
 			callScript("SABS.CloseSABS");
 		}
@@ -85,9 +85,9 @@ public class RunB extends RunBHelper
 		if(iscontrvvod)
 		{
 			Log.msg("Запущен скрипт по контрольному вводу документов.");
-			Settings.ContrVvod.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\contrvvod.xml");
-			callScript("SABS.VFD",new String[]{Settings.ContrVvod.key});
-			callScript("SABS.StartSABS",new String[]{Settings.ContrVvod.user, Settings.ContrVvod.pwd, Settings.ContrVvod.sign});
+			Settings.Login.readXML(Settings.testProj + "settings\\login.xml");
+			callScript("SABS.VFD",new String[]{Settings.Login.contrvvod.key});
+			callScript("SABS.StartSABS",new String[]{Settings.Login.contrvvod.user, Settings.Login.contrvvod.pwd, Settings.Login.contrvvod.sign});
 			callScript("PrProvod.PervVvod.ContrVvod", new Object[]{ pl});
 			callScript("SABS.CloseSABS");
 		}
@@ -121,9 +121,9 @@ public class RunB extends RunBHelper
 		if(isformes)
 		{
 			Log.msg("Запущен скрипт по формирования ЭС.");
-			Settings.FormES.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\formes.xml");
-			callScript("SABS.VFD",new String[]{Settings.FormES.key});
-			callScript("SABS.StartSABS",new String[]{Settings.FormES.user, Settings.FormES.pwd, Settings.FormES.sign});
+			Settings.Login.readXML(Settings.testProj + "settings\\login.xml");
+			callScript("SABS.VFD",new String[]{Settings.Login.formes.key});
+			callScript("SABS.StartSABS",new String[]{Settings.Login.formes.user, Settings.Login.formes.pwd, Settings.Login.formes.sign});
 			callScript("PrProvod.PervVvod.FormES");
 			callScript("SABS.CloseSABS");
 		}
@@ -132,9 +132,9 @@ public class RunB extends RunBHelper
 		if(iscontres)
 		{
 			Log.msg("Запущен скрипт по контролю ЭС.");
-			Settings.ContrES.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\contres.xml");
-			callScript("SABS.VFD",new String[]{Settings.ContrES.key});
-			callScript("SABS.StartSABS",new String[]{Settings.ContrES.user, Settings.ContrES.pwd, Settings.ContrES.sign});
+			Settings.Login.readXML(Settings.testProj + "settings\\login.xml");
+			callScript("SABS.VFD",new String[]{Settings.Login.contres.key});
+			callScript("SABS.StartSABS",new String[]{Settings.Login.contres.user, Settings.Login.contres.pwd, Settings.Login.contres.sign});
 			callScript("PrProvod.PervVvod.ContrES");
 			callScript("SABS.CloseSABS");
 
@@ -216,11 +216,11 @@ public class RunB extends RunBHelper
 		//контроль R-пакета
 		if(iscontrrpack)
 		{
-			Log.msg("Запущен скрипт по контролю R пакета.");
-			Settings.ContrES.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\contres.xml");
+			Log.msg("Запущен скрипт по контролю R пакета.");			
+			Settings.Login.readXML(Settings.testProj + "settings\\login.xml");
 			sleep(5);
-			callScript("SABS.VFD",new String[]{Settings.ContrES.key});
-			callScript("SABS.StartSABS",new String[]{Settings.ContrES.user, Settings.ContrES.pwd, Settings.ContrES.sign});
+			callScript("SABS.VFD",new String[]{Settings.Login.contres.key});
+			callScript("SABS.StartSABS",new String[]{Settings.Login.contres.user, Settings.Login.contres.pwd, Settings.Login.contres.sign});
 			callScript("PrProvod.PervVvod.ContrRpack");
 			callScript("SABS.CloseSABS");
 		}
@@ -229,9 +229,9 @@ public class RunB extends RunBHelper
 		if(isobrrpack)
 		{
 			Log.msg("Запущен скрипт по обработке R пакета.");
-			Settings.FormES.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\formes.xml");
-			callScript("SABS.VFD",new String[]{Settings.FormES.key});
-			callScript("SABS.StartSABS",new String[]{Settings.FormES.user, Settings.FormES.pwd, Settings.FormES.sign});
+			Settings.Login.readXML(Settings.testProj + "settings\\login.xml");
+			callScript("SABS.VFD",new String[]{Settings.Login.formes.key});
+			callScript("SABS.StartSABS",new String[]{Settings.Login.formes.user, Settings.Login.formes.pwd, Settings.Login.formes.sign});
 			callScript("PrProvod.PervVvod.ObrRpack");			
 			callScript("SABS.CloseSABS");
 		}

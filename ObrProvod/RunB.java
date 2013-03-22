@@ -71,9 +71,9 @@ public class RunB extends RunBHelper
 		if(iscontrspack)
 		{
 			Log.msg("Запущен скрипт по контролю S пакета.");
-			Settings.ContrES.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\contres.xml");
-			callScript("SABS.VFD",new String[]{Settings.ContrES.key});
-			callScript("SABS.StartSABS",new String[]{Settings.ContrES.user, Settings.ContrES.pwd, Settings.ContrES.sign});
+			Settings.Login.readXML(Settings.testProj + "settings\\login.xml");
+			callScript("SABS.VFD",new String[]{Settings.Login.contres.key});
+			callScript("SABS.StartSABS",new String[]{Settings.Login.contres.user, Settings.Login.contres.pwd, Settings.Login.contres.sign});
 			callScript("ObrProvod.Vvod.ContrSpack");
 			callScript("SABS.CloseSABS");
 		}
@@ -82,9 +82,9 @@ public class RunB extends RunBHelper
 		if(isobrspack)
 		{
 			Log.msg("Запущен скрипт по обработке S пакета.");
-			Settings.FormES.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\formes.xml");
-			callScript("SABS.VFD",new String[]{Settings.FormES.key});
-			callScript("SABS.StartSABS",new String[]{Settings.FormES.user, Settings.FormES.pwd, Settings.FormES.sign});
+			Settings.Login.readXML(Settings.testProj + "settings\\login.xml");
+			callScript("SABS.VFD",new String[]{Settings.Login.formes.key});
+			callScript("SABS.StartSABS",new String[]{Settings.Login.formes.user, Settings.Login.formes.pwd, Settings.Login.formes.sign});
 			callScript("ObrProvod.Vvod.ObrSpack");			
 			callScript("SABS.CloseSABS");
 		}
@@ -94,9 +94,9 @@ public class RunB extends RunBHelper
 		if(iscontrrpack)
 		{
 			Log.msg("Запущен скрипт по контролю R пакета.");
-			Settings.ContrES.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\contres.xml");
-			callScript("SABS.VFD",new String[]{Settings.ContrES.key});
-			callScript("SABS.StartSABS",new String[]{Settings.ContrES.user, Settings.ContrES.pwd, Settings.ContrES.sign});
+			Settings.Login.readXML(Settings.testProj + "settings\\login.xml");
+			callScript("SABS.VFD",new String[]{Settings.Login.contres.key});
+			callScript("SABS.StartSABS",new String[]{Settings.Login.contres.user, Settings.Login.contres.pwd, Settings.Login.contres.sign});
 			callScript("ObrProvod.Vvod.ContrRpack");
 			callScript("SABS.CloseSABS");	
 

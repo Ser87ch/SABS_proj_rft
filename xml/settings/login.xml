@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<login>
+	<pervvod>
+		<user>tov</user>
+		<pwd>@WSXxsw2</pwd>
+		<sign>OPER1</sign>	
+		<key>oper1.fdd</key>	
+	</pervvod>
+	<contrvvod>
+		<user>tvn</user>
+		<pwd>$rfvVFR4</pwd>
+		<sign>OPER2</sign>	
+		<key>oper2.fdd</key>	
+	</contrvvod>
+	<formes>
+		<user>jsi</user>
+		<pwd>$rfvVFR4</pwd>
+		<sign>ADMINOD</sign>	
+		<key>adminod.fdd</key>	
+	</formes>
+	<contres>
+		<user>yes</user>
+		<pwd>$rfvVFR4</pwd>
+		<sign>CONTROB</sign>	
+		<key>controb.fdd</key>	
+	</contres>
+</login>
