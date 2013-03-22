@@ -595,76 +595,36 @@ public class Pack {
 	public static String getSPackName()
 	{
 		try {
-			if(Settings.GenSpack.error.equals("00") || Settings.GenSpack.error.equals("23") || Settings.GenSpack.error.equals("24") 
-					|| Settings.GenSpack.error.equals("25") || Settings.GenSpack.error.equals("26") || Settings.GenSpack.error.equals("27"))
-			{
-				DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
-				db.connect();			
-				ResultSet rs = db.st.executeQuery("select top 1 isnull(SUBTYPE,'') packfile from dbo.document_bon_pack where substring(SUBTYPE, 4,1) = 's' and substring(SUBTYPE, 10,3) = '" + Settings.bik.substring(4, 6) + "i' and status = 0 and substring(subtype, 5, 4) = '" + new SimpleDateFormat("ddMM").format(Settings.operDate) + "' order by ID_PACK desc");
 
-				String spack;
-				if(rs.next())
-					spack = rs.getString("packfile"); //p$9s0302.82o			
-				else
-					spack = "";
-				db.close();
-				String s;
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();			
+			ResultSet rs = db.st.executeQuery("select top 1 isnull(SUBTYPE,'') packfile from dbo.document_bon_pack where substring(SUBTYPE, 4,1) = 's' and substring(SUBTYPE, 10,3) = '" + Settings.bik.substring(4, 6) + "i' and status = 0 and substring(subtype, 5, 4) = '" + new SimpleDateFormat("ddMM").format(Settings.operDate) + "' order by ID_PACK desc");
 
-				if(spack.equals(""))
-				{
-					s = "1";				
-				}
-				else if(spack.substring(2,3).equals("9"))
-				{
-					s = "A";
-				}
-				else
-				{
-					char a = (char)(spack.charAt(2) + 1); 
-					s = Character.toString(a);
-				}
+			String spack;
+			if(rs.next())
+				spack = rs.getString("packfile"); //p$9s0302.82o			
+			else
+				spack = "";
+			db.close();
+			String s;
 
-				Log.msg("Имя файла S пакета " + "p$" + s + "s" + new SimpleDateFormat("ddMM").format(Settings.operDate) + "." + Settings.bik.substring(4,6) + "i .");
-				return "p$" + s + "s" + new SimpleDateFormat("ddMM").format(Settings.operDate) + "." + Settings.bik.substring(4,6) + "i";
-			}
-			else if(Settings.GenSpack.error.equals("11"))
+			if(spack.equals(""))
 			{
-				Log.msg("Имя файла S пакета P$2s" + new SimpleDateFormat("ddMM").format(Settings.operDate) + ".a2i с кодом ошибки 11.");
-				return "P$2s0302.a2i";
+				s = "1";				
 			}
-			else if(Settings.GenSpack.error.equals("12"))
+			else if(spack.substring(2,3).equals("9"))
 			{
-				Log.msg("Имя файла S пакета P$2saa02.82i с кодом ошибки 12.");
-				return "P$2saa02.82i";
+				s = "A";
 			}
-			else if(Settings.GenSpack.error.equals("13"))
+			else
 			{
-				Log.msg("Имя файла S пакета P$2s" + new SimpleDateFormat("ddMM").format(Settings.operDate) + ".99i с кодом ошибки 13.");
-				return "P$2s0302.99i";
+				char a = (char)(spack.charAt(2) + 1); 
+				s = Character.toString(a);
 			}
-			else if(Settings.GenSpack.error.equals("14"))
-			{
-				Log.msg("Имя файла S пакета P$*s"  + new SimpleDateFormat("ddMM").format(Settings.operDate) + ".82i с кодом ошибки 14.");
-				return "P$*s0302.82i";
-			}
-			else if(Settings.GenSpack.error.equals("15"))
-			{
-				DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
-				db.connect();			
-				ResultSet rs = db.st.executeQuery("select top 1 isnull(SUBTYPE,'') packfile from dbo.document_bon_pack where substring(SUBTYPE, 4,1) = 's' and substring(SUBTYPE, 12,1) = 'i' and status = 0 and substring(subtype, 5, 4) = '" + new SimpleDateFormat("ddMM").format(Settings.operDate) + "' order by ID_PACK desc");
 
-				String spack;
-				if(rs.next())
-					spack = rs.getString("packfile"); //p$9s0302.82o			
-				else
-					spack = "";
-				db.close();
-				Log.msg("Имя файла S пакета " + spack + " с кодом ошибки 14.");
-				return spack;
-			}
-			
-			
-			return "";
+			Log.msg("Имя файла S пакета " + "p$" + s + "s" + new SimpleDateFormat("ddMM").format(Settings.operDate) + "." + Settings.bik.substring(4,6) + "i .");
+			return "p$" + s + "s" + new SimpleDateFormat("ddMM").format(Settings.operDate) + "." + Settings.bik.substring(4,6) + "i";
+
 		} catch(Exception e) {
 			e.printStackTrace();
 			Log.msg(e);
@@ -676,20 +636,20 @@ public class Pack {
 	{
 		String pack = "";
 		File[] files = new File(folder).listFiles();
-	    if(files!=null) 
-	    { 
-	        for(File f: files) 
-	        {
-	        	if(f.getName().startsWith("p$") && f.getName().substring(3, 4).toLowerCase().equals(type.toLowerCase()))
-	        	{
-	        		pack = f.getName();
-	        		break;
-	        	}
-	        }
-	    }
+		if(files!=null) 
+		{ 
+			for(File f: files) 
+			{
+				if(f.getName().startsWith("p$") && f.getName().substring(3, 4).toLowerCase().equals(type.toLowerCase()))
+				{
+					pack = f.getName();
+					break;
+				}
+			}
+		}
 		return pack;
 	}
-	
+
 	public static String copySPack(String testnum)
 	{
 		try{
@@ -709,8 +669,8 @@ public class Pack {
 		}
 	}
 
-	
-	
+
+
 	public static String copyRPack(String testnum)
 	{
 		try{
@@ -730,7 +690,7 @@ public class Pack {
 		}
 	}
 
-	
+
 	public static String copyBPack(String testnum)
 	{
 		try{
@@ -757,7 +717,7 @@ public class Pack {
 			Log.msgCMP("Имена S пакетов не совпадают.");
 			return false;
 		}
-		
+
 		SPack.loadMask();
 
 		SPack et = new SPack(etal);
@@ -775,7 +735,7 @@ public class Pack {
 
 	public static boolean compareRPack(String etal, String fl)
 	{
-		
+
 		if(!new File(etal).getName().equals(new File(fl).getName()))
 		{
 			Log.msgCMP("Имена R пакетов не совпадают.");
@@ -795,10 +755,10 @@ public class Pack {
 			Log.msgCMP("R пакет " + fl + " не совпадает с эталонным R пакетом " + fl + " по маске rpack.msk .");
 		return et.equals(sp);
 	}
-	
+
 	public static boolean compareBPack(String etal, String fl)
 	{
-		
+
 		if(!new File(etal).getName().equals(new File(fl).getName()))
 		{
 			Log.msgCMP("Имена B пакетов не совпадают.");
@@ -869,24 +829,24 @@ public class Pack {
 		}			
 	}
 
-	
+
 	public static void clearFolder(File fld)
 	{
 		File[] files = fld.listFiles();
-	    if(files!=null) 
-	    { 
-	        for(File f: files) 
-	        {
-	            if(f.isDirectory())
-	            {
-	                clearFolder(f);
-	            } else {
-	                f.delete();
-	            }
-	        }
-	    }
+		if(files!=null) 
+		{ 
+			for(File f: files) 
+			{
+				if(f.isDirectory())
+				{
+					clearFolder(f);
+				} else {
+					f.delete();
+				}
+			}
+		}
 	}
-	
+
 	static class SPack
 	{
 		String fl;
@@ -1015,7 +975,7 @@ public class Pack {
 				Log.msg(e);				
 			}
 		}
-		
+
 		void loadB()
 		{
 			try {

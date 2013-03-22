@@ -69,7 +69,7 @@ public class Main {
 			
 			String spack = Pack.copySPack("001");
 			//XML.validate("C:\\sabstest\\XMLschema\\output\\deltadb.xsd", "C:\\sabstest\\tests\\a000001\\output\\rpack.xml");
-			Settings.GenRpack.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\genrpack.xml");
+			Settings.Sign.readXML(Settings.testProj + "settings\\genrpack.xml");
 			//Pack.createRpackError49();
 			//Pack.createBpackError49();
 			String s = Pack.getRPackName();

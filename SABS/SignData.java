@@ -39,7 +39,8 @@ public class SignData extends SignDataHelper
 		
 		Log.createGen();
 		
-		Settings.readXML(Settings.testProj + "default\\general.xml");		
+		Settings.readXML(Settings.testProj + "default\\general.xml");
+		Settings.Sign.readXML(Settings.testProj + "default\\sign.xml");
 		Settings.GenSpack.readXML(Settings.testProj + "default\\gen\\genspack.xml");		
 		
 		File dir = new File(Settings.testProj + "data\\");
@@ -52,16 +53,16 @@ public class SignData extends SignDataHelper
 		
 		Log.msg("Запущен скрипт по подписанию S пакетов.");
 		
-		callScript("SABS.VFD",new String[]{Settings.GenSpack.keyobr});
+		callScript("SABS.VFD",new String[]{Settings.Sign.keyobr});
 		
-		callScript("SABS.SignFile",new String[]{Settings.GenSpack.signobr, Settings.datafolder + "input\\003\\spack.txt", Settings.datafolder + "input\\003\\spack_1sgn.txt"});
-		callScript("SABS.SignFile",new String[]{Settings.GenSpack.signobr, Settings.datafolder + "input\\004\\spack.txt", Settings.datafolder + "input\\004\\spack_1sgn.txt"});
-		callScript("SABS.SignFile",new String[]{Settings.GenSpack.signobr, Settings.datafolder + "input\\005\\spack.txt", Settings.datafolder + "input\\005\\spack_1sgn.txt"});
+		callScript("SABS.SignFile",new String[]{Settings.Sign.signobr, Settings.datafolder + "input\\003\\spack.txt", Settings.datafolder + "input\\003\\spack_1sgn.txt"});
+		callScript("SABS.SignFile",new String[]{Settings.Sign.signobr, Settings.datafolder + "input\\004\\spack.txt", Settings.datafolder + "input\\004\\spack_1sgn.txt"});
+		callScript("SABS.SignFile",new String[]{Settings.Sign.signobr, Settings.datafolder + "input\\005\\spack.txt", Settings.datafolder + "input\\005\\spack_1sgn.txt"});
 		
-		callScript("SABS.VFD",new String[]{Settings.GenSpack.keycontr});
-		callScript("SABS.SignFile",new String[]{Settings.GenSpack.signcontr, Settings.datafolder + "input\\003\\spack_1sgn.txt", Settings.datafolder + "input\\003\\" + sfilename});		
-		callScript("SABS.SignFile",new String[]{Settings.GenSpack.signcontr, Settings.datafolder + "input\\004\\spack_1sgn.txt", Settings.datafolder + "input\\004\\" + sfilename});		
-		callScript("SABS.SignFile",new String[]{Settings.GenSpack.signcontr, Settings.datafolder + "input\\005\\spack_1sgn.txt", Settings.datafolder + "input\\005\\" + sfilename});
+		callScript("SABS.VFD",new String[]{Settings.Sign.keycontr});
+		callScript("SABS.SignFile",new String[]{Settings.Sign.signcontr, Settings.datafolder + "input\\003\\spack_1sgn.txt", Settings.datafolder + "input\\003\\" + sfilename});		
+		callScript("SABS.SignFile",new String[]{Settings.Sign.signcontr, Settings.datafolder + "input\\004\\spack_1sgn.txt", Settings.datafolder + "input\\004\\" + sfilename});		
+		callScript("SABS.SignFile",new String[]{Settings.Sign.signcontr, Settings.datafolder + "input\\005\\spack_1sgn.txt", Settings.datafolder + "input\\005\\" + sfilename});
 		
 		Log.close();
 	}

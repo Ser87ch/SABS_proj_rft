@@ -165,15 +165,15 @@ public class Run extends RunHelper
 		if(isgenrpack)
 		{
 			Log.msg("Запущен скрипт по созданию R пакета.");
-			Settings.GenRpack.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\genrpack.xml");
+			Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 
 			Pack.createRpack();
 
 			String rfilename = Pack.getRPackName();
-			callScript("SABS.VFD",new String[]{Settings.GenRpack.keyobr});
-			callScript("SABS.SignFile",new String[]{Settings.GenRpack.signobr, Settings.fullfolder + "\\input\\001\\rpack.txt", Settings.fullfolder + "\\input\\001\\rpack_1sgn.txt"});
-			callScript("SABS.VFD",new String[]{Settings.GenRpack.keycontr});			
-			callScript("SABS.SignFile",new String[]{Settings.GenRpack.signcontr, Settings.fullfolder + "\\input\\001\\rpack_1sgn.txt", Settings.fullfolder + "\\input\\001\\" + rfilename});
+			callScript("SABS.VFD",new String[]{Settings.Sign.keyobr});
+			callScript("SABS.SignFile",new String[]{Settings.Sign.signobr, Settings.fullfolder + "\\input\\001\\rpack.txt", Settings.fullfolder + "\\input\\001\\rpack_1sgn.txt"});
+			callScript("SABS.VFD",new String[]{Settings.Sign.keycontr});			
+			callScript("SABS.SignFile",new String[]{Settings.Sign.signcontr, Settings.fullfolder + "\\input\\001\\rpack_1sgn.txt", Settings.fullfolder + "\\input\\001\\" + rfilename});
 			logInfo("Создан R пакет " +  rfilename + " .");
 
 			try {

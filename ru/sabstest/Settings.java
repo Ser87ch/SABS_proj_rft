@@ -317,39 +317,38 @@ public class Settings{
 		}
 	}
 
-	public static class GenRpack{
+	public static class Sign{
 		public static String signobr = "";
 		public static String keyobr = "";
 		public static String signcontr = "";
 		public static String keycontr = "";
-		public static boolean isGenBpack = false;
+		
 
 		public static void createXML()
 		{
-			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\genrpack.xml");
+			createXML(Settings.testProj + "settings\\sign.xml");
 		}
 
 		public static void createXML(String fl)
 		{
 			Document doc = XML.createNewDoc();
-			Element rootElement = doc.createElement("genrpack");
+			Element rootElement = doc.createElement("sign");
 			doc.appendChild(rootElement);
 
 			XML.createNode(doc, rootElement, "signobr", signobr);	
 			XML.createNode(doc, rootElement, "keyobr", keyobr);	
 			XML.createNode(doc, rootElement, "signcontr", signcontr);	
 			XML.createNode(doc, rootElement, "keycontr", keycontr);	
-			XML.createNode(doc, rootElement, "isgenbpack", Boolean.toString(isGenBpack));
 
 			XML.createXMLFile(doc, fl);
 
 			Log.msg("XML с настройками для генерации R-пакета " + fl + " создан.");
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\" + Settings.pervfolder + "\\genrpack.xsd",fl);
+			XML.validate(Settings.testProj + "XMLSchema\\settings\\sign.xsd",fl);
 		}
 
 		public static void readXML(String src)
 		{
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\" + Settings.pervfolder + "\\genrpack.xsd",src);
+			XML.validate(Settings.testProj + "XMLSchema\\settings\\sign.xsd",src);
 
 			Element eElement = XML.getXMLRootElement(src);
 
@@ -357,7 +356,6 @@ public class Settings{
 			keyobr = XML.getChildValueString("keyobr", eElement);	
 			signcontr = XML.getChildValueString("signcontr", eElement);		
 			keycontr = XML.getChildValueString("keycontr", eElement);		
-			isGenBpack = Boolean.parseBoolean(XML.getChildValueString("isgenbpack", eElement));
 
 			Log.msg("XML с настройками для генерации R-пакета " + src + " загружен в программу.");
 		}
@@ -368,11 +366,6 @@ public class Settings{
 		public static int numBIK = 0;
 		public static int numDoc = 0;
 		public static int firstDoc = 0;
-		public static String signobr = "";
-		public static String keyobr = "";
-		public static String signcontr = "";
-		public static String keycontr = "";
-		public static String error = "";
 
 		public static void createXML()
 		{
@@ -388,11 +381,6 @@ public class Settings{
 			XML.createNode(doc, rootElement, "numbik", numBIK);	
 			XML.createNode(doc, rootElement, "numdoc", numDoc);	
 			XML.createNode(doc, rootElement, "firstdoc", firstDoc);
-			XML.createNode(doc, rootElement, "signobr", signobr);	
-			XML.createNode(doc, rootElement, "keyobr", keyobr);	
-			XML.createNode(doc, rootElement, "signcontr", signcontr);	
-			XML.createNode(doc, rootElement, "keycontr", keycontr);	
-			XML.createNode(doc, rootElement, "error", error);	
 
 			XML.createXMLFile(doc, fl);
 			Log.msg("XML с настройками для генерации S-пакета " + fl + " создан.");
@@ -408,11 +396,6 @@ public class Settings{
 			numBIK = XML.getChildValueInt("numbik", eElement);	
 			numDoc = XML.getChildValueInt("numdoc", eElement);	
 			firstDoc = XML.getChildValueInt("firstdoc", eElement);
-			signobr = XML.getChildValueString("signobr", eElement);		
-			keyobr = XML.getChildValueString("keyobr", eElement);	
-			signcontr = XML.getChildValueString("signcontr", eElement);		
-			keycontr = XML.getChildValueString("keycontr", eElement);	
-			error = XML.getChildValueString("error", eElement);
 
 			Log.msg("XML с настройками для генерации S-пакета " + src + " загружен в программу.");
 		}

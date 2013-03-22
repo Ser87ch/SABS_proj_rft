@@ -171,16 +171,16 @@ public class RunB extends RunBHelper
 		if(isgenrpack)
 		{
 			Log.msg("Запущен скрипт по созданию R пакета.");
-			Settings.GenRpack.readXML(Settings.fullfolder + "settings\\" + Settings.pervfolder + "\\genrpack.xml");
+			Settings.Sign.readXML(Settings.fullfolder + "settings\\sign.xml");
 
 			Pack.createRpackError49();
 			Pack.createBpackError49();
 
 			String rfilename = Pack.getRPackName();
-			callScript("SABS.VFD",new String[]{Settings.GenRpack.keyobr});
-			callScript("SABS.SignFile",new String[]{Settings.GenRpack.signobr, Settings.fullfolder + "\\input\\002\\rpack.txt", Settings.fullfolder + "\\input\\002\\rpack_1sgn.txt"});
-			callScript("SABS.VFD",new String[]{Settings.GenRpack.keycontr});			
-			callScript("SABS.SignFile",new String[]{Settings.GenRpack.signcontr, Settings.fullfolder + "\\input\\002\\rpack_1sgn.txt", Settings.fullfolder + "\\input\\002\\" + rfilename});
+			callScript("SABS.VFD",new String[]{Settings.Sign.keyobr});
+			callScript("SABS.SignFile",new String[]{Settings.Sign.signobr, Settings.fullfolder + "\\input\\002\\rpack.txt", Settings.fullfolder + "\\input\\002\\rpack_1sgn.txt"});
+			callScript("SABS.VFD",new String[]{Settings.Sign.keycontr});			
+			callScript("SABS.SignFile",new String[]{Settings.Sign.signcontr, Settings.fullfolder + "\\input\\002\\rpack_1sgn.txt", Settings.fullfolder + "\\input\\002\\" + rfilename});
 
 			logInfo("Создан R пакет " +  rfilename + " с кодом ошибки 49.");
 			try {
@@ -191,10 +191,10 @@ public class RunB extends RunBHelper
 			}
 			String bfilename = Pack.getBPackName();
 
-			callScript("SABS.VFD",new String[]{Settings.GenRpack.keyobr});
-			callScript("SABS.SignFile",new String[]{Settings.GenRpack.signobr, Settings.fullfolder + "\\input\\002\\bpack.txt", Settings.fullfolder + "\\input\\002\\bpack_1sgn.txt"});
-			callScript("SABS.VFD",new String[]{Settings.GenRpack.keycontr});
-			callScript("SABS.SignFile",new String[]{Settings.GenRpack.signcontr, Settings.fullfolder + "\\input\\002\\bpack_1sgn.txt", Settings.fullfolder + "\\input\\002\\" + bfilename});
+			callScript("SABS.VFD",new String[]{Settings.Sign.keyobr});
+			callScript("SABS.SignFile",new String[]{Settings.Sign.signobr, Settings.fullfolder + "\\input\\002\\bpack.txt", Settings.fullfolder + "\\input\\002\\bpack_1sgn.txt"});
+			callScript("SABS.VFD",new String[]{Settings.Sign.keycontr});
+			callScript("SABS.SignFile",new String[]{Settings.Sign.signcontr, Settings.fullfolder + "\\input\\002\\bpack_1sgn.txt", Settings.fullfolder + "\\input\\002\\" + bfilename});
 			logInfo("Создан B пакет " +  bfilename + " с кодом ошибки 49.");
 			
 
