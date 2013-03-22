@@ -39,8 +39,8 @@ public class NewData extends NewDataHelper
 		
 		Init.mkDataFolder();
 		
-		Settings.readXML(Settings.testProj + "default\\general.xml");
-		Settings.GenDoc.readXML(Settings.testProj + "default\\gen\\gendoc.xml");
+		Settings.readXML(Settings.testProj + "settings\\general.xml");
+		Settings.GenDoc.readXML(Settings.testProj + "settings\\gen\\gendoc.xml");
 
 		PayDocList pl = new PayDocList();
 		pl.generate();		
@@ -50,7 +50,7 @@ public class NewData extends NewDataHelper
 		plb.generateB();	
 		plb.createXML(Settings.datafolder + "input\\002\\paydocs.xml");
 		
-		Settings.GenSpack.readXML(Settings.testProj + "default\\gen\\genspack.xml");
+		Settings.GenSpack.readXML(Settings.testProj + "settings\\gen\\genspack.xml");
 		
 		PayDocList pls = new PayDocList();
 		pls.generateS();		
