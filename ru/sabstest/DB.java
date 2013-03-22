@@ -1,7 +1,11 @@
 package ru.sabstest;
 
 import java.io.Closeable;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 
 public class DB implements Closeable{
 	private String server;
