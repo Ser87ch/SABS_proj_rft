@@ -889,7 +889,7 @@ public class Pack {
 			try {
 				BufferedReader br;
 
-				br = new BufferedReader(new FileReader(Settings.testProj + "settings\\" + Settings.pervfolder + "\\spack.msk"));
+				br = new BufferedReader(new FileReader(Settings.testProj + "settings\\mask\\spack.msk"));
 
 				mskhd = br.readLine();
 				mskln = br.readLine();
@@ -906,7 +906,7 @@ public class Pack {
 			try {
 				BufferedReader br;
 
-				br = new BufferedReader(new FileReader(Settings.testProj + "settings\\" + Settings.obrfolder + "\\rpack.msk"));
+				br = new BufferedReader(new FileReader(Settings.testProj + "settings\\mask\\rpack.msk"));
 
 				mskhd = br.readLine();
 				mskln = br.readLine();
@@ -923,7 +923,7 @@ public class Pack {
 			try {
 				BufferedReader br;
 
-				br = new BufferedReader(new FileReader(Settings.testProj + "settings\\" + Settings.obrfolder + "\\bpack.msk"));
+				br = new BufferedReader(new FileReader(Settings.testProj + "settings\\mask\\bpack.msk"));
 
 				mskhd = br.readLine();
 				mskln = br.readLine();
