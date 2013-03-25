@@ -179,13 +179,22 @@ public class XML {
 		rootElement.appendChild(el);
 		return el;
 	}
-
-	public static Element createNode(Document doc, Element rootElement, String tag, VidPlat value)
+	
+	public static Date getOptionalDateAttr(String attr, Element el)
 	{
-		Element el = doc.createElement(tag);
-		if(value != null)
-			el.appendChild(doc.createTextNode(value.toString()));
-		rootElement.appendChild(el);
-		return el;
+		String s = el.getAttribute(attr);
+		if(!s.equals(""))
+			return Date.valueOf(s);
+		else
+			return null;
+	}
+	
+	public static int getOptionalIntAttr(String attr, Element el)
+	{
+		String s = el.getAttribute(attr);
+		if(!s.equals(""))
+			return Integer.parseInt(s);
+		else
+			return 0;
 	}
 }

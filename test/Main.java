@@ -11,13 +11,13 @@ import ru.sabstest.*;
 
 
 public class Main {
-	enum Test {INIT, GEN, PERVVOD,DDB,RPACK,SPACK,CMP,CMPDELTA,O}
+	enum Test {INIT, GEN, PERVVOD,DDB,RPACK,SPACK,CMP,CMPDELTA,O,ED}
 
 	public static void main(String[] args)
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.INIT;
+		Test t = Test.ED;
 		switch(t)
 		{
 
@@ -66,7 +66,7 @@ public class Main {
 		{
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
-			
+
 			String spack = Pack.copySPack("001");
 			//XML.validate("C:\\sabstest\\XMLschema\\output\\deltadb.xsd", "C:\\sabstest\\tests\\a000001\\output\\rpack.xml");
 			Settings.Sign.readXML(Settings.testProj + "settings\\genrpack.xml");
@@ -105,16 +105,31 @@ public class Main {
 			break;
 		}				
 		case O:
+		{
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
-			
-			PayDoc.Client cl = new PayDoc.Client("044552989","40116810100000000037");
+
+			Client cl = new Client("044552989","40116810100000000037");
 			cl.contrrazr();
-			System.out.println(cl.ls);
-			
-		
+			System.out.println(cl.personalAcc);
+
+
 			break;
 		}
+		case ED:
+		{
+//			MoneyOrder m = new MoneyOrder();
+//			m.readED(XML.getXMLRootElement("C:\\ED101_1.xml"));
+//
+//			m.createXML("C:\\1.xml");
+			PayDocList pdl = new PayDocList();
+			pdl.readEPD("C:\\PacketEPD.xml");
+			
+			pdl.createEPD("C:\\2.xml");
+			
+		}
+		}
+
 
 		Log.close();
 

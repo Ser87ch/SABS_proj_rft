@@ -290,10 +290,10 @@ public class Pack {
 
 			String bikrkc = new String(bik);
 			//счет 30811
-			PayDoc.Client vozvr = new PayDoc.Client(bikrkc,"30811810500000000010");
+			Client vozvr = new Client(bikrkc,"30811810500000000010");
 			vozvr.contrrazr();
 			byte[] schvozvr = new byte[20];
-			schvozvr = vozvr.ls.getBytes("cp866");
+			schvozvr = vozvr.personalAcc.getBytes("cp866");
 
 
 			for(int i = 0; i < 29; i++)

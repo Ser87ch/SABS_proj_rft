@@ -4,6 +4,7 @@ package ru.sabstest;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +21,14 @@ import org.w3c.dom.NodeList;
 public class PayDocList {
 	private List<PayDoc> pdl;
 
+	int edNo;
+	Date edDate;
+	String edAuthor;
+	String edReceiver;
+	int edQuantity;
+	int sum;
+	String systemCode;
+	
 	public PayDocList() 
 	{
 
@@ -35,7 +44,7 @@ public class PayDocList {
 			rs.next();
 			String ls = rs.getString("NUM_ACC");
 
-			PayDoc.Client plat = new PayDoc.Client(Settings.bik, ls);
+			Client plat = new Client(Settings.bik, ls);
 
 			pdl = new ArrayList<PayDoc>();
 			ResultSet rsbik = null;
@@ -48,24 +57,24 @@ public class PayDocList {
 				String kspol = rsbik.getString("ksnp");
 				String lspol = "40702810000000000005";
 
-				PayDoc.Client pol = new PayDoc.Client(bikpol, kspol, lspol, "111111111111", "222222222", "ЗАО Тест");
+				Client pol = new Client(bikpol, kspol, lspol, "111111111111", "222222222", "ЗАО Тест");
 				pol.contrrazr();
 
 				for(int j = 0; j < Settings.GenDoc.numDoc; j++)
 				{
-					PayDoc pd = new PayDoc();
-					pd.num = Settings.GenDoc.firstDoc + j;
-					pd.date = Settings.operDate;
-					pd.vidop = "01";
-					pd.sum =  ((float) Math.round(new Random().nextFloat() * 10000))/ 100;				
-					pd.vidpl = VidPlat.EL;
-					pd.plat = plat;
-					pd.pol = pol;
-					pd.ocher = 6;
-					pd.status = "";
-					pd.naznach = "Оплата теста";
-					pd.datesp = Settings.operDate;
-					pd.datepost = Settings.operDate;
+					PayDoc pd = new MoneyOrder();
+					pd.accDocNo = Settings.GenDoc.firstDoc + j;
+					pd.accDocDate = Settings.operDate;
+					pd.transKind = "01";
+					pd.sum =  (int) (new Random().nextFloat() * 10000);				
+					pd.paytKind = "1";
+					pd.payer = plat;
+					pd.payee = pol;
+					pd.priority = "6";
+					pd.tax.drawerStatus = "";
+					pd.purpose = "Оплата теста";
+					pd.chargeOffDate = Settings.operDate;
+					pd.receiptDate = Settings.operDate;
 
 					pdl.add(pd);
 					Log.msg("Документ №" + Integer.toString(i) + " сгенерирован.");
@@ -91,7 +100,7 @@ public class PayDocList {
 			rs.next();
 			String ls = rs.getString("NUM_ACC");
 
-			PayDoc.Client plat = new PayDoc.Client(Settings.bik, ls);
+			Client plat = new Client(Settings.bik, ls);
 
 			pdl = new ArrayList<PayDoc>();
 			ResultSet rsbik = null;
@@ -103,24 +112,24 @@ public class PayDocList {
 				String kspol = rsbik.getString("ksnp");
 				String lspol = "40702810000000000005";
 
-				PayDoc.Client pol = new PayDoc.Client(bikpol, kspol, lspol, "111111111111", "222222222", "ЗАО Тест");
+				Client pol = new Client(bikpol, kspol, lspol, "111111111111", "222222222", "ЗАО Тест");
 				pol.contrrazr();
 
 				for(int j = 0; j < Settings.GenDoc.numDoc; j++)
 				{
-					PayDoc pd = new PayDoc();
-					pd.num = Settings.GenDoc.firstDoc + j;
-					pd.date = Settings.operDate;
-					pd.vidop = "01";
-					pd.sum =  ((float) Math.round(new Random().nextFloat() * 10000))/ 100;				
-					pd.vidpl = VidPlat.EL;
-					pd.plat = plat;
-					pd.pol = pol;
-					pd.ocher = 6;
-					pd.status = "";
-					pd.naznach = "Оплата теста";
-					pd.datesp = Settings.operDate;
-					pd.datepost = Settings.operDate;
+					PayDoc pd = new MoneyOrder();
+					pd.accDocNo = Settings.GenDoc.firstDoc + j;
+					pd.accDocDate = Settings.operDate;
+					pd.transKind = "01";
+					pd.sum =  (int) (new Random().nextFloat() * 10000);				
+					pd.paytKind = "1";
+					pd.payer = plat;
+					pd.payee = pol;
+					pd.priority = "6";
+					pd.tax.drawerStatus = "";
+					pd.purpose = "Оплата теста";
+					pd.chargeOffDate = Settings.operDate;
+					pd.receiptDate = Settings.operDate;
 
 					pdl.add(pd);
 					Log.msg("Документ №" + Integer.toString(i) + " сгенерирован.");
@@ -150,7 +159,7 @@ public class PayDocList {
 			rs.next();
 			String ls = rs.getString("NUM_ACC");
 
-			PayDoc.Client plat = new PayDoc.Client(Settings.bik, "", ls, "111111111111", "222222222", "ЗАО Получатель");
+			Client plat = new Client(Settings.bik, "", ls, "111111111111", "222222222", "ЗАО Получатель");
 
 			pdl = new ArrayList<PayDoc>();
 
@@ -170,25 +179,25 @@ public class PayDocList {
 				elnum = rsel.getInt("el");
 				ndoc = rsel.getInt("ndoc");
 
-				PayDoc.Client pol = new PayDoc.Client(bikpol, kspol, lspol, "222222222222", "111111111", "ЗАО Плательщик");
+				Client pol = new Client(bikpol, kspol, lspol, "222222222222", "111111111", "ЗАО Плательщик");
 				pol.contrrazr();
 
 				for(int j = 0; j < Settings.GenSpack.numDoc; j++)
 				{
-					PayDoc pd = new PayDoc();
-					pd.num = ndoc + 1 + j;
-					pd.date = Settings.operDate;
-					pd.vidop = "01";
-					pd.sum =  ((float) Math.round(new Random().nextFloat() * 10000))/ 100;				
-					pd.vidpl = VidPlat.EL;
-					pd.pol = plat;
-					pd.plat = pol;
-					pd.ocher = 6;
-					pd.status = "";
-					pd.naznach = "Оплата теста";
-					pd.datesp = Settings.operDate;
-					pd.datepost = Settings.operDate;
-					pd.elnum = elnum + 1 + j;
+					PayDoc pd = new MoneyOrder();
+					pd.accDocNo = ndoc + 1 + j;
+					pd.accDocDate = Settings.operDate;
+					pd.transKind = "01";
+					pd.sum =  (int) (new Random().nextFloat() * 10000);					
+					pd.paytKind = "1";
+					pd.payee = plat;
+					pd.payer = pol;
+					pd.priority = "6";
+					pd.tax.drawerStatus = "";
+					pd.purpose = "Оплата теста";
+					pd.chargeOffDate = Settings.operDate;
+					pd.receiptDate = Settings.operDate;
+					pd.edNo = elnum + 1 + j;
 					pdl.add(pd);
 					Log.msg("Документ №" + Integer.toString(i) + " для S пакета сгенерирован.");
 					i++;
@@ -218,7 +227,7 @@ public class PayDocList {
 			rs.next();
 			String ls = rs.getString("NUM_ACC");
 
-			PayDoc.Client plat = new PayDoc.Client(Settings.bik, "", ls, "111111111111", "222222222", "ЗАО Получатель");
+			Client plat = new Client(Settings.bik, "", ls, "111111111111", "222222222", "ЗАО Получатель");
 
 			pdl = new ArrayList<PayDoc>();
 
@@ -238,53 +247,53 @@ public class PayDocList {
 				elnum = rsel.getInt("el");
 				ndoc = rsel.getInt("ndoc");
 
-				PayDoc.Client pol = new PayDoc.Client(bikpol, kspol, lspol, "222222222222", "111111111", "ЗАО Плательщик");
+				Client pol = new Client(bikpol, kspol, lspol, "222222222222", "111111111", "ЗАО Плательщик");
 				pol.contrrazr();
 
 				for(int j = 0; j < numd; j++)
 				{
-					PayDoc pd = new PayDoc();
-					pd.num = ndoc + 1 + j;
-					pd.date = Settings.operDate;
-					pd.vidop = "01";
-					pd.sum =  ((float) Math.round(new Random().nextFloat() * 10000))/ 100;				
-					pd.vidpl = VidPlat.EL;
-					pd.pol = plat;
+					PayDoc pd = new MoneyOrder();
+					pd.accDocNo = ndoc + 1 + j;
+					pd.accDocDate = Settings.operDate;
+					pd.transKind = "01";
+					pd.sum =  (int) (new Random().nextFloat() * 10000);					
+					pd.paytKind = "1";
+					pd.payee = plat;
 					if(j == 0) //49 несуществующий счет получателя
 					{
-						PayDoc.Client poler = new PayDoc.Client(Settings.bik, "", "40116810499999999999", "111111111111", "222222222", "ЗАО Получатель");
+						Client poler = new Client(Settings.bik, "", "40116810499999999999", "111111111111", "222222222", "ЗАО Получатель");
 						pol.contrrazr();
-						pd.pol = poler;
+						pd.payee = poler;
 					}
 
 					//					if(j == 3) //40 несуществующий корсчет ко получателя 40116810600000000037
 					//					{
-					//						PayDoc.Client poler = new PayDoc.Client("044525159", "30101810000000000159", "40116810600000000037", "111111111111", "222222222", "ЗАО Получатель");
+					//						Client poler = new Client("044525159", "30101810000000000159", "40116810600000000037", "111111111111", "222222222", "ЗАО Получатель");
 					//						//poler.contrrazr();
 					//						pd.pol = poler;
 					//					}
 
 					if(j == 1) //39 у ко получотозвана лицензия
 					{
-						PayDoc.Client poler = new PayDoc.Client("044552989", "30101810000000000989", "40116810300000000037", "111111111111", "222222222", "ЗАО Получатель");
+						Client poler = new Client("044552989", "30101810000000000989", "40116810300000000037", "111111111111", "222222222", "ЗАО Получатель");
 						poler.contrrazr();
-						pd.pol = poler;
+						pd.payee = poler;
 					}
 
-					pd.plat = pol;
+					pd.payer = pol;
 					if(j == 2) //43 недопустимый номер бс второ порядка лиц счета плат
 					{
-						PayDoc.Client plater = new PayDoc.Client(bikpol, kspol, "55555810200000000005", "111111111111", "222222222", "ЗАО Получатель");
+						Client plater = new Client(bikpol, kspol, "55555810200000000005", "111111111111", "222222222", "ЗАО Получатель");
 						plater.contrrazr();
-						pd.plat = plater;
+						pd.payer = plater;
 					}
 
-					pd.ocher = 6;
-					pd.status = "";
-					pd.naznach = "Оплата теста";
-					pd.datesp = Settings.operDate;
-					pd.datepost = Settings.operDate;
-					pd.elnum = elnum + 1 + j;
+					pd.priority = "6";
+					pd.tax.drawerStatus = "";
+					pd.purpose = "Оплата теста";
+					pd.chargeOffDate = Settings.operDate;
+					pd.receiptDate = Settings.operDate;
+					pd.edNo = elnum + 1 + j;
 					pdl.add(pd);
 					Log.msg("Документ №" + Integer.toString(i) + " для S пакета сгенерирован.");
 					i++;
@@ -309,13 +318,13 @@ public class PayDocList {
 		return pdl.size();
 	}
 
-	public int sumAll() //сумма умноженная на 100
+	public int sumAll() 
 	{
 		int sum = 0;
 		ListIterator <PayDoc> iter = pdl.listIterator();
 		while(iter.hasNext())
 		{
-			int i = (int) (iter.next().sum * 100);
+			int i = iter.next().sum;
 			sum = sum + i;
 
 		}
@@ -364,51 +373,51 @@ public class PayDocList {
 
 				PayDoc pd = iter.next();
 
-				XML.createNode(doc, paydoc, "num", pd.num);
-				XML.createNode(doc, paydoc, "date", pd.date);
-				XML.createNode(doc, paydoc, "vidop", pd.vidop);
+				XML.createNode(doc, paydoc, "num", pd.accDocNo);
+				XML.createNode(doc, paydoc, "date", pd.accDocDate);
+				XML.createNode(doc, paydoc, "vidop", pd.transKind);
 				XML.createNode(doc, paydoc, "sum", pd.sum);
-				XML.createNode(doc, paydoc, "vidpl", pd.vidpl);
+				XML.createNode(doc, paydoc, "vidpl", pd.paytKind);
 
 				//плательщик
 				Element plat = doc.createElement("plat");
 				paydoc.appendChild(plat);
 
-				XML.createNode(doc, plat, "bik", pd.plat.bik);
-				XML.createNode(doc, plat, "ks", pd.plat.ks);
-				XML.createNode(doc, plat, "ls", pd.plat.ls);
-				XML.createNode(doc, plat, "inn", pd.plat.inn);
-				XML.createNode(doc, plat, "kpp", pd.plat.kpp);
-				XML.createNode(doc, plat, "name", pd.plat.name);
+				XML.createNode(doc, plat, "bik", pd.payer.bic);
+				XML.createNode(doc, plat, "ks", pd.payer.correspAcc);
+				XML.createNode(doc, plat, "ls", pd.payer.personalAcc);
+				XML.createNode(doc, plat, "inn", pd.payer.inn);
+				XML.createNode(doc, plat, "kpp", pd.payer.kpp);
+				XML.createNode(doc, plat, "name", pd.payer.name);
 
 				//получатель
 				Element pol = doc.createElement("pol");
 				paydoc.appendChild(pol);				
 
-				XML.createNode(doc, pol, "bik", pd.pol.bik);
-				XML.createNode(doc, pol, "ks", pd.pol.ks);
-				XML.createNode(doc, pol, "ls", pd.pol.ls);
-				XML.createNode(doc, pol, "inn", pd.pol.inn);
-				XML.createNode(doc, pol, "kpp", pd.pol.kpp);
-				XML.createNode(doc, pol, "name", pd.pol.name);
+				XML.createNode(doc, pol, "bik", pd.payee.bic);
+				XML.createNode(doc, pol, "ks", pd.payee.correspAcc);
+				XML.createNode(doc, pol, "ls", pd.payee.personalAcc);
+				XML.createNode(doc, pol, "inn", pd.payee.inn);
+				XML.createNode(doc, pol, "kpp", pd.payee.kpp);
+				XML.createNode(doc, pol, "name", pd.payee.name);
 
-				XML.createNode(doc, paydoc, "ocher", pd.ocher);
-				XML.createNode(doc, paydoc, "status", pd.status);
+				XML.createNode(doc, paydoc, "ocher", pd.priority);
+				XML.createNode(doc, paydoc, "status", pd.tax.drawerStatus);
 
-				if(pd.status != "")
+				if(pd.tax.drawerStatus != "")
 				{
-					XML.createNode(doc, paydoc, "kbk", pd.kbk);
-					XML.createNode(doc, paydoc, "okato", pd.okato);
-					XML.createNode(doc, paydoc, "osn", pd.osn);
-					XML.createNode(doc, paydoc, "nalper", pd.nalper);
-					XML.createNode(doc, paydoc, "numdoc", pd.numdoc);
-					XML.createNode(doc, paydoc, "datedoc", pd.datedoc);
-					XML.createNode(doc, paydoc, "typepl", pd.typepl);
+					XML.createNode(doc, paydoc, "kbk", pd.tax.cbc);
+					XML.createNode(doc, paydoc, "okato", pd.tax.okato);
+					XML.createNode(doc, paydoc, "osn", pd.tax.paytReason);
+					XML.createNode(doc, paydoc, "nalper", pd.tax.taxPeriod);
+					XML.createNode(doc, paydoc, "numdoc", pd.tax.docNo);
+					XML.createNode(doc, paydoc, "datedoc", pd.tax.docDate);
+					XML.createNode(doc, paydoc, "typepl", pd.tax.taxPaytKind);
 				}
 
-				XML.createNode(doc, paydoc, "naznach", pd.naznach);
-				XML.createNode(doc, paydoc, "datesp", pd.datesp);
-				XML.createNode(doc, paydoc, "datepost", pd.datepost);
+				XML.createNode(doc, paydoc, "naznach", pd.purpose);
+				XML.createNode(doc, paydoc, "datesp", pd.chargeOffDate);
+				XML.createNode(doc, paydoc, "datepost", pd.receiptDate);
 
 				Log.msg("Документ №" + i + " записан в XML.");
 				i++;
@@ -447,38 +456,38 @@ public class PayDocList {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 					Element eElement = (Element) nNode;
-					PayDoc pd = new PayDoc();
-					pd.num = XML.getChildValueInt("num", eElement);	
-					pd.date = XML.getChildValueDate("date", eElement);	
-					pd.vidop = XML.getChildValueString("vidop", eElement);
-					pd.sum = XML.getChildValueFloat("sum", eElement);
-					pd.vidpl = VidPlat.valueOf(XML.getChildValueString("vidpl", eElement));
+					PayDoc pd = new MoneyOrder();
+					pd.accDocNo = XML.getChildValueInt("num", eElement);	
+					pd.accDocDate = XML.getChildValueDate("date", eElement);	
+					pd.transKind = XML.getChildValueString("vidop", eElement);
+					pd.sum = XML.getChildValueInt("sum", eElement);
+					pd.paytKind = XML.getChildValueString("vidpl", eElement);
 
 					NodeList nlList = eElement.getElementsByTagName("plat");
 					Element clElement = (Element) nlList.item(0);
 
-					pd.plat = new PayDoc.Client(XML.getChildValueString("bik", clElement), XML.getChildValueString("ks", clElement),
+					pd.payer = new Client(XML.getChildValueString("bik", clElement), XML.getChildValueString("ks", clElement),
 							XML.getChildValueString("ls", clElement), XML.getChildValueString("inn", clElement),
 							XML.getChildValueString("kpp", clElement), XML.getChildValueString("name", clElement));
 
 					nlList = eElement.getElementsByTagName("pol");
 					clElement = (Element) nlList.item(0);
-					pd.pol = new PayDoc.Client(XML.getChildValueString("bik", clElement), XML.getChildValueString("ks", clElement),
+					pd.payee = new Client(XML.getChildValueString("bik", clElement), XML.getChildValueString("ks", clElement),
 							XML.getChildValueString("ls", clElement), XML.getChildValueString("inn", clElement),
 							XML.getChildValueString("kpp", clElement), XML.getChildValueString("name", clElement));
 
-					pd.ocher = XML.getChildValueInt("ocher", eElement);
-					pd.status = XML.getChildValueString("status", eElement);
-					pd.kbk = XML.getChildValueString("kbk", eElement);
-					pd.okato = XML.getChildValueString("okato", eElement);
-					pd.osn = XML.getChildValueString("osn", eElement);
-					pd.nalper = XML.getChildValueString("nalper", eElement);
-					pd.numdoc = XML.getChildValueString("numdoc", eElement);
-					pd.datedoc = XML.getChildValueString("datedoc", eElement);
-					pd.typepl = XML.getChildValueString("typepl", eElement);
-					pd.naznach = XML.getChildValueString("naznach", eElement);
-					pd.datesp = XML.getChildValueDate("datesp", eElement);
-					pd.datepost = XML.getChildValueDate("datepost", eElement);
+					pd.priority = XML.getChildValueString("ocher", eElement);
+					pd.tax.drawerStatus = XML.getChildValueString("status", eElement);
+					pd.tax.cbc = XML.getChildValueString("kbk", eElement);
+					pd.tax.okato = XML.getChildValueString("okato", eElement);
+					pd.tax.paytReason = XML.getChildValueString("osn", eElement);
+					pd.tax.taxPeriod = XML.getChildValueString("nalper", eElement);
+					pd.tax.docNo = XML.getChildValueString("numdoc", eElement);
+					pd.tax.docDate = XML.getChildValueString("datedoc", eElement);
+					pd.tax.taxPaytKind = XML.getChildValueString("typepl", eElement);
+					pd.purpose = XML.getChildValueString("naznach", eElement);
+					pd.chargeOffDate = XML.getChildValueDate("datesp", eElement);
+					pd.receiptDate = XML.getChildValueDate("datepost", eElement);
 
 					pdl.add(pd);
 					Log.msg("Документ №" + Integer.toString(temp + 1) + " загружен в программу.");
@@ -526,20 +535,20 @@ public class PayDocList {
 				sd.writeBytes("\r\n");
 				PayDoc pd = iter.next();
 
-				sf = String.format("%06d", pd.elnum) + new SimpleDateFormat("ddMMyyyy").format(pd.date) +
-				pd.plat.bik.substring(2,9) + "000" + pd.plat.bik + String.format("%20s", pd.plat.ls) + String.format("%20s", pd.plat.ks) +
-				String.format("%03d", pd.num) + new SimpleDateFormat("ddMMyyyy").format(pd.date) + pd.vidop +
-				pd.pol.bik + String.format("%20s", pd.pol.ls) + String.format("%20s", pd.pol.ks) +
-				String.format("%018d", (int)(pd.sum * 100)) + String.format("%01d", pd.ocher) + 
-				String.format("%12s", pd.plat.inn) + String.format("%9s", pd.plat.kpp) +
-				String.format("%-160s", pd.plat.name) + 	String.format("%12s", pd.pol.inn) + 
-				String.format("%9s", pd.pol.kpp) + String.format("%-160s", pd.pol.name) + 
-				String.format("%-210s", pd.naznach) + new SimpleDateFormat("ddMMyyyy").format(pd.datepost) + 
-				String.format("%8s", "") + new SimpleDateFormat("ddMMyyyy").format(pd.datesp) +
-				new SimpleDateFormat("ddMMyyyy").format(pd.date) + String.format("%2s", pd.status) + 
-				String.format("%20s", pd.kbk) + String.format("%11s", pd.okato) + String.format("%2s", pd.osn) +
-				String.format("%10s", pd.nalper) + String.format("%15s", pd.numdoc) + String.format("%10s", pd.datedoc) +
-				String.format("%2s", pd.typepl) + String.format("%50s", "");
+				sf = String.format("%06d", pd.edNo) + new SimpleDateFormat("ddMMyyyy").format(pd.accDocDate) +
+				pd.payer.bic.substring(2,9) + "000" + pd.payer.bic + String.format("%20s", pd.payer.personalAcc) + String.format("%20s", pd.payer.correspAcc) +
+				String.format("%03d", pd.accDocNo) + new SimpleDateFormat("ddMMyyyy").format(pd.accDocDate) + pd.transKind +
+				pd.payee.bic + String.format("%20s", pd.payee.personalAcc) + String.format("%20s", pd.payee.correspAcc) +
+				String.format("%018d", pd.sum) + String.format("%01d", pd.priority) + 
+				String.format("%12s", pd.payer.inn) + String.format("%9s", pd.payer.kpp) +
+				String.format("%-160s", pd.payer.name) + 	String.format("%12s", pd.payee.inn) + 
+				String.format("%9s", pd.payee.kpp) + String.format("%-160s", pd.payee.name) + 
+				String.format("%-210s", pd.purpose) + new SimpleDateFormat("ddMMyyyy").format(pd.receiptDate) + 
+				String.format("%8s", "") + new SimpleDateFormat("ddMMyyyy").format(pd.chargeOffDate) +
+				new SimpleDateFormat("ddMMyyyy").format(pd.accDocDate) + String.format("%2s", pd.tax.drawerStatus) + 
+				String.format("%20s", pd.tax.cbc) + String.format("%11s", pd.tax.okato) + String.format("%2s", pd.tax.paytReason) +
+				String.format("%10s", pd.tax.taxPeriod) + String.format("%15s", pd.tax.docNo) + String.format("%10s", pd.tax.docDate) +
+				String.format("%2s", pd.tax.taxPaytKind) + String.format("%50s", "");
 
 				b = new byte[880];
 				b = sf.getBytes("cp866"); 
@@ -561,6 +570,57 @@ public class PayDocList {
 	public void createSpack()
 	{
 		createSpack(Settings.testProj + "tests\\" + Settings.folder + "\\input\\spack.txt");
+	}
+	
+	public void readEPD(String src)
+	{
+		Element root = XML.getXMLRootElement(src);
+		pdl = new ArrayList<PayDoc>();
+		
+		edNo = Integer.parseInt(root.getAttribute("EDNo"));
+		edDate = Date.valueOf(root.getAttribute("EDDate"));
+		edAuthor = root.getAttribute("EDAuthor");
+		edReceiver = root.getAttribute("EDReceiver");
+		edQuantity = Integer.parseInt(root.getAttribute("EDQuantity"));
+		sum = Integer.parseInt(root.getAttribute("Sum"));
+		systemCode = root.getAttribute("SystemCode");
+		
+		NodeList nl = root.getElementsByTagName("ED101");
+		
+		for(int i = 0; i < nl.getLength(); i++)
+		{
+			PayDoc pd = new MoneyOrder();
+			pd.readED((Element) nl.item(i));
+			pdl.add(pd);
+		}
+		
+		//System.out.println(toString());
+	}
+	
+	public void createEPD(String fl)
+	{
+		Document doc = XML.createNewDoc();
+		Element root = doc.createElement("PacketEPD");
+		doc.appendChild(root);
+		
+		root.setAttribute("xmlns", "urn:cbr-ru:ed:v2.0");
+		
+		root.setAttribute("EDNo", Integer.toString(edNo));
+		root.setAttribute("EDDate", new SimpleDateFormat("yyyy-MM-dd").format(edDate));
+		root.setAttribute("EDAuthor", edAuthor);
+		root.setAttribute("EDReceiver", edReceiver);
+		root.setAttribute("EDQuantity", Integer.toString(edQuantity));
+		root.setAttribute("Sum", Integer.toString(sum));
+		root.setAttribute("SystemCode", systemCode);
+		
+		ListIterator <PayDoc> iter = pdl.listIterator();
+		while(iter.hasNext())
+		{
+			PayDoc pd = iter.next();
+			root.appendChild(pd.createED(doc));
+		}
+		
+		XML.createXMLFile(doc, fl);
 	}
 }
 

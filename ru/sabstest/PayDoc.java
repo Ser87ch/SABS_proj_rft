@@ -4,51 +4,54 @@ import java.sql.Date;
 import java.lang.Character;
 import java.text.SimpleDateFormat;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 
 
-public class PayDoc {
-	public int num;
-	public Date date;
-	public String vidop;
-	public float sum;
-	public VidPlat vidpl;
-	public Client plat;
-	public Client pol;
-	public int ocher;
-	public String status;
-	public String kbk;
-	public String okato;
-	public String osn;
-	public String nalper;
-	public String numdoc;
-	public String datedoc;
-	public String typepl;
-	public String naznach;
-	public Date datesp;
-	public Date datepost;
-	public int elnum;
+
+abstract public class PayDoc {
+	//реквизиты ЭД
+	public int edNo; //Номер ЭД в течение опердня
+	public Date edDate; //Дата составления ЭД
+	public String edAuthor; //Уникальный идентификатор составителя ЭД (УИС)
+		
+	//основные реквизиты
+	public String paytKind; //вид платежа
+	public int sum; //сумма
+	public String transKind; //вид операции
+	public String priority; //очередность платежа
+	public Date receiptDate; //дата поступления в банк плательщика
+	public Date fileDate; //дата помещения в картотеку
+	public Date chargeOffDate; //дата списания со счета плательщика
+	public String systemCode; //признак системы обработки (заполняется если ЭД не составе пакета)
 	
-	PayDoc()
+	//реквизиты исходного расчетного документа
+	public int accDocNo; //номер расчетного документа
+	public Date accDocDate; //Дата выписки расчетного документа
+	
+	public Client payer; //плательщика
+	public Client payee; //получатель
+	
+	public String purpose; //назначение платежа
+	
+	//Ведомственная информация
+	DepartmentalInfo tax;
+	
+	
+	public PayDoc()
 	{	
-		this.num = 0;
-		this.date = new Date(0);
-		this.vidop = "";
+		this.accDocNo = 0;
+		this.accDocDate = new Date(0);
+		this.transKind = "";
 		this.sum = 0;				
-		this.vidpl = VidPlat.EL;
-		this.ocher = 6;
-		this.status = "";
-		this.kbk = "";
-		this.okato = "";
-		this.osn = "";
-		this.nalper = "";
-		this.numdoc = "";
-		this.datedoc = "";
-		this.typepl = "";		
-		this.naznach = "Тест";
-		this.datesp = new Date(0);
-		this.datepost = new Date(0);	
-		this.elnum = 0;
+		this.paytKind = "1";
+		this.priority = "6";
+		tax = new DepartmentalInfo("", "", "", "", "", "", "", "");			
+		this.purpose = "Тест";
+		this.chargeOffDate = new Date(0);
+		this.receiptDate = new Date(0);	
+		this.edNo = 0;
 	}
 
 	@Override
@@ -57,17 +60,18 @@ public class PayDoc {
 		return toStr(" ", false);
 	}
 
+	
 	public String toStr(String razd, boolean addShift){
 		String str = "";
 
-		str = Integer.toString(num) + razd + new SimpleDateFormat("ddMMyyyy").format(date) + razd + vidop + razd + Float.toString(sum) + razd + vidpl.toString() + razd + 
-		plat.bik + razd + plat.ks + razd + plat.ls + razd + plat.inn + razd + plat.kpp + razd + plat.name + razd + pol.bik + razd + pol.ks + razd + pol.ls + razd + pol.inn + razd + pol.kpp + razd 
-		+ (addShift ? "+{ExtEnd}" : "") + pol.name + razd +
-		Integer.toString(ocher) + razd + status;
-		if(status != "" && status != null)
-			str = str + razd + kbk + razd + okato + razd + osn + razd + nalper + razd + numdoc + razd + datedoc + razd + typepl;
+		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd + transKind + razd + Float.toString(sum) + razd + paytKind.toString() + razd + 
+		payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd + payer.inn + razd + payer.kpp + razd + payer.name + razd + payee.bic + razd + payee.correspAcc + razd + payee.personalAcc + razd + payee.inn + razd + payee.kpp + razd 
+		+ (addShift ? "+{ExtEnd}" : "") + payee.name + razd +
+		priority + razd + tax.drawerStatus;
+		if(tax.drawerStatus != "" && tax.drawerStatus != null)
+			str = str + razd + tax.cbc + razd + tax.okato + razd + tax.paytReason + razd + tax.taxPeriod + razd + tax.docNo + razd + tax.docDate + razd + tax.taxPaytKind;
 
-		str = str + razd + naznach + razd + new SimpleDateFormat("ddMMyyyy").format(datesp) + razd + new SimpleDateFormat("ddMMyyyy").format(datepost);
+		str = str + razd + purpose + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate);
 		return str;	
 	}
 
@@ -75,75 +79,27 @@ public class PayDoc {
 
 		String str = "";
 
-		str = Integer.toString(num) + razd + new SimpleDateFormat("ddMMyyyy").format(date) + razd + vidop + razd + Float.toString(sum) + razd + vidpl.toString() + razd + 
-		plat.bik + razd + plat.ks + razd + plat.ls + razd + pol.bik + razd + pol.ks + razd + pol.ls + razd + Integer.toString(ocher);
+		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd + transKind + razd + Float.toString(sum) + razd + paytKind.toString() + razd + 
+		payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd + payee.bic + razd + payee.correspAcc + razd + payee.personalAcc + razd + priority;
 
 		return str;	
 	}
 
-	public static class Client {
-		public String bik;
-		public String ks;
-		public String ls;
-		public String inn;
-		public String kpp;
-		public String name;
-
-		public Client(String bik, String ls) {
-			this.bik = bik;	
-			this.ks = "";
-			this.ls = ls;
-			this.inn = "";
-			this.kpp = "";
-			this.name = "";
-
-		}
-		public Client(String bik, String ks , String ls) {
-			this.bik = bik;
-			this.ks = ks;
-			this.ls = ls;	
-			this.inn = "";
-			this.kpp = "";
-			this.name = "";
-		}
-		public Client(String bik, String ks , String ls, String inn, String kpp, String name) {
-			this.bik = bik;
-			this.ks = ks;
-			this.ls = ls;
-			this.inn = inn;
-			this.kpp = kpp;
-			this.name = name;
-		}
-		public void contrrazr() {
-			String contrls;
-
-			if(bik.substring(6,9).equals("000") || bik.substring(6,9).equals("001") || bik.substring(6,9).equals("002")) {
-				contrls = "0" + bik.substring(4,6) + ls.substring(0, 8) + "0" + ls.substring(9, 20);
-			}
-			else {
-				contrls = bik.substring(6,9) + ls.substring(0, 8) + "0" + ls.substring(9, 20);
-			}
-
-			int contr = 0, k;
-
-			for(k = 0; k < 23; k++) {
-				switch (k % 3) {
-				case 0: contr =  (Character.getNumericValue(contrls.charAt(k)) * 7) % 10 + contr ;
-				break;
-				case 1: contr =  (Character.getNumericValue(contrls.charAt(k)) * 1) % 10 + contr ;
-				break;
-				case 2: contr =  (Character.getNumericValue(contrls.charAt(k)) * 3) % 10 + contr ;
-				break;
-				}
-
-			}
-
-			contr = ((contr % 10) * 3) % 10;
-
-			ls = ls.substring(0, 8) + Integer.toString(contr) + ls.substring(9, 20);
-
-		}
+	abstract public Element createED(Document doc);
+	
+	
+	abstract public void readED(Element doc);
+	
+	
+	public void createXML(String fl)
+	{
+		Document doc = XML.createNewDoc();
+		doc.appendChild(createED(doc));
+		XML.createXMLFile(doc, fl);
 	}
-
-
+	
+	public void readXML(String src)
+	{
+		readED(XML.getXMLRootElement(src));
+	}
 }
