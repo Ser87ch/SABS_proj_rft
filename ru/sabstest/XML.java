@@ -197,4 +197,22 @@ public class XML {
 		else
 			return 0;
 	}
+	
+	public static void setOptinalAttr(Element el, String attrName, Date value)
+	{
+		if(value != null)
+			el.setAttribute(attrName, new SimpleDateFormat("yyyy-MM-dd").format(value));
+	}
+	
+	public static void setOptinalAttr(Element el, String attrName, int value)
+	{
+		if(value != 0)
+			el.setAttribute(attrName, Integer.toString(value));
+	}
+	
+	public static void setOptinalAttr(Element el, String attrName, String value)
+	{
+		if(value != null && !value.equals(""))
+			el.setAttribute(attrName, value);
+	}
 }

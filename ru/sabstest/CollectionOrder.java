@@ -1,16 +1,16 @@
-
 package ru.sabstest;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+public class CollectionOrder extends PaymentDocument {
 
-public class PaymentOrder extends PaymentDocument {
-	public PaymentOrder()
+	public Date receiptDateCollectBank;	
+	
+	public CollectionOrder()
 	{
 		super();
 	}
@@ -18,23 +18,26 @@ public class PaymentOrder extends PaymentDocument {
 	@Override
 	public Element createED(Document doc)
 	{
-		Element rootElement = doc.createElement("ED101");		
+		Element rootElement = doc.createElement("ED104");		
 
 		addCommonEDElements(doc, rootElement);		
-
+		
+		XML.setOptinalAttr(rootElement, "ReceiptDateCollectBank", receiptDateCollectBank);
+		
 		if(tax != null && !tax.drawerStatus.equals(""))
 			rootElement.appendChild(tax.createXMLElement(doc));
 		
 		return rootElement;
 	}
 
-	
 	@Override
 	public void readED(Element doc)
 	{
-		if(doc.getTagName() == "ED101")
+		if(doc.getTagName() == "ED104")
 		{
 			readCommonEDElements(doc);
+			
+			receiptDateCollectBank = XML.getOptionalDateAttr("ReceiptDateCollectBank", doc);
 			
 			NodeList nl = doc.getElementsByTagName("DepartmentalInfo");
 			if(nl.getLength() == 1)

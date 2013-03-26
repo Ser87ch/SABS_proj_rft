@@ -27,19 +27,13 @@ public class PaymentRequest extends PaymentDocument {
 		Element rootElement = doc.createElement("ED103");		
 
 		addCommonEDElements(doc, rootElement);		
-
-		if(paytCondition != null && !paytCondition.equals(""))
-			rootElement.setAttribute("PaytCondition", paytCondition);
-		if(acptTerm != 0)
-			rootElement.setAttribute("AcptTerm", Integer.toString(acptTerm));
-		if(docDispatchDate != null)
-			rootElement.setAttribute("DocDispatchDate", new SimpleDateFormat("yyyy-MM-dd").format(docDispatchDate));
-		if(receiptDateCollectBank != null)
-			rootElement.setAttribute("ReceiptDateCollectBank", new SimpleDateFormat("yyyy-MM-dd").format(receiptDateCollectBank));
-		if(maturityDate != null)
-			rootElement.setAttribute("MaturityDate", new SimpleDateFormat("yyyy-MM-dd").format(maturityDate));
-		if(acptSum != 0)
-			rootElement.setAttribute("AcptSum", Integer.toString(acptSum));
+		
+		XML.setOptinalAttr(rootElement, "PaytCondition", paytCondition);
+		XML.setOptinalAttr(rootElement, "AcptTerm", acptTerm);
+		XML.setOptinalAttr(rootElement, "DocDispatchDate", docDispatchDate);
+		XML.setOptinalAttr(rootElement, "ReceiptDateCollectBank", receiptDateCollectBank);
+		XML.setOptinalAttr(rootElement, "MaturityDate", maturityDate);
+		XML.setOptinalAttr(rootElement, "AcptSum", acptSum);
 		
 		return rootElement;
 	}

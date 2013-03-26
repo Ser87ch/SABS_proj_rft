@@ -124,9 +124,9 @@ public class Main {
 //			
 //			pdl.createEPD("C:\\3.xml");
 			
-			PaymentRequest pq = new PaymentRequest();
+			CollectionOrder pq = new CollectionOrder();
 			
-			pq.readXML("C:\\ED103.xml");
+			pq.readXML("C:\\ED104.xml");
 			
 			pq.createXML("C:\\4.xml");
 		}

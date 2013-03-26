@@ -112,14 +112,11 @@ abstract public class PaymentDocument {
 		rootElement.setAttribute("Sum", Integer.toString(sum));
 		rootElement.setAttribute("TransKind", transKind);
 		rootElement.setAttribute("Priority", priority);
-		if(receiptDate != null)
-			rootElement.setAttribute("ReceiptDate", new SimpleDateFormat("yyyy-MM-dd").format(receiptDate));
-		if(fileDate != null)
-			rootElement.setAttribute("FileDate", new SimpleDateFormat("yyyy-MM-dd").format(fileDate));
-		if(chargeOffDate != null)
-			rootElement.setAttribute("ChargeOffDate", new SimpleDateFormat("yyyy-MM-dd").format(chargeOffDate));
-		if(systemCode != null && !systemCode.equals(""))
-			rootElement.setAttribute("SystemCode", systemCode);
+		
+		XML.setOptinalAttr(rootElement, "ReceiptDate", receiptDate);
+		XML.setOptinalAttr(rootElement, "FileDate", fileDate);
+		XML.setOptinalAttr(rootElement, "ChargeOffDate", chargeOffDate);
+		XML.setOptinalAttr(rootElement, "SystemCode", systemCode);		
 		
 		Element accDoc = doc.createElement("AccDoc");
 		rootElement.appendChild(accDoc);
