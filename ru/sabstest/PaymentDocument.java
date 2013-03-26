@@ -181,6 +181,11 @@ abstract public class PaymentDocument {
 			pd = new PaymentWarrant();
 			pd.readED(root);
 		}
+		else if(root.getNodeName().equals("ED108"))
+		{
+			pd = new PaymentOrderRegister();
+			pd.readED(root);
+		}
 		return pd;
 	}
 

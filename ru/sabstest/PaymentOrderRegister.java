@@ -1,0 +1,91 @@
+package ru.sabstest;
+
+import java.util.List;
+import java.util.ListIterator;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+public class PaymentOrderRegister extends PaymentDocument {
+
+	public List <TransactionInfo> tiList;
+
+	public PaymentOrderRegister()
+	{
+		super();
+	}
+
+	@Override
+	public Element createED(Document doc)
+	{
+		Element rootElement = doc.createElement("ED108");		
+
+		addCommonEDElements(doc, rootElement);		
+
+		if(tax != null && !tax.drawerStatus.equals(""))
+			rootElement.appendChild(tax.createXMLElement(doc));
+
+		ListIterator<TransactionInfo> it = tiList.listIterator();
+
+		while(it.hasNext())
+			rootElement.appendChild(it.next().createED(doc));
+
+
+		return rootElement;
+	}
+
+
+	@Override
+	public void readED(Element doc)
+	{
+		if(doc.getTagName() == "ED108")
+		{
+			readCommonEDElements(doc);
+
+			NodeList nl = doc.getElementsByTagName("DepartmentalInfo");
+			if(nl.getLength() == 1)
+			{
+				tax = new DepartmentalInfo();
+				tax.readED((Element) nl.item(0));
+			}
+
+			nl = doc.getElementsByTagName("CreditTransferTransactionInfo");
+			
+			for(int i = 0; i < nl.getLength(); i++)
+			{
+				TransactionInfo ti = new TransactionInfo();
+				ti.readED((Element) nl.item(i));
+				
+				tiList.add(ti);
+			}		
+			
+		}
+	}	
+
+	public static class TransactionInfo
+	{
+		public int transactionID;
+
+		public Element createED(Document doc)
+		{
+			Element rootElement = doc.createElement("CreditTransferTransactionInfo");		
+
+			XML.setOptinalAttr(rootElement, "TransactionID", transactionID);
+
+
+			return rootElement;
+		}
+
+		public void readED(Element tr)
+		{
+			if(tr.getTagName() == "CreditTransferTransactionInfo")
+			{
+				transactionID = XML.getOptionalIntAttr("TransactionID", tr);
+
+			}
+		}
+
+	}
+
+}

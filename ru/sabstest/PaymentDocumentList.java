@@ -620,6 +620,15 @@ public class PaymentDocumentList {
 			pd.readED((Element) nl.item(i));
 			pdl.add(pd);
 		}
+		
+		nl = root.getElementsByTagName("ED108");
+
+		for(int i = 0; i < nl.getLength(); i++)
+		{
+			PaymentDocument pd = new PaymentOrderRegister();
+			pd.readED((Element) nl.item(i));
+			pdl.add(pd);
+		}
 		//System.out.println(toString());
 	}
 
