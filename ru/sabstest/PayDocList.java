@@ -608,7 +608,8 @@ public class PayDocList {
 		root.setAttribute("EDNo", Integer.toString(edNo));
 		root.setAttribute("EDDate", new SimpleDateFormat("yyyy-MM-dd").format(edDate));
 		root.setAttribute("EDAuthor", edAuthor);
-		root.setAttribute("EDReceiver", edReceiver);
+		if(edReceiver != null && !edReceiver.equals(""))
+			root.setAttribute("EDReceiver", edReceiver);
 		root.setAttribute("EDQuantity", Integer.toString(edQuantity));
 		root.setAttribute("Sum", Integer.toString(sum));
 		root.setAttribute("SystemCode", systemCode);

@@ -1,7 +1,6 @@
 package ru.sabstest;
 
 import java.sql.Date;
-import java.lang.Character;
 import java.text.SimpleDateFormat;
 
 import org.w3c.dom.Document;
