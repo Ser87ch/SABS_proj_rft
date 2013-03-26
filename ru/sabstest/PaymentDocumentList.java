@@ -28,7 +28,7 @@ public class PaymentDocumentList {
 	int edQuantity;
 	int sum;
 	String systemCode;
-	
+
 	public PaymentDocumentList() 
 	{
 
@@ -571,12 +571,12 @@ public class PaymentDocumentList {
 	{
 		createSpack(Settings.testProj + "tests\\" + Settings.folder + "\\input\\spack.txt");
 	}
-	
+
 	public void readEPD(String src)
 	{
 		Element root = XML.getXMLRootElement(src);
 		pdl = new ArrayList<PaymentDocument>();
-		
+
 		edNo = Integer.parseInt(root.getAttribute("EDNo"));
 		edDate = Date.valueOf(root.getAttribute("EDDate"));
 		edAuthor = root.getAttribute("EDAuthor");
@@ -584,27 +584,53 @@ public class PaymentDocumentList {
 		edQuantity = Integer.parseInt(root.getAttribute("EDQuantity"));
 		sum = Integer.parseInt(root.getAttribute("Sum"));
 		systemCode = root.getAttribute("SystemCode");
-		
+
 		NodeList nl = root.getElementsByTagName("ED101");
-		
+
 		for(int i = 0; i < nl.getLength(); i++)
 		{
 			PaymentDocument pd = new PaymentOrder();
 			pd.readED((Element) nl.item(i));
 			pdl.add(pd);
 		}
-		
+
+		nl = root.getElementsByTagName("ED103");
+
+		for(int i = 0; i < nl.getLength(); i++)
+		{
+			PaymentDocument pd = new PaymentRequest();
+			pd.readED((Element) nl.item(i));
+			pdl.add(pd);
+		}
+
+		nl = root.getElementsByTagName("ED104");
+
+		for(int i = 0; i < nl.getLength(); i++)
+		{
+			PaymentDocument pd = new CollectionOrder();
+			pd.readED((Element) nl.item(i));
+			pdl.add(pd);
+		}
+
+		nl = root.getElementsByTagName("ED105");
+
+		for(int i = 0; i < nl.getLength(); i++)
+		{
+			PaymentDocument pd = new PaymentWarrant();
+			pd.readED((Element) nl.item(i));
+			pdl.add(pd);
+		}
 		//System.out.println(toString());
 	}
-	
+
 	public void createEPD(String fl)
 	{
 		Document doc = XML.createNewDoc();
 		Element root = doc.createElement("PacketEPD");
 		doc.appendChild(root);
-		
+
 		root.setAttribute("xmlns", "urn:cbr-ru:ed:v2.0");
-		
+
 		root.setAttribute("EDNo", Integer.toString(edNo));
 		root.setAttribute("EDDate", new SimpleDateFormat("yyyy-MM-dd").format(edDate));
 		root.setAttribute("EDAuthor", edAuthor);
@@ -613,15 +639,20 @@ public class PaymentDocumentList {
 		root.setAttribute("EDQuantity", Integer.toString(edQuantity));
 		root.setAttribute("Sum", Integer.toString(sum));
 		root.setAttribute("SystemCode", systemCode);
-		
+
 		ListIterator <PaymentDocument> iter = pdl.listIterator();
 		while(iter.hasNext())
 		{
 			PaymentDocument pd = iter.next();
 			root.appendChild(pd.createED(doc));
 		}
-		
+
 		XML.createXMLFile(doc, fl);
+	}
+	
+	public void add(PaymentDocument pd)
+	{
+		pdl.add(pd);
 	}
 }
 

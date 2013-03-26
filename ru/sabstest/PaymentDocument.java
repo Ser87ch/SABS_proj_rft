@@ -14,7 +14,7 @@ abstract public class PaymentDocument {
 	public int edNo; //Номер ЭД в течение опердня
 	public Date edDate; //Дата составления ЭД
 	public String edAuthor; //Уникальный идентификатор составителя ЭД (УИС)
-		
+
 	//основные реквизиты
 	public String paytKind; //вид платежа
 	public int sum; //сумма
@@ -24,20 +24,20 @@ abstract public class PaymentDocument {
 	public Date fileDate; //дата помещения в картотеку
 	public Date chargeOffDate; //дата списания со счета плательщика
 	public String systemCode; //признак системы обработки (заполняется если ЭД не составе пакета)
-	
+
 	//реквизиты исходного расчетного документа
 	public int accDocNo; //номер расчетного документа
 	public Date accDocDate; //Дата выписки расчетного документа
-	
+
 	public Client payer; //плательщика
 	public Client payee; //получатель
-	
+
 	public String purpose; //назначение платежа
-	
+
 	//Ведомственная информация
 	DepartmentalInfo tax;
-	
-	
+
+
 	public PaymentDocument()
 	{	
 		this.accDocNo = 0;
@@ -59,7 +59,7 @@ abstract public class PaymentDocument {
 		return toStr(" ", false);
 	}
 
-	
+
 	public String toStr(String razd, boolean addShift){
 		String str = "";
 
@@ -85,23 +85,23 @@ abstract public class PaymentDocument {
 	}
 
 	abstract public Element createED(Document doc);
-	
-	
+
+
 	abstract public void readED(Element doc);
-	
-	
+
+
 	public void createXML(String fl)
 	{
 		Document doc = XML.createNewDoc();
 		doc.appendChild(createED(doc));
 		XML.createXMLFile(doc, fl);
 	}
-	
+
 	public void readXML(String src)
 	{
 		readED(XML.getXMLRootElement(src));
 	}
-	
+
 	public void addCommonEDElements(Document doc, Element rootElement)
 	{
 		rootElement.setAttribute("xmlns", "urn:cbr-ru:ed:v2.0");
@@ -112,12 +112,12 @@ abstract public class PaymentDocument {
 		rootElement.setAttribute("Sum", Integer.toString(sum));
 		rootElement.setAttribute("TransKind", transKind);
 		rootElement.setAttribute("Priority", priority);
-		
+
 		XML.setOptinalAttr(rootElement, "ReceiptDate", receiptDate);
 		XML.setOptinalAttr(rootElement, "FileDate", fileDate);
 		XML.setOptinalAttr(rootElement, "ChargeOffDate", chargeOffDate);
 		XML.setOptinalAttr(rootElement, "SystemCode", systemCode);		
-		
+
 		Element accDoc = doc.createElement("AccDoc");
 		rootElement.appendChild(accDoc);
 
@@ -129,7 +129,7 @@ abstract public class PaymentDocument {
 
 		XML.createNode(doc, rootElement, "Purpose", purpose);
 	}
-	
+
 	public void readCommonEDElements(Element doc)
 	{
 		edNo = Integer.parseInt(doc.getAttribute("EDNo"));
@@ -144,16 +144,44 @@ abstract public class PaymentDocument {
 		fileDate = XML.getOptionalDateAttr("FileDate", doc);
 		chargeOffDate = XML.getOptionalDateAttr("ChargeOffDate", doc);
 		systemCode = doc.getAttribute("SystemCode");
-		
+
 		Element accDoc = (Element) doc.getElementsByTagName("AccDoc").item(0);			
 		accDocNo = Integer.parseInt(accDoc.getAttribute("AccDocNo"));
 		accDocDate = Date.valueOf(accDoc.getAttribute("AccDocDate"));
-		
+
 		payer = new Client();
 		payer.readED((Element) doc.getElementsByTagName("Payer").item(0));
 		payee = new Client();
 		payee.readED((Element) doc.getElementsByTagName("Payee").item(0));
-		
+
 		purpose = XML.getChildValueString("Purpose", doc);
 	}
+
+	public static PaymentDocument createDocFromXML(String src)
+	{
+		Element root = XML.getXMLRootElement(src);
+		PaymentDocument pd = null;
+		if(root.getNodeName().equals("ED101"))
+		{
+			pd = new PaymentOrder();
+			pd.readED(root);
+		}
+		else if(root.getNodeName().equals("ED103"))
+		{
+			pd = new PaymentRequest();
+			pd.readED(root);
+		}
+		else if(root.getNodeName().equals("ED104"))
+		{
+			pd = new CollectionOrder();
+			pd.readED(root);
+		}
+		else if(root.getNodeName().equals("ED105"))
+		{
+			pd = new PaymentWarrant();
+			pd.readED(root);
+		}
+		return pd;
+	}
+
 }

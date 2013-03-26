@@ -73,6 +73,7 @@ public class Main {
 			//Pack.createRpackError49();
 			//Pack.createBpackError49();
 			String s = Pack.getRPackName();
+			System.out.println(spack + s);
 			break;
 		}
 		case SPACK:
@@ -119,16 +120,18 @@ public class Main {
 		case ED:
 		{
 
-//			PaymentDocumentList pdl = new PaymentDocumentList();
-//			pdl.readEPD("C:\\PacketEPD.xml");
-//			
-//			pdl.createEPD("C:\\3.xml");
+			PaymentDocumentList pdl = new PaymentDocumentList();
+			pdl.readEPD("C:\\PacketEPD.xml");			
 			
-			CollectionOrder pq = new CollectionOrder();
-			
-			pq.readXML("C:\\ED104.xml");
-			
-			pq.createXML("C:\\4.xml");
+			pdl.add(PaymentDocument.createDocFromXML("C:\\ED101_1.xml"));
+			pdl.add(PaymentDocument.createDocFromXML("C:\\ED101_2.xml"));
+			pdl.add(PaymentDocument.createDocFromXML("C:\\ED103.xml"));
+			pdl.add(PaymentDocument.createDocFromXML("C:\\ED104.xml"));
+			pdl.add(PaymentDocument.createDocFromXML("C:\\ED105.xml"));
+			pdl.createEPD("C:\\new.xml");
+
+			break;
+	
 		}
 		}
 
