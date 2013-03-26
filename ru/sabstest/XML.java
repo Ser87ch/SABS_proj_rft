@@ -102,6 +102,28 @@ public class XML {
 		}
 	}
 
+	public static void validate(String[] xsd, String xml)
+	{
+		try {
+			Source[] schemaFile = new Source[xsd.length];
+			for(int i = 0; i < xsd.length; i++)
+				schemaFile[i] = new StreamSource(new File(xsd[i]));
+			Source xmlFile = new StreamSource(new File(xml));
+			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+			Schema schema = schemaFactory.newSchema(schemaFile);
+			Validator validator = schema.newValidator();
+
+			validator.validate(xmlFile);
+
+			Log.msg("XML файл " + xml + " соответствует схеме " + xsd + ".");
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.msg("XML файл " + xml + " не соответствует схеме " + xsd + ".");
+			Log.msg(e);
+		}
+	}
+
 	public static String getChildValueString(String sTag, Element root) 
 	{
 		try{
@@ -179,7 +201,7 @@ public class XML {
 		rootElement.appendChild(el);
 		return el;
 	}
-	
+
 	public static Date getOptionalDateAttr(String attr, Element el)
 	{
 		String s = el.getAttribute(attr);
@@ -188,7 +210,7 @@ public class XML {
 		else
 			return null;
 	}
-	
+
 	public static int getOptionalIntAttr(String attr, Element el)
 	{
 		String s = el.getAttribute(attr);
@@ -197,19 +219,19 @@ public class XML {
 		else
 			return 0;
 	}
-	
+
 	public static void setOptinalAttr(Element el, String attrName, Date value)
 	{
 		if(value != null)
 			el.setAttribute(attrName, new SimpleDateFormat("yyyy-MM-dd").format(value));
 	}
-	
+
 	public static void setOptinalAttr(Element el, String attrName, int value)
 	{
 		if(value != 0)
 			el.setAttribute(attrName, Integer.toString(value));
 	}
-	
+
 	public static void setOptinalAttr(Element el, String attrName, String value)
 	{
 		if(value != null && !value.equals(""))

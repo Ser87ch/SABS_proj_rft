@@ -114,7 +114,6 @@ public class Main {
 			cl.contrrazr();
 			System.out.println(cl.personalAcc);
 
-
 			break;
 		}
 		case ED:
@@ -131,15 +130,10 @@ public class Main {
 			pdl.createEPD("C:\\new.xml");
 
 			break;
-	
 		}
 		}
-
 
 		Log.close();
-
-
-
 	}
 
 }
