@@ -7,7 +7,7 @@ import ru.sabstest.DeltaDB;
 import ru.sabstest.Init;
 import ru.sabstest.Log;
 import ru.sabstest.Pack;
-import ru.sabstest.PayDocList;
+import ru.sabstest.PaymentDocumentList;
 import ru.sabstest.Settings;
 
 import com.rational.test.ft.*;
@@ -62,7 +62,7 @@ public class RunB extends RunBHelper
 			DeltaDB.createDBLog();
 		}
 
-		PayDocList pl = new PayDocList();
+		PaymentDocumentList pl = new PaymentDocumentList();
 		if(ispervvod || iscontrvvod)
 		{			
 			pl.readXML(Settings.datafolder + "input\\002\\paydocs.xml");

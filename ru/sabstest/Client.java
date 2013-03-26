@@ -99,7 +99,7 @@ public class Client {
 		
 		bank.setAttribute("BIC", bic);
 		if(correspAcc != null && !correspAcc.equals(""))
-			rootElement.setAttribute("CorrespAcc", correspAcc);
+			bank.setAttribute("CorrespAcc", correspAcc);
 		
 		return rootElement;
 	}

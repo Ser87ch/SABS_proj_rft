@@ -2,7 +2,7 @@ package SABS;
 import resources.SABS.NewDataHelper;
 import ru.sabstest.Init;
 import ru.sabstest.Log;
-import ru.sabstest.PayDocList;
+import ru.sabstest.PaymentDocumentList;
 import ru.sabstest.Settings;
 
 import com.rational.test.ft.*;
@@ -42,25 +42,25 @@ public class NewData extends NewDataHelper
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
 		Settings.GenDoc.readXML(Settings.testProj + "settings\\gen\\gendoc.xml");
 
-		PayDocList pl = new PayDocList();
+		PaymentDocumentList pl = new PaymentDocumentList();
 		pl.generate();		
 		pl.createXML(Settings.datafolder + "input\\001\\paydocs.xml");
 		
-		PayDocList plb = new PayDocList();
+		PaymentDocumentList plb = new PaymentDocumentList();
 		plb.generateB();	
 		plb.createXML(Settings.datafolder + "input\\002\\paydocs.xml");
 		
 		Settings.GenSpack.readXML(Settings.testProj + "settings\\gen\\genspack.xml");
 		
-		PayDocList pls = new PayDocList();
+		PaymentDocumentList pls = new PaymentDocumentList();
 		pls.generateS();		
 		pls.createSpack(Settings.datafolder + "input\\003\\spack.txt");	
 		
-		pls = new PayDocList();
+		pls = new PaymentDocumentList();
 		pls.generateSerr();
 		pls.createSpack(Settings.datafolder + "input\\004\\spack.txt");
 		
-		pls = new PayDocList();
+		pls = new PaymentDocumentList();
 		pls.generateSwB(4);
 		pls.createSpack(Settings.datafolder + "input\\005\\spack.txt");
 		Log.close();

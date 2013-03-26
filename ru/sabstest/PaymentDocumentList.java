@@ -18,8 +18,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
-public class PayDocList {
-	private List<PayDoc> pdl;
+public class PaymentDocumentList {
+	private List<PaymentDocument> pdl;
 
 	int edNo;
 	Date edDate;
@@ -29,7 +29,7 @@ public class PayDocList {
 	int sum;
 	String systemCode;
 	
-	public PayDocList() 
+	public PaymentDocumentList() 
 	{
 
 	}
@@ -46,7 +46,7 @@ public class PayDocList {
 
 			Client plat = new Client(Settings.bik, ls);
 
-			pdl = new ArrayList<PayDoc>();
+			pdl = new ArrayList<PaymentDocument>();
 			ResultSet rsbik = null;
 
 			rsbik = db.st.executeQuery("select top " + Settings.GenDoc.numBIK + " NEWNUM, isnull(KSNP,'') ksnp from dbo.BNKSEEK where substring(NEWNUM,1,4) = '" + Settings.bik.substring(0, 4) + "' and UER in ('2','3','4','5') and NEWNUM <> '" + Settings.bik + "'");
@@ -62,7 +62,7 @@ public class PayDocList {
 
 				for(int j = 0; j < Settings.GenDoc.numDoc; j++)
 				{
-					PayDoc pd = new MoneyOrder();
+					PaymentDocument pd = new PaymentOrder();
 					pd.accDocNo = Settings.GenDoc.firstDoc + j;
 					pd.accDocDate = Settings.operDate;
 					pd.transKind = "01";
@@ -102,7 +102,7 @@ public class PayDocList {
 
 			Client plat = new Client(Settings.bik, ls);
 
-			pdl = new ArrayList<PayDoc>();
+			pdl = new ArrayList<PaymentDocument>();
 			ResultSet rsbik = null;
 
 			rsbik = db.st.executeQuery("select RKC NEWNUM, '' ksnp from dbo.BNKSEEK where NEWNUM = '" + Settings.bik + "'");
@@ -117,7 +117,7 @@ public class PayDocList {
 
 				for(int j = 0; j < Settings.GenDoc.numDoc; j++)
 				{
-					PayDoc pd = new MoneyOrder();
+					PaymentDocument pd = new PaymentOrder();
 					pd.accDocNo = Settings.GenDoc.firstDoc + j;
 					pd.accDocDate = Settings.operDate;
 					pd.transKind = "01";
@@ -161,7 +161,7 @@ public class PayDocList {
 
 			Client plat = new Client(Settings.bik, "", ls, "111111111111", "222222222", "ЗАО Получатель");
 
-			pdl = new ArrayList<PayDoc>();
+			pdl = new ArrayList<PaymentDocument>();
 
 			ResultSet rsbik = db.st.executeQuery("select top " + Settings.GenSpack.numBIK + " NEWNUM, isnull(KSNP,'') ksnp from dbo.BNKSEEK where substring(NEWNUM,1,4) = '" + Settings.bik.substring(0, 4) + "' and UER in ('2','3','4','5') and NEWNUM <> '" + Settings.bik + "'");
 			int i = 1;
@@ -184,7 +184,7 @@ public class PayDocList {
 
 				for(int j = 0; j < Settings.GenSpack.numDoc; j++)
 				{
-					PayDoc pd = new MoneyOrder();
+					PaymentDocument pd = new PaymentOrder();
 					pd.accDocNo = ndoc + 1 + j;
 					pd.accDocDate = Settings.operDate;
 					pd.transKind = "01";
@@ -229,7 +229,7 @@ public class PayDocList {
 
 			Client plat = new Client(Settings.bik, "", ls, "111111111111", "222222222", "ЗАО Получатель");
 
-			pdl = new ArrayList<PayDoc>();
+			pdl = new ArrayList<PaymentDocument>();
 
 			ResultSet rsbik = db.st.executeQuery("select top 1 NEWNUM, isnull(KSNP,'') ksnp from dbo.BNKSEEK where substring(NEWNUM,1,4) = '" + Settings.bik.substring(0, 4) + "' and UER in ('2','3','4','5') and NEWNUM <> '" + Settings.bik + "'");
 			int i = 1;
@@ -252,7 +252,7 @@ public class PayDocList {
 
 				for(int j = 0; j < numd; j++)
 				{
-					PayDoc pd = new MoneyOrder();
+					PaymentDocument pd = new PaymentOrder();
 					pd.accDocNo = ndoc + 1 + j;
 					pd.accDocDate = Settings.operDate;
 					pd.transKind = "01";
@@ -321,7 +321,7 @@ public class PayDocList {
 	public int sumAll() 
 	{
 		int sum = 0;
-		ListIterator <PayDoc> iter = pdl.listIterator();
+		ListIterator <PaymentDocument> iter = pdl.listIterator();
 		while(iter.hasNext())
 		{
 			int i = iter.next().sum;
@@ -332,16 +332,16 @@ public class PayDocList {
 		return sum;
 	}
 
-	public PayDoc get(int i)
+	public PaymentDocument get(int i)
 	{
-		return (PayDoc) pdl.get(i);
+		return (PaymentDocument) pdl.get(i);
 	}
 
 	@Override
 	public String toString()
 	{
 		String str = "";
-		ListIterator <PayDoc> iter = pdl.listIterator();
+		ListIterator <PaymentDocument> iter = pdl.listIterator();
 		while(iter.hasNext())
 		{
 			str = str + iter.next().toString() + "\n";
@@ -360,7 +360,7 @@ public class PayDocList {
 
 			rootElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			rootElement.setAttribute("xsi:noNamespaceSchemaLocation", Settings.testProj + "XMLSchema\\input\\paydocs.xsd");
-			ListIterator <PayDoc> iter = pdl.listIterator();
+			ListIterator <PaymentDocument> iter = pdl.listIterator();
 			int i = 1;
 			Log.msg("Начало создания XML с входящими документами.");
 			while(iter.hasNext())
@@ -371,7 +371,7 @@ public class PayDocList {
 				paydoc.setAttribute("id", Integer.toString(i));
 
 
-				PayDoc pd = iter.next();
+				PaymentDocument pd = iter.next();
 
 				XML.createNode(doc, paydoc, "num", pd.accDocNo);
 				XML.createNode(doc, paydoc, "date", pd.accDocDate);
@@ -441,7 +441,7 @@ public class PayDocList {
 	public void readXML(String src)
 	{
 		try {
-			pdl = new ArrayList<PayDoc>();
+			pdl = new ArrayList<PaymentDocument>();
 
 			Element root = XML.getXMLRootElement(src);
 			XML.validate(Settings.testProj + "XMLSchema\\input\\paydocs.xsd",src);
@@ -456,7 +456,7 @@ public class PayDocList {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
 					Element eElement = (Element) nNode;
-					PayDoc pd = new MoneyOrder();
+					PaymentDocument pd = new PaymentOrder();
 					pd.accDocNo = XML.getChildValueInt("num", eElement);	
 					pd.accDocDate = XML.getChildValueDate("date", eElement);	
 					pd.transKind = XML.getChildValueString("vidop", eElement);
@@ -529,11 +529,11 @@ public class PayDocList {
 			Log.msg("Служебная запись записана в S пакет.");
 
 			int i = 1;
-			ListIterator <PayDoc> iter = pdl.listIterator();
+			ListIterator <PaymentDocument> iter = pdl.listIterator();
 			while(iter.hasNext())
 			{
 				sd.writeBytes("\r\n");
-				PayDoc pd = iter.next();
+				PaymentDocument pd = iter.next();
 
 				sf = String.format("%06d", pd.edNo) + new SimpleDateFormat("ddMMyyyy").format(pd.accDocDate) +
 				pd.payer.bic.substring(2,9) + "000" + pd.payer.bic + String.format("%20s", pd.payer.personalAcc) + String.format("%20s", pd.payer.correspAcc) +
@@ -575,7 +575,7 @@ public class PayDocList {
 	public void readEPD(String src)
 	{
 		Element root = XML.getXMLRootElement(src);
-		pdl = new ArrayList<PayDoc>();
+		pdl = new ArrayList<PaymentDocument>();
 		
 		edNo = Integer.parseInt(root.getAttribute("EDNo"));
 		edDate = Date.valueOf(root.getAttribute("EDDate"));
@@ -589,7 +589,7 @@ public class PayDocList {
 		
 		for(int i = 0; i < nl.getLength(); i++)
 		{
-			PayDoc pd = new MoneyOrder();
+			PaymentDocument pd = new PaymentOrder();
 			pd.readED((Element) nl.item(i));
 			pdl.add(pd);
 		}
@@ -614,10 +614,10 @@ public class PayDocList {
 		root.setAttribute("Sum", Integer.toString(sum));
 		root.setAttribute("SystemCode", systemCode);
 		
-		ListIterator <PayDoc> iter = pdl.listIterator();
+		ListIterator <PaymentDocument> iter = pdl.listIterator();
 		while(iter.hasNext())
 		{
-			PayDoc pd = iter.next();
+			PaymentDocument pd = iter.next();
 			root.appendChild(pd.createED(doc));
 		}
 		

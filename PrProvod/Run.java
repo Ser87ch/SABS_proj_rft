@@ -56,7 +56,7 @@ public class Run extends RunHelper
 			DeltaDB.createDBLog();
 		}
 
-		PayDocList pl = new PayDocList();
+		PaymentDocumentList pl = new PaymentDocumentList();
 		if(ispervvod || iscontrvvod)
 		{			
 			pl.readXML(Settings.datafolder + "input\\001\\paydocs.xml");

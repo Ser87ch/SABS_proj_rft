@@ -30,7 +30,7 @@ public class Vvod extends VvodHelper
 		SABSwindow().inputKeys("{TAB}");
 		SABSwindow().inputKeys("{ExtDown}{ExtDown}{ENTER}");
 
-		PayDocList pl = (PayDocList) args[0]; 
+		PaymentDocumentList pl = (PaymentDocumentList) args[0]; 
 
 		Docswindow().inputKeys("{F2}");	
 	
@@ -38,7 +38,7 @@ public class Vvod extends VvodHelper
 
 		for(int i = 0; i < pl.length(); i++)
 		{
-			PayDoc pd = pl.get(i);
+			PaymentDocument pd = pl.get(i);
 			Inputwindow().inputKeys(pd.toStr("{ENTER}",true));
 			Inputwindow().inputKeys("{ENTER}{ENTER}{ENTER}");	
 

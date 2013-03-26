@@ -34,7 +34,7 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			Settings.GenDoc.readXML(Settings.testProj + "settings\\gendoc.xml");
 
-			PayDocList pl = new PayDocList();
+			PaymentDocumentList pl = new PaymentDocumentList();
 			pl.generate();
 			//System.out.println(pl.toString());
 			pl.createXML();
@@ -46,7 +46,7 @@ public class Main {
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			Settings.GenDoc.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\pervvod.xml");
-			PayDocList pl = new PayDocList();
+			PaymentDocumentList pl = new PaymentDocumentList();
 			pl.readXML(Settings.testProj + "input\\" + Settings.pervfolder + "\\paydocs.xml");
 			//System.out.println(pl.toString());
 			System.out.println(pl.get(0).toStr("{ENTER}",true));
@@ -81,7 +81,7 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");			
 			Settings.GenSpack.readXML(Settings.testProj + "settings\\" + Settings.obrfolder + "\\genspack.xml");
 
-			PayDocList pl = new PayDocList();
+			PaymentDocumentList pl = new PaymentDocumentList();
 			pl.generateS();
 			pl.createSpack();
 
@@ -118,15 +118,17 @@ public class Main {
 		}
 		case ED:
 		{
-//			MoneyOrder m = new MoneyOrder();
-//			m.readED(XML.getXMLRootElement("C:\\ED101_1.xml"));
-//
-//			m.createXML("C:\\1.xml");
-			PayDocList pdl = new PayDocList();
-			pdl.readEPD("C:\\PacketEPD.xml");
+
+//			PaymentDocumentList pdl = new PaymentDocumentList();
+//			pdl.readEPD("C:\\PacketEPD.xml");
+//			
+//			pdl.createEPD("C:\\3.xml");
 			
-			pdl.createEPD("C:\\2.xml");
+			PaymentRequest pq = new PaymentRequest();
 			
+			pq.readXML("C:\\ED103.xml");
+			
+			pq.createXML("C:\\4.xml");
 		}
 		}
 

@@ -28,13 +28,13 @@ public class ContrVvod extends ContrVvodHelper
 		sleep(1);
 		SABSwindow().inputKeys("{ExtDown}{Enter}");
 				
-		PayDocList pl = (PayDocList) args[0]; 	
+		PaymentDocumentList pl = (PaymentDocumentList) args[0]; 	
 		
 		ContrDocwindow().inputKeys("{F2}");	
 		
 		for(int i = 0; i < pl.length(); i++)
 		{
-			PayDoc pd = pl.get(i);
+			PaymentDocument pd = pl.get(i);
 			Inputwindow().inputKeys(pd.toStrContr("{ENTER}"));	
 			Inputwindow().inputKeys("{ENTER}{ENTER}{ENTER}");	
 			ControlTextwindow().inputKeys("{ENTER}{ENTER}{ENTER}");

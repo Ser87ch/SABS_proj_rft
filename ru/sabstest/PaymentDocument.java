@@ -9,7 +9,7 @@ import org.w3c.dom.Element;
 
 
 
-abstract public class PayDoc {
+abstract public class PaymentDocument {
 	//реквизиты ЭД
 	public int edNo; //Номер ЭД в течение опердня
 	public Date edDate; //Дата составления ЭД
@@ -38,7 +38,7 @@ abstract public class PayDoc {
 	DepartmentalInfo tax;
 	
 	
-	public PayDoc()
+	public PaymentDocument()
 	{	
 		this.accDocNo = 0;
 		this.accDocDate = new Date(0);
@@ -100,5 +100,63 @@ abstract public class PayDoc {
 	public void readXML(String src)
 	{
 		readED(XML.getXMLRootElement(src));
+	}
+	
+	public void addCommonEDElements(Document doc, Element rootElement)
+	{
+		rootElement.setAttribute("xmlns", "urn:cbr-ru:ed:v2.0");
+		rootElement.setAttribute("EDNo", Integer.toString(edNo));
+		rootElement.setAttribute("EDDate", new SimpleDateFormat("yyyy-MM-dd").format(edDate));
+		rootElement.setAttribute("EDAuthor", edAuthor);
+		rootElement.setAttribute("PaytKind", paytKind);
+		rootElement.setAttribute("Sum", Integer.toString(sum));
+		rootElement.setAttribute("TransKind", transKind);
+		rootElement.setAttribute("Priority", priority);
+		if(receiptDate != null)
+			rootElement.setAttribute("ReceiptDate", new SimpleDateFormat("yyyy-MM-dd").format(receiptDate));
+		if(fileDate != null)
+			rootElement.setAttribute("FileDate", new SimpleDateFormat("yyyy-MM-dd").format(fileDate));
+		if(chargeOffDate != null)
+			rootElement.setAttribute("ChargeOffDate", new SimpleDateFormat("yyyy-MM-dd").format(chargeOffDate));
+		if(systemCode != null && !systemCode.equals(""))
+			rootElement.setAttribute("SystemCode", systemCode);
+		
+		Element accDoc = doc.createElement("AccDoc");
+		rootElement.appendChild(accDoc);
+
+		accDoc.setAttribute("AccDocNo", Integer.toString(accDocNo));
+		accDoc.setAttribute("AccDocDate", new SimpleDateFormat("yyyy-MM-dd").format(accDocDate));		
+
+		rootElement.appendChild(payer.createXMLElement(doc, "Payer"));
+		rootElement.appendChild(payee.createXMLElement(doc, "Payee"));
+
+		XML.createNode(doc, rootElement, "Purpose", purpose);
+	}
+	
+	public void readCommonEDElements(Element doc)
+	{
+		edNo = Integer.parseInt(doc.getAttribute("EDNo"));
+		edDate = Date.valueOf(doc.getAttribute("EDDate"));
+		edAuthor = doc.getAttribute("EDAuthor");
+
+		paytKind = doc.getAttribute("PaytKind");
+		sum = Integer.parseInt(doc.getAttribute("Sum"));
+		transKind = doc.getAttribute("TransKind");
+		priority = doc.getAttribute("Priority");
+		receiptDate = XML.getOptionalDateAttr("ReceiptDate", doc);
+		fileDate = XML.getOptionalDateAttr("FileDate", doc);
+		chargeOffDate = XML.getOptionalDateAttr("ChargeOffDate", doc);
+		systemCode = doc.getAttribute("SystemCode");
+		
+		Element accDoc = (Element) doc.getElementsByTagName("AccDoc").item(0);			
+		accDocNo = Integer.parseInt(accDoc.getAttribute("AccDocNo"));
+		accDocDate = Date.valueOf(accDoc.getAttribute("AccDocDate"));
+		
+		payer = new Client();
+		payer.readED((Element) doc.getElementsByTagName("Payer").item(0));
+		payee = new Client();
+		payee.readED((Element) doc.getElementsByTagName("Payee").item(0));
+		
+		purpose = XML.getChildValueString("Purpose", doc);
 	}
 }
