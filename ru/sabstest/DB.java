@@ -3,6 +3,7 @@ package ru.sabstest;
 import java.io.Closeable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -71,4 +72,23 @@ public class DB implements Closeable{
 		}
 	}
 
+
+	public static String selectFirstValueSabsDb(String s)
+	{
+		String value = "";
+		try {
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();
+
+			ResultSet rs = db.st.executeQuery(s);
+			rs.next();
+			value = rs.getString(0);
+
+			db.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+			Log.msg(e);
+		}
+		return value;
+	}
 }

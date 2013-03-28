@@ -3,6 +3,7 @@ package ru.sabstest;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Random;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -44,5 +45,30 @@ public class PaymentOrder extends PaymentDocument {
 			}
 			
 		}
-	}	
+	}
+	
+	@Override
+	public void generateFromXML(Element gendoc, int edNo, String edAuthor)
+	{
+		this.edNo = edNo;
+		edDate = Settings.operDate;
+		this.edAuthor = edAuthor;
+		paytKind = "1";
+		sum = (int) (new Random().nextFloat() * 10000);
+		transKind = "01";
+		priority = "6";
+		accDocNo = edNo;
+		accDocDate = Settings.operDate;
+		purpose = "Тестовое платежное поручение";
+		
+		Element el = (Element) gendoc.getElementsByTagName("Payer").item(0);		
+		
+		payer = Client.createClientFromBICPersonalAcc(XML.getChildValueString("BIC", el), 
+				XML.getChildValueString("PersonalAcc", el));
+		
+		el = (Element) gendoc.getElementsByTagName("Payee").item(0);		
+		
+		payee = Client.createClientFromBICPersonalAcc(XML.getChildValueString("BIC", el), 
+				XML.getChildValueString("PersonalAcc", el));
+	}
 }

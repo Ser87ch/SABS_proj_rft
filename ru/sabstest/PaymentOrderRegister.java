@@ -63,6 +63,12 @@ public class PaymentOrderRegister extends PaymentDocument {
 		}
 	}	
 
+	@Override
+	public void generateFromXML(Element gendoc, int edNo, String edAuthor)
+	{
+		
+	}
+	
 	public static class TransactionInfo
 	{
 		public int transactionID;
@@ -88,4 +94,5 @@ public class PaymentOrderRegister extends PaymentDocument {
 
 	}
 
+	
 }

@@ -20,7 +20,7 @@ public class Client {
 		this.name = "";
 
 	}
-	
+
 	public Client(String bik, String ls) {
 		this.bic = bik;	
 		this.correspAcc = "";
@@ -91,29 +91,74 @@ public class Client {
 
 		if(kpp != null && !kpp.equals(""))
 			rootElement.setAttribute("KPP", kpp);
-	
+
 		XML.createNode(doc, rootElement, "Name", name);
-		
+
 		Element bank = doc.createElement("Bank");
 		rootElement.appendChild(bank);
-		
+
 		bank.setAttribute("BIC", bic);
 		if(correspAcc != null && !correspAcc.equals(""))
 			bank.setAttribute("CorrespAcc", correspAcc);
-		
+
 		return rootElement;
 	}
-	
+
 	public void readED(Element cl)
 	{
 		personalAcc = cl.getAttribute("PersonalAcc");
 		inn = cl.getAttribute("INN");
 		kpp = cl.getAttribute("KPP");
-		
+
 		name = XML.getChildValueString("Name", cl);
-		
+
 		Element bank = (Element) cl.getElementsByTagName("Bank").item(0);
 		correspAcc = bank.getAttribute("CorrespAcc");
 		bic = bank.getAttribute("BIC");		
+	}
+
+	public static Client createClientFromBICPersonalAcc(String bicStr, String personalAccStr)
+	{
+		Client cl = new Client();
+
+		String bic = bicStr.replaceAll("@", Settings.bik);
+		String personalAcc = personalAccStr.replaceAll("@", Settings.bik);
+
+		if(bic.substring(0, 6).equals("select"))
+			cl.bic = DB.selectFirstValueSabsDb(bic);
+
+		if(personalAcc.substring(0, 6).equals("select"))
+			cl.personalAcc = DB.selectFirstValueSabsDb(personalAcc);
+
+		if(cl.bic.equals(Settings.bik) && !cl.personalAcc.equals(""))
+		{
+			if(cl.personalAcc.substring(0,1).equals("3") || cl.personalAcc.substring(0,1).equals("4"))
+			{
+				cl.name = DB.selectFirstValueSabsDb("select c.nameshort from dbo.Account a\r\n" + 
+						"inner join dbo.Acc_Link al on a.id_acc = al.id_acc and al.id_link_type = 2\r\n" + 
+						"inner join dbo.Clientj c on c.id_jur = al.id_obj\r\n" + 
+						"where a.NUM_ACC = '"+ cl.personalAcc + "'"); 
+				cl.inn = DB.selectFirstValueSabsDb("select c.inn from dbo.Account a\r\n" + 
+						"inner join dbo.Acc_Link al on a.id_acc = al.id_acc and al.id_link_type = 2\r\n" + 
+						"inner join dbo.Clientj c on c.id_jur = al.id_obj\r\n" + 
+						"where a.NUM_ACC = '"+ cl.personalAcc + "'"); 
+			}
+			else if(cl.personalAcc.substring(0,1).equals("6"))
+			{
+				cl.name = DB.selectFirstValueSabsDb("select a.name_short from dbo.Account a where a.NUM_ACC = '" + cl.personalAcc + "'");
+			}
+		}
+		else
+		{
+			cl.correspAcc = DB.selectFirstValueSabsDb("select top 1 isnull(KSNP,'') ksnp from dbo.BNKSEEK where NEWNUM = '" + cl.bic + "'");
+
+			if(!cl.personalAcc.equals(""))
+			{
+				cl.inn = "222222222222";
+				cl.kpp = "111111111";
+				cl.name = "Тестовый клиент";
+			}
+		}
+		return cl;
 	}
 }

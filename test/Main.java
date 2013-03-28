@@ -17,7 +17,7 @@ public class Main {
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.ED;
+		Test t = Test.GEN;
 		switch(t)
 		{
 
@@ -32,12 +32,11 @@ public class Main {
 		{			
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
-			Settings.GenDoc.readXML(Settings.testProj + "settings\\gendoc.xml");
 
 			PaymentDocumentList pl = new PaymentDocumentList();
-			pl.generate();
-			//System.out.println(pl.toString());
-			pl.createXML();
+			pl.generateFromXML("C:\\generation.xml");
+		
+			pl.createEPD("C:\\epd.xml");
 			break;
 		}
 

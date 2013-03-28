@@ -19,7 +19,7 @@ import org.w3c.dom.NodeList;
 
 
 public class PaymentDocumentList {
-	private List<PaymentDocument> pdl;
+	private List<PaymentDocument> pdList;
 
 	int edNo;
 	Date edDate;
@@ -46,7 +46,7 @@ public class PaymentDocumentList {
 
 			Client plat = new Client(Settings.bik, ls);
 
-			pdl = new ArrayList<PaymentDocument>();
+			pdList = new ArrayList<PaymentDocument>();
 			ResultSet rsbik = null;
 
 			rsbik = db.st.executeQuery("select top " + Settings.GenDoc.numBIK + " NEWNUM, isnull(KSNP,'') ksnp from dbo.BNKSEEK where substring(NEWNUM,1,4) = '" + Settings.bik.substring(0, 4) + "' and UER in ('2','3','4','5') and NEWNUM <> '" + Settings.bik + "'");
@@ -76,7 +76,7 @@ public class PaymentDocumentList {
 					pd.chargeOffDate = Settings.operDate;
 					pd.receiptDate = Settings.operDate;
 
-					pdl.add(pd);
+					pdList.add(pd);
 					Log.msg("Документ №" + Integer.toString(i) + " сгенерирован.");
 					i++;
 				}
@@ -102,7 +102,7 @@ public class PaymentDocumentList {
 
 			Client plat = new Client(Settings.bik, ls);
 
-			pdl = new ArrayList<PaymentDocument>();
+			pdList = new ArrayList<PaymentDocument>();
 			ResultSet rsbik = null;
 
 			rsbik = db.st.executeQuery("select RKC NEWNUM, '' ksnp from dbo.BNKSEEK where NEWNUM = '" + Settings.bik + "'");
@@ -131,7 +131,7 @@ public class PaymentDocumentList {
 					pd.chargeOffDate = Settings.operDate;
 					pd.receiptDate = Settings.operDate;
 
-					pdl.add(pd);
+					pdList.add(pd);
 					Log.msg("Документ №" + Integer.toString(i) + " сгенерирован.");
 					i++;
 				}
@@ -161,7 +161,7 @@ public class PaymentDocumentList {
 
 			Client plat = new Client(Settings.bik, "", ls, "111111111111", "222222222", "ЗАО Получатель");
 
-			pdl = new ArrayList<PaymentDocument>();
+			pdList = new ArrayList<PaymentDocument>();
 
 			ResultSet rsbik = db.st.executeQuery("select top " + Settings.GenSpack.numBIK + " NEWNUM, isnull(KSNP,'') ksnp from dbo.BNKSEEK where substring(NEWNUM,1,4) = '" + Settings.bik.substring(0, 4) + "' and UER in ('2','3','4','5') and NEWNUM <> '" + Settings.bik + "'");
 			int i = 1;
@@ -198,7 +198,7 @@ public class PaymentDocumentList {
 					pd.chargeOffDate = Settings.operDate;
 					pd.receiptDate = Settings.operDate;
 					pd.edNo = elnum + 1 + j;
-					pdl.add(pd);
+					pdList.add(pd);
 					Log.msg("Документ №" + Integer.toString(i) + " для S пакета сгенерирован.");
 					i++;
 				}
@@ -229,7 +229,7 @@ public class PaymentDocumentList {
 
 			Client plat = new Client(Settings.bik, "", ls, "111111111111", "222222222", "ЗАО Получатель");
 
-			pdl = new ArrayList<PaymentDocument>();
+			pdList = new ArrayList<PaymentDocument>();
 
 			ResultSet rsbik = db.st.executeQuery("select top 1 NEWNUM, isnull(KSNP,'') ksnp from dbo.BNKSEEK where substring(NEWNUM,1,4) = '" + Settings.bik.substring(0, 4) + "' and UER in ('2','3','4','5') and NEWNUM <> '" + Settings.bik + "'");
 			int i = 1;
@@ -294,7 +294,7 @@ public class PaymentDocumentList {
 					pd.chargeOffDate = Settings.operDate;
 					pd.receiptDate = Settings.operDate;
 					pd.edNo = elnum + 1 + j;
-					pdl.add(pd);
+					pdList.add(pd);
 					Log.msg("Документ №" + Integer.toString(i) + " для S пакета сгенерирован.");
 					i++;
 				}
@@ -315,13 +315,13 @@ public class PaymentDocumentList {
 
 	public int length()
 	{
-		return pdl.size();
+		return pdList.size();
 	}
 
 	public int sumAll() 
 	{
 		int sum = 0;
-		ListIterator <PaymentDocument> iter = pdl.listIterator();
+		ListIterator <PaymentDocument> iter = pdList.listIterator();
 		while(iter.hasNext())
 		{
 			int i = iter.next().sum;
@@ -334,14 +334,14 @@ public class PaymentDocumentList {
 
 	public PaymentDocument get(int i)
 	{
-		return (PaymentDocument) pdl.get(i);
+		return (PaymentDocument) pdList.get(i);
 	}
 
 	@Override
 	public String toString()
 	{
 		String str = "";
-		ListIterator <PaymentDocument> iter = pdl.listIterator();
+		ListIterator <PaymentDocument> iter = pdList.listIterator();
 		while(iter.hasNext())
 		{
 			str = str + iter.next().toString() + "\n";
@@ -360,7 +360,7 @@ public class PaymentDocumentList {
 
 			rootElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			rootElement.setAttribute("xsi:noNamespaceSchemaLocation", Settings.testProj + "XMLSchema\\input\\paydocs.xsd");
-			ListIterator <PaymentDocument> iter = pdl.listIterator();
+			ListIterator <PaymentDocument> iter = pdList.listIterator();
 			int i = 1;
 			Log.msg("Начало создания XML с входящими документами.");
 			while(iter.hasNext())
@@ -441,7 +441,7 @@ public class PaymentDocumentList {
 	public void readXML(String src)
 	{
 		try {
-			pdl = new ArrayList<PaymentDocument>();
+			pdList = new ArrayList<PaymentDocument>();
 
 			Element root = XML.getXMLRootElement(src);
 			XML.validate(Settings.testProj + "XMLSchema\\input\\paydocs.xsd",src);
@@ -489,7 +489,7 @@ public class PaymentDocumentList {
 					pd.chargeOffDate = XML.getChildValueDate("datesp", eElement);
 					pd.receiptDate = XML.getChildValueDate("datepost", eElement);
 
-					pdl.add(pd);
+					pdList.add(pd);
 					Log.msg("Документ №" + Integer.toString(temp + 1) + " загружен в программу.");
 				}
 			}
@@ -529,7 +529,7 @@ public class PaymentDocumentList {
 			Log.msg("Служебная запись записана в S пакет.");
 
 			int i = 1;
-			ListIterator <PaymentDocument> iter = pdl.listIterator();
+			ListIterator <PaymentDocument> iter = pdList.listIterator();
 			while(iter.hasNext())
 			{
 				sd.writeBytes("\r\n");
@@ -575,7 +575,7 @@ public class PaymentDocumentList {
 	public void readEPD(String src)
 	{
 		Element root = XML.getXMLRootElement(src);
-		pdl = new ArrayList<PaymentDocument>();
+		pdList = new ArrayList<PaymentDocument>();
 
 		edNo = Integer.parseInt(root.getAttribute("EDNo"));
 		edDate = Date.valueOf(root.getAttribute("EDDate"));
@@ -591,7 +591,7 @@ public class PaymentDocumentList {
 		{
 			PaymentDocument pd = new PaymentOrder();
 			pd.readED((Element) nl.item(i));
-			pdl.add(pd);
+			pdList.add(pd);
 		}
 
 		nl = root.getElementsByTagName("ED103");
@@ -600,7 +600,7 @@ public class PaymentDocumentList {
 		{
 			PaymentDocument pd = new PaymentRequest();
 			pd.readED((Element) nl.item(i));
-			pdl.add(pd);
+			pdList.add(pd);
 		}
 
 		nl = root.getElementsByTagName("ED104");
@@ -609,7 +609,7 @@ public class PaymentDocumentList {
 		{
 			PaymentDocument pd = new CollectionOrder();
 			pd.readED((Element) nl.item(i));
-			pdl.add(pd);
+			pdList.add(pd);
 		}
 
 		nl = root.getElementsByTagName("ED105");
@@ -618,16 +618,16 @@ public class PaymentDocumentList {
 		{
 			PaymentDocument pd = new PaymentWarrant();
 			pd.readED((Element) nl.item(i));
-			pdl.add(pd);
+			pdList.add(pd);
 		}
-		
+
 		nl = root.getElementsByTagName("ED108");
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
 			PaymentDocument pd = new PaymentOrderRegister();
 			pd.readED((Element) nl.item(i));
-			pdl.add(pd);
+			pdList.add(pd);
 		}
 		//System.out.println(toString());
 	}
@@ -649,7 +649,7 @@ public class PaymentDocumentList {
 		root.setAttribute("Sum", Integer.toString(sum));
 		root.setAttribute("SystemCode", systemCode);
 
-		ListIterator <PaymentDocument> iter = pdl.listIterator();
+		ListIterator <PaymentDocument> iter = pdList.listIterator();
 		while(iter.hasNext())
 		{
 			PaymentDocument pd = iter.next();
@@ -658,10 +658,47 @@ public class PaymentDocumentList {
 
 		XML.createXMLFile(doc, fl);
 	}
-	
+
 	public void add(PaymentDocument pd)
 	{
-		pdl.add(pd);
+		pdList.add(pd);
+	}
+
+	public void generateFromXML(String src)
+	{
+		Element root = XML.getXMLRootElement(src);
+
+		if(root.getNodeValue().equals("PacketEPD"))
+		{
+			pdList = new ArrayList<PaymentDocument>();
+
+			edNo = Integer.parseInt(root.getAttribute("EPDNo"));
+			edDate = Settings.operDate;
+			edAuthor = root.getAttribute("EDAuthor");
+			systemCode = "01";
+
+
+			int edNo = Integer.parseInt(root.getAttribute("EDFirstNo"));
+
+			NodeList nl = root.getElementsByTagName("ED101");
+
+			for(int i = 0; i < nl.getLength(); i++)
+			{
+				Element ed = (Element) nl.item(i);
+				PaymentDocument pd = new PaymentOrder();
+				int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
+				for(int j = 0; j < quantity; j++)
+				{
+					pd.generateFromXML(ed, edNo, edAuthor);
+					edNo++;
+					pdList.add(pd);
+				}
+			}
+
+			edQuantity = length();
+			sum = sumAll();
+
+		}
 	}
 }
 

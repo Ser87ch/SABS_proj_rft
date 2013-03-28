@@ -54,5 +54,10 @@ public class PaymentRequest extends PaymentDocument {
 		}
 
 	}
-
+	
+	@Override
+	public void generateFromXML(Element gendoc, int edNo, String edAuthor)
+	{
+		
+	}
 }
