@@ -81,8 +81,9 @@ public class DB implements Closeable{
 			db.connect();
 
 			ResultSet rs = db.st.executeQuery(s);
-			rs.next();
-			value = rs.getString(1);
+			
+			if(rs.next())
+				value = rs.getString(1);
 
 			db.close();
 		} catch(Exception e) {

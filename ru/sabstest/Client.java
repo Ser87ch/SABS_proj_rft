@@ -155,6 +155,7 @@ public class Client {
 				cl.name = "Тестовый клиент";
 			}
 		}
+		cl.contrrazr();
 		return cl;
 	}
 }
