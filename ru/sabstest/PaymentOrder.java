@@ -65,12 +65,10 @@ public class PaymentOrder extends PaymentDocument {
 		
 		Element el = (Element) gendoc.getElementsByTagName("Payer").item(0);		
 		
-		payer = Client.createClientFromBICPersonalAcc(XML.getChildValueString("BIC", el), 
-				XML.getChildValueString("PersonalAcc", el));
+		payer = Client.createClientFromBICPersonalAcc(el);
 		
 		el = (Element) gendoc.getElementsByTagName("Payee").item(0);		
 		
-		payee = Client.createClientFromBICPersonalAcc(XML.getChildValueString("BIC", el), 
-				XML.getChildValueString("PersonalAcc", el));
+		payee = Client.createClientFromBICPersonalAcc(el);
 	}
 }

@@ -72,18 +72,28 @@ public class DB implements Closeable{
 		}
 	}
 
-
 	public static String selectFirstValueSabsDb(String s)
 	{
+		return selectFirstValueSabsDb(s,1);
+	}
+
+	public static String selectFirstValueSabsDb(String s, int row)
+	{
+		if(row == 0)
+			row = 1;
 		String value = "";
 		try {
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
 
 			ResultSet rs = db.st.executeQuery(s);
-			
-			if(rs.next())
-				value = rs.getString(1);
+			int i = 1;
+			while(rs.next() && i<=row)
+			{
+				if(i==row)
+					value = rs.getString(1);
+				i++;
+			}			
 
 			db.close();
 		} catch(Exception e) {

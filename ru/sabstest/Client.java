@@ -109,20 +109,36 @@ public class Client {
 		bic = bank.getAttribute("BIC");		
 	}
 
-	public static Client createClientFromBICPersonalAcc(String bicStr, String personalAccStr)
+	public static Client createClientFromBICPersonalAcc(Element clEl)
 	{
 		Client cl = new Client();
 
+		String bicStr, personalAccStr;
+		
+		Element bicEl =(Element) clEl.getElementsByTagName("BIC").item(0);
+		Element paEl =(Element) clEl.getElementsByTagName("PersonalAcc").item(0);
+		
+		bicStr = bicEl.getFirstChild().getNodeValue();
+		personalAccStr = paEl.getFirstChild().getNodeValue();
+		
 		String bic = bicStr.replaceAll("@", Settings.bik);
 		String personalAcc = personalAccStr.replaceAll("@", Settings.bik);
 
 		if(bic.substring(0, 6).equals("select"))
-			cl.bic = DB.selectFirstValueSabsDb(bic);
+		{
+			int row;
+			row = XML.getOptionalIntAttr("row", bicEl);
+			cl.bic = DB.selectFirstValueSabsDb(bic,row);
+		}
 		else 
 			cl.bic = bic;
 
 		if(personalAcc.substring(0, 6).equals("select"))
-			cl.personalAcc = DB.selectFirstValueSabsDb(personalAcc);
+		{
+			int row;
+			row = XML.getOptionalIntAttr("row", paEl);
+			cl.personalAcc = DB.selectFirstValueSabsDb(personalAcc,row);
+		}
 		else
 			cl.personalAcc = personalAcc;
 
@@ -155,7 +171,12 @@ public class Client {
 				cl.name = "Тестовый клиент";
 			}
 		}
-		cl.contrrazr();
+		try{
+		cl.contrrazr();}
+		catch(Exception e)
+		{
+			System.out.println("1");
+		}
 		return cl;
 	}
 }
