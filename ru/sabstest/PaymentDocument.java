@@ -48,8 +48,8 @@ abstract public class PaymentDocument {
 		this.priority = "6";
 		tax = new DepartmentalInfo("", "", "", "", "", "", "", "");			
 		this.purpose = "Тест";
-		this.chargeOffDate = new Date(0);
-		this.receiptDate = new Date(0);	
+		//this.chargeOffDate = new Date(0);
+		//this.receiptDate = new Date(0);	
 		this.edNo = 0;
 	}
 

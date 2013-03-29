@@ -83,24 +83,16 @@ public class Client {
 	{
 		Element rootElement = doc.createElement(elementName);
 
-		if(personalAcc != null && !personalAcc.equals(""))
-			rootElement.setAttribute("PersonalAcc", personalAcc);
-
-		if(inn != null && !inn.equals(""))
-			rootElement.setAttribute("INN", inn);
-
-		if(kpp != null && !kpp.equals(""))
-			rootElement.setAttribute("KPP", kpp);
-
+		XML.setOptinalAttr(rootElement, "PersonalAcc", personalAcc);
+		XML.setOptinalAttr(rootElement, "INN", inn);
+		XML.setOptinalAttr(rootElement, "KPP", kpp);
 		XML.createNode(doc, rootElement, "Name", name);
 
 		Element bank = doc.createElement("Bank");
 		rootElement.appendChild(bank);
 
 		bank.setAttribute("BIC", bic);
-		if(correspAcc != null && !correspAcc.equals(""))
-			bank.setAttribute("CorrespAcc", correspAcc);
-
+		XML.setOptinalAttr(bank, "CorrespAcc", correspAcc);
 		return rootElement;
 	}
 
@@ -126,9 +118,13 @@ public class Client {
 
 		if(bic.substring(0, 6).equals("select"))
 			cl.bic = DB.selectFirstValueSabsDb(bic);
+		else 
+			cl.bic = bic;
 
 		if(personalAcc.substring(0, 6).equals("select"))
 			cl.personalAcc = DB.selectFirstValueSabsDb(personalAcc);
+		else
+			cl.personalAcc = personalAcc;
 
 		if(cl.bic.equals(Settings.bik) && !cl.personalAcc.equals(""))
 		{

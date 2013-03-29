@@ -82,7 +82,7 @@ public class DB implements Closeable{
 
 			ResultSet rs = db.st.executeQuery(s);
 			rs.next();
-			value = rs.getString(0);
+			value = rs.getString(1);
 
 			db.close();
 		} catch(Exception e) {

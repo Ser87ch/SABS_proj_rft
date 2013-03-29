@@ -667,8 +667,8 @@ public class PaymentDocumentList {
 	public void generateFromXML(String src)
 	{
 		Element root = XML.getXMLRootElement(src);
-
-		if(root.getNodeValue().equals("PacketEPD"))
+		
+		if(root.getNodeName().equals("PacketEPD"))
 		{
 			pdList = new ArrayList<PaymentDocument>();
 
@@ -685,10 +685,11 @@ public class PaymentDocumentList {
 			for(int i = 0; i < nl.getLength(); i++)
 			{
 				Element ed = (Element) nl.item(i);
-				PaymentDocument pd = new PaymentOrder();
+				
 				int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
 				for(int j = 0; j < quantity; j++)
 				{
+					PaymentDocument pd = new PaymentOrder();
 					pd.generateFromXML(ed, edNo, edAuthor);
 					edNo++;
 					pdList.add(pd);
