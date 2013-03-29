@@ -44,7 +44,7 @@ public class DepartmentalInfo {
 	
 	public void readED(Element di)
 	{
-		if(di.getNodeName() == "DepartmentalInfo")
+		if(di.getNodeName().equals("DepartmentalInfo"))
 		{
 			drawerStatus = di.getAttribute("DrawerStatus");
 			cbc = di.getAttribute("CBC");
@@ -60,30 +60,15 @@ public class DepartmentalInfo {
 	{
 		Element rootElement = doc.createElement("DepartmentalInfo");
 		
-		if(drawerStatus != null && !drawerStatus.equals(""))
-			rootElement.setAttribute("DrawerStatus", drawerStatus);
-		
-		if(cbc != null && !cbc.equals(""))
-			rootElement.setAttribute("CBC", cbc);
-		
-		if(okato != null && !okato.equals(""))
-			rootElement.setAttribute("OKATO", okato);
-		
-		if(paytReason != null && !paytReason.equals(""))
-			rootElement.setAttribute("PaytReason", paytReason);
-		
-		if(taxPeriod != null && !taxPeriod.equals(""))
-			rootElement.setAttribute("TaxPeriod", taxPeriod);
-		
-		if(docNo != null && !docNo.equals(""))
-			rootElement.setAttribute("DocNo", docNo);
-		
-		if(docDate != null && !docDate.equals(""))
-			rootElement.setAttribute("DocDate", docDate);
-		
-		if(taxPaytKind != null && !taxPaytKind.equals(""))
-			rootElement.setAttribute("TaxPaytKind", taxPaytKind);
-		
+		XML.setOptinalAttr(rootElement, "DrawerStatus", drawerStatus);
+		XML.setOptinalAttr(rootElement, "CBC", cbc);
+		XML.setOptinalAttr(rootElement, "OKATO", okato);
+		XML.setOptinalAttr(rootElement, "PaytReason", paytReason);
+		XML.setOptinalAttr(rootElement, "TaxPeriod", taxPeriod);
+		XML.setOptinalAttr(rootElement, "DocNo", docNo);
+		XML.setOptinalAttr(rootElement, "DocDate", docDate);
+		XML.setOptinalAttr(rootElement, "TaxPaytKind", taxPaytKind);
+				
 		return rootElement;
 	}
 }

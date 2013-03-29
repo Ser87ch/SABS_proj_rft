@@ -39,7 +39,7 @@ public class PaymentOrderRegister extends PaymentDocument {
 	@Override
 	public void readED(Element doc)
 	{
-		if(doc.getTagName() == "ED108")
+		if(doc.getTagName().equals("ED108"))
 		{
 			readCommonEDElements(doc);
 
@@ -85,7 +85,7 @@ public class PaymentOrderRegister extends PaymentDocument {
 
 		public void readED(Element tr)
 		{
-			if(tr.getTagName() == "CreditTransferTransactionInfo")
+			if(tr.getTagName().equals("CreditTransferTransactionInfo"))
 			{
 				transactionID = XML.getOptionalIntAttr("TransactionID", tr);
 

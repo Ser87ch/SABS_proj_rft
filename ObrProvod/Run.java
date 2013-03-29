@@ -101,12 +101,12 @@ public class Run extends RunHelper
 			callScript("SABS.CloseSABS");	
 			
 			String rpack = Pack.copyRPack("003");
-			if(rpack != "")
+			if(!rpack.equals(""))
 				logInfo("R пакет " + rpack + " скопирован в " + Settings.fullfolder + "output\\003\\");
 			
 			String rpet = Pack.getPackNameFolder(Settings.datafolder + "etalon\\003\\", "r");
 			
-			if(rpack != "" && rpet != "")
+			if(!rpack.equals("") && !rpet.equals(""))
 			{
 				if(Pack.compareRPack(Settings.datafolder + "etalon\\003\\" + rpet, Settings.fullfolder + "output\\003\\" + rpack))							
 					logTestResult("R пакет " + Settings.fullfolder + "output\\003\\" + rpack + " совпадает с эталонным R пакетом " + Settings.datafolder + "etalon\\003\\" + rpet + " по маске rpack.msk .", true);
@@ -114,12 +114,12 @@ public class Run extends RunHelper
 					logTestResult("R пакет " + Settings.fullfolder + "output\\003\\" + rpack + " не совпадает с эталонным R пакетом " + Settings.datafolder + "etalon\\003\\" + rpet + " по маске rpack.msk .", false);
 
 			}
-			else if(rpack == "")
+			else if(rpack.equals(""))
 			{
 				Log.msgCMP("Отсуствует R пакет в " +  Settings.fullfolder + "output\\003\\" + rpack + " для сравнения.");
 				logTestResult("Отсуствует R пакет в " +  Settings.fullfolder + "output\\003\\" + rpack + " для сравнения.", false);
 			}
-			else if(rpet == "")
+			else if(rpet.equals(""))
 			{
 				Log.msg("Отсуствует эталонный R пакет в " +  Settings.datafolder + "etalon\\003\\" + rpet + " для сравнения.");
 				logInfo("Отсуствует эталонный R пакет в " +  Settings.datafolder + "etalon\\003\\" + rpet + " для сравнения.");

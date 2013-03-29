@@ -33,7 +33,7 @@ public class CollectionOrder extends PaymentDocument {
 	@Override
 	public void readED(Element doc)
 	{
-		if(doc.getTagName() == "ED104")
+		if(doc.getTagName().equals("ED104"))
 		{
 			readCommonEDElements(doc);
 			

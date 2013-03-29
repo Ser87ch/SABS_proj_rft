@@ -40,7 +40,7 @@ public class PaymentRequest extends PaymentDocument {
 
 	@Override
 	public void readED(Element doc) {
-		if(doc.getTagName() == "ED103")
+		if(doc.getTagName().equals("ED103"))
 		{
 			readCommonEDElements(doc);
 			

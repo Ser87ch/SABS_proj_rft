@@ -139,7 +139,7 @@ public class Run extends RunHelper
 			String spet = Pack.getPackNameFolder(Settings.datafolder + "etalon\\001\\", "s");
 
 
-			if(spack != "" && spet != "")
+			if(!spack.equals("") && !spet.equals(""))
 			{
 				if(Pack.compareSPack(Settings.datafolder + "etalon\\001\\" + spet, Settings.fullfolder + "output\\001\\" + spack))							
 					logTestResult("S пакет " + Settings.fullfolder + "output\\001\\" + spack + " совпадает с эталонным S пакетом " + Settings.datafolder + "etalon\\001\\" + spet + " по маске spack.msk .", true);
@@ -147,12 +147,12 @@ public class Run extends RunHelper
 					logTestResult("S пакет " + Settings.fullfolder + "output\\001\\" + spack + " не совпадает с эталонным S пакетом " + Settings.datafolder + "etalon\\001\\" + spet + " по маске spack.msk .", false);
 
 			}
-			else if(spack == "")
+			else if(spack.equals(""))
 			{
 				Log.msgCMP("Отсуствует S пакет в " +  Settings.fullfolder + "output\\001\\" + spack + " для сравнения.");
 				logTestResult("Отсуствует S пакет в " +  Settings.fullfolder + "output\\001\\" + spack + " для сравнения.", false);
 			}
-			else if(spet == "")
+			else if(spet.equals(""))
 			{
 				Log.msg("Отсуствует эталонный S пакет в " +  Settings.datafolder + "etalon\\001\\" + spet + " для сравнения.");
 				logInfo("Отсуствует эталонный S пакет в " +  Settings.datafolder + "etalon\\001\\" + spet + " для сравнения.");

@@ -48,7 +48,7 @@ public class PaymentWarrant extends PaymentDocument {
 
 	@Override
 	public void readED(Element doc) {
-		if(doc.getTagName() == "ED105")
+		if(doc.getTagName().equals("ED105"))
 		{
 			readCommonEDElements(doc);
 			
