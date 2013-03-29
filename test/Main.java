@@ -34,9 +34,10 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 
 			PaymentDocumentList pl = new PaymentDocumentList();
-			pl.generateFromXML("C:\\generation.xml");
+			pl.generateFromXML("C:\\generation001.xml");
 		
-			pl.createEPD("C:\\epd.xml");
+			pl.createEPD("C:\\epd001.xml");			
+			
 			break;
 		}
 

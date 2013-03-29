@@ -63,9 +63,12 @@ abstract public class PaymentDocument {
 	public String toStr(String razd, boolean addShift){
 		String str = "";
 
-		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd + transKind + razd + Float.toString(sum) + razd + paytKind.toString() + razd + 
-		payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd + payer.inn + razd + payer.kpp + razd + payer.name + razd + payee.bic + razd + payee.correspAcc + razd + payee.personalAcc + razd + payee.inn + razd + payee.kpp + razd 
-		+ (addShift ? "+{ExtEnd}" : "") + payee.name + razd +
+		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd +
+		transKind + razd + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
+		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd +
+		paytKind.toString() + razd + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
+		payer.inn + razd + payer.kpp + razd + payer.name + razd + payee.bic + razd + payee.correspAcc + razd +
+		payee.personalAcc + razd + payee.inn + razd + payee.kpp + razd + (addShift ? "+{ExtEnd}" : "") + payee.name + razd +
 		priority + razd + tax.drawerStatus;
 		if(!tax.drawerStatus.equals("") && tax.drawerStatus != null)
 			str = str + razd + tax.cbc + razd + tax.okato + razd + tax.paytReason + razd + tax.taxPeriod + razd + tax.docNo + razd + tax.docDate + razd + tax.taxPaytKind;
@@ -78,8 +81,11 @@ abstract public class PaymentDocument {
 
 		String str = "";
 
-		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd + transKind + razd + Float.toString(sum) + razd + paytKind.toString() + razd + 
-		payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd + payee.bic + razd + payee.correspAcc + razd + payee.personalAcc + razd + priority;
+		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd + transKind + razd +
+		Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
+		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd + paytKind.toString() + razd + 
+		payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd + payee.bic + razd + payee.correspAcc + razd +
+		payee.personalAcc + razd + priority;
 
 		return str;	
 	}

@@ -60,6 +60,8 @@ public class PaymentOrder extends PaymentDocument {
 		accDocNo = edNo;
 		accDocDate = Settings.operDate;
 		purpose = "Тестовое платежное поручение";
+		chargeOffDate = Settings.operDate;
+		receiptDate = Settings.operDate;
 		
 		Element el = (Element) gendoc.getElementsByTagName("Payer").item(0);		
 		
