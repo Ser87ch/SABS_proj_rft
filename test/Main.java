@@ -47,7 +47,7 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			Settings.GenDoc.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\pervvod.xml");
 			PaymentDocumentList pl = new PaymentDocumentList();
-			pl.readXML(Settings.testProj + "input\\" + Settings.pervfolder + "\\paydocs.xml");
+			pl.readEPD(Settings.testProj + "input\\" + Settings.pervfolder + "\\paydocs.xml");
 			//System.out.println(pl.toString());
 			System.out.println(pl.get(0).toStr("{ENTER}",true));
 			break;
@@ -83,7 +83,7 @@ public class Main {
 			Settings.GenSpack.readXML(Settings.testProj + "settings\\" + Settings.obrfolder + "\\genspack.xml");
 
 			PaymentDocumentList pl = new PaymentDocumentList();
-			pl.generateS();
+			pl.generateFromXML(Settings.testProj + "settings\\gen\\generation001.xml");
 			pl.createSpack();
 
 			String s = Pack.getSPackName();

@@ -49,7 +49,7 @@ public class RunB extends RunBHelper
 			Settings.testProj = (String) args[0];
 
 		Init.load();
-		Settings.readXML(Settings.fullfolder + "settings\\general.xml");				
+		Settings.readXML(Settings.testProj + "settings\\general.xml");				
 
 		if(isreset)
 			callScript("SABS.Reset");
@@ -58,7 +58,7 @@ public class RunB extends RunBHelper
 		if(isdeltadb)
 		{
 			Log.msg("Начало логирования изменений в БД.");
-			DeltaDB.readXMLSettings(Settings.fullfolder + "settings\\deltadb.xml");
+			DeltaDB.readXMLSettings(Settings.testProj + "settings\\deltadb.xml");
 			DeltaDB.createDBLog();
 		}
 
@@ -171,7 +171,7 @@ public class RunB extends RunBHelper
 		if(isgenrpack)
 		{
 			Log.msg("Запущен скрипт по созданию R пакета.");
-			Settings.Sign.readXML(Settings.fullfolder + "settings\\sign.xml");
+			Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 
 			Pack.createRpackError49();
 			Pack.createBpackError49();
@@ -210,7 +210,7 @@ public class RunB extends RunBHelper
 		if(isdeltadbr)
 		{
 			Log.msg("Начало логирования изменений в БД.");
-			DeltaDB.readXMLSettings(Settings.fullfolder + "settings\\deltadb.xml");
+			DeltaDB.readXMLSettings(Settings.testProj + "settings\\deltadb.xml");
 			DeltaDB.createDBLog();
 		}
 		//контроль R-пакета

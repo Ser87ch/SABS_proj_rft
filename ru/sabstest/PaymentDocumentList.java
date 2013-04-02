@@ -34,6 +34,7 @@ public class PaymentDocumentList {
 
 	}
 
+	@Deprecated
 	public void generate()
 	{
 		try {
@@ -90,6 +91,7 @@ public class PaymentDocumentList {
 		}
 	}
 
+	@Deprecated
 	public void generateB()
 	{
 		try {
@@ -145,6 +147,7 @@ public class PaymentDocumentList {
 		}
 	}
 
+	@Deprecated
 	public void generateS()
 	{
 		try {
@@ -213,6 +216,8 @@ public class PaymentDocumentList {
 		}
 	}
 
+	
+	@Deprecated
 	public void generateSwB(int numd)
 	{
 		try {
@@ -308,6 +313,8 @@ public class PaymentDocumentList {
 			Log.msg(e);
 		}
 	}
+	
+	@Deprecated
 	public void generateSerr()
 	{
 		generateSwB(3);
@@ -350,6 +357,8 @@ public class PaymentDocumentList {
 		return str;
 	}
 
+	
+	@Deprecated
 	public void createXML(String fl)
 	{
 		try {
@@ -433,11 +442,13 @@ public class PaymentDocumentList {
 		}
 	}
 
+	@Deprecated
 	public void createXML()
 	{
 		createXML(Settings.testProj + "\\tests\\" + Settings.folder + "\\input\\paydocs.xml");
 	}
 
+	@Deprecated
 	public void readXML(String src)
 	{
 		try {
@@ -664,6 +675,7 @@ public class PaymentDocumentList {
 		pdList.add(pd);
 	}
 
+	
 	public void generateFromXML(String src)
 	{
 		Element root = XML.getXMLRootElement(src);
