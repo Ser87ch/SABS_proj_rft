@@ -36,8 +36,8 @@ public class Main {
 			PaymentDocumentList pl = new PaymentDocumentList();
 			pl.generateFromXML("C:\\generation001.xml");
 		
-			pl.createEPD("C:\\epd001.xml");			
-			
+			//pl.createEPD("C:\\epd001.xml");			
+			pl.createSpack("C:\\1.txt");
 			break;
 		}
 

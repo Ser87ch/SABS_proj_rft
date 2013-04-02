@@ -539,7 +539,7 @@ public class PaymentDocumentList {
 				pd.payer.bic.substring(2,9) + "000" + pd.payer.bic + String.format("%20s", pd.payer.personalAcc) + String.format("%20s", pd.payer.correspAcc) +
 				String.format("%03d", pd.accDocNo) + new SimpleDateFormat("ddMMyyyy").format(pd.accDocDate) + pd.transKind +
 				pd.payee.bic + String.format("%20s", pd.payee.personalAcc) + String.format("%20s", pd.payee.correspAcc) +
-				String.format("%018d", pd.sum) + String.format("%01d", pd.priority) + 
+				String.format("%018d", pd.sum) + pd.priority + 
 				String.format("%12s", pd.payer.inn) + String.format("%9s", pd.payer.kpp) +
 				String.format("%-160s", pd.payer.name) + 	String.format("%12s", pd.payee.inn) + 
 				String.format("%9s", pd.payee.kpp) + String.format("%-160s", pd.payee.name) + 

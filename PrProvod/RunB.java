@@ -65,7 +65,7 @@ public class RunB extends RunBHelper
 		PaymentDocumentList pl = new PaymentDocumentList();
 		if(ispervvod || iscontrvvod)
 		{			
-			pl.readXML(Settings.datafolder + "input\\002\\paydocs.xml");
+			pl.readEPD(Settings.datafolder + "input\\002\\paydocs.xml");
 			//System.out.println(pl.toString());
 		}
 

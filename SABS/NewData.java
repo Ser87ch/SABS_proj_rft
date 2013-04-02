@@ -43,25 +43,25 @@ public class NewData extends NewDataHelper
 		Settings.GenDoc.readXML(Settings.testProj + "settings\\gen\\gendoc.xml");
 
 		PaymentDocumentList pl = new PaymentDocumentList();
-		pl.generate();		
-		pl.createXML(Settings.datafolder + "input\\001\\paydocs.xml");
+		pl.generateFromXML(Settings.testProj + "settings\\gen\\generation001.xml");		
+		pl.createEPD(Settings.datafolder + "input\\001\\paydocs.xml");
 		
 		PaymentDocumentList plb = new PaymentDocumentList();
-		plb.generateB();	
-		plb.createXML(Settings.datafolder + "input\\002\\paydocs.xml");
+		plb.generateFromXML(Settings.testProj + "settings\\gen\\generation002.xml");	
+		plb.createEPD(Settings.datafolder + "input\\002\\paydocs.xml");
 		
 		Settings.GenSpack.readXML(Settings.testProj + "settings\\gen\\genspack.xml");
 		
 		PaymentDocumentList pls = new PaymentDocumentList();
-		pls.generateS();		
+		pls.generateFromXML(Settings.testProj + "settings\\gen\\generation003.xml");		
 		pls.createSpack(Settings.datafolder + "input\\003\\spack.txt");	
 		
 		pls = new PaymentDocumentList();
-		pls.generateSerr();
+		pls.generateFromXML(Settings.testProj + "settings\\gen\\generation004.xml");
 		pls.createSpack(Settings.datafolder + "input\\004\\spack.txt");
 		
 		pls = new PaymentDocumentList();
-		pls.generateSwB(4);
+		pls.generateFromXML(Settings.testProj + "settings\\gen\\generation005.xml");
 		pls.createSpack(Settings.datafolder + "input\\005\\spack.txt");
 		Log.close();
 	}
