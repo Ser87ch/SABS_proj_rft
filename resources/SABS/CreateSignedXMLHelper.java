@@ -20,11 +20,11 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>CreateSignedXML</b><br>
- * Generated     : <b>2013/04/04 11:53:12</b><br>
+ * Generated     : <b>2012/04/04 14:01:11</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  апреля 04, 2013
+ * @since  апреля 04, 2012
  * @author Admin
  */
 public abstract class CreateSignedXMLHelper extends RationalTestScript

@@ -31,7 +31,7 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 		run(Settings.path + "\\bin\\clienXML.exe -i  My c:\\ 0",Settings.path + "\\bin");
 		
 		selectProfilecomboBox().click(atText(profile));
-		okbutton().click();
+		okbutton().click();		
 		
 		sleep(2);
 		run(Settings.path + "\\bin\\clienXML.exe -wd " + dest + " C:\\  999",Settings.path + "\\bin");

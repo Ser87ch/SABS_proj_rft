@@ -27,7 +27,7 @@ public class Test extends TestHelper
 		
 		PaymentDocumentList pdl = new PaymentDocumentList();
 		pdl.generateFromXML(Settings.testProj + "settings\\gen\\generation001.xml");
-		
+		pdl.createEPD("C:\\test1.xml");
 		pdl.insertIntoDB("testtest.xml");
 		
 		callScript("SABS.VFD",new String[]{Settings.Sign.keyobr});

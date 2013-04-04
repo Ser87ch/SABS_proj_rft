@@ -171,12 +171,8 @@ public class Client {
 				cl.name = "Тестовый клиент";
 			}
 		}
-		try{
-		cl.contrrazr();}
-		catch(Exception e)
-		{
-			System.out.println("1");
-		}
+		
+		cl.contrrazr();		
 		return cl;
 	}
 }

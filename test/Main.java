@@ -108,7 +108,7 @@ public class Main {
 		case O:
 		{
 
-			XML.createXMLFromBase64("C:\\test.xml", "C:\\testde.xml");
+			XML.createXMLFromBase64("C:\\testtest.xml", "C:\\testtestde.xml");
 			
 			break;
 		}
