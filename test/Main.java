@@ -107,13 +107,11 @@ public class Main {
 		}				
 		case O:
 		{
-//			Init.load();
-//			Settings.readXML(Settings.testProj + "settings\\general.xml");
-//
-//			Client cl = new Client("044552989","40116810100000000037");
-//			cl.contrrazr();
-//			System.out.println(cl.personalAcc);
-			XML.createXMLFromBase64("C:\\test.xml", "C:\\testde.xml");
+
+		//	XML.createXMLFromBase64("C:\\test.xml", "C:\\testde.xml");
+			PaymentDocumentList pdl = new PaymentDocumentList();
+			
+			String a = pdl.edAuthor;
 			break;
 		}
 		case ED:

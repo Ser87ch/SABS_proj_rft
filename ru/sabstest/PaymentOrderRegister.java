@@ -1,5 +1,6 @@
 package ru.sabstest;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -92,6 +93,13 @@ public class PaymentOrderRegister extends PaymentDocument {
 			}
 		}
 
+	}
+
+	@Override
+	public void insertIntoDB(int idPacet, int pEDNo, Date pacDate, String pAuthor, String filename)
+	{
+		
+		
 	}
 
 	

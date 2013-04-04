@@ -2,10 +2,12 @@ package ru.sabstest;
 
 import java.io.Closeable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 
 
 public class DB implements Closeable{
@@ -102,4 +104,29 @@ public class DB implements Closeable{
 		}
 		return value;
 	}
+	
+	public static String toString(String s)
+	{
+		if(s.equals("") || s == null)
+			return "null";
+		else
+			return "'" + s + "'";
+	}
+	
+	public static String toString(int s)
+	{
+		if(s == 0)
+			return "null";
+		else
+			return Integer.toString(s);
+	}
+	
+	public static String toString(Date s)
+	{
+		if(s == null)
+			return "null";
+		else
+			return "'" + new SimpleDateFormat("yyyy-MM-dd").format(s) + "'";
+	}
+	
 }

@@ -93,7 +93,7 @@ abstract public class PaymentDocument {
 	abstract public Element createED(Document doc);
 	abstract public void readED(Element doc);
 	abstract public void generateFromXML(Element gendoc, int edNo, String edAuthor);
-
+	abstract public void insertIntoDB(int idPacet, int pEDNo, Date pacDate, String pAuthor, String filename);
 
 	public void createXML(String fl)
 	{

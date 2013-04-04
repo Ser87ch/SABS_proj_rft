@@ -79,4 +79,11 @@ public class PaymentWarrant extends PaymentDocument {
 	{
 		
 	}
+
+	@Override
+	public void insertIntoDB(int idPacet, int pEDNo, Date pacDate, String pAuthor, String filename) 
+	{
+		
+		
+	}
 }
