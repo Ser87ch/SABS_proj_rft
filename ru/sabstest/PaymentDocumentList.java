@@ -251,7 +251,7 @@ public class PaymentDocumentList {
 			edNo = Integer.parseInt(root.getAttribute("EPDNo"));
 			edDate = Settings.operDate;
 			edAuthor = root.getAttribute("EDAuthor");
-			systemCode = "01";
+			systemCode = "0";
 
 
 			int edNo = Integer.parseInt(root.getAttribute("EDFirstNo"));

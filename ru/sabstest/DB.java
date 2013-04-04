@@ -107,7 +107,7 @@ public class DB implements Closeable{
 	
 	public static String toString(String s)
 	{
-		if(s.equals("") || s == null)
+		if(s == null || s.equals(""))
 			return "null";
 		else
 			return "'" + s + "'";

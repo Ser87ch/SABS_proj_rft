@@ -41,7 +41,7 @@ public class SignData extends SignDataHelper
 		
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
-		Settings.GenSpack.readXML(Settings.testProj + "settings\\gen\\genspack.xml");		
+		
 		
 		File dir = new File(Settings.testProj + "data\\");
 		

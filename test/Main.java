@@ -80,7 +80,7 @@ public class Main {
 		{
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");			
-			Settings.GenSpack.readXML(Settings.testProj + "settings\\" + Settings.obrfolder + "\\genspack.xml");
+	//		Settings.GenSpack.readXML(Settings.testProj + "settings\\" + Settings.obrfolder + "\\genspack.xml");
 
 			PaymentDocumentList pl = new PaymentDocumentList();
 			pl.generateFromXML(Settings.testProj + "settings\\gen\\generation001.xml");
@@ -108,10 +108,8 @@ public class Main {
 		case O:
 		{
 
-		//	XML.createXMLFromBase64("C:\\test.xml", "C:\\testde.xml");
-			PaymentDocumentList pdl = new PaymentDocumentList();
+			XML.createXMLFromBase64("C:\\test.xml", "C:\\testde.xml");
 			
-			String a = pdl.edAuthor;
 			break;
 		}
 		case ED:

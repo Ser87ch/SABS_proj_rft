@@ -50,7 +50,7 @@ public class NewData extends NewDataHelper
 		plb.generateFromXML(Settings.testProj + "settings\\gen\\generation002.xml");	
 		plb.createEPD(Settings.datafolder + "input\\002\\paydocs.xml");
 		
-		Settings.GenSpack.readXML(Settings.testProj + "settings\\gen\\genspack.xml");
+	
 		
 		PaymentDocumentList pls = new PaymentDocumentList();
 		pls.generateFromXML(Settings.testProj + "settings\\gen\\generation003.xml");		

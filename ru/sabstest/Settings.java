@@ -284,45 +284,45 @@ public class Settings{
 		}
 	}
 
-	public static class GenSpack{
-
-		public static int numBIK = 0;
-		public static int numDoc = 0;
-		public static int firstDoc = 0;
-
-		public static void createXML()
-		{
-			createXML(Settings.testProj + "settings\\" + Settings.obrfolder + "\\genspack.xml");
-		}
-
-		public static void createXML(String fl)
-		{
-			Document doc = XML.createNewDoc();
-			Element rootElement = doc.createElement("genspack");
-			doc.appendChild(rootElement);
-
-			XML.createNode(doc, rootElement, "numbik", numBIK);	
-			XML.createNode(doc, rootElement, "numdoc", numDoc);	
-			XML.createNode(doc, rootElement, "firstdoc", firstDoc);
-
-			XML.createXMLFile(doc, fl);
-			Log.msg("XML с настройками для генерации S-пакета " + fl + " создан.");
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\genspack.xsd",fl);
-		}
-
-		public static void readXML(String src)
-		{			
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\genspack.xsd",src);				
-
-			Element eElement = XML.getXMLRootElement(src);
-
-			numBIK = XML.getChildValueInt("numbik", eElement);	
-			numDoc = XML.getChildValueInt("numdoc", eElement);	
-			firstDoc = XML.getChildValueInt("firstdoc", eElement);
-
-			Log.msg("XML с настройками для генерации S-пакета " + src + " загружен в программу.");
-		}
-	}
+//	public static class GenSpack{
+//
+//		public static int numBIK = 0;
+//		public static int numDoc = 0;
+//		public static int firstDoc = 0;
+//
+//		public static void createXML()
+//		{
+//			createXML(Settings.testProj + "settings\\" + Settings.obrfolder + "\\genspack.xml");
+//		}
+//
+//		public static void createXML(String fl)
+//		{
+//			Document doc = XML.createNewDoc();
+//			Element rootElement = doc.createElement("genspack");
+//			doc.appendChild(rootElement);
+//
+//			XML.createNode(doc, rootElement, "numbik", numBIK);	
+//			XML.createNode(doc, rootElement, "numdoc", numDoc);	
+//			XML.createNode(doc, rootElement, "firstdoc", firstDoc);
+//
+//			XML.createXMLFile(doc, fl);
+//			Log.msg("XML с настройками для генерации S-пакета " + fl + " создан.");
+//			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\genspack.xsd",fl);
+//		}
+//
+//		public static void readXML(String src)
+//		{			
+//			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\genspack.xsd",src);				
+//
+//			Element eElement = XML.getXMLRootElement(src);
+//
+//			numBIK = XML.getChildValueInt("numbik", eElement);	
+//			numDoc = XML.getChildValueInt("numdoc", eElement);	
+//			firstDoc = XML.getChildValueInt("firstdoc", eElement);
+//
+//			Log.msg("XML с настройками для генерации S-пакета " + src + " загружен в программу.");
+//		}
+//	}
 }
 
 
