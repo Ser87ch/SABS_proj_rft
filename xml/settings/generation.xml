@@ -1,0 +1,32 @@
+<PacketEPD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="generation.xsd" EDAuthor="4582002000" EPDNo="100" EDFirstNo="100">
+	<ED101 Quantity="2">
+		<Payer>
+			<BIC>@</BIC>
+			<PersonalAcc><![CDATA[select top 1 NUM_ACC from dbo.Account where rest = (select min(rest) from dbo.Account where substring(NUM_ACC,1,1) = '4' and substring(NUM_ACC,1,5) <> '40101')]]></PersonalAcc>			    
+		</Payer>
+		<Payee>
+		    <BIC><![CDATA[select top 3 NEWNUM from dbo.BNKSEEK where substring(NEWNUM,1,4) = substring('@', 1, 4) and UER in ('2','3','4','5') and NEWNUM <> '@']]></BIC>
+		    <PersonalAcc>40702810000000000005</PersonalAcc>
+		</Payee>
+	</ED101>
+	<ED101 Quantity="2">
+		<Payer>
+			<BIC>@</BIC>
+			<PersonalAcc><![CDATA[select top 1 NUM_ACC from dbo.Account where rest = (select min(rest) from dbo.Account where substring(NUM_ACC,1,1) = '4' and substring(NUM_ACC,1,5) <> '40101')]]></PersonalAcc>			    
+		</Payer>
+		<Payee>
+		    <BIC row="2"><![CDATA[select top 3 NEWNUM from dbo.BNKSEEK where substring(NEWNUM,1,4) = substring('@', 1, 4) and UER in ('2','3','4','5') and NEWNUM <> '@']]></BIC>
+		    <PersonalAcc>40702810000000000005</PersonalAcc>
+		</Payee>
+	</ED101>
+	<ED101 Quantity="2">
+		<Payer>
+			<BIC>@</BIC>
+			<PersonalAcc><![CDATA[select top 1 NUM_ACC from dbo.Account where rest = (select min(rest) from dbo.Account where substring(NUM_ACC,1,1) = '4' and substring(NUM_ACC,1,5) <> '40101')]]></PersonalAcc>			    
+		</Payer>
+		<Payee>
+		    <BIC row="3"><![CDATA[select top 3 NEWNUM from dbo.BNKSEEK where substring(NEWNUM,1,4) = substring('@', 1, 4) and UER in ('2','3','4','5') and NEWNUM <> '@']]></BIC>
+		    <PersonalAcc>40702810000000000005</PersonalAcc>
+		</Payee>
+	</ED101>
+</PacketEPD>

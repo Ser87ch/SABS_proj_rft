@@ -242,6 +242,8 @@ public class PaymentDocumentList {
 	
 	public void generateFromXML(String src)
 	{
+		
+		XML.validate(Settings.testProj + "\\XMLschema\\generation.xsd", src);
 		Element root = XML.getXMLRootElement(src);
 		
 		if(root.getNodeName().equals("PacketEPD"))
