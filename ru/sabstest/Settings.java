@@ -40,6 +40,8 @@ public class Settings{
 			ResultSet rs = db.st.executeQuery("select VALUE from dbo.XDM_CONF_SETTINGS where ID_PARAM = 1004");
 			rs.next();
 			Settings.path = rs.getString("VALUE");
+			if(!Settings.path.substring(Settings.path.length()-1).equals("\\"))
+				Settings.path = Settings.path + "\\";
 			Log.msg("œ‡ÔÍ‡ —¿¡— " + Settings.path);
 
 			rs = db.st.executeQuery("select X.BIK as BIK , isnull(B.KSNP,'') as KSNP from dbo.XDM_DEPARTMENT X inner join dbo.BNKSEEK B on B.NEWNUM = X.BIK");

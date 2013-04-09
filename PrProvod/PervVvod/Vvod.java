@@ -62,7 +62,7 @@ public class Vvod extends VvodHelper
 				
 		Docswindow().inputKeys("{F7}");				
 		
-		Folderwindow().inputKeys("{ExtDown}{ExtDown}{ExtDown}{ExtDown}{ExtDown}{ExtDown}");
+		Folderwindow().inputKeys("{ExtDown}{ExtDown}");
 		PrintcheckBox().click();		
 		FolderOkbutton().click();
 		ExistDocOkbutton().click();

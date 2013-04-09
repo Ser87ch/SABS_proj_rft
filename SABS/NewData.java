@@ -40,7 +40,7 @@ public class NewData extends NewDataHelper
 		Init.mkDataFolder();
 		
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
-		Settings.GenDoc.readXML(Settings.testProj + "settings\\gen\\gendoc.xml");
+		
 
 		PaymentDocumentList pl = new PaymentDocumentList();
 		pl.generateFromXML(Settings.testProj + "settings\\gen\\generation001.xml");		
