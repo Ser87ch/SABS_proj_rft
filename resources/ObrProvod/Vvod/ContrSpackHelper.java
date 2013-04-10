@@ -20,11 +20,11 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>ContrSpack</b><br>
- * Generated     : <b>2012/07/10 10:52:53</b><br>
+ * Generated     : <b>2013/04/10 15:35:43</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  июля 10, 2012
+ * @since  апреля 10, 2013
  * @author Admin
  */
 public abstract class ContrSpackHelper extends RationalTestScript
@@ -55,6 +55,31 @@ public abstract class ContrSpackHelper extends RationalTestScript
 	}
 	
 	/**
+	 * Ошибка: with default state.
+	 *		.text : Ошибка
+	 * 		.class : #32770
+	 * 		.processName : purs_loader.exe
+	 * 		.name : Ошибка
+	 */
+	protected TopLevelSubitemTestObject Errorwindow() 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("Errorwindow"));
+	}
+	/**
+	 * Ошибка: with specific test context and state.
+	 *		.text : Ошибка
+	 * 		.class : #32770
+	 * 		.processName : purs_loader.exe
+	 * 		.name : Ошибка
+	 */
+	protected TopLevelSubitemTestObject Errorwindow(TestObject anchor, long flags) 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("Errorwindow"), anchor, flags);
+	}
+	
+	/**
 	 * Outline: with default state.
 	 *		.class : .Outline
 	 * 		.name : null
@@ -75,6 +100,31 @@ public abstract class ContrSpackHelper extends RationalTestScript
 	{
 		return new GuiSubitemTestObject(
                         getMappedTestObject("Menutree"), anchor, flags);
+	}
+	
+	/**
+	 * ОК: with default state.
+	 *		.text : ОК
+	 * 		.class : .Pushbutton
+	 * 		.name : ОК
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject OKerrorbutton() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("OKerrorbutton"));
+	}
+	/**
+	 * ОК: with specific test context and state.
+	 *		.text : ОК
+	 * 		.class : .Pushbutton
+	 * 		.name : ОК
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject OKerrorbutton(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("OKerrorbutton"), anchor, flags);
 	}
 	
 	

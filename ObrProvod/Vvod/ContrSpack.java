@@ -23,10 +23,10 @@ public class ContrSpack extends ContrSpackHelper
 		Menutree().click(atName("Контроль ЭС "));		
 		ESpanel().click(atPoint(65,15));	
 		
-//		while(Errorwindow().exists())
-//		{
-//			OKerrorbutton().click();			
-//		}
+		while(Errorwindow().exists())
+		{
+			OKerrorbutton().click();			
+		}
 		
 		Menutree().click(atName("Электронные расчеты"));
 		Log.msg("S-пакет проконтролирован.");

@@ -23,10 +23,10 @@ public class ContrRpack extends ContrRpackHelper
 		Menutree().click(atName("Контроль ЭС "));		
 		ESpanel().click(atPoint(45,15));
 		
-//		while(Errorwindow().exists())
-//		{
-//			OKerrorbutton().click();			
-//		}
+		while(Errorwindow().exists())
+		{
+			OKerrorbutton().click();			
+		}
 		
 		Menutree().click(atName("Электронные расчеты"));
 		Log.msg("R пакет проконтролирован.");
