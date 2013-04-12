@@ -253,6 +253,7 @@ public class PaymentDocumentList {
 			edNo = Integer.parseInt(root.getAttribute("EPDNo"));
 			edDate = Settings.operDate;
 			edAuthor = root.getAttribute("EDAuthor");
+			edReceiver = root.getAttribute("EDReceiver");
 			systemCode = "0";
 
 

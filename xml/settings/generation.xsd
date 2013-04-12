@@ -17,6 +17,7 @@
 				<xs:element name="ED108" type="attr" />
 			</xs:choice>
 			<xs:attribute name="EDAuthor" type="xs:string" use="required" />
+			<xs:attribute name="EDReceiver" type="xs:string" />
 			<xs:attribute name="EPDNo" type="xs:string" use="required" />
 			<xs:attribute name="EDFirstNo" type="xs:string" use="required" />
 		</xs:complexType>
