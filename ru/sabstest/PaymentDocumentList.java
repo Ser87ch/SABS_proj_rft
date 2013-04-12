@@ -300,7 +300,7 @@ public class PaymentDocumentList {
 			"VALUES(null, 2, null, 0,\r\n" + 
 			DB.toString(Settings.operDate) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edQuantity) + ",\r\n" + 
 			DB.toString(sum) + ", " + DB.toString(systemCode) + ", null, 0, " + DB.toString(filename) + ", 0, 0, \r\n" + 
-			" 0, null, null, null, '458200200000', " + DB.toString(edAuthor) + ", 1, \r\n" +  //Mesto MesFrom?
+			" 0, null, null, null, " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", 1, \r\n" +  //Mesto MesFrom?
 			" 5, null, '20120202', 3, 1, 1, 1,\r\n" + 
 			" 0, 1, 3, 0, 1, null, null,\r\n" + 
 			" null, null, null, 20, '', NULL, NULL, NULL, NULL)";			
@@ -339,7 +339,7 @@ public class PaymentDocumentList {
 			"VALUES(null, 2, null, 0,\r\n" + 
 			DB.toString(Settings.operDate) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edQuantity) + ",\r\n" + 
 			DB.toString(sum) + ", " + DB.toString(systemCode) + ", null, 0, " + DB.toString(filename) + ", 0, 0, \r\n" + 
-			" 0, null, null, null, '458200200000', " + DB.toString(edAuthor) + ", 1, \r\n" +  //Mesto MesFrom?
+			" 0, null, null, null, " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", 1, \r\n" +  //Mesto MesFrom?
 			" 5, null, '20120202', 3, 1, 1, 1,\r\n" + 
 			" 0, 1, 3, 0, 1, null, null,\r\n" + 
 			" null, null, null, 20, '', NULL, NULL, NULL, NULL)";			
