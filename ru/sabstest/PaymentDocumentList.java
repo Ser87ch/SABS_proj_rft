@@ -274,6 +274,71 @@ public class PaymentDocumentList {
 					pdList.add(pd);
 				}
 			}
+			
+			nl = root.getElementsByTagName("ED103");
+
+			for(int i = 0; i < nl.getLength(); i++)
+			{
+				Element ed = (Element) nl.item(i);
+
+				int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
+				for(int j = 0; j < quantity; j++)
+				{
+					PaymentDocument pd = new PaymentRequest();
+					pd.generateFromXML(ed, edNo, edAuthor);
+					edNo++;
+					pdList.add(pd);
+				}
+			}
+			
+			nl = root.getElementsByTagName("ED104");
+
+			for(int i = 0; i < nl.getLength(); i++)
+			{
+				Element ed = (Element) nl.item(i);
+
+				int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
+				for(int j = 0; j < quantity; j++)
+				{
+					PaymentDocument pd = new CollectionOrder();
+					pd.generateFromXML(ed, edNo, edAuthor);
+					edNo++;
+					pdList.add(pd);
+				}
+			}
+			
+			
+			nl = root.getElementsByTagName("ED105");
+
+			for(int i = 0; i < nl.getLength(); i++)
+			{
+				Element ed = (Element) nl.item(i);
+
+				int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
+				for(int j = 0; j < quantity; j++)
+				{
+					PaymentDocument pd = new PaymentWarrant();
+					pd.generateFromXML(ed, edNo, edAuthor);
+					edNo++;
+					pdList.add(pd);
+				}
+			}
+			
+			nl = root.getElementsByTagName("ED108");
+
+			for(int i = 0; i < nl.getLength(); i++)
+			{
+				Element ed = (Element) nl.item(i);
+
+				int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
+				for(int j = 0; j < quantity; j++)
+				{
+					PaymentDocument pd = new PaymentOrderRegister();
+					pd.generateFromXML(ed, edNo, edAuthor);
+					edNo++;
+					pdList.add(pd);
+				}
+			}
 
 			edQuantity = length();
 			sum = sumAll();
