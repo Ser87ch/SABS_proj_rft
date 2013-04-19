@@ -8,6 +8,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+/**
+ * Платежный ордер
+ * @author Admin
+ *
+ */
 public class PaymentWarrant extends PaymentDocument {
 	public String transContent; //содержание операции
 	

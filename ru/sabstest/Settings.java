@@ -10,6 +10,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 
+/**
+ * Класс настройки
+ * @author Admin
+ *
+ */
 public class Settings{
 
 	public static String server = "";
@@ -30,6 +35,9 @@ public class Settings{
 
 
 
+	/**
+	 * загрузка настроек из БД
+	 */
 	public static void loadFromDB()
 	{
 		try {
@@ -74,6 +82,10 @@ public class Settings{
 		createXML(Settings.testProj + "settings\\general.xml");
 	}
 
+	/**
+	 * создание файла с настройками
+	 * @param fl полный путь к файлу
+	 */
 	public static void createXML(String fl)
 	{		
 		Document doc = XML.createNewDoc();
@@ -90,6 +102,10 @@ public class Settings{
 		XML.validate(Settings.testProj + "XMLSchema\\settings\\general.xsd", fl);
 	}
 
+	/**
+	 * считывает настройки из файла
+	 * @param src полный путь к файлу
+	 */
 	public static void readXML(String src)
 	{
 		XML.validate(Settings.testProj + "XMLSchema\\settings\\general.xsd",src);
@@ -106,6 +122,11 @@ public class Settings{
 
 
 
+	/**
+	 * настройка генерации данных
+	 * @author Admin
+	 *
+	 */
 	public static class GenDoc{
 		public static int numBIK = 0;
 		public static int numDoc = 0;
@@ -116,6 +137,10 @@ public class Settings{
 			createXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\gendoc.xml");
 		}
 
+		/**
+		 * создание файла с настройками
+		 * @param fl полный путь к файлу
+		 */
 		public static void createXML(String fl)
 		{
 			Document doc = XML.createNewDoc();
@@ -131,6 +156,10 @@ public class Settings{
 			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\gendoc.xsd", fl);		
 		}
 
+		/**
+		 * считывает настройки из файла
+		 * @param src полный путь к файлу
+		 */
 		public static void readXML(String src)
 		{
 			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\gendoc.xsd",src);
@@ -157,6 +186,10 @@ public class Settings{
 			createXML(Settings.testProj + "settings\\login.xml");
 		}
 
+		/**
+		 * создание файла с настройками
+		 * @param fl полный путь к файлу
+		 */
 		public static void createXML(String fl)
 		{
 			Document doc = XML.createNewDoc();
@@ -197,6 +230,10 @@ public class Settings{
 			XML.validate(Settings.testProj + "XMLSchema\\settings\\login.xsd",fl);
 		}
 
+		/**
+		 * считывает настройки из файла
+		 * @param src полный путь к файлу
+		 */
 		public static void readXML(String src)
 		{
 			XML.validate(Settings.testProj + "XMLSchema\\settings\\login.xsd",src);
@@ -254,6 +291,10 @@ public class Settings{
 			createXML(Settings.testProj + "settings\\sign.xml");
 		}
 
+		/**
+		 * создание файла с настройками
+		 * @param fl полный путь к файлу
+		 */
 		public static void createXML(String fl)
 		{
 			Document doc = XML.createNewDoc();
@@ -271,6 +312,10 @@ public class Settings{
 			XML.validate(Settings.testProj + "XMLSchema\\settings\\sign.xsd",fl);
 		}
 
+		/**
+		 * считывает настройки из файла
+		 * @param src полный путь к файлу
+		 */
 		public static void readXML(String src)
 		{
 			XML.validate(Settings.testProj + "XMLSchema\\settings\\sign.xsd",src);

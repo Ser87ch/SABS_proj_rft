@@ -9,6 +9,11 @@ import org.w3c.dom.Element;
 
 
 
+/**
+ * Абстрактный класс платежный документ
+ * @author Admin
+ *
+ */
 abstract public class PaymentDocument {
 	//реквизиты ЭД
 	public int edNo; //Номер ЭД в течение опердня
@@ -60,6 +65,11 @@ abstract public class PaymentDocument {
 	}
 
 
+	/**
+	 * @param razd разделитель реквизитов
+	 * @param addShift добавляется ли Shift
+	 * @return строку с реквизитами документа
+	 */
 	public String toStr(String razd, boolean addShift){
 		String str = "";
 
@@ -77,6 +87,11 @@ abstract public class PaymentDocument {
 		return str;	
 	}
 
+	
+	/**
+	 * @param razd разделитель реквизитов
+	 * @return строка для контрольного ввода
+	 */
 	public String toStrContr(String razd){
 
 		String str = "";
@@ -91,16 +106,45 @@ abstract public class PaymentDocument {
 	}
 
 	/**
-	 * фасы
-	 * @param doc
-	 * @return
+	 * создает элемент с реквизитами документа
+	 * @param doc документ
+	 * @return элемент
 	 */
 	abstract public Element createED(Document doc);
+	
+	
+	/**
+	 * считывает реквизиты из элемента
+	 * @param doc элемент
+	 */
 	abstract public void readED(Element doc);
-	abstract public void generateFromXML(Element gendoc, int edNo, String edAuthor);
+	/**
+	 * генерирует документ на основе элемента из xml генерации
+	 * @param gendoc элемент
+	 * @param edNo номер документа
+	 * @param edAuthor УИС
+	 */
+	abstract public void generateFromXML(Element gendoc, int edNo, String edAuthor);	
+	/**
+	 * вставка данных в БД для создания xml УЭО
+	 * @param idPacet ид пакета
+	 * @param pEDNo номер пакета
+	 * @param pacDate дата пакета
+	 * @param pAuthor УИС
+	 * @param filename файл
+	 */
 	abstract public void insertIntoDbUfebs(int idPacet, int pEDNo, Date pacDate, String pAuthor, String filename);
+	/**
+	 * вставка данных в БД для создания xml ВЭР
+	 * @param idPacet ид пакета
+	 * @param filename файл
+	 */
 	abstract public void insertIntoDbVer(int idPacet, String filename);
 	
+	/**
+	 * создает xml файл с реквизитами документа
+	 * @param полный путь к файлу
+	 */
 	public void createXML(String fl)
 	{
 		Document doc = XML.createNewDoc();
@@ -108,11 +152,21 @@ abstract public class PaymentDocument {
 		XML.createXMLFile(doc, fl);
 	}
 
+	
+	/**
+	 * считать реквизиты из XML
+	 * @param src путь к файлу
+	 */
 	public void readXML(String src)
 	{
 		readED(XML.getXMLRootElement(src));
 	}
 
+	/**
+	 * добавляются основные реквизиты платежного документа к элементу
+	 * @param doc документ
+	 * @param rootElement элемент
+	 */
 	public void addCommonEDElements(Document doc, Element rootElement)
 	{
 		rootElement.setAttribute("xmlns", "urn:cbr-ru:ed:v2.0");
@@ -141,6 +195,10 @@ abstract public class PaymentDocument {
 		XML.createNode(doc, rootElement, "Purpose", purpose);
 	}
 
+	/**
+	 * считываются основные реквизиты платежного документа
+	 * @param doc элемент
+	 */
 	public void readCommonEDElements(Element doc)
 	{
 		edNo = Integer.parseInt(doc.getAttribute("EDNo"));
@@ -168,6 +226,10 @@ abstract public class PaymentDocument {
 		purpose = XML.getChildValueString("Purpose", doc);
 	}
 
+	/**
+	 * @param src полный путь к файлу
+	 * @return платежный документ считанный из xml
+	 */
 	public static PaymentDocument createDocFromXML(String src)
 	{
 		Element root = XML.getXMLRootElement(src);

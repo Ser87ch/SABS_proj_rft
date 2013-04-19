@@ -18,6 +18,11 @@ import java.util.List;
 import java.util.ListIterator;
 
 
+/**
+ * класс для работы с пакетами
+ * @author Admin
+ *
+ */
 public class Pack {
 
 

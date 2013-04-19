@@ -17,6 +17,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 
+/**
+ *  ласс пакет Ёѕƒ
+ * @author Admin
+ *
+ */
 public class PaymentDocumentList {
 	private List<PaymentDocument> pdList;
 
@@ -35,11 +40,17 @@ public class PaymentDocumentList {
 
 
 
+	/**
+	 * @return количество документов в пакете
+	 */
 	public int length()
 	{
 		return pdList.size();
 	}
 
+	/**
+	 * @return сумма документов в пакете
+	 */
 	public int sumAll() 
 	{
 		int sum = 0;
@@ -54,6 +65,10 @@ public class PaymentDocumentList {
 		return sum;
 	}
 
+	/**
+	 * @param i номер документа
+	 * @return документ под номером i
+	 */
 	public PaymentDocument get(int i)
 	{
 		return (PaymentDocument) pdList.get(i);
@@ -75,6 +90,10 @@ public class PaymentDocumentList {
 
 
 
+	/**
+	 * создает s пакет
+	 * @param fl полный путь к файлу
+	 */
 	public void createSpack(String fl)
 	{
 		try {
@@ -147,6 +166,10 @@ public class PaymentDocumentList {
 		createSpack(Settings.testProj + "tests\\" + Settings.folder + "\\input\\spack.txt");
 	}
 
+	/**
+	 * считывает Ёѕƒ из xml
+	 * @param src полный путь к файлу
+	 */
 	public void readEPD(String src)
 	{
 		Element root = XML.getXMLRootElement(src);
@@ -207,6 +230,10 @@ public class PaymentDocumentList {
 		//System.out.println(toString());
 	}
 
+	/** 
+	 * создает XML Ёѕƒ
+	 * @param fl полный путь к файлу
+	 */
 	public void createEPD(String fl)
 	{
 		Document doc = XML.createNewDoc();
@@ -234,12 +261,20 @@ public class PaymentDocumentList {
 		XML.createXMLFile(doc, fl);
 	}
 
+	/**
+	 * добавл€ет документ в Ёѕƒ
+	 * @param pd платежный документ
+	 */
 	public void add(PaymentDocument pd)
 	{
 		pdList.add(pd);
 	}
 
 
+	/**
+	 * генерирует Ёѕƒ из xml
+	 * @param src полный путь к файлу
+	 */
 	public void generateFromXML(String src)
 	{
 
@@ -347,6 +382,10 @@ public class PaymentDocumentList {
 	}
 
 
+	/**
+	 * вставка пакета в Ѕƒ ”Ёќ
+	 * @param filename полный путь к файлу
+	 */
 	public void insertIntoDbUfebs(String filename)
 	{
 		try
@@ -386,6 +425,10 @@ public class PaymentDocumentList {
 		}
 	}
 
+	/**
+	 * вставка пакета в Ѕƒ ¬Ё–
+	 * @param filename полный путь к файлу
+	 */
 	public void insertIntoDbVer(String filename)
 	{
 		try

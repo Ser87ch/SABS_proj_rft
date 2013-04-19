@@ -9,6 +9,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+/**
+ * Класс Реестр платежный документов
+ * @author Admin
+ *
+ */
 public class PaymentOrderRegister extends PaymentDocument {
 
 	public List <TransactionInfo> tiList;
@@ -90,6 +95,11 @@ public class PaymentOrderRegister extends PaymentDocument {
 		payee = Client.createClientFromBICPersonalAcc(el);
 	}
 	
+	/**
+	 * Реестр поручений
+	 * @author Admin
+	 *
+	 */
 	public static class TransactionInfo
 	{
 		public int transactionID;

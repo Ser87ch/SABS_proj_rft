@@ -7,6 +7,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 
+/**
+ * Класс Платежное требование
+ * @author Admin
+ *
+ */
 public class PaymentRequest extends PaymentDocument {
 
 	public String paytCondition; //условия оплаты

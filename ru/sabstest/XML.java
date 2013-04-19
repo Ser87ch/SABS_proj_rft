@@ -29,6 +29,9 @@ import org.w3c.dom.Element;
 
 public class XML {
 
+	/**
+	 * @return новый XML документ
+	 */
 	public static Document createNewDoc()
 	{
 		Document doc = null;
@@ -46,6 +49,11 @@ public class XML {
 		return doc;
 	}
 
+	/**
+	 * создает XML файл
+	 * @param doc документ
+	 * @param filename полный путь к файлу
+	 */
 	public static void createXMLFile(Document doc, String filename)
 	{
 
@@ -67,6 +75,10 @@ public class XML {
 		}
 	}
 
+	/**
+	 * @param filename полный путь к файлу
+	 * @return главный элемент xml
+	 */
 	public static Element getXMLRootElement(String filename)
 	{
 		Element root = null;
@@ -86,6 +98,11 @@ public class XML {
 
 	}
 
+	/**
+	 * валидация xml файла xsd
+	 * @param xsd полный путь к xsd
+	 * @param xml полный путь к xml
+	 */
 	public static void validate(String xsd, String xml)
 	{
 		try {
@@ -106,6 +123,11 @@ public class XML {
 		}
 	}
 
+	/**
+	 * валидация xml файла xsd
+	 * @param xsd полный путь к xsd
+	 * @param xml полный путь к xml
+	 */
 	public static void validate(String[] xsd, String xml)
 	{
 		try {
