@@ -6,9 +6,18 @@ import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Класс для логирования тестов
+ * @author Admin
+ *
+ */
 public class Log {
 
 	static BufferedWriter out;
+	
+	/**
+	 * создает лог теста
+	 */
 	public static void create()
 	{
 		try {
@@ -21,6 +30,9 @@ public class Log {
 		}
 	}	
 	
+	/**
+	 * создает лог генерации данных
+	 */
 	public static void createGen()
 	{
 		File dir = new File(Settings.testProj + "data\\");
@@ -37,6 +49,9 @@ public class Log {
 		}
 	}	
 
+	/**
+	 * закрывает файл логирования
+	 */
 	public static void close()
 	{
 		if(out != null)
@@ -54,6 +69,10 @@ public class Log {
 		}
 	}	
 
+	/**
+	 * пишет сообщение в лог
+	 * @param str сообщение
+	 */
 	public static void msg(String str)
 	{
 		if (out != null)
@@ -69,6 +88,10 @@ public class Log {
 		}
 	}
 	
+	/**
+	 * пишет сообщение о сранение с эталонными данными в лог
+	 * @param str сообщение
+	 */
 	public static void msgCMP(String str)
 	{
 		if (out != null)
@@ -84,6 +107,10 @@ public class Log {
 		}
 	}
 	
+	/**
+	 * пишет сообщение о исключении в лог
+	 * @param e исключение
+	 */
 	public static void msg(Exception e)
 	{
 		if (out != null)

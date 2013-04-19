@@ -4,8 +4,16 @@ import java.io.File;
 import java.text.DecimalFormat;
 
 
+/**
+ * Класс для инициализации теста
+ * @author Admin
+ *
+ */
 public class Init {
 	
+	/**
+	 * создает папки для нового теста
+	 */
 	public static void mkfolder()
 	{
 		try {		
@@ -52,6 +60,9 @@ public class Init {
 
 	}
 
+	/**
+	 * создает папки для новых данных
+	 */
 	public static void mkDataFolder()
 	{
 		File dir = new File(Settings.testProj + "data\\");
@@ -90,6 +101,9 @@ public class Init {
 
 	}
 
+	/**
+	 * находит папку с последним тестом, создает лог файл в ней
+	 */
 	public static void load()
 	{
 		File dir = new File(Settings.testProj + "tests\\");

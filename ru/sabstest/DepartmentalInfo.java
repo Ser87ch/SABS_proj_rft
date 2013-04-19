@@ -3,6 +3,11 @@ package ru.sabstest;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+/**
+ * Класс Ведомственная информация
+ * @author Admin
+ *
+ */
 public class DepartmentalInfo {
 	public String drawerStatus; //статус составителя
 	public String cbc; //КБК
@@ -42,6 +47,10 @@ public class DepartmentalInfo {
 		this.taxPaytKind = taxPaytKind;
 	}
 	
+	/**
+	 * считывает информация из элемента
+	 * @param di элемент
+	 */
 	public void readED(Element di)
 	{
 		if(di.getNodeName().equals("DepartmentalInfo"))
@@ -56,6 +65,12 @@ public class DepartmentalInfo {
 			taxPaytKind = di.getAttribute("TaxPaytKind");
 		}
 	}
+	
+	/**
+	 * создает в документе элемент
+	 * @param doc документ
+	 * @return элемент
+	 */
 	public Element createXMLElement(Document doc)
 	{
 		Element rootElement = doc.createElement("DepartmentalInfo");

@@ -90,6 +90,11 @@ abstract public class PaymentDocument {
 		return str;	
 	}
 
+	/**
+	 * фасы
+	 * @param doc
+	 * @return
+	 */
 	abstract public Element createED(Document doc);
 	abstract public void readED(Element doc);
 	abstract public void generateFromXML(Element gendoc, int edNo, String edAuthor);

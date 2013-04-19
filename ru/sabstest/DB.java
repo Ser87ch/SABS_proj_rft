@@ -10,6 +10,11 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
 
+/**
+ * Класс БД
+ * @author Admin
+ *
+ */
 public class DB implements Closeable{
 	private String server;
 	private String db;
@@ -26,6 +31,10 @@ public class DB implements Closeable{
 		this.pwd = pwd;
 	}
 
+	/**
+	 * Поключается к БД по JDBC
+	 * @throws Exception
+	 */
 	public void connect() throws Exception 
 	{
 		try {
@@ -47,6 +56,10 @@ public class DB implements Closeable{
 		}
 	}
 
+	/**
+	 * @return произведено ли подключение к БД
+	 * @throws SQLException
+	 */
 	public boolean isConnected() throws SQLException
 	{		
 		if(con != null)	return con.isValid(10);
@@ -76,10 +89,15 @@ public class DB implements Closeable{
 
 	public static String selectFirstValueSabsDb(String s)
 	{
-		return selectFirstValueSabsDb(s,1);
+		return selectValueSabsDb(s,1);
 	}
 
-	public static String selectFirstValueSabsDb(String s, int row)
+	/**
+	 * @param s запрос к БД
+	 * @param row номер строки
+	 * @return значение в первой колонке в запросе
+	 */
+	public static String selectValueSabsDb(String s, int row)
 	{
 		if(row == 0)
 			row = 1;
@@ -105,6 +123,10 @@ public class DB implements Closeable{
 		return value;
 	}
 
+	/**
+	 * вставляет в БД строку необходимую для чтения подписанного УФЭБС файла для УЭО
+	 * @param filename наименование файла
+	 */
 	public static void insertPacetForReadUfebs(String filename)
 	{
 		try {
@@ -124,6 +146,10 @@ public class DB implements Closeable{
 
 	}
 
+	/**
+	 * вставляет в БД строку необходимую для чтения подписанного УФЭБС файла для ВЭР
+	 * @param filename наименование файла
+	 */
 	public static void insertPacetForReadVer(String filename)
 	{
 		try {

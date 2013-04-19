@@ -3,6 +3,10 @@ package ru.sabstest;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+/**
+ * Класс Клиент
+ * @author Admin
+ */
 public class Client {
 	public String bic;
 	public String correspAcc;
@@ -49,6 +53,9 @@ public class Client {
 		this.name = name;
 	}
 
+	/**
+	 * Изменение контрольного разряда в счете на правильный
+	 */
 	public void contrrazr() {
 		String contrls;
 
@@ -79,6 +86,11 @@ public class Client {
 
 	}
 
+	/**
+	 * @param doc документ для создания елемента
+	 * @param elementName наименование элемента
+	 * @return элемент с реквизитами клиента
+	 */
 	public Element createXMLElement(Document doc, String elementName)
 	{
 		Element rootElement = doc.createElement(elementName);
@@ -95,7 +107,12 @@ public class Client {
 		XML.setOptinalAttr(bank, "CorrespAcc", correspAcc);
 		return rootElement;
 	}
-
+	
+	
+	/**
+	 * @param cl элемент с реквизитами клиента
+	 * считывает реквизиты клиента из элемента
+	 */
 	public void readED(Element cl)
 	{
 		personalAcc = cl.getAttribute("PersonalAcc");
@@ -109,6 +126,13 @@ public class Client {
 		bic = bank.getAttribute("BIC");		
 	}
 
+	/**
+	 * Создает нового клиента. @ - текущий БИК. 
+	 * В случае если в данных находится sql запрос, он выполняется и в значения БИК подставляется либо первое значение, либо указанное в row, в счет подставляется первое значение.
+	 * Если БИК текущий, реквизиты клиента берутся из базы.
+	 * @param clEl элемент с данными для генерации реквизитов клиентов
+	 * @return нового клиента	 * 
+	 */
 	public static Client createClientFromBICPersonalAcc(Element clEl)
 	{
 		Client cl = new Client();
@@ -128,7 +152,7 @@ public class Client {
 		{
 			int row;
 			row = XML.getOptionalIntAttr("row", bicEl);
-			cl.bic = DB.selectFirstValueSabsDb(bic,row);
+			cl.bic = DB.selectValueSabsDb(bic,row);
 		}
 		else 
 			cl.bic = bic;
@@ -137,7 +161,7 @@ public class Client {
 		{
 			int row;
 			row = XML.getOptionalIntAttr("row", paEl);
-			cl.personalAcc = DB.selectFirstValueSabsDb(personalAcc,row);
+			cl.personalAcc = DB.selectValueSabsDb(personalAcc,row);
 		}
 		else
 			cl.personalAcc = personalAcc;

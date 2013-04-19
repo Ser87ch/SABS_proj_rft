@@ -18,9 +18,17 @@ import org.w3c.dom.NodeList;
 
 
 
+/**
+ * Класс Изменения в БД
+ * @author Admin 
+ */
 public class DeltaDB {
 	static private List<TableMeta> tables;
 
+	/**
+	 * создает файл с изменениями в БД
+	 * @param filename полный путь к файлу
+	 */
 	public static void createXML(String filename)
 	{
 		try 
@@ -85,6 +93,11 @@ public class DeltaDB {
 		}
 	}
 
+	/**
+	 * создает таблицу для логирования изменений в БД 
+	 * @param t описание таблицы
+	 * @return создалась ли таблица
+	 */
 	private static boolean createTableLog(TableMeta t)
 	{
 		try
@@ -130,6 +143,11 @@ public class DeltaDB {
 
 	}
 
+	/**
+	 * создает тригер для отслеживания вставок в БД
+	 * @param t описание таблицы
+	 * @return создался ли тригер
+	 */
 	private static boolean createTriggerIns(TableMeta t)
 	{
 		try
@@ -178,6 +196,11 @@ public class DeltaDB {
 		}
 	}
 
+	/**
+	 * создает тригер для отслеживания удалений в БД
+	 * @param t описание таблицы
+	 * @return создался ли тригер
+	 */
 	private static boolean createTriggerDel(TableMeta t)
 	{
 		try
@@ -226,6 +249,11 @@ public class DeltaDB {
 		}
 	}
 
+	/**
+	 * создает тригер для отслеживания обновлений в БД
+	 * @param t описание таблицы
+	 * @return создался ли тригер
+	 */
 	private static boolean createTriggerUpd(TableMeta t)
 	{
 		try
@@ -300,6 +328,10 @@ public class DeltaDB {
 		}
 	}
 
+	
+	/**
+	 * создает таблицы и тригера для отслеживания изменений в БД для таблиц и колонок, указанных в настройках
+	 */
 	public static void createDBLog()
 	{
 		try 
@@ -323,6 +355,10 @@ public class DeltaDB {
 		}
 	}
 
+	
+	/**
+	 * удаляет таблицы и тригера, которые использовались для логирования
+	 */
 	public static void deleteDBLog()
 	{
 		try {
@@ -375,6 +411,11 @@ public class DeltaDB {
 		}
 	}
 
+	
+	/**
+	 * @return
+	 * возращает в виде строки все таблицы, для которых записываются изменения
+	 */
 	public static String toStr()
 	{
 		ListIterator <TableMeta> iter = tables.listIterator();
@@ -390,7 +431,11 @@ public class DeltaDB {
 		return s;
 
 	}
-
+	
+	/**
+	 * создание xml с таблицами и колонками для отслеживания изменений
+	 * @param fl полный путь к файлу
+	 */
 	public static void createXMLSettings(String fl)
 	{		
 		Document doc = XML.createNewDoc();
@@ -425,6 +470,10 @@ public class DeltaDB {
 		createXMLSettings(Settings.testProj + "settings\\deltadb.xml");
 	}
 
+	/**
+	 * считывает из xml таблицы и колонки в них для отслеживания изменений
+	 * @param src полный путь к файлу
+	 */
 	public static void readXMLSettings(String src)
 	{		
 		Element root = XML.getXMLRootElement(src);
@@ -451,6 +500,11 @@ public class DeltaDB {
 		Log.msg("XML с настройками для подсчета изменений в БД " + src + " загружен в программу.");		
 	}
 
+	/**
+	 * @param et первый xml с изменениями в БД
+	 * @param src второй xml с изменениями в БД
+	 * @return совпадают ли изменения
+	 */
 	public static boolean cmpDeltaDB(String et, String src)
 	{
 		Delta etd = new Delta();
@@ -461,6 +515,11 @@ public class DeltaDB {
 	}
 
 
+	/**
+	 * Класс Изменения в БД
+	 * @author Admin
+	 *
+	 */
 	private static class Delta
 	{
 		List<Table> tables;
@@ -470,6 +529,10 @@ public class DeltaDB {
 			tables = new ArrayList<Table>();
 		}
 
+		/**
+		 * считывает файл с изменениями в бд
+		 * @param src полный путь к файлу
+		 */
 		private void readXML(String src)
 		{
 			
@@ -520,6 +583,11 @@ public class DeltaDB {
 			}		
 		}
 
+		
+		/**
+		 * @param et
+		 * @return совпадают ли изменения в бд
+		 */
 		private boolean equals(Delta et)
 		{
 			if(tables.size() != et.tables.size())
@@ -537,7 +605,11 @@ public class DeltaDB {
 			}
 			return true;
 		}
-
+		
+		/**
+		 * @param t таблица
+		 * @return содержатся ли полностью данные из таблицы в изменениях в бд
+		 */
 		private boolean contains(Table t)
 		{
 
@@ -562,6 +634,11 @@ public class DeltaDB {
 	}
 
 
+	/**
+	 * Класс Описание таблицы
+	 * @author Admin
+	 *
+	 */
 	private static class TableMeta
 	{
 		String name;
@@ -574,11 +651,18 @@ public class DeltaDB {
 			columns = new ArrayList<String>();
 		}
 
+		/**
+		 * добавляет колонку в описание таблицы
+		 * @param col наименование колонки
+		 */
 		private void add(String col)
 		{
 			columns.add(col);
 		}
 
+		/**
+		 * @return строку всех колонок в таблице
+		 */
 		private String toStr()
 		{
 			ListIterator <String> iter = columns.listIterator();
@@ -592,6 +676,10 @@ public class DeltaDB {
 			return s;
 		}	
 
+		/**
+		 * @param tm описание таблицы
+		 * @return совпадают ли описания таблиц
+		 */
 		private boolean equals(TableMeta tm)
 		{
 
@@ -614,6 +702,11 @@ public class DeltaDB {
 
 	}
 
+	/**
+	 * Класс Таблица
+	 * @author Admin
+	 *
+	 */
 	private static class Table
 	{
 		private TableMeta tm;
@@ -624,6 +717,10 @@ public class DeltaDB {
 			lines = new ArrayList<Line>();
 		}
 
+		/**
+		 * @param ln строка
+		 * @return содержит ли таблица полностью строку
+		 */
 		private boolean contains(Line ln)
 		{
 
@@ -638,6 +735,11 @@ public class DeltaDB {
 		}
 	}
 
+	/**
+	 * класс Строка
+	 * @author Admin
+	 *
+	 */
 	private static class Line
 	{
 		private List<String> columns;
@@ -649,10 +751,18 @@ public class DeltaDB {
 			this.i = i;
 			this.action = action;
 		}
+		/**
+		 * добавляет значение в строку
+		 * @param value 
+		 */
 		private void addCol(String value)
 		{
 			columns.add(value);
 		}
+		/**
+		 * @param ln строка
+		 * @return совпадают ли строки
+		 */
 		private boolean equals(Line ln)
 		{
 

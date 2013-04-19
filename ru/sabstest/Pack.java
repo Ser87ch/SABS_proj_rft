@@ -22,6 +22,9 @@ public class Pack {
 
 
 
+	/**
+	 * создает на основе S пакета R пакет
+	 */
 	public static void createRpack()
 	{
 		try {
@@ -126,6 +129,9 @@ public class Pack {
 		}
 	}
 
+	/**
+	 * создает на основе S пакета R пакет с ошибкой 49
+	 */
 	public static void createRpackError49()
 	{
 		try {
@@ -238,7 +244,9 @@ public class Pack {
 		}
 	}
 
-
+	/**
+	 * создает на основе S пакета B пакет с ошибкой 49
+	 */
 	public static void createBpackError49()
 	{
 		try {
@@ -489,6 +497,13 @@ public class Pack {
 		}
 	}
 
+	
+	/**
+	 * копирует файл
+	 * @param sourcestr откуда копируется
+	 * @param deststr куда копируется
+	 * @throws IOException
+	 */
 	public static void copyFile(String sourcestr, String deststr)throws IOException {
 		File sourceFile = new File(sourcestr);
 		File destFile = new File(deststr);
@@ -516,6 +531,9 @@ public class Pack {
 		}
 	}
 
+	/**
+	 * @return следующее неиспользованное имя R пакета
+	 */
 	public static String getRPackName()
 	{
 		try {
@@ -555,6 +573,9 @@ public class Pack {
 		}
 	}
 
+	/**
+	 * @return следующее неиспользованное имя B пакета
+	 */	
 	public static String getBPackName()
 	{
 		try {
@@ -591,7 +612,10 @@ public class Pack {
 			return "";
 		}
 	}
-
+	
+	/**
+	 * @return следующее неиспользованное имя S пакета
+	 */
 	public static String getSPackName()
 	{
 		try {
@@ -632,6 +656,12 @@ public class Pack {
 		}
 	}
 
+	/**
+	 * возращает из папки наименование пакета по типу
+	 * @param folder папка
+	 * @param type тип пакета
+	 * @return наименование пакета
+	 */
 	public static String getPackNameFolder(String folder, String type)
 	{
 		String pack = "";
@@ -650,6 +680,10 @@ public class Pack {
 		return pack;
 	}
 
+	/**
+	 * @param testnum номер теста из которого копирует пакет
+	 * @return наименование пакета
+	 */	
 	public static String copySPack(String testnum)
 	{
 		try{
@@ -670,7 +704,10 @@ public class Pack {
 	}
 
 
-
+	/**
+	 * @param testnum номер теста из которого копирует пакет
+	 * @return наименование пакета
+	 */
 	public static String copyRPack(String testnum)
 	{
 		try{
@@ -690,7 +727,10 @@ public class Pack {
 		}
 	}
 
-
+	/**
+	 * @param testnum номер теста из которого копирует пакет
+	 * @return наименование пакета
+	 */
 	public static String copyBPack(String testnum)
 	{
 		try{
@@ -710,6 +750,11 @@ public class Pack {
 		}
 	}
 
+	/**
+	 * @param etal полный путь к S пакету
+	 * @param fl полный путь к S пакету
+	 * @return совпадают ли S пакеты
+	 */
 	public static boolean compareSPack(String etal, String fl)
 	{
 		if(!new File(etal).getName().equals(new File(fl).getName()))
@@ -733,6 +778,11 @@ public class Pack {
 		return et.equals(sp);
 	}
 
+	/**
+	 * @param etal полный путь к R пакету
+	 * @param fl полный путь к R пакету
+	 * @return совпадают ли R пакеты
+	 */
 	public static boolean compareRPack(String etal, String fl)
 	{
 
@@ -755,7 +805,12 @@ public class Pack {
 			Log.msgCMP("R пакет " + fl + " не совпадает с эталонным R пакетом " + fl + " по маске rpack.msk .");
 		return et.equals(sp);
 	}
-
+	
+	/**
+	 * @param etal полный путь к B пакету
+	 * @param fl полный путь к B пакету
+	 * @return совпадают ли B пакеты
+	 */
 	public static boolean compareBPack(String etal, String fl)
 	{
 
@@ -779,6 +834,12 @@ public class Pack {
 		return et.equals(sp);
 	}
 
+	/**
+	 * копирование пакета
+	 * @param src
+	 * @param dest
+	 */
+	@Deprecated
 	public static void copyPack(String src, String dest)
 	{
 		try {
@@ -830,6 +891,10 @@ public class Pack {
 	}
 
 
+	/**
+	 * удаление содержимого папки
+	 * @param fld папка
+	 */
 	public static void clearFolder(File fld)
 	{
 		File[] files = fld.listFiles();
@@ -847,6 +912,11 @@ public class Pack {
 		}
 	}
 
+	/**
+	 * Класс Пакет
+	 * @author Admin
+	 *
+	 */
 	static class SPack
 	{
 		String fl;
@@ -860,6 +930,9 @@ public class Pack {
 			this.fl = fl;
 		}
 
+		/**
+		 * @return количество строк в пакете
+		 */
 		int countLine()
 		{
 			try {
@@ -884,6 +957,9 @@ public class Pack {
 			}
 		}
 
+		/**
+		 * загружает маску для S пакетов
+		 */
 		static void loadMask()
 		{
 			try {
@@ -901,6 +977,9 @@ public class Pack {
 			}
 		}
 
+		/**
+		 * загружает маску для R пакетов
+		 */
 		static void loadMaskR()
 		{
 			try {
@@ -918,6 +997,9 @@ public class Pack {
 			}
 		}
 
+		/**
+		 * загружает маску для B пакетов
+		 */
 		static void loadMaskB()
 		{
 			try {
@@ -936,6 +1018,9 @@ public class Pack {
 		}
 
 
+		/**
+		 * загружает пакет
+		 */
 		void load()
 		{
 			try {
@@ -976,6 +1061,9 @@ public class Pack {
 			}
 		}
 
+		/**
+		 * загружает B пакет
+		 */
 		void loadB()
 		{
 			try {
@@ -1016,6 +1104,11 @@ public class Pack {
 			}
 		}
 
+		
+		/**
+		 * @param sp
+		 * @return совпадают ли пакеты по маске
+		 */
 		boolean equals(SPack sp)
 		{
 			if(!this.head.equals(sp.head))			

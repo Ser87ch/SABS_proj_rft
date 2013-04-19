@@ -7,6 +7,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+/**
+ * Класс Инкассовое поручение
+ * @author Admin 
+ */
 public class CollectionOrder extends PaymentDocument {
 
 	public Date receiptDateCollectBank;	
