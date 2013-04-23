@@ -3,5 +3,6 @@
 	<server>CHERNOBRIVENKO\\ATLANT:1259</server>
 	<db>sabs_zapd</db>
 	<user>robot</user>
-	<pwd>1</pwd>		
+	<pwd>1</pwd>	
+	<dumpname>open0402.bkp</dumpname>	
 </general>
