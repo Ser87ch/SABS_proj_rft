@@ -15,7 +15,8 @@ public class DB implements Closeable{
 	private Connection con;
 	public Statement st;
 
-	DB(String server, String db, String user, String pwd)
+	//DM временно, для отладки!!!
+	public DB(String server, String db, String user, String pwd)
 	{
 		this.server = server;
 		this.db = db;

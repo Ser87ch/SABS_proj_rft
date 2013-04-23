@@ -11,16 +11,34 @@ import ru.sabstest.*;
 
 
 public class Main {
-	enum Test {INIT, GEN, PERVVOD,DDB,RPACK,SPACK,CMP,CMPDELTA,O,ED}
+	enum Test {INIT, GEN, PERVVOD,DDB,RPACK,SPACK,CMP,CMPDELTA,O,ED,DBCONNECT}
 
 	public static void main(String[] args)
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.ED;
+		Test t = Test.DBCONNECT;
 		switch(t)
 		{
 
+		case DBCONNECT:
+		{
+			
+			DB db = new DB(	"SER-ADA508913EF\\ATLANT:1033", "sabs_zapd", "sa", "1");			
+			
+			try 
+		    {
+				db.connect();
+				
+				db.close();
+		    } 
+		    catch (Exception e) 
+		    {
+		    	e.printStackTrace();
+		    }
+
+			break;
+		}
 
 		case INIT:
 		{
@@ -73,6 +91,7 @@ public class Main {
 			//Pack.createRpackError49();
 			//Pack.createBpackError49();
 			String s = Pack.getRPackName();
+			System.out.println(spack + s);
 			break;
 		}
 		case SPACK:
@@ -120,15 +139,17 @@ public class Main {
 		{
 
 //			PaymentDocumentList pdl = new PaymentDocumentList();
-//			pdl.readEPD("C:\\PacketEPD.xml");
+//			pdl.readEPD("C:\\PacketEPD.xml");			
 //			
-//			pdl.createEPD("C:\\3.xml");
-			
-			CollectionOrder pq = new CollectionOrder();
-			
-			pq.readXML("C:\\ED104.xml");
-			
-			pq.createXML("C:\\4.xml");
+//			pdl.pdl.add(PaymentDocument.createDocFromXML("C:\\ED101_1.xml"));
+//			pdl.pdl.add(PaymentDocument.createDocFromXML("C:\\ED101_2.xml"));
+//			pdl.pdl.add(PaymentDocument.createDocFromXML("C:\\ED103.xml"));
+//			pdl.pdl.add(PaymentDocument.createDocFromXML("C:\\ED104.xml"));
+//			
+//			pdl.createEPD("C:\\new.xml");
+			PaymentDocument.createDocFromXML("C:\\ED105.xml").createXML("C:\\7.xml");
+			break;
+	
 		}
 		}
 

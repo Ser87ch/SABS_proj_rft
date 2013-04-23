@@ -489,6 +489,43 @@ public class Pack {
 		}
 	}
 
+	public static void copyEoFiles(String sourfolder, String destfolder, String type)
+	{
+		String eofile = "", sourfile="", destfile="";
+		File[] files = new File(sourfolder).listFiles();
+		if(files!=null) 
+		{ 
+			for(File f: files) 
+			{
+
+				if(f.isDirectory()==false)
+				{
+					eofile = f.getName();
+					if( eofile.substring(0, 1).toLowerCase().equals(type.toLowerCase()))
+					{
+						sourfile = sourfolder+eofile;
+						destfile = destfolder+eofile;
+						
+						try 
+						{
+							copyFile(sourfile,destfile);
+							//Log.msg("пакет ЭС УФЭБС ЭО " + sourfile + " скопирован в САБС.");
+						} 
+						catch (IOException e) {
+							e.printStackTrace();
+							Log.msg(e);
+						}	
+					}
+					
+				}
+			}
+		}
+		return ;
+	}
+
+	
+	
+	
 	public static void copyFile(String sourcestr, String deststr)throws IOException {
 		File sourceFile = new File(sourcestr);
 		File destFile = new File(deststr);

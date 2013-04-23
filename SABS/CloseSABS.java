@@ -21,6 +21,9 @@ public class CloseSABS extends CloseSABSHelper
 	public void testMain(Object[] args) 
 	{
 		try{
+			
+			//DM+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+			/*
 			SABSwindow(ANY,MAY_EXIT).click(CLOSE_BUTTON);
 			Closebutton().click();
 			
@@ -32,6 +35,15 @@ public class CloseSABS extends CloseSABSHelper
 				SABSwindow(ANY,MAY_EXIT).click(CLOSE_BUTTON);
 				Closebutton().click();
 			}
+			*/	
+		
+			// Window: purs_loader.exe: 044582002 œ” ¡¿Õ ¿ –Œ——»» «¿œ¿ƒÕŒ≈
+			SABSwindow(ANY,MAY_EXIT).click(CLOSE_BUTTON);
+		
+			// Window: purs_loader.exe: ¬ÓÔÓÒ
+			//Closebutton(ANY,MAY_EXIT).click(atPoint(47,13));
+			Closebutton(ANY,MAY_EXIT).click();
+			//DM+ /////////////////////////////////////			
 				
 			
 			Log.msg("—¿¡— Á‡Í˚Ú.");

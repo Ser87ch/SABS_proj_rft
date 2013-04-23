@@ -27,7 +27,12 @@ public class Reset extends ResetHelper
 		if(Settings.path == "")
 			Settings.path = "C:\\sabs_zapd\\";
 		
-		Log.msg("Подготовка САБС к тестированию.");
+		//DM+
+		if(Settings.dumpname == "")
+			Settings.dumpname = "0402open_eo0.bkp";
+		
+		//DM+
+		Log.msg("---------Подготовка САБС к тестированию.---------");
 		
 		Pack.clearFolder(new File(Settings.path + "\\post\\archive"));
 		Log.msg("Папка " + Settings.path + "\\post\\archive очищена.");
@@ -44,6 +49,30 @@ public class Reset extends ResetHelper
 		Pack.clearFolder(new File(Settings.path + "\\post\\oPuI"));
 		Log.msg("Папка " + Settings.path + "\\post\\oPuI очищена.");
 		
+
+		//DM+ папки ЭО
+		// контролер
+		Pack.clearFolder(new File(Settings.path + "\\post\\kUfI"));
+		Log.msg("Папка " + Settings.path + "\\post\\kPuI очищена.");
+		
+		Pack.clearFolder(new File(Settings.path + "\\post\\kUfO"));
+		Log.msg("Папка " + Settings.path + "\\post\\kPuO очищена.");
+		
+		// ответисполнитель
+		Pack.clearFolder(new File(Settings.path + "\\post\\oUfI"));
+		Log.msg("Папка " + Settings.path + "\\post\\oPuO очищена.");
+		
+		Pack.clearFolder(new File(Settings.path + "\\post\\oUfO"));
+		Log.msg("Папка " + Settings.path + "\\post\\oPuI очищена.");
+		
+		//"дискеты"
+		Pack.clearFolder(new File(Settings.path + "\\post\\ufebs\\in"));
+		Log.msg("Папка " + Settings.path + "\\post\\ufebs\\in очищена.");
+		
+		Pack.clearFolder(new File(Settings.path + "\\post\\ufebs\\out"));
+		Log.msg("Папка " + Settings.path + "\\post\\ufebs\\out очищена.");
+		
+		
 		run(Settings.path + "\\bin\\sabs_set.exe",Settings.path + "\\bin");	
 		
 		SABSSetwindow().waitForExistence(15.0,2.0);
@@ -55,7 +84,16 @@ public class Reset extends ResetHelper
 		DBpasswindow().inputKeys("1");
 		Passokbutton().click();
 		
-		Dumptree().click(atName("0402open.bkp"));
+		//DM+
+		//Dumptree().click(atName("0402open.bkp"));
+		//Dumptree().click(atName("0402open_eo0.bkp"));
+		//
+		//String dmpnm = "0402open_eo0.bkp";
+		//Dumptree().click(atName(dmpnm));
+		//
+		Dumptree().click(atName(Settings.dumpname));
+
+		
 		FileOKbutton().click();
 		sleep(2);
 		Confirmbutton().click();
@@ -66,7 +104,9 @@ public class Reset extends ResetHelper
 		окbutton().click();
 				
 		SABSSetwindow(ANY,MAY_EXIT).click(CLOSE_BUTTON);
-		Log.msg("БД восстановлена из страховой копии 0402open.bkp");
+		
+		//DM
+		Log.msg("БД восстановлена из СК " + Settings.dumpname);
 		
 	}
 }
