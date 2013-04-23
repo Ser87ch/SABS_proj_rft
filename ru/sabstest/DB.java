@@ -134,8 +134,8 @@ public class DB implements Closeable{
 			db.connect();
 
 			String query = "INSERT INTO [dbo].[UFEBS_Pacet]\r\n" + 
-			"( [ID_Depart], [ID_ARM], [User_Insert], [InOutMode], [FileName], [Mesto], [KodObr]) \r\n" +					
-			"VALUES(null, 2, null, 0, " + DB.toString(filename) + ", 'R', 0)";			
+			"( [ID_Depart], [ID_ARM], [User_Insert], [InOutMode], [FileName], [Mesto], [KodObr], [Shifr], [Upakovka]) \r\n" +					
+			"VALUES(null, 0, null, 0, " + DB.toString(filename) + ", 'R', 0, 1, 1)";			
 			db.st.executeUpdate(query);
 			db.close();			
 
@@ -156,8 +156,8 @@ public class DB implements Closeable{
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
 			String query = "INSERT INTO [dbo].[epay_Pacet]\r\n" + 
-			"( [ID_Depart], [ID_ARM], [User_Insert], [InOutMode], [FileName], [Mesto], [KodObr]) \r\n" +					
-			"VALUES(null, 2, null, 0, " + DB.toString(filename) + ", 'R', 0)";			
+			"( [ID_Depart], [ID_ARM], [User_Insert], [InOutMode], [FileName], [Mesto], [KodObr], [Shifr], [Upakovka]) \r\n" +					
+			"VALUES(null, 0, null, 0, " + DB.toString(filename) + ", 'R', 0, 1, 1)";			
 			db.st.executeUpdate(query);
 			db.close();	
 		} catch(Exception e) {

@@ -23,10 +23,10 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 	public void testMain(Object[] args) 
 	{
 		String profile = (String) args[0];		
-		String key = (String) args[0];
-		String profile2 = (String) args[0];
-		String key2 = (String) args[0];
-		String dest = (String) args[1];				
+		String key = (String) args[1];
+		String profile2 = (String) args[2];
+		String key2 = (String) args[3];
+		String dest = (String) args[4];				
 
 		sleep(2);
 		run(Settings.path + "\\bin\\ConvXML.exe",Settings.path + "\\bin");
@@ -35,7 +35,7 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 		sleep(2);
 		run(Settings.path + "\\bin\\clienXML.exe -i  My c:\\ 0",Settings.path + "\\bin");
 
-		selectProfilecomboBox().click(atText(profile));
+		selectProfilecomboBox().select(profile);
 		okbutton().click();		
 		
 		if(loadKeywindow().exists())
@@ -47,13 +47,13 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 		sleep(2);
 		run(Settings.path + "\\bin\\clienXML.exe -wd " + dest + " C:\\  999",Settings.path + "\\bin");
 		
-		DB.insertPacetForReadUfebs("testtest.xml");
+		DB.insertPacetForReadUfebs("qqqtest.xml");
 		
 		callScript("SABS.VFD",new String[]{key2});
 		sleep(2);
 		run(Settings.path + "\\bin\\clienXML.exe -i  My c:\\ 0",Settings.path + "\\bin");
 
-		selectProfilecomboBox().click(atText(profile2));
+		selectProfilecomboBox().select(profile2);
 		okbutton().click();		
 		
 		if(loadKeywindow().exists())

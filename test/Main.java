@@ -107,23 +107,20 @@ public class Main {
 		}				
 		case O:
 		{
-
-			XML.createXMLFromBase64("C:\\testtest.xml", "C:\\testtestde.xml");
+		
+			XML.createXMLFromBase64("C:\\qqqtest.xml", "C:\\qqqtestde.xml");
 			
 			break;
 		}
 		case ED:
 		{
 
+			Init.load();
+			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			PaymentDocumentList pdl = new PaymentDocumentList();
-			pdl.readEPD("C:\\PacketEPD.xml");			
 			
-			pdl.add(PaymentDocument.createDocFromXML("C:\\ED101_1.xml"));
-			pdl.add(PaymentDocument.createDocFromXML("C:\\ED101_2.xml"));
-			pdl.add(PaymentDocument.createDocFromXML("C:\\ED103.xml"));
-			pdl.add(PaymentDocument.createDocFromXML("C:\\ED104.xml"));
-			pdl.add(PaymentDocument.createDocFromXML("C:\\ED105.xml"));
-			pdl.createEPD("C:\\new.xml");
+			pdl.generateFromXML("C:\\gen.xml");
+			pdl.createEPD("C:\\qqq.xml");
 
 			break;
 		}

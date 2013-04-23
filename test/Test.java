@@ -27,12 +27,12 @@ public class Test extends TestHelper
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
 		PaymentDocumentList pdl = new PaymentDocumentList();
-		pdl.generateFromXML(Settings.testProj + "settings\\gen\\generation001.xml");
-		pdl.createEPD("C:\\test1.xml");
-		pdl.insertIntoDbUfebs("testtest.xml");
+		pdl.generateFromXML("C:\\gen.xml");
+		pdl.createEPD("C:\\qqq.xml");
+		pdl.insertIntoDbUfebs("qqqtest.xml");
 		
 			
-		callScript("SABS.CreateSignedXML",new String[]{Settings.Sign.signobr,Settings.Sign.keyobr, Settings.Sign.signcontr, Settings.Sign.keycontr, "C:\\"});
+		callScript("SABS.CreateSignedXML",new String[]{"OPER_OK_401", "oper_ok_401.fdd", "CONTR_OK_401", "contr_ok_401.fdd", "C:\\"});
 		
 		
 		
