@@ -23,27 +23,76 @@ public class StartSABS extends StartSABSHelper
 			String user = (String) args[0];
 			String pwd = (String) args[1];
 			String sign = (String) args[2];
+			
 			run(Settings.path + "\\bin\\purs_loader.exe",Settings.path + "\\bin");
-			Log.msg("САБС запущен.");
+			
+			//DM
+			Log.msg("Запускается САБС. Логин: " + user + ".  Профиль: " + sign + ".");
+			
+			sleep(3);
+			
+			
+			
+			//DM+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+			/*
 
 			Loginwindow().inputKeys(user + "{ENTER}" + pwd + "{ENTER}");
 			Log.msg("Пароль введен.");
 			logTestResult("Login", true); 
 
 			SignComnfirmbutton().click();
+			
+			
 			SigncomboBox().select(sign);
 			Signokbutton().click();
-			sleep(3);
-			LoadSignwindow().inputKeys("{ENTER}");
+			
+		
+			//DM??LoadSignwindow().inputKeys("{ENTER}");
 			//SignNextbutton().click();	
-			sleep(3);
-			LoadSignwindow().inputKeys("{ENTER}");
+			
+			//DM??LoadSignwindow().inputKeys("{ENTER}");
 			//SignDonebutton().click();
+			
 			Log.msg("Сигнатура проинициализирована.");
 
 			// Window: purs_loader.exe: 044582002 ПУ БАНКА РОССИИ ЗАПАДНОЕ
-			SABSwindow().waitForExistence(15.0, 2.0);
+			SABSwindow().waitForExistence(25.0, 2.0);
 			SABSwindow().maximize();
+			
+			*/
+
+			
+			
+			доступКСистемеwindow().inputKeys(user + "{ENTER}" + pwd + "{ENTER}");
+			sleep(1);
+			
+			Log.msg("Пароль введен.");
+			logTestResult("Login", true);
+			
+			// Window: purs_loader.exe: Подтверждение
+			///даbutton().click(atPoint(46,12));
+			даbutton().click();
+			
+			sleep(1);
+			
+			// Window: ConvXml.exe: Выберите профиль
+			comboBoxcomboBox().click(ARROW);
+			///comboBoxcomboBox().click(atText("CONTRKEP"));
+			comboBoxcomboBox().click(atText(sign));
+			///comboBoxcomboBox().select(sign);
+
+			sleep(1);
+			
+			///okbutton2().click(atPoint(55,14));
+			okbutton2().click();
+			
+			//sleep(1);
+			
+			//DM
+			Log.msg("САБС запущен.");
+			
+			//DM+ //////////////////////////////////////////
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 			Log.msg(e);

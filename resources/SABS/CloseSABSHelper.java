@@ -20,11 +20,11 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>CloseSABS</b><br>
- * Generated     : <b>2012/09/18 14:51:52</b><br>
+ * Generated     : <b>2013/04/02 16:38:27</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  сент€бр€ 18, 2012
+ * @since  апрел€ 02, 2013
  * @author Admin
  */
 public abstract class CloseSABSHelper extends RationalTestScript

@@ -11,17 +11,34 @@ import ru.sabstest.*;
 
 
 public class Main {
-	enum Test {INIT, GEN, PERVVOD,DDB,RPACK,SPACK,CMP,CMPDELTA,O,ED,VER}
+	enum Test {INIT, GEN, PERVVOD,DDB,RPACK,SPACK,CMP,CMPDELTA,O,ED,VER,DBCONNECT}
 
 	public static void main(String[] args)
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.O;
+		Test t = Test.DBCONNECT;
 		switch(t)
 		{
 
+		case DBCONNECT:
+		{
+			
+			DB db = new DB(	"SER-ADA508913EF\\ATLANT:1033", "sabs_zapd", "sa", "1");			
+			
+			try 
+		    {
+				db.connect();
+				
+				db.close();
+		    } 
+		    catch (Exception e) 
+		    {
+		    	e.printStackTrace();
+		    }
 
+			break;
+		}
 		case INIT:
 		{
 			Init.mkfolder();	

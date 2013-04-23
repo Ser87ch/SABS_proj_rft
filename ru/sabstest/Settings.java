@@ -30,10 +30,13 @@ public class Settings{
 	public static String fullfolder = "";
 	public static String datafolder = ""; 
 
+	//DM+
+	public static String dumpname = "";
+	//public static String mainwindowname = "";
+
 	public static final String pervfolder = "perv"; 
-	public static final String obrfolder = "obr"; 
-
-
+	public static final String obrfolder = "obr";
+	
 
 	/**
 	 * загрузка настроек из БД
@@ -52,16 +55,22 @@ public class Settings{
 				Settings.path = Settings.path + "\\";
 			Log.msg("Папка САБС " + Settings.path);
 
-			rs = db.st.executeQuery("select X.BIK as BIK , isnull(B.KSNP,'') as KSNP from dbo.XDM_DEPARTMENT X inner join dbo.BNKSEEK B on B.NEWNUM = X.BIK");
+			rs = db.st.executeQuery("select X.BIK as BIK, X.NAME AS NAME, isnull(B.KSNP,'') as KSNP from dbo.XDM_DEPARTMENT X inner join dbo.BNKSEEK B on B.NEWNUM = X.BIK");
 			rs.next();
 			Settings.bik = rs.getString("BIK");
+			
 			//	Settings.ks = rs.getString("KSNP");
-			Log.msg("БИК ПУ " + Settings.bik);
+
+			///DM*
+			///Settings.mainwindowname = rs.getString("NAME");
+			///Log.msg("БИК ПУ: " + Settings.bik + ", имя ПУ: "+Settings.mainwindowname);
+			
 
 			rs = db.st.executeQuery("SELECT top 1 OPER_DATE as dt FROM XDM_OPERDAY_PROP WHERE VALUE = 0");
 			rs.next();
 			Settings.operDate = rs.getDate("dt");
-			Log.msg("Опер. день " + new SimpleDateFormat("dd.MM.yyyy").format(Settings.operDate));		
+			//DM
+			Log.msg("Дата опер.дня: " + new SimpleDateFormat("dd.MM.yyyy").format(Settings.operDate));		
 
 			File dir = new File(Settings.testProj + "data\\");
 
@@ -95,7 +104,10 @@ public class Settings{
 		XML.createNode(doc, rootElement, "server", Settings.server);			
 		XML.createNode(doc, rootElement, "db", Settings.db);
 		XML.createNode(doc, rootElement, "user", Settings.user);
-		XML.createNode(doc, rootElement, "pwd", Settings.pwd);		
+		XML.createNode(doc, rootElement, "pwd", Settings.pwd);
+		
+		//DM+
+		XML.createNode(doc, rootElement, "dumpname", Settings.dumpname);
 
 		XML.createXMLFile(doc, fl);
 		Log.msg("XML c общими настройками " + fl + " создан.");
@@ -116,12 +128,18 @@ public class Settings{
 		user = XML.getChildValueString("user", eElement);	
 		pwd = XML.getChildValueString("pwd", eElement);
 
+		//DM+
+		dumpname = XML.getChildValueString("dumpname", eElement);
+
+
 		Settings.loadFromDB();
 		Log.msg("XML c общими настройками " + src + " загружен в программу.");		
 	}
 
 
-
+	
+	
+	
 	/**
 	 * настройка генерации данных
 	 * @author Admin
@@ -181,6 +199,14 @@ public class Settings{
 		public static LoginInfo formes; 
 		public static LoginInfo contres;
 		
+		//DM+
+		public static LoginInfo eocontr;
+		public static LoginInfo eootvet;
+		
+		//DM+!!!
+		public static LoginInfo eoadmin;
+		
+		
 		public static void createXML()
 		{
 			createXML(Settings.testProj + "settings\\login.xml");
@@ -224,6 +250,33 @@ public class Settings{
 			XML.createNode(doc, rootElement, "sign", contres.sign);	
 			XML.createNode(doc, rootElement, "key", contres.key);	
 
+
+			//DM+
+			login = doc.createElement("eocontr");
+			rootElement.appendChild(login);
+			XML.createNode(doc, rootElement, "user", eocontr.user);	
+			XML.createNode(doc, rootElement, "pwd", eocontr.pwd);	
+			XML.createNode(doc, rootElement, "sign", eocontr.sign);	
+			XML.createNode(doc, rootElement, "key", eocontr.key);	
+
+			//DM+
+			login = doc.createElement("eootvet");
+			rootElement.appendChild(login);
+			XML.createNode(doc, rootElement, "user", eootvet.user);	
+			XML.createNode(doc, rootElement, "pwd", eootvet.pwd);	
+			XML.createNode(doc, rootElement, "sign", eootvet.sign);	
+			XML.createNode(doc, rootElement, "key", eootvet.key);	
+			
+			//DM+!!!
+			login = doc.createElement("eoadmin");
+			rootElement.appendChild(login);
+			XML.createNode(doc, rootElement, "user", eoadmin.user);	
+			XML.createNode(doc, rootElement, "pwd", eoadmin.pwd);	
+			XML.createNode(doc, rootElement, "sign", eoadmin.sign);	
+			XML.createNode(doc, rootElement, "key", eoadmin.key);	
+
+
+			
 			XML.createXMLFile(doc, fl);
 			Log.msg("XML с настройками пользователей " + fl + " создан.");				
 
@@ -254,6 +307,21 @@ public class Settings{
 			
 			login = (Element) root.getElementsByTagName("contres").item(0);
 			contres = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
+					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
+			
+			//DM+
+			login = (Element) root.getElementsByTagName("eocontr").item(0);
+			eocontr = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
+					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
+			
+			//DM+
+			login = (Element) root.getElementsByTagName("eootvet").item(0);
+			eootvet = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
+					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
+			
+			//DM+!!
+			login = (Element) root.getElementsByTagName("eoadmin").item(0);
+			eoadmin = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
 					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
 			
 			Log.msg("XML с настройками пользователей " + src + " загружен в программу.");

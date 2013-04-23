@@ -21,6 +21,8 @@ public class CloseSABS extends CloseSABSHelper
 	public void testMain(Object[] args) 
 	{
 		try{
+			
+			
 			SABSwindow(ANY,MAY_EXIT).click(CLOSE_BUTTON);
 			Closebutton().click();
 			
@@ -32,6 +34,7 @@ public class CloseSABS extends CloseSABSHelper
 				SABSwindow(ANY,MAY_EXIT).click(CLOSE_BUTTON);
 				Closebutton().click();
 			}
+			
 				
 			
 			Log.msg("САБС закрыт.");

@@ -20,165 +20,15 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>StartSABS</b><br>
- * Generated     : <b>2012/10/22 9:07:11</b><br>
+ * Generated     : <b>2013/04/02 15:47:06</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  октября 22, 2012
+ * @since  апреля 02, 2013
  * @author Admin
  */
 public abstract class StartSABSHelper extends RationalTestScript
 {
-	/**
-	 * ЗагрузкаКлючаСНосителя: with default state.
-	 *		.text : Загрузка ключа с носителя
-	 * 		.class : #32770
-	 * 		.processName : ConvXml.exe
-	 * 		.name : Загрузка ключа с носителя
-	 */
-	protected TopLevelSubitemTestObject LoadSignwindow() 
-	{
-		return new TopLevelSubitemTestObject(
-                        getMappedTestObject("LoadSignwindow"));
-	}
-	/**
-	 * ЗагрузкаКлючаСНосителя: with specific test context and state.
-	 *		.text : Загрузка ключа с носителя
-	 * 		.class : #32770
-	 * 		.processName : ConvXml.exe
-	 * 		.name : Загрузка ключа с носителя
-	 */
-	protected TopLevelSubitemTestObject LoadSignwindow(TestObject anchor, long flags) 
-	{
-		return new TopLevelSubitemTestObject(
-                        getMappedTestObject("LoadSignwindow"), anchor, flags);
-	}
-	
-	/**
-	 * ДоступКСистеме: with default state.
-	 *		.text : Доступ к системе
-	 * 		.class : TfmYADMLogin
-	 * 		.processName : purs_loader.exe
-	 * 		.name : Доступ к системе
-	 */
-	protected TopLevelSubitemTestObject Loginwindow() 
-	{
-		return new TopLevelSubitemTestObject(
-                        getMappedTestObject("Loginwindow"));
-	}
-	/**
-	 * ДоступКСистеме: with specific test context and state.
-	 *		.text : Доступ к системе
-	 * 		.class : TfmYADMLogin
-	 * 		.processName : purs_loader.exe
-	 * 		.name : Доступ к системе
-	 */
-	protected TopLevelSubitemTestObject Loginwindow(TestObject anchor, long flags) 
-	{
-		return new TopLevelSubitemTestObject(
-                        getMappedTestObject("Loginwindow"), anchor, flags);
-	}
-	
-	/**
-	 * _044582002ПУБАНКАРОССИИЗАПАДНОЕ: with default state.
-	 *		.text : 044582002 ПУ БАНКА РОССИИ ЗАПАДНОЕ
-	 * 		.class : TpursMainForm
-	 * 		.processName : purs_loader.exe
-	 * 		.name : 044582002 ПУ БАНКА РОССИИ ЗАПАДНОЕ
-	 */
-	protected TopLevelSubitemTestObject SABSwindow() 
-	{
-		return new TopLevelSubitemTestObject(
-                        getMappedTestObject("SABSwindow"));
-	}
-	/**
-	 * _044582002ПУБАНКАРОССИИЗАПАДНОЕ: with specific test context and state.
-	 *		.text : 044582002 ПУ БАНКА РОССИИ ЗАПАДНОЕ
-	 * 		.class : TpursMainForm
-	 * 		.processName : purs_loader.exe
-	 * 		.name : 044582002 ПУ БАНКА РОССИИ ЗАПАДНОЕ
-	 */
-	protected TopLevelSubitemTestObject SABSwindow(TestObject anchor, long flags) 
-	{
-		return new TopLevelSubitemTestObject(
-                        getMappedTestObject("SABSwindow"), anchor, flags);
-	}
-	
-	/**
-	 * Да: with default state.
-	 *		.text : Да
-	 * 		.class : .Pushbutton
-	 * 		.name : Да
-	 * 		.classIndex : 0
-	 */
-	protected GuiTestObject SignComnfirmbutton() 
-	{
-		return new GuiTestObject(
-                        getMappedTestObject("SignComnfirmbutton"));
-	}
-	/**
-	 * Да: with specific test context and state.
-	 *		.text : Да
-	 * 		.class : .Pushbutton
-	 * 		.name : Да
-	 * 		.classIndex : 0
-	 */
-	protected GuiTestObject SignComnfirmbutton(TestObject anchor, long flags) 
-	{
-		return new GuiTestObject(
-                        getMappedTestObject("SignComnfirmbutton"), anchor, flags);
-	}
-	
-	/**
-	 * Готово: with default state.
-	 *		.text : Готово
-	 * 		.class : .Pushbutton
-	 * 		.name : Готово
-	 * 		.classIndex : 0
-	 */
-	protected GuiTestObject SignDonebutton() 
-	{
-		return new GuiTestObject(
-                        getMappedTestObject("SignDonebutton"));
-	}
-	/**
-	 * Готово: with specific test context and state.
-	 *		.text : Готово
-	 * 		.class : .Pushbutton
-	 * 		.name : Готово
-	 * 		.classIndex : 0
-	 */
-	protected GuiTestObject SignDonebutton(TestObject anchor, long flags) 
-	{
-		return new GuiTestObject(
-                        getMappedTestObject("SignDonebutton"), anchor, flags);
-	}
-	
-	/**
-	 * Далее: with default state.
-	 *		.text : Далее >
-	 * 		.class : .Pushbutton
-	 * 		.name : Далее >
-	 * 		.classIndex : 0
-	 */
-	protected GuiTestObject SignNextbutton() 
-	{
-		return new GuiTestObject(
-                        getMappedTestObject("SignNextbutton"));
-	}
-	/**
-	 * Далее: with specific test context and state.
-	 *		.text : Далее >
-	 * 		.class : .Pushbutton
-	 * 		.name : Далее >
-	 * 		.classIndex : 0
-	 */
-	protected GuiTestObject SignNextbutton(TestObject anchor, long flags) 
-	{
-		return new GuiTestObject(
-                        getMappedTestObject("SignNextbutton"), anchor, flags);
-	}
-	
 	/**
 	 * ComboBox: with default state.
 	 *		.text : null
@@ -186,10 +36,10 @@ public abstract class StartSABSHelper extends RationalTestScript
 	 * 		.name : null
 	 * 		.classIndex : 0
 	 */
-	protected TextSelectGuiSubitemTestObject SigncomboBox() 
+	protected TextSelectGuiSubitemTestObject comboBoxcomboBox() 
 	{
 		return new TextSelectGuiSubitemTestObject(
-                        getMappedTestObject("SigncomboBox"));
+                        getMappedTestObject("comboBoxcomboBox"));
 	}
 	/**
 	 * ComboBox: with specific test context and state.
@@ -198,10 +48,10 @@ public abstract class StartSABSHelper extends RationalTestScript
 	 * 		.name : null
 	 * 		.classIndex : 0
 	 */
-	protected TextSelectGuiSubitemTestObject SigncomboBox(TestObject anchor, long flags) 
+	protected TextSelectGuiSubitemTestObject comboBoxcomboBox(TestObject anchor, long flags) 
 	{
 		return new TextSelectGuiSubitemTestObject(
-                        getMappedTestObject("SigncomboBox"), anchor, flags);
+                        getMappedTestObject("comboBoxcomboBox"), anchor, flags);
 	}
 	
 	/**
@@ -211,10 +61,10 @@ public abstract class StartSABSHelper extends RationalTestScript
 	 * 		.name : OK
 	 * 		.classIndex : 0
 	 */
-	protected GuiTestObject Signokbutton() 
+	protected GuiTestObject okbutton() 
 	{
 		return new GuiTestObject(
-                        getMappedTestObject("Signokbutton"));
+                        getMappedTestObject("okbutton"));
 	}
 	/**
 	 * OK: with specific test context and state.
@@ -223,10 +73,108 @@ public abstract class StartSABSHelper extends RationalTestScript
 	 * 		.name : OK
 	 * 		.classIndex : 0
 	 */
-	protected GuiTestObject Signokbutton(TestObject anchor, long flags) 
+	protected GuiTestObject okbutton(TestObject anchor, long flags) 
 	{
 		return new GuiTestObject(
-                        getMappedTestObject("Signokbutton"), anchor, flags);
+                        getMappedTestObject("okbutton"), anchor, flags);
+	}
+	
+	/**
+	 * OK: with default state.
+	 *		.text : OK
+	 * 		.class : .Pushbutton
+	 * 		.name : OK
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject okbutton2() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("okbutton2"));
+	}
+	/**
+	 * OK: with specific test context and state.
+	 *		.text : OK
+	 * 		.class : .Pushbutton
+	 * 		.name : OK
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject okbutton2(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("okbutton2"), anchor, flags);
+	}
+	
+	/**
+	 * Text: with default state.
+	 *		.class : .Text
+	 * 		.name : null
+	 * 		.classIndex : 0
+	 */
+	protected GuiSubitemTestObject texttext() 
+	{
+		return new GuiSubitemTestObject(
+                        getMappedTestObject("texttext"));
+	}
+	/**
+	 * Text: with specific test context and state.
+	 *		.class : .Text
+	 * 		.name : null
+	 * 		.classIndex : 0
+	 */
+	protected GuiSubitemTestObject texttext(TestObject anchor, long flags) 
+	{
+		return new GuiSubitemTestObject(
+                        getMappedTestObject("texttext"), anchor, flags);
+	}
+	
+	/**
+	 * Да: with default state.
+	 *		.text : Да
+	 * 		.class : .Pushbutton
+	 * 		.name : Да
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject даbutton() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("даbutton"));
+	}
+	/**
+	 * Да: with specific test context and state.
+	 *		.text : Да
+	 * 		.class : .Pushbutton
+	 * 		.name : Да
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject даbutton(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("даbutton"), anchor, flags);
+	}
+	
+	/**
+	 * ДоступКСистеме: with default state.
+	 *		.text : Доступ к системе
+	 * 		.class : TfmYADMLogin
+	 * 		.processName : purs_loader.exe
+	 * 		.name : Доступ к системе
+	 */
+	protected TopLevelSubitemTestObject доступКСистемеwindow() 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("доступКСистемеwindow"));
+	}
+	/**
+	 * ДоступКСистеме: with specific test context and state.
+	 *		.text : Доступ к системе
+	 * 		.class : TfmYADMLogin
+	 * 		.processName : purs_loader.exe
+	 * 		.name : Доступ к системе
+	 */
+	protected TopLevelSubitemTestObject доступКСистемеwindow(TestObject anchor, long flags) 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("доступКСистемеwindow"), anchor, flags);
 	}
 	
 	

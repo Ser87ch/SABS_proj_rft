@@ -44,10 +44,16 @@ public class Init {
 			(new File(Settings.fullfolder + "input")).mkdir();
 			(new File(Settings.fullfolder + "output")).mkdir();			
 
-			Log.msg("Папка промежуточных данных для теста " + Settings.fullfolder + "input создана.");
-			Log.msg("Папка исходящих данных для теста " + Settings.fullfolder + "output создана.");
+			//DM
+			//Log.msg("Папка промежуточных данных для теста " + Settings.fullfolder + "input создана.");
+			//Log.msg("Папка исходящих данных для теста " + Settings.fullfolder + "output создана.");
+			Log.msg("Папка для входящих данных теста (" + Settings.fullfolder + "input) создана.");
+			Log.msg("Папка для исходящих данных теста (" + Settings.fullfolder + "output) создана.");
+
 		
-			for(int i = 1 ; i < 6; i++)
+			//DM+: 6-->7
+			//for(int i = 1 ; i < 6; i++)
+			for(int i = 1 ; i < 7; i++)	
 			{
 				(new File(Settings.fullfolder + "\\input\\" + String.format("%03d", i))).mkdir();
 				(new File(Settings.fullfolder + "\\output\\" + String.format("%03d", i))).mkdir();
@@ -93,7 +99,9 @@ public class Init {
 		Log.msg("Папка входящих данных для теста " + Settings.testProj + "data\\" + fld +  "\\input создана.");		
 		Log.msg("Папка эталонных данных для теста "+ Settings.testProj + "data\\" + fld +  "\\etalon создана.");
 
-		for(int i = 1 ; i < 6; i++)
+		//DM+: 6-->7
+		//for(int i = 1 ; i < 6; i++)
+		for(int i = 1 ; i < 7; i++)	
 		{
 			(new File(Settings.testProj + "data\\" + fld + "\\input\\" + String.format("%03d", i))).mkdir();
 			(new File(Settings.testProj + "data\\" + fld + "\\etalon\\" + String.format("%03d", i))).mkdir();
@@ -106,10 +114,11 @@ public class Init {
 	 */
 	public static void load()
 	{
+		
 		File dir = new File(Settings.testProj + "tests\\");
-
 		String[] children = dir.list();
 		String filename = children[children.length - 1];
+		
 		Settings.folder = filename;
 		Settings.fullfolder = Settings.testProj + "tests\\" + Settings.folder + "\\";
 		
