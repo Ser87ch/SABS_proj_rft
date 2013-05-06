@@ -24,15 +24,17 @@ public class Test extends TestHelper
 	{
 		Settings.testProj = (String) args[0];
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
+		//Settings.readXML("C:\\general.xml");
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
 		PaymentDocumentList pdl = new PaymentDocumentList();
-		pdl.generateFromXML("C:\\gen.xml");
-		pdl.createEPD("C:\\qqq.xml");
-		pdl.insertIntoDbUfebs("qqqtest.xml");
-		
+		pdl.generateFromXML("C:\\genver.xml");
+		pdl.createEPD("C:\\ver.xml");
+		//pdl.insertIntoDbUfebs("vertest.xml");
+		pdl.insertIntoDbVer("vertest.xml");
 			
-		callScript("SABS.CreateSignedXML",new String[]{"OPER_OK_401", "oper_ok_401.fdd", "CONTR_OK_401", "contr_ok_401.fdd", "C:\\"});
+		//callScript("SABS.CreateSignedXML",new String[]{"OPER_OK_401", "oper_ok_401.fdd", "CONTR_OK_401", "contr_ok_401.fdd", "C:\\"});
+		callScript("SABS.CreateSignedXMLVer",new String[]{"OTVETPU", "otvetpu.fdd", "CONTRPU", "contrpu.fdd", "C:\\"});
 		
 		
 		

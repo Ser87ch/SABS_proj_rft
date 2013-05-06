@@ -17,7 +17,7 @@ public class Main {
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.DBCONNECT;
+		Test t = Test.O;
 		switch(t)
 		{
 
@@ -125,7 +125,7 @@ public class Main {
 		case O:
 		{
 		
-			XML.createXMLFromBase64("C:\\qqqtest.xml", "C:\\qqqtestde.xml");
+			XML.createXMLFromBase64("C:\\vertest.xml", "C:\\qqqtestde.xml");
 			
 			break;
 		}
