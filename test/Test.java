@@ -23,18 +23,19 @@ public class Test extends TestHelper
 	public void testMain(Object[] args) 
 	{
 		Settings.testProj = (String) args[0];
+		String fl = "vertest4.xml";
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
 		//Settings.readXML("C:\\general.xml");
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
 		PaymentDocumentList pdl = new PaymentDocumentList();
-		pdl.generateFromXML("C:\\genver.xml");
+		pdl.generateFromXML("C:\\genver2.xml");
 		pdl.createEPD("C:\\ver.xml");
-		//pdl.insertIntoDbUfebs("vertest.xml");
-		pdl.insertIntoDbVer("vertest.xml");
+		//pdl.insertIntoDbUfebs(fl);
+		pdl.insertIntoDbVer(fl);
 			
 		//callScript("SABS.CreateSignedXML",new String[]{"OPER_OK_401", "oper_ok_401.fdd", "CONTR_OK_401", "contr_ok_401.fdd", "C:\\"});
-		callScript("SABS.CreateSignedXMLVer",new String[]{"OTVETPU", "otvetpu.fdd", "CONTRPU", "contrpu.fdd", "C:\\"});
+		callScript("SABS.CreateSignedXMLVer",new String[]{"CONTRPU", "contrpu.fdd", "OTVETPU", "otvetpu.fdd", "C:\\", fl});
 		
 		
 		
