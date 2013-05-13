@@ -29,9 +29,9 @@ public class SignFile extends SignFileHelper
 		run("C:\\Program Files\\MDPREI\\spki\\spki1utl.exe -sign -data " + source + " -out " + dest + " -profile " + profile 
 				, "C:\\Program Files\\MDPREI\\spki");
 		sleep(2);			
-		Nextbutton().click();
-		sleep(2);
-		Readybutton().click();
+//		Nextbutton().click();
+//		sleep(2);
+//		Readybutton().click();
 		Log.msg("Файл " + source + " подписан профилем " + profile + " и сохранен в " + dest);
 		
 	}
