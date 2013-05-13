@@ -77,8 +77,9 @@ public class Reset extends ResetHelper
 		
 		SABSSetwindow().waitForExistence(15.0,2.0);
 		SABSSetwindow().maximize();
+		sleep(2);
 		Menutree().doubleClick(atName("Управление БД"));		
-			
+		sleep(2);
 		Menutree().doubleClick(atName("Восстановление БД из страховой копии БД"));
 		
 		DBpasswindow().inputKeys("1");
