@@ -108,6 +108,24 @@ public class Client {
 		return rootElement;
 	}
 	
+	/**
+	 * @param doc документ для создания елемента
+	 * @param elementName наименование элемента
+	 * @return элемент с краткими реквизитами клиента
+	 */
+	public Element createXMLShortElement(Document doc, String elementName)
+	{
+		Element rootElement = doc.createElement(elementName);
+
+		XML.setOptinalAttr(rootElement, "PersonalAcc", personalAcc);	
+
+		Element bank = doc.createElement("Bank");
+		rootElement.appendChild(bank);
+
+		bank.setAttribute("BIC", bic);
+		XML.setOptinalAttr(bank, "CorrespAcc", correspAcc);
+		return rootElement;
+	}
 	
 	/**
 	 * @param cl элемент с реквизитами клиента
