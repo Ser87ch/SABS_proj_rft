@@ -29,8 +29,8 @@ public class Test extends TestHelper
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
 		PaymentDocumentList pdl = new PaymentDocumentList();
-		pdl.generateFromXML("C:\\genver2.xml");
-		pdl.createEPD("C:\\ver.xml");
+		//pdl.generateFromXML("C:\\genver2.xml");
+		pdl.createFile("C:\\ver.xml");
 		//pdl.insertIntoDbUfebs(fl);
 		pdl.insertIntoDbVer(fl);
 			

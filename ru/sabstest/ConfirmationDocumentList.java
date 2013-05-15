@@ -14,7 +14,7 @@ import org.w3c.dom.Element;
  * @author Admin
  *
  */
-public class ConfirmationDocumentList {
+public class ConfirmationDocumentList extends Packet{
 	private List<ConfirmationDocument> cdList;
 	
 	public int edNo;
@@ -56,13 +56,25 @@ public class ConfirmationDocumentList {
 	}
 
 	public ConfirmationDocumentList() {
-		
+		packetType = Packet.Type.PacketESIDVER;
 	}
 	
 	public void generate(PaymentDocumentList pdl)
 	{
 		cdList = new ArrayList <ConfirmationDocument>();
 		
+		
+	}
+
+	@Override
+	boolean generateFromXML(Element packet) {
+		
+		return false;
+	}
+
+	@Override
+	void createFile(String fl) {
+		// TODO Auto-generated method stub
 		
 	}
 	

@@ -59,7 +59,7 @@ public class Run extends RunHelper
 		PaymentDocumentList pl = new PaymentDocumentList();
 		if(ispervvod || iscontrvvod)
 		{			
-			pl.readEPD(Settings.datafolder + "input\\001\\paydocs.xml");
+			pl.readFile(Settings.datafolder + "input\\001\\paydocs.xml");
 			//System.out.println(pl.toString());
 		}
 

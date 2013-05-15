@@ -2,23 +2,12 @@ package SABS;
 import resources.SABS.NewDataHelper;
 import ru.sabstest.Init;
 import ru.sabstest.Log;
+import ru.sabstest.PacketList;
 import ru.sabstest.PaymentDocumentList;
 import ru.sabstest.Settings;
 
-import com.rational.test.ft.*;
-import com.rational.test.ft.object.interfaces.*;
-import com.rational.test.ft.object.interfaces.SAP.*;
-import com.rational.test.ft.object.interfaces.WPF.*;
-import com.rational.test.ft.object.interfaces.dojo.*;
-import com.rational.test.ft.object.interfaces.siebel.*;
-import com.rational.test.ft.object.interfaces.flex.*;
-import com.rational.test.ft.object.interfaces.generichtmlsubdomain.*;
-import com.rational.test.ft.script.*;
-import com.rational.test.ft.value.*;
-import com.rational.test.ft.vp.*;
 import com.rational.test.tss.TSSException;
 import com.rational.test.tss.TSSUtility;
-import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 
 
 public class NewData extends NewDataHelper
@@ -42,27 +31,27 @@ public class NewData extends NewDataHelper
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
 		
 
-		PaymentDocumentList pl = new PaymentDocumentList();
+		PacketList pl = new PacketList();
 		pl.generateFromXML(Settings.testProj + "settings\\gen\\generation001.xml");		
-		pl.createEPD(Settings.datafolder + "input\\001\\paydocs.xml");
+		pl.createFile(Settings.datafolder + "input\\001\\paydocs.xml");
 		
-		PaymentDocumentList plb = new PaymentDocumentList();
+		PacketList plb = new PacketList();
 		plb.generateFromXML(Settings.testProj + "settings\\gen\\generation002.xml");	
-		plb.createEPD(Settings.datafolder + "input\\002\\paydocs.xml");
+		plb.createFile(Settings.datafolder + "input\\002\\paydocs.xml");
 		
 	
 		
-		PaymentDocumentList pls = new PaymentDocumentList();
+		PacketList pls = new PacketList();
 		pls.generateFromXML(Settings.testProj + "settings\\gen\\generation003.xml");		
-		pls.createSpack(Settings.datafolder + "input\\003\\spack.txt");	
+		((PaymentDocumentList) pls.get(0)).createSpack(Settings.datafolder + "input\\003\\spack.txt");	
 		
-		pls = new PaymentDocumentList();
+		pls = new PacketList();
 		pls.generateFromXML(Settings.testProj + "settings\\gen\\generation004.xml");
-		pls.createSpack(Settings.datafolder + "input\\004\\spack.txt");
+		((PaymentDocumentList) pls.get(0)).createSpack(Settings.datafolder + "input\\004\\spack.txt");
 		
-		pls = new PaymentDocumentList();
+		pls = new PacketList();
 		pls.generateFromXML(Settings.testProj + "settings\\gen\\generation005.xml");
-		pls.createSpack(Settings.datafolder + "input\\005\\spack.txt");
+		((PaymentDocumentList) pls.get(0)).createSpack(Settings.datafolder + "input\\005\\spack.txt");
 		Log.close();
 	}
 }

@@ -11,13 +11,13 @@ import ru.sabstest.*;
 
 
 public class Main {
-	enum Test {INIT, GEN, PERVVOD,DDB,RPACK,SPACK,CMP,CMPDELTA,O,ED,VER,DBCONNECT}
+	enum Test {INIT, GEN, PERVVOD,DDB,RPACK,CMP,CMPDELTA,O,ED,DBCONNECT}
 
 	public static void main(String[] args)
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.O;
+		Test t = Test.ED;
 		switch(t)
 		{
 
@@ -50,11 +50,11 @@ public class Main {
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 
-			PaymentDocumentList pl = new PaymentDocumentList();
+			PacketList pl = new PacketList();
 			pl.generateFromXML("C:\\generation001.xml");
 		
-			//pl.createEPD("C:\\epd001.xml");			
-			pl.createSpack("C:\\1.txt");
+			pl.createFile("C:\\epd001.xml");			
+			//pl.createSpack("C:\\1.txt");
 			break;
 		}
 
@@ -64,7 +64,7 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			Settings.GenDoc.readXML(Settings.testProj + "settings\\" + Settings.pervfolder + "\\pervvod.xml");
 			PaymentDocumentList pl = new PaymentDocumentList();
-			pl.readEPD(Settings.testProj + "input\\" + Settings.pervfolder + "\\paydocs.xml");
+			pl.readFile(Settings.testProj + "input\\" + Settings.pervfolder + "\\paydocs.xml");
 			//System.out.println(pl.toString());
 			System.out.println(pl.get(0).toStr("{ENTER}",true));
 			break;
@@ -93,20 +93,7 @@ public class Main {
 			System.out.println(spack + s);
 			break;
 		}
-		case SPACK:
-		{
-			Init.load();
-			Settings.readXML(Settings.testProj + "settings\\general.xml");			
-	//		Settings.GenSpack.readXML(Settings.testProj + "settings\\" + Settings.obrfolder + "\\genspack.xml");
-
-			PaymentDocumentList pl = new PaymentDocumentList();
-			pl.generateFromXML(Settings.testProj + "settings\\gen\\generation001.xml");
-			pl.createSpack();
-
-			String s = Pack.getSPackName();
-			System.out.println(s);
-			break;
-		}	
+		
 		case CMP:
 		{
 			Init.load();
@@ -134,32 +121,14 @@ public class Main {
 
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
-			PaymentDocumentList pdl = new PaymentDocumentList();
+			PacketList pdl = new PacketList();
 			
-			pdl.generateFromXML("C:\\gen.xml");
-			pdl.createEPD("C:\\qqq.xml");
+			pdl.generateFromXML("C:\\test\\genver.xml");
+			pdl.createFile("C:\\test\\");
 
 			break;
 		}
-		case VER:
-		{
-			Init.load();
-			Settings.readXML("C:\\stend.xml");
-			
-			PaymentDocumentList pdl = new PaymentDocumentList();
-			pdl.generateFromXML("C:\\gen1.xml");
-			pdl.createEPD("C:\\1.xml");
-			pdl.insertIntoDbVer("1.xml");
-			
-			pdl.generateFromXML("C:\\gen2.xml");
-			pdl.createEPD("C:\\2.xml");
-			pdl.insertIntoDbVer("2.xml");
-			
-			pdl.generateFromXML("C:\\gen3.xml");
-			pdl.createEPD("C:\\3.xml");
-			pdl.insertIntoDbVer("3.xml");
-			break;
-		}
+		
 		}
 
 		Log.close();
