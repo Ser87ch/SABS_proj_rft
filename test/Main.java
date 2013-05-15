@@ -17,7 +17,7 @@ public class Main {
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.ED;
+		Test t = Test.O;
 		switch(t)
 		{
 
@@ -112,7 +112,12 @@ public class Main {
 		case O:
 		{
 		
-			XML.createXMLFromBase64("C:\\vertest.xml", "C:\\qqqtestde.xml");
+			Init.load();
+			Settings.readXML(Settings.testProj + "settings\\general.xml");
+			//XML.createXMLFromBase64("C:\\test\\p$2R0107.xml", "C:\\test\\Rde.xml");
+			
+			PaymentDocumentList pdl = new PaymentDocumentList();
+			pdl.readFile("C:\\test\\de.xml");
 			
 			break;
 		}

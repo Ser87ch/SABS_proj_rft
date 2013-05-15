@@ -50,7 +50,7 @@ public class PaymentDocumentList extends Packet{
 	/**
 	 * @return количество документов в пакете
 	 */
-	public int length()
+	public int size()
 	{
 		return pdList.size();
 	}
@@ -118,7 +118,7 @@ public class PaymentDocumentList extends Packet{
 			DataOutputStream sd = new DataOutputStream(s);
 
 			String sf = rkcbik + String.format("%18s", "") + new SimpleDateFormat("ddMMyyyy").format(Settings.operDate) +
-			String.format("%3s", "") + Settings.bik + String.format("%10s", "") + String.format("%09d", this.length()) + 
+			String.format("%3s", "") + Settings.bik + String.format("%10s", "") + String.format("%09d", this.size()) + 
 			String.format("%9s", "") + String.format("%018d", this.sumAll() ) + String.format("%8s", "") + 
 			String.format("%-210s", "ЭЛЕКТРОННЫЕ ПЛАТЕЖИ") + String.format("%-80s", rkcname) +
 			String.format("%-80s", bnkname) + String.format("%259s", "");			
@@ -296,7 +296,7 @@ public class PaymentDocumentList extends Packet{
 	 * генерирует ЭПД из xml
 	 * @param src полный путь к файлу
 	 */
-	boolean generateFromXML(Element root)
+	public void generateFromXML(Element root)
 	{
 
 		//	XML.validate(Settings.testProj + "\\XMLschema\\settings\\generation.xsd", src);
@@ -307,7 +307,7 @@ public class PaymentDocumentList extends Packet{
 		else if(root.getNodeName().equals("PacketEPD"))
 			packetType = Packet.Type.PacketEPD;
 		else
-			return false;
+			return;
 
 
 		pdList = new ArrayList<PaymentDocument>();
@@ -402,9 +402,9 @@ public class PaymentDocumentList extends Packet{
 			}
 		}
 
-		edQuantity = length();
+		edQuantity = size();
 		sum = sumAll();
-		return true;
+		
 	}
 
 

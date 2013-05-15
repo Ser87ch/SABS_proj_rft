@@ -32,7 +32,7 @@ public class ContrVvod extends ContrVvodHelper
 		
 		ContrDocwindow().inputKeys("{F2}");	
 		
-		for(int i = 0; i < pl.length(); i++)
+		for(int i = 0; i < pl.size(); i++)
 		{
 			PaymentDocument pd = pl.get(i);
 			Inputwindow().inputKeys(pd.toStrContr("{ENTER}"));	

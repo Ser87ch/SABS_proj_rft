@@ -61,28 +61,10 @@ public class PaymentRequest extends PaymentDocument {
 	}
 	
 	@Override
-	public void generateFromXML(Element gendoc, int edNo, String edAuthor)
+	public void generateFromXMLByType(Element gendoc)
 	{
-		this.edNo = edNo;
-		edDate = Settings.operDate;
-		this.edAuthor = edAuthor;
-		paytKind = "1";
-		sum = (int) (new Random().nextFloat() * 10000);
 		transKind = "02";
-		priority = "6";
-		accDocNo = edNo;
-		accDocDate = Settings.operDate;
 		purpose = "Тестовое платежное требование";
-		chargeOffDate = Settings.operDate;
-		receiptDate = Settings.operDate;
-
-		Element el = (Element) gendoc.getElementsByTagName("Payer").item(0);		
-
-		payer = Client.createClientFromBICPersonalAcc(el);
-
-		el = (Element) gendoc.getElementsByTagName("Payee").item(0);		
-
-		payee = Client.createClientFromBICPersonalAcc(el);
 	}
 
 	@Override

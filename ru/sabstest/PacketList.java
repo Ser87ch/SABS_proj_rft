@@ -9,48 +9,48 @@ import org.w3c.dom.NodeList;
 
 public class PacketList {
 	List<Packet> pList;
-	
+
 	public PacketList()
 	{
-		
+
 	}
-	
+
 	public void generateFromXML(String fl)
 	{
 		Element root = XML.getXMLRootElement(fl);
-		
+
 		if(root.getNodeName().equals("Generation"))
 		{
 			pList = new ArrayList<Packet> ();
-			
+
 			NodeList nl = root.getElementsByTagName("PacketEPD");
 			for(int i = 0; i < nl.getLength(); i++)
 			{
-				Packet epd = new PaymentDocumentList();
-				if(epd.generateFromXML((Element) nl.item(i)))
-					pList.add(epd);
+				PaymentDocumentList epd = new PaymentDocumentList();
+				epd.generateFromXML((Element) nl.item(i));
+				pList.add(epd);
 			}
-				
+
 			nl = root.getElementsByTagName("PacketEPDVER");
 			for(int i = 0; i < nl.getLength(); i++)
 			{
-				Packet pack = new PaymentDocumentList();
-				if(pack.generateFromXML((Element) nl.item(i)))
-					pList.add(pack);
-				
-				pack = new ConfirmationDocumentList();
-				if(pack.generateFromXML((Element) nl.item(i)))
-					pList.add(pack);
-				
-				pack = new ReturnDocumentList();
-				if(pack.generateFromXML((Element) nl.item(i)))
-					pList.add(pack);
-				
+				PaymentDocumentList epd = new PaymentDocumentList();
+				epd.generateFromXML((Element) nl.item(i));
+				pList.add(epd);
+
+				ConfirmationDocumentList rpack = new ConfirmationDocumentList();
+				if(rpack.generateFromPaymentDocumentList(epd))
+					pList.add(rpack);
+
+				ReturnDocumentList bpack = new ReturnDocumentList();
+				if(bpack.generateFromPaymentDocumentList(epd))
+					pList.add(bpack);
+
 			}
 		}
-			
+
 	}
-	
+
 	public void createFile(String folder)
 	{
 		Iterator<Packet> it = pList.iterator();
@@ -62,7 +62,7 @@ public class PacketList {
 			p.createFile(folder + Integer.toString(i) + ".xml");
 		}
 	}
-	
+
 	public Packet get(int i)
 	{
 		return pList.get(i);

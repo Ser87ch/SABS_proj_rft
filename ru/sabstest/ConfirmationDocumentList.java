@@ -16,7 +16,7 @@ import org.w3c.dom.Element;
  */
 public class ConfirmationDocumentList extends Packet{
 	private List<ConfirmationDocument> cdList;
-	
+
 	public int edNo;
 	public Date edDate;
 	public String edAuthor;
@@ -24,15 +24,16 @@ public class ConfirmationDocumentList extends Packet{
 	public int edQuantity;
 	public int sum;
 	public String packetCode;
-	
+
 	/** 
 	 * создает XML Ёѕƒ
 	 * @param fl полный путь к файлу
 	 */
-	public void createEPD(String fl)
+	@Override
+	void createFile(String fl)
 	{
 		Document doc = XML.createNewDoc();
-		Element root = doc.createElement("PacketEPD");
+		Element root = doc.createElement("PacketESIDVER_RYM");
 		doc.appendChild(root);
 
 		root.setAttribute("xmlns", "urn:cbr-ru:ed:v2.0");
@@ -55,28 +56,71 @@ public class ConfirmationDocumentList extends Packet{
 		XML.createXMLFile(doc, fl);
 	}
 
-	public ConfirmationDocumentList() {
+	public ConfirmationDocumentList() 
+	{
 		packetType = Packet.Type.PacketESIDVER;
 	}
-	
-	public void generate(PaymentDocumentList pdl)
+
+	public boolean generateFromPaymentDocumentList(PaymentDocumentList pdl)
 	{
-		cdList = new ArrayList <ConfirmationDocument>();
+		cdList = new ArrayList <ConfirmationDocument>();		
+
+		edNo = pdl.edNo + 500;
+		edDate = pdl.edDate;
+		edAuthor = pdl.edReceiver;
+		edReceiver = pdl.edAuthor;
 		
-		
+		packetCode = "1";
+
+		for(int i = 0; i < pdl.size(); i++)
+		{
+			PaymentDocument pd = pdl.get(i);
+
+			if(!pd.resultCode.equals("") && (pd.resultCode != null))
+			{
+				ConfirmationDocument cd = new ConfirmationDocument();
+				cd.generateFromPaymentDocument(pd, edAuthor);
+				cdList.add(cd);
+			}
+
+		}
+
+		if(cdList == null || cdList.size() == 0)
+			return false;
+		else
+		{
+			edQuantity = size();
+			sum = sum();
+			return true;
+		}
 	}
 
-	@Override
-	boolean generateFromXML(Element packet) {
-		
-		return false;
+
+	/**
+	 * @return количество документов в пакете
+	 */
+	public int size()
+	{
+		return cdList.size();
 	}
 
-	@Override
-	void createFile(String fl) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * @return сумма документов в пакете
+	 */
+	public int sum() 
+	{
+		int sum = 0;
+		ListIterator <ConfirmationDocument> iter = cdList.listIterator();
+		while(iter.hasNext())
+		{
+			int i = iter.next().sum;
+			sum = sum + i;
+
+		}
+
+		return sum;
 	}
-	
-	
+
+
+
 }

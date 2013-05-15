@@ -36,7 +36,7 @@ public class Vvod extends VvodHelper
 	
 		
 
-		for(int i = 0; i < pl.length(); i++)
+		for(int i = 0; i < pl.size(); i++)
 		{
 			PaymentDocument pd = pl.get(i);
 			Inputwindow().inputKeys(pd.toStr("{ENTER}",true));
@@ -57,7 +57,7 @@ public class Vvod extends VvodHelper
 		Inputwindow().inputKeys("{ESCAPE}");
 		Docswindow().inputKeys("{TAB}{ExtDown}");
 		
-		for(int i = 0; i < pl.length(); i++)
+		for(int i = 0; i < pl.size(); i++)
 			Docswindow().inputKeys("+{ExtDown}");
 				
 		Docswindow().inputKeys("{F7}");				

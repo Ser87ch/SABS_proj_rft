@@ -89,4 +89,25 @@ public class ConfirmationDocument {
 		
 	}
 	
+	public void generateFromPaymentDocument(PaymentDocument pd, String author)
+	{
+		resultCode = pd.resultCode;
+		
+		iEdAuthor = pd.edAuthor;
+		iEdDate = pd.edDate;
+		iEdNo = pd.edNo;
+		
+		edNo = pd.edNo + 500;
+		edDate = pd.edDate;
+		edAuthor = author;
+		sum = pd.sum;
+		transKind = pd.transKind;
+		
+		accDocNo = pd.accDocNo;
+		accDocDate = pd.accDocDate;
+		
+		payer = pd.payer;
+		payee = pd.payee;
+	}
+	
 }

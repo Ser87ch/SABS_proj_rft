@@ -7,6 +7,5 @@ abstract public class Packet {
 	
 	public enum Type{PacketEPD, PacketEPDVER, PacketESIDVER, PacketEPDVER_B};
 	
-	abstract boolean generateFromXML(Element packet);
 	abstract void createFile(String fl);
 }

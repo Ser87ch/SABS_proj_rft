@@ -2,6 +2,7 @@ package ru.sabstest;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Random;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -42,6 +43,8 @@ abstract public class PaymentDocument {
 	//Ведомственная информация
 	DepartmentalInfo tax;
 
+	
+	public String resultCode;
 
 	public PaymentDocument()
 	{	
@@ -56,6 +59,7 @@ abstract public class PaymentDocument {
 		//this.chargeOffDate = new Date(0);
 		//this.receiptDate = new Date(0);	
 		this.edNo = 0;
+		this.resultCode = "";
 	}
 
 	@Override
@@ -118,13 +122,45 @@ abstract public class PaymentDocument {
 	 * @param doc элемент
 	 */
 	abstract public void readED(Element doc);
+	
 	/**
 	 * генерирует документ на основе элемента из xml генерации
 	 * @param gendoc элемент
 	 * @param edNo номер документа
 	 * @param edAuthor УИС
 	 */
-	abstract public void generateFromXML(Element gendoc, int edNo, String edAuthor);	
+	abstract public void generateFromXMLByType(Element gendoc);
+	
+	public void generateFromXML(Element gendoc, int edNo, String edAuthor)
+	{
+		this.edNo = edNo;
+		edDate = Settings.operDate;
+		this.edAuthor = edAuthor;
+		paytKind = "1";
+		sum = XML.getOptionalIntAttr("Sum", gendoc);
+		if(sum == 0)
+			sum = (int) (new Random().nextFloat() * 10000);		
+		
+		priority = "6";
+		accDocNo = edNo;
+		accDocDate = Settings.operDate;
+		
+		chargeOffDate = Settings.operDate;
+		receiptDate = Settings.operDate;
+
+		Element el = (Element) gendoc.getElementsByTagName("Payer").item(0);		
+
+		payer = Client.createClientFromBICPersonalAcc(el);
+
+		el = (Element) gendoc.getElementsByTagName("Payee").item(0);		
+
+		payee = Client.createClientFromBICPersonalAcc(el);
+		
+		resultCode = gendoc.getAttribute("ResultCode");
+		
+		generateFromXMLByType(gendoc);
+	}
+	
 	/**
 	 * вставка данных в БД для создания xml УЭО
 	 * @param idPacet ид пакета
@@ -134,6 +170,7 @@ abstract public class PaymentDocument {
 	 * @param filename файл
 	 */
 	abstract public void insertIntoDbUfebs(int idPacet, int pEDNo, Date pacDate, String pAuthor, String filename);
+	
 	/**
 	 * вставка данных в БД для создания xml ВЭР
 	 * @param idPacet ид пакета
