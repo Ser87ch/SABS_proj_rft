@@ -8,6 +8,7 @@ import java.util.ListIterator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 /**
  * Пакет ЭСИС
@@ -56,6 +57,34 @@ public class ConfirmationDocumentList extends Packet{
 		XML.createXMLFile(doc, fl);
 	}
 
+	void readFile(String src)
+	{
+
+		Element root = XML.getXMLRootElement(src);
+
+		if(!root.getNodeName().equals("PacketESIDVER_RYM"))		
+			return;
+
+		cdList = new ArrayList<ConfirmationDocument>();
+
+		edNo = Integer.parseInt(root.getAttribute("EDNo"));
+		edDate = Date.valueOf(root.getAttribute("EDDate"));
+		edAuthor = root.getAttribute("EDAuthor");
+		edReceiver = root.getAttribute("EDReceiver");
+		edQuantity = Integer.parseInt(root.getAttribute("EDQuantity"));
+		sum = Integer.parseInt(root.getAttribute("Sum"));
+		packetCode = root.getAttribute("PacketCode");
+
+		NodeList nl = root.getElementsByTagName("ED216");
+
+		for(int i = 0; i < nl.getLength(); i++)
+		{
+			ConfirmationDocument cd = new ConfirmationDocument();
+			cd.readED((Element) nl.item(i));
+			cdList.add(cd);
+		}
+	}
+
 	public ConfirmationDocumentList() 
 	{
 		packetType = Packet.Type.PacketESIDVER;
@@ -69,7 +98,7 @@ public class ConfirmationDocumentList extends Packet{
 		edDate = pdl.edDate;
 		edAuthor = pdl.edReceiver;
 		edReceiver = pdl.edAuthor;
-		
+
 		packetCode = "1";
 
 		for(int i = 0; i < pdl.size(); i++)

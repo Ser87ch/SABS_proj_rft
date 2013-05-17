@@ -67,7 +67,7 @@ public class ConfirmationDocument {
 	 * считываются основные реквизиты платежного документа
 	 * @param doc элемент
 	 */
-	public void readCommonEDElements(Element doc)
+	public void readED(Element doc)
 	{
 		edNo = Integer.parseInt(doc.getAttribute("EDNo"));
 		edDate = Date.valueOf(doc.getAttribute("EDDate"));
