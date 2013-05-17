@@ -17,7 +17,7 @@ public class Main {
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.O;
+		Test t = Test.ED;
 		switch(t)
 		{
 

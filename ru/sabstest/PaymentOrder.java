@@ -2,6 +2,7 @@
 package ru.sabstest;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ListIterator;
 import java.util.Random;
 
@@ -153,11 +154,16 @@ public class PaymentOrder extends PaymentDocument {
 		accDocNo = pd.accDocNo;
 		accDocDate = pd.accDocDate;
 
-		payer = pd.payee; //разобраться
+		payer = new Client(Settings.bik,"30811810000000000003"); 
+		payer.contrrazr();
+		payer.name = "Возврат ошибочного электронного платежного документа";
 		
 		payee = pd.payer;
 		
 
-		purpose = "возврат";
+		purpose = "Возврат ошибочного электронного платежного документа " +  String.format("%06d", sum) + " с датой составления "
+		+ new SimpleDateFormat("dd/MM/yyyy").format(edDate) +", УИС " 
+		+ edAuthor + " на сумму " + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
+		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + " код возврата " + pd.resultCode ;
 	}
 }

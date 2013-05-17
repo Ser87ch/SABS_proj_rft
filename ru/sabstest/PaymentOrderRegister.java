@@ -116,7 +116,7 @@ public class PaymentOrderRegister extends PaymentDocument {
 
 	@Override
 	public void insertIntoDbVer(int idPacet, String filename) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
