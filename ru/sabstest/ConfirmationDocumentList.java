@@ -96,7 +96,7 @@ public class ConfirmationDocumentList extends Packet{
 
 		edNo = pdl.edNo + 500;
 		edDate = pdl.edDate;
-		edAuthor = pdl.edReceiver;
+		edAuthor = Settings.rkc.substring(2) + "000"; //pdl.edReceiver;
 		edReceiver = pdl.edAuthor;
 
 		packetCode = "1";

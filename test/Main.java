@@ -114,10 +114,10 @@ public class Main {
 		
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
-			//XML.createXMLFromBase64("C:\\test\\p$2R0107.xml", "C:\\test\\Rde.xml");
+			XML.createXMLFromBase64("C:\\test\\p$3B0107.xml", "C:\\test\\Bde.xml");
 			
-			PaymentDocumentList pdl = new PaymentDocumentList();
-			pdl.readFile("C:\\test\\de.xml");
+//			PaymentDocumentList pdl = new PaymentDocumentList();
+//			pdl.readFile("C:\\test\\de.xml");
 			
 			break;
 		}

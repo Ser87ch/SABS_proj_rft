@@ -29,7 +29,7 @@ public class Settings{
 	public static String folder = "";
 	public static String fullfolder = "";
 	public static String datafolder = ""; 
-
+	public static String rkc = "";
 	//DM+
 	public static String dumpname = "";
 	//public static String mainwindowname = "";
@@ -55,10 +55,10 @@ public class Settings{
 				Settings.path = Settings.path + "\\";
 			Log.msg("œ‡ÔÍ‡ —¿¡— " + Settings.path);
 
-			rs = db.st.executeQuery("select X.BIK as BIK, X.NAME AS NAME, isnull(B.KSNP,'') as KSNP from dbo.XDM_DEPARTMENT X inner join dbo.BNKSEEK B on B.NEWNUM = X.BIK");
+			rs = db.st.executeQuery("select X.BIK as BIK, X.NAME AS NAME, isnull(B.KSNP,'') as KSNP, B.RKC RKC from dbo.XDM_DEPARTMENT X inner join dbo.BNKSEEK B on B.NEWNUM = X.BIK");
 			rs.next();
 			Settings.bik = rs.getString("BIK");
-			
+			Settings.rkc = rs.getString("RKC");
 			//	Settings.ks = rs.getString("KSNP");
 
 			///DM*

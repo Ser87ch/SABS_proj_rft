@@ -134,4 +134,30 @@ public class PaymentOrder extends PaymentDocument {
 			Log.msg(e);			
 		}
 	}
+	
+	public void generateReturnDocument(PaymentDocument pd, String author)
+	{
+		edNo = pd.edNo + 1000;
+		edDate = pd.edDate;
+		edAuthor = author;
+
+		paytKind = pd.paytKind;
+		sum = pd.sum;
+		transKind = "01";
+		priority = pd.priority;
+		receiptDate = pd.receiptDate;
+		fileDate = pd.fileDate;
+		chargeOffDate = pd.chargeOffDate;
+		systemCode = pd.systemCode;
+					
+		accDocNo = pd.accDocNo;
+		accDocDate = pd.accDocDate;
+
+		payer = pd.payee; //разобраться
+		
+		payee = pd.payer;
+		
+
+		purpose = "возврат";
+	}
 }
