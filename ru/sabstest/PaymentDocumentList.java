@@ -245,11 +245,12 @@ public class PaymentDocumentList extends Packet{
 		//System.out.println(toString());
 	}
 
+	@Override
 	/** 
 	 * создает XML ЭПД
 	 * @param fl полный путь к файлу
 	 */
-	public void createFile(String fl)
+	public void createFile(String folder)
 	{
 		Document doc = XML.createNewDoc();
 		Element root = null;
@@ -279,7 +280,7 @@ public class PaymentDocumentList extends Packet{
 			root.appendChild(pd.createED(doc));
 		}
 
-		XML.createXMLFile(doc, fl);
+		XML.createXMLFile(doc, folder + filename);
 	}
 
 	/**
@@ -404,7 +405,7 @@ public class PaymentDocumentList extends Packet{
 
 		edQuantity = size();
 		sum = sumAll();
-		
+
 	}
 
 
@@ -412,7 +413,7 @@ public class PaymentDocumentList extends Packet{
 	 * вставка пакета в БД УЭО
 	 * @param filename полный путь к файлу
 	 */
-	public void insertIntoDbUfebs(String filename)
+	void insertIntoDbUfebs(String filename)
 	{
 		try
 		{
@@ -455,13 +456,15 @@ public class PaymentDocumentList extends Packet{
 	 * вставка пакета в БД ВЭР
 	 * @param filename полный путь к файлу
 	 */
-	public void insertIntoDbVer(String filename)
+	void insertIntoDbVer(String filename)
 	{
 		try
 		{
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
 
+			String uic = Settings.bik.substring(2) + "000";
+			
 			String query =  "INSERT INTO [dbo].[epay_Packet]\r\n" + 
 			"([ID_Depart], [ID_ARM], [User_Insert], [InOutMode],\r\n" + 
 			" [Date_Oper], [EDNo], [EDDate], [EDAuthor], [EDReceiver], [EDQuantity],\r\n" + 
@@ -473,7 +476,7 @@ public class PaymentDocumentList extends Packet{
 			"VALUES(null, 0, null, 0,\r\n" + 
 			DB.toString(Settings.operDate) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edQuantity) + ",\r\n" + 
 			DB.toString(sum) + ", " + DB.toString(systemCode) + ", null, 0, " + DB.toString(filename) + ", 0, 0, \r\n" + 
-			" 0, null, null, null, " + DB.toString(edReceiver) + ", " + DB.toString(edReceiver) + ", 1, \r\n" +  //Mesto MesFrom?
+			" 0, null, null, null, " + DB.toString(uic) + ", " + DB.toString(uic) + ", 1, \r\n" +  //Mesto MesFrom?
 			" 5, null, '20120202', 3, 1, 0, 0,\r\n" + 
 			" 0, 4, 3, 0, 1, null, null,\r\n" + 
 			" null, null, null, 20, '', NULL, NULL, NULL, NULL)";			
@@ -494,7 +497,19 @@ public class PaymentDocumentList extends Packet{
 		}
 	}
 
-	
+	@Override
+	/**
+	 * вставка пакета в БД ВЭР
+	 * @param filename полный путь к файлу
+	 */
+	public void insertIntoDb()
+	{
+		if(packetType == Packet.Type.PacketEPD)
+			insertIntoDbUfebs(filename);
+		else if(packetType == Packet.Type.PacketEPDVER)
+			insertIntoDbVer(filename);
+	}
+
 }
 
 

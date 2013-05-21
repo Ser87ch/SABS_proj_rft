@@ -66,7 +66,7 @@ public class ReturnDocumentList extends Packet{
 	
 
 	@Override
-	void createFile(String fl) 
+	public void createFile(String folder) 
 	{
 		Document doc = XML.createNewDoc();
 		Element root = doc.createElement("PacketEPDVER_B");
@@ -89,7 +89,7 @@ public class ReturnDocumentList extends Packet{
 			root.appendChild(rd.createED(doc));
 		}
 
-		XML.createXMLFile(doc, fl);
+		XML.createXMLFile(doc, folder + filename);
 		
 	}
 	
@@ -142,5 +142,15 @@ public class ReturnDocumentList extends Packet{
 		}
 
 		return sum;
+	}
+	
+	@Override
+	/**
+	 * вставка пакета в БД ВЭР
+	 * @param filename полный путь к файлу
+	 */
+	public void insertIntoDb()
+	{
+		
 	}
 }

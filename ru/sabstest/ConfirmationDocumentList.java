@@ -31,7 +31,7 @@ public class ConfirmationDocumentList extends Packet{
 	 * @param fl полный путь к файлу
 	 */
 	@Override
-	void createFile(String fl)
+	public void createFile(String folder)
 	{
 		Document doc = XML.createNewDoc();
 		Element root = doc.createElement("PacketESIDVER_RYM");
@@ -54,7 +54,7 @@ public class ConfirmationDocumentList extends Packet{
 			root.appendChild(cd.createED(doc));
 		}
 
-		XML.createXMLFile(doc, fl);
+		XML.createXMLFile(doc, folder + filename);
 	}
 
 	void readFile(String src)
@@ -151,5 +151,50 @@ public class ConfirmationDocumentList extends Packet{
 	}
 
 
+	@Override
+	/**
+	 * вставка пакета в БД ВЭР
+	 * @param filename полный путь к файлу
+	 */
+	public void insertIntoDb()
+	{
+		try
+		{
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();
+
+			String uic = Settings.bik.substring(2) + "000";
+			
+			String query =  "INSERT INTO [dbo].[epay_Packet]\r\n" + 
+			"([ID_Depart], [ID_ARM], [User_Insert], [InOutMode],\r\n" + 
+			" [Date_Oper], [EDNo], [EDDate], [EDAuthor], [EDReceiver], [EDQuantity],\r\n" + 
+			" [Summa], [SystemCode], [sTime], [Type], [FileName], [KodErr], [KodObr],\r\n" + 
+			" [KodDocum], [Time_Inp], [MSGID], [ErrorTxt], [Mesto], [MesFrom], [MesType],\r\n" + 
+			" [MesPrior], [MesFName], [MesTime], [SlKonv], [Pridenti], [Shifr], [Upakovka],\r\n" + 
+			" [OID], [WriteSig], [Verify], [Pr_ufebs], [Forme221], [IEdNo], [IEdDate], \r\n" + 
+			"[IEdAuth], [Esc_Key], [Esc_key2], [Seanc], [FilePath], [ManName], [QueName], [KcoiKgur], [TypeObr])\r\n" + 
+			"VALUES(null, 0, null, 0,\r\n" + 
+			DB.toString(Settings.operDate) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edQuantity) + ",\r\n" + 
+			DB.toString(sum) + ", " + DB.toString(packetCode) + ", null, 1, " + DB.toString(filename) + ", 0, 0, \r\n" + 
+			" 0, null, null, null, " + DB.toString(uic) + ", " + DB.toString(uic) + ", 1, \r\n" +  //Mesto MesFrom?
+			" 5, null, '20120202', 3, 1, 0, 0,\r\n" + 
+			" 0, 4, 3, 0, 1, null, null,\r\n" + 
+			" null, null, null, 20, '', NULL, NULL, NULL, NULL)";			
+			db.st.executeUpdate(query);
+			db.close();			 
+
+			int idPacet = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_PACKET) from dbo.epay_Packet"));
+
+			ListIterator <ConfirmationDocument> iter = cdList.listIterator();
+			while(iter.hasNext())
+			{
+				iter.next().insertIntoDbVer(idPacet, filename);
+			}			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.msg(e);			
+		}
+	}
 
 }

@@ -1,21 +1,8 @@
 package SABS;
 import resources.SABS.CreateSignedXMLHelper;
 import ru.sabstest.DB;
-import ru.sabstest.PaymentDocumentList;
+import ru.sabstest.PacketList;
 import ru.sabstest.Settings;
-
-import com.rational.test.ft.*;
-import com.rational.test.ft.object.interfaces.*;
-import com.rational.test.ft.object.interfaces.SAP.*;
-import com.rational.test.ft.object.interfaces.WPF.*;
-import com.rational.test.ft.object.interfaces.dojo.*;
-import com.rational.test.ft.object.interfaces.siebel.*;
-import com.rational.test.ft.object.interfaces.flex.*;
-import com.rational.test.ft.object.interfaces.generichtmlsubdomain.*;
-import com.rational.test.ft.script.*;
-import com.rational.test.ft.value.*;
-import com.rational.test.ft.vp.*;
-import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 
 public class CreateSignedXML extends CreateSignedXMLHelper
 {
@@ -26,7 +13,10 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 		String key = (String) args[1];
 		String profile2 = (String) args[2];
 		String key2 = (String) args[3];
-		String dest = (String) args[4];				
+		String dest = (String) args[4];		
+		PacketList pl = (PacketList) args[5];
+		
+		pl.insertIntoDB();
 
 		sleep(2);
 		run(Settings.path + "\\bin\\ConvXML.exe",Settings.path + "\\bin");
@@ -47,7 +37,7 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 		sleep(2);
 		run(Settings.path + "\\bin\\clienXML.exe -wd " + dest + " C:\\  999",Settings.path + "\\bin");
 		
-		DB.insertPacetForReadUfebs("qqqtest.xml");
+		pl.insertForRead();
 		
 		callScript("SABS.VFD",new String[]{key2});
 		sleep(2);

@@ -27,6 +27,7 @@ public class PacketList {
 			for(int i = 0; i < nl.getLength(); i++)
 			{
 				PaymentDocumentList epd = new PaymentDocumentList();
+				epd.filename = Integer.toString(i + 1) + "su.xml";
 				epd.generateFromXML((Element) nl.item(i));
 				pList.add(epd);
 			}
@@ -35,17 +36,23 @@ public class PacketList {
 			for(int i = 0; i < nl.getLength(); i++)
 			{
 				PaymentDocumentList epd = new PaymentDocumentList();
+				epd.filename = Integer.toString(i + 1) + "s.xml";
 				epd.generateFromXML((Element) nl.item(i));
 				pList.add(epd);
 
 				ConfirmationDocumentList rpack = new ConfirmationDocumentList();
 				if(rpack.generateFromPaymentDocumentList(epd))
+				{
+					rpack.filename = Integer.toString(i + 1) + "r.xml";
 					pList.add(rpack);
+				}
 
 				ReturnDocumentList bpack = new ReturnDocumentList();
 				if(bpack.generateFromPaymentDocumentList(epd))
+				{
+					bpack.filename = Integer.toString(i + 1) + "b.xml";
 					pList.add(bpack);
-
+				}
 			}
 		}
 
@@ -54,17 +61,41 @@ public class PacketList {
 	public void createFile(String folder)
 	{
 		Iterator<Packet> it = pList.iterator();
-		int i = 0;
+		
 		while(it.hasNext())
 		{
-			i++;
 			Packet p = it.next();
-			p.createFile(folder + Integer.toString(i) + ".xml");
+			p.createFile(folder);
 		}
 	}
 
 	public Packet get(int i)
 	{
 		return pList.get(i);
+	}
+	
+	public void insertIntoDB()
+	{
+		Iterator<Packet> it = pList.iterator();
+	
+		while(it.hasNext())
+		{
+			Packet p = it.next();
+			p.insertIntoDb();
+		}
+	}
+	
+	public void insertForRead()
+	{
+		Iterator<Packet> it = pList.iterator();
+		
+		while(it.hasNext())
+		{
+			Packet p = it.next();
+			if(p.packetType == Packet.Type.PacketEPD)
+				DB.insertPacetForReadUfebs(p.filename);
+			else
+				DB.insertPacetForReadVer(p.filename);
+		}
 	}
 }

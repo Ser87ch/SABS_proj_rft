@@ -110,4 +110,55 @@ public class ConfirmationDocument {
 		payee = pd.payee;
 	}
 	
+	public void insertIntoDbVer(int idPacet, String filename) 
+	{
+
+		try
+		{
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();
+			
+			String type="";
+			
+			if(transKind == "01")
+				type = "ED101";
+			else if(transKind == "02")
+				type = "ED103";
+			else if(transKind == "06")
+				type = "ED104";
+			else if(transKind == "16")
+				type = "ED105";
+			
+			String query = "INSERT INTO [dbo].[epay_Epd]\r\n" + 
+			"([ID_PACKET], [ID_DEPART],\r\n" + 
+			" [ID_ARM], [ID_DOC_BON], [InOutMode], [EKodObr], [Name], [EDNo], [EDDate], [EDAuthor],\r\n" + 
+			" [ini_EdNo], [ini_EdDate], [ini_EdAutor],\r\n" + 
+			" [EDReceiver], [AccDocNo], [AccDocDate], [PaytKind], [Summa],\r\n" + 
+			" [payee_INN], [payee_Name], [payee_PersonalAcc], [payee_BIC], [payee_CorrespAcc], [payee_KPP],\r\n" + 
+			" [payer_INN], [payer_Name], [payer_PersonalAcc], [payer_BIC], [payer_CorrespAcc], [payer_KPP],\r\n" + 
+			" [TransKind], [Priority], [Purpose], [PaytCondition], [AcptTerm], [DocDispatchDate],\r\n" + 
+			" [part_PaytNo], [part_TransKind], [part_AccDocNo], [part_AccDocDate], [part_SumResidualPayt], \r\n" + 
+			"[ReceiptDate], [FileDate], [TransContent], [ChargeOffDate], [MaturityDate], [ReceiptDateCollectBank], \r\n" + 
+			"[dep_DrawerStatus], [dep_CBC], [dep_OKATO], [dep_PaytReason], [dep_TaxPeriod], [dep_DocNo], [dep_DocDate], [dep_TaxPaytKind], \r\n" + 
+			"[AcptSum], [Typ_Doc], [SS], [NamPost], [Esc_Key], [Esc_Key2])\r\n" +					 
+			"VALUES(" + DB.toString(idPacet) + ", null,\r\n" + 
+			"2, null, 0, "+ DB.toString(resultCode) +", "+ DB.toString(type) +"," + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ",\r\n" + 
+			DB.toString(iEdNo) + "," + DB.toString(iEdDate) + "," + DB.toString(iEdAuthor) + ",\r\n" + 
+			"null, " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ", null, '" + DB.toString(sum).substring(0,DB.toString(sum).length() - 2) +  "," + DB.toString(sum).substring(DB.toString(sum).length() - 2, DB.toString(sum).length()) + "',\r\n" +
+			DB.toString(payee.inn) + ", " + DB.toString(payee.name) + ", " + DB.toString(payee.personalAcc) + ", " + DB.toString(payee.bic) + ", " + DB.toString(payee.correspAcc)+ ", " + DB.toString(payee.kpp) + ",\r\n" + 
+			DB.toString(payer.inn) + ", " + DB.toString(payer.name) + ", " + DB.toString(payer.personalAcc) + ", " + DB.toString(payer.bic) + ", " + DB.toString(payer.correspAcc)+ ", " + DB.toString(payer.kpp) + ",\r\n" +  
+			DB.toString(transKind) + ", null, null, null, null, null,\r\n" + 
+			"null, null, null, null, null,\r\n" +
+			"null, null, null, null, null, null,\r\n" + 
+			"null, null, null, null, null, null, null, null,\r\n" + 
+			"null, 'E', null, " + DB.toString(filename) + ", null, null)";			
+			db.st.executeUpdate(query);
+			db.close();		
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.msg(e);			
+		}
+	}
+	
 }
