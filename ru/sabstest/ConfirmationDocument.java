@@ -118,16 +118,18 @@ public class ConfirmationDocument {
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
 			
-			String type="";
+			String type="ED216";
 			
-			if(transKind == "01")
-				type = "ED101";
-			else if(transKind == "02")
-				type = "ED103";
-			else if(transKind == "06")
-				type = "ED104";
-			else if(transKind == "16")
-				type = "ED105";
+//			if(transKind == "01")
+//				type = "ED101";
+//			else if(transKind == "02")
+//				type = "ED103";
+//			else if(transKind == "06")
+//				type = "ED104";
+//			else if(transKind == "16")
+//				type = "ED105";
+			
+			
 			
 			String query = "INSERT INTO [dbo].[epay_Epd]\r\n" + 
 			"([ID_PACKET], [ID_DEPART],\r\n" + 
