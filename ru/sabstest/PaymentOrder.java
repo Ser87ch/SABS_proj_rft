@@ -95,8 +95,8 @@ public class PaymentOrder extends PaymentDocument {
 		}
 	}
 
-	@Override
-	public void insertIntoDbVer(int idPacet, String filename) 
+	
+	public void insertIntoDbVer(int idPacet, String filename, int iEdNo, Date iEdDate, String iEdAuthor) 
 	{
 
 		try
@@ -118,7 +118,7 @@ public class PaymentOrder extends PaymentDocument {
 			"[AcptSum], [Typ_Doc], [SS], [NamPost], [Esc_Key], [Esc_Key2])\r\n" +					 
 			"VALUES(" + DB.toString(idPacet) + ", null,\r\n" + 
 			"2, null, 0, 0, 'ED101'," + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ",\r\n" + 
-			"null, null, null,\r\n" + 
+			DB.toString(iEdNo) + "," + DB.toString(iEdDate) + "," + DB.toString(iEdAuthor) + ",\r\n" + 
 			"null, " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ", " + DB.toString(paytKind) + ", '" + DB.toString(sum).substring(0,DB.toString(sum).length() - 2) +  "," + DB.toString(sum).substring(DB.toString(sum).length() - 2, DB.toString(sum).length()) + "',\r\n" +
 			DB.toString(payee.inn) + ", " + DB.toString(payee.name) + ", " + DB.toString(payee.personalAcc) + ", " + DB.toString(payee.bic) + ", " + DB.toString(payee.correspAcc)+ ", " + DB.toString(payee.kpp) + ",\r\n" + 
 			DB.toString(payer.inn) + ", " + DB.toString(payer.name) + ", " + DB.toString(payer.personalAcc) + ", " + DB.toString(payer.bic) + ", " + DB.toString(payer.correspAcc)+ ", " + DB.toString(payer.kpp) + ",\r\n" +  
@@ -136,6 +136,11 @@ public class PaymentOrder extends PaymentDocument {
 		}
 	}
 	
+	@Override
+	public void insertIntoDbVer(int idPacet, String filename) 
+	{
+		insertIntoDbVer(idPacet, filename, 0, null, null);	
+	}
 	public void generateReturnDocument(PaymentDocument pd, String author)
 	{
 		edNo = pd.edNo + 1000;

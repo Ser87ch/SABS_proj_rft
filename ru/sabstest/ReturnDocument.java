@@ -50,4 +50,9 @@ public class ReturnDocument {
 		
 		po.generateReturnDocument(pd, author);
 	}
+	
+	public void insertIntoDbVer(int idPacet, String filename) 
+	{
+		po.insertIntoDbVer(idPacet, filename, iEdNo, iEdDate, iEdAuthor);	
+	}
 }

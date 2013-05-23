@@ -37,23 +37,23 @@ public class CreateSignedXMLVer extends CreateSignedXMLVerHelper
 		sleep(2);
 		run(Settings.path + "\\bin\\clienXML.exe -wdv " + dest + " C:\\  999",Settings.path + "\\bin");
 		
-//		pl.insertForRead();
+		pl.insertForRead();
+		
+		callScript("SABS.VFD",new String[]{key2});
+		sleep(2);
+		run(Settings.path + "\\bin\\clienXML.exe -i  My c:\\ 0",Settings.path + "\\bin");
+
+		selectProfilecomboBox().select(profile2);
+		okbutton().click();		
 //		
-//		callScript("SABS.VFD",new String[]{key2});
-//		sleep(2);
-//		run(Settings.path + "\\bin\\clienXML.exe -i  My c:\\ 0",Settings.path + "\\bin");
-//
-//		selectProfilecomboBox().select(profile2);
-//		okbutton().click();		
-////		
-////		if(loadKeywindow().exists())
-////		{
-////			nextbutton().click();
-////			readybutton().click();
-////		}
-//		
-//		sleep(2);
-//		run(Settings.path + "\\bin\\clienXML.exe -kdv " + dest + " C:\\  999",Settings.path + "\\bin");
+//		if(loadKeywindow().exists())
+//		{
+//			nextbutton().click();
+//			readybutton().click();
+//		}
+		
+		sleep(2);
+		run(Settings.path + "\\bin\\clienXML.exe -kdv " + dest + " C:\\  999",Settings.path + "\\bin");
 	}
 }
 
