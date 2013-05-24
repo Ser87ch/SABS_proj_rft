@@ -12,4 +12,6 @@ abstract public class Packet {
 	public abstract void createFile(String folder);
 	
 	public abstract void insertIntoDb();
+	
+	public abstract void setFileName();
 }

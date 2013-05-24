@@ -32,12 +32,31 @@ public class PaymentDocumentList extends Packet{
 	public int edQuantity;
 	public int sum;
 	public String systemCode;
-
+	
 
 
 	public PaymentDocumentList() 
 	{
 
+	}
+	
+	@Override
+	public void setFileName()
+	{
+		if(isVER())
+			filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate) + String.format("%09d", edNo) + ".PacketEPDVER";
+		else
+		{
+			if(edAuthor.substring(0,7).equals(Settings.bik.substring(2))) //особый клиент
+				filename = "K";
+			else
+				filename = "B";
+			
+			filename = filename + Integer.toString(Integer.parseInt(new SimpleDateFormat("MM").format(edDate)),36)
+				+ Integer.toString(Integer.parseInt(new SimpleDateFormat("dd").format(edDate)),36);
+			
+			filename = filename + edAuthor.substring(2,7) + "." + String.format("%03d", edNo);
+		}
 	}
 
 	public boolean isVER()

@@ -26,6 +26,13 @@ public class ConfirmationDocumentList extends Packet{
 	public int sum;
 	public String packetCode;
 
+	
+	@Override
+	public void setFileName()
+	{
+		filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate) + String.format("%09d", edNo) + ".PacketESIDVER_RYM";
+	}
+	
 	/** 
 	 * создает XML Ёѕƒ
 	 * @param fl полный путь к файлу

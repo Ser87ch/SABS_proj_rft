@@ -10,6 +10,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+
+
+
 /**
  * ЭПД по возврату платежей
  * @author Admin
@@ -29,6 +32,12 @@ public class ReturnDocumentList extends Packet{
 	{
 		packetType = Packet.Type.PacketEPDVER_B;
 		rdList = new ArrayList<ReturnDocument>();
+	}
+	
+	@Override
+	public void setFileName()
+	{
+		filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate) + String.format("%09d", edNo) + ".PacketEPDVER_B";
 	}
 		
 	public boolean generateFromPaymentDocumentList(PaymentDocumentList pdl)
