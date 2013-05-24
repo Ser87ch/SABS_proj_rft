@@ -9,13 +9,14 @@ public class CreateSignedXMLVer extends CreateSignedXMLVerHelper
 	
 	public void testMain(Object[] args) 
 	{
-		String profile = (String) args[0];		
-		String key = (String) args[1];
-		String profile2 = (String) args[2];
-		String key2 = (String) args[3];
-		String dest = (String) args[4];	
-		PacketList pl = (PacketList) args[5];
-
+		
+		String dest = (String) args[0];	
+		PacketList pl = (PacketList) args[1];
+		String profile = pl.firstSign.profile;		
+		String key = pl.firstSign.key;
+		String profile2 = pl.secondSign.profile;
+		String key2 = pl.secondSign.key;
+		
 		pl.insertIntoDB();
 		
 		sleep(2);

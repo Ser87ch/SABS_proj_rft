@@ -92,6 +92,9 @@ public class ConfirmationDocumentList extends Packet{
 
 	public boolean generateFromPaymentDocumentList(PaymentDocumentList pdl)
 	{
+		
+
+		
 		cdList = new ArrayList <ConfirmationDocument>();		
 
 		edNo = pdl.edNo + 500;

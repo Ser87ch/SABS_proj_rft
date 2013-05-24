@@ -33,6 +33,8 @@ public class ReturnDocumentList extends Packet{
 		
 	public boolean generateFromPaymentDocumentList(PaymentDocumentList pdl)
 	{
+	
+		
 		rdList = new ArrayList <ReturnDocument>();		
 
 		edNo = pdl.edNo + 1000;

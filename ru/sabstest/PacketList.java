@@ -10,6 +10,9 @@ import org.w3c.dom.NodeList;
 public class PacketList {
 	List<Packet> pList;
 
+	public Sign firstSign;
+	public Sign secondSign;
+	
 	public PacketList()
 	{
 
@@ -22,7 +25,10 @@ public class PacketList {
 		if(root.getNodeName().equals("Generation"))
 		{
 			pList = new ArrayList<Packet> ();
-
+			
+			firstSign = new Sign(root.getAttribute("key1"),root.getAttribute("profile1"));
+			secondSign = new Sign(root.getAttribute("key2"),root.getAttribute("profile2"));
+			
 			NodeList nl = root.getElementsByTagName("PacketEPD");
 			for(int i = 0; i < nl.getLength(); i++)
 			{

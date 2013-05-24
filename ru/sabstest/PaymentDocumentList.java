@@ -304,9 +304,13 @@ public class PaymentDocumentList extends Packet{
 		//	Element root = XML.getXMLRootElement(src);
 
 		if(root.getNodeName().equals("PacketEPDVER"))
-			packetType = Packet.Type.PacketEPDVER;
+		{
+			packetType = Packet.Type.PacketEPDVER;			
+		}
 		else if(root.getNodeName().equals("PacketEPD"))
-			packetType = Packet.Type.PacketEPD;
+		{
+			packetType = Packet.Type.PacketEPD;			
+		}
 		else
 			return;
 
