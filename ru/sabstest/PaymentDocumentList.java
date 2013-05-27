@@ -330,6 +330,7 @@ public class PaymentDocumentList extends Packet{
 			packetType = Packet.Type.PacketEPDVER;			
 			firstSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
 			secondSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
+			
 		}
 		else if(root.getNodeName().equals("PacketEPD"))
 		{
@@ -350,6 +351,7 @@ public class PaymentDocumentList extends Packet{
 		edReceiver = root.getAttribute("EDReceiver");
 		systemCode = "0";
 
+		setFileName();
 
 		int edNo = Integer.parseInt(root.getAttribute("EDFirstNo"));
 

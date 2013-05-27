@@ -53,6 +53,8 @@ public class ReturnDocumentList extends Packet{
 		edAuthor = Settings.rkc.substring(2) + "000";//pdl.edReceiver;
 		edReceiver = pdl.edAuthor;
 		
+		setFileName();
+		
 		for(int i = 0; i < pdl.size(); i++)
 		{
 			PaymentDocument pd = pdl.get(i);

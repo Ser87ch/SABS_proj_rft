@@ -120,8 +120,8 @@ public class Main {
 //			PaymentDocumentList pdl = new PaymentDocumentList();
 //			pdl.readFile("C:\\test\\de.xml");
 			
-			Settings.readXML("C:\\general.xml");
-			DB.insertPacetForReadUfebs("1su.xml");
+		//	Settings.readXML("C:\\general.xml");
+			//DB.insertPacetForReadUfebs("1su.xml");
 			
 			
 			break;

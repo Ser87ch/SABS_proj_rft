@@ -17,13 +17,13 @@ public class Test extends TestHelper
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
 		PacketList pl = new PacketList();
-		pl.generateFromXML("C:\\test\\nach\\gen11.xml");
+		pl.generateFromXML("C:\\test\\nach\\gen1.xml");
 		//pl.createFile("C:\\test\\");
 	//	pl.insertIntoDB();
 		
 		
 		//callScript("SABS.CreateSignedXMLVer",new Object[]{"C:\\test\\nach", pl});		
-		callScript("SABS.CreateSignedXML",new Object[]{"C:\\test\\nach", pl});
+		callScript("SABS.CreateSignedXML",new Object[]{"C:\\test\\nach\\1", pl});
 	}
 }
 

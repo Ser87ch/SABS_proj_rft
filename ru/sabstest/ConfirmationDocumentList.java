@@ -110,7 +110,9 @@ public class ConfirmationDocumentList extends Packet{
 		edReceiver = pdl.edAuthor;
 
 		packetCode = "1";
-
+		
+		setFileName();
+		
 		for(int i = 0; i < pdl.size(); i++)
 		{
 			PaymentDocument pd = pdl.get(i);
