@@ -36,7 +36,10 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 			//		}
 
 			sleep(2);
-			run(Settings.path + "\\bin\\clienXML.exe -wd " + dest + " C:\\  999",Settings.path + "\\bin");
+			if(pl.packetType == Packet.Type.PacketEPD)
+				run(Settings.path + "\\bin\\clienXML.exe -wd " + dest + " C:\\  999",Settings.path + "\\bin");
+			else
+				run(Settings.path + "\\bin\\clienXML.exe -wdv " + dest + " C:\\  999",Settings.path + "\\bin");
 
 			pl.insertForRead();
 
@@ -54,7 +57,11 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 			//		}
 
 			sleep(2);
-			run(Settings.path + "\\bin\\clienXML.exe -kd " + dest + " C:\\  999",Settings.path + "\\bin");
+
+			if(pl.packetType == Packet.Type.PacketEPD)
+				run(Settings.path + "\\bin\\clienXML.exe -kd " + dest + " C:\\  999",Settings.path + "\\bin");
+			else
+				run(Settings.path + "\\bin\\clienXML.exe -kdv " + dest + " C:\\  999",Settings.path + "\\bin");
 		}
 	}
 }

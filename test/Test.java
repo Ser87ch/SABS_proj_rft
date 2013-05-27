@@ -20,9 +20,7 @@ public class Test extends TestHelper
 		pl.generateFromXML("C:\\test\\nach\\gen1.xml");
 		//pl.createFile("C:\\test\\");
 	//	pl.insertIntoDB();
-		
-		
-		//callScript("SABS.CreateSignedXMLVer",new Object[]{"C:\\test\\nach", pl});		
+						
 		callScript("SABS.CreateSignedXML",new Object[]{"C:\\test\\nach\\1", pl});
 	}
 }
