@@ -43,6 +43,8 @@ public class ReturnDocumentList extends Packet{
 	public boolean generateFromPaymentDocumentList(PaymentDocumentList pdl)
 	{
 	
+		firstSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
+		secondSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
 		
 		rdList = new ArrayList <ReturnDocument>();		
 
@@ -160,7 +162,7 @@ public class ReturnDocumentList extends Packet{
 	 * вставка пакета в БД ВЭР
 	 * @param filename полный путь к файлу
 	 */
-	public void insertIntoDb()
+	public void insertIntoDB()
 	{
 		try
 		{

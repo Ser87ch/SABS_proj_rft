@@ -100,8 +100,8 @@ public class ConfirmationDocumentList extends Packet{
 	public boolean generateFromPaymentDocumentList(PaymentDocumentList pdl)
 	{
 		
-
-		
+		firstSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
+		secondSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
 		cdList = new ArrayList <ConfirmationDocument>();		
 
 		edNo = pdl.edNo + 500;
@@ -166,7 +166,7 @@ public class ConfirmationDocumentList extends Packet{
 	 * вставка пакета в БД ВЭР
 	 * @param filename полный путь к файлу
 	 */
-	public void insertIntoDb()
+	public void insertIntoDB()
 	{
 		try
 		{

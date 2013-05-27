@@ -34,6 +34,9 @@ public class PaymentDocumentList extends Packet{
 	public String systemCode;
 	
 
+	
+	
+	
 
 	public PaymentDocumentList() 
 	{
@@ -325,14 +328,19 @@ public class PaymentDocumentList extends Packet{
 		if(root.getNodeName().equals("PacketEPDVER"))
 		{
 			packetType = Packet.Type.PacketEPDVER;			
+			firstSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
+			secondSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
 		}
 		else if(root.getNodeName().equals("PacketEPD"))
 		{
-			packetType = Packet.Type.PacketEPD;			
+			packetType = Packet.Type.PacketEPD;		
+			firstSign = new Sign(root.getAttribute("key1"),root.getAttribute("profile1"));
+			secondSign = new Sign(root.getAttribute("key2"),root.getAttribute("profile2"));
 		}
 		else
 			return;
-
+		
+		
 
 		pdList = new ArrayList<PaymentDocument>();
 
@@ -525,7 +533,7 @@ public class PaymentDocumentList extends Packet{
 	 * вставка пакета в БД ВЭР
 	 * @param filename полный путь к файлу
 	 */
-	public void insertIntoDb()
+	public void insertIntoDB()
 	{
 		if(packetType == Packet.Type.PacketEPD)
 			insertIntoDbUfebs(filename);
