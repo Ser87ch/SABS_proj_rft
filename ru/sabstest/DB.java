@@ -135,8 +135,8 @@ public class DB implements Closeable{
 			db.connect();
 
 			String query = "INSERT INTO [dbo].[UFEBS_Pacet]\r\n" + 
-			"( [ID_Depart], [ID_ARM], [User_Insert], [InOutMode], [FileName], [Mesto], [KodObr], [Shifr], [Upakovka]) \r\n" +					
-			"VALUES(null, 0, null, 0, " + DB.toString(filename) + ", 'R', 0, 1, 1)";			
+			"( [ID_Depart], [ID_ARM], [User_Insert], [InOutMode], [FileName], [Mesto], [KodObr], [Shifr], [Upakovka],[Receiver]) \r\n" +					
+			"VALUES(null, 0, null, 0, " + DB.toString(filename) + ", 'R', 0, 1, 1, " + toString(Settings.bik.substring(2) + "000") + ")";			
 			db.st.executeUpdate(query);
 			db.close();			
 
