@@ -32,17 +32,17 @@ public class PaymentDocumentList extends Packet{
 	public int edQuantity;
 	public int sum;
 	public String systemCode;
-	
 
-	
-	
-	
+
+
+
+
 
 	public PaymentDocumentList() 
 	{
 
 	}
-	
+
 	@Override
 	public void setFileName()
 	{
@@ -54,11 +54,14 @@ public class PaymentDocumentList extends Packet{
 				filename = "K";
 			else
 				filename = "B";
-			
+
 			filename = filename + Integer.toString(Integer.parseInt(new SimpleDateFormat("MM").format(edDate)),36)
-				+ Integer.toString(Integer.parseInt(new SimpleDateFormat("dd").format(edDate)),36);
-			
-			filename = filename + edAuthor.substring(2,7) + "." + String.format("%03d", edNo);
+			+ Integer.toString(Integer.parseInt(new SimpleDateFormat("dd").format(edDate)),36);
+
+			if(edAuthor.substring(0,7).equals(Settings.bik.substring(2))) //особый клиент
+				filename = filename + edAuthor.substring(2,4) + edAuthor.substring(7,10) + "." + String.format("%03d", edNo);
+			else
+				filename = filename + edAuthor.substring(2,7) + "." + String.format("%03d", edNo);
 		}
 	}
 
@@ -330,7 +333,7 @@ public class PaymentDocumentList extends Packet{
 			packetType = Packet.Type.PacketEPDVER;			
 			firstSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
 			secondSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
-			
+
 		}
 		else if(root.getNodeName().equals("PacketEPD"))
 		{
@@ -340,8 +343,8 @@ public class PaymentDocumentList extends Packet{
 		}
 		else
 			return;
-		
-		
+
+
 
 		pdList = new ArrayList<PaymentDocument>();
 
@@ -497,7 +500,7 @@ public class PaymentDocumentList extends Packet{
 			db.connect();
 
 			String uic = Settings.bik.substring(2) + "000";
-			
+
 			String query =  "INSERT INTO [dbo].[epay_Packet]\r\n" + 
 			"([ID_Depart], [ID_ARM], [User_Insert], [InOutMode],\r\n" + 
 			" [Date_Oper], [EDNo], [EDDate], [EDAuthor], [EDReceiver], [EDQuantity],\r\n" + 
