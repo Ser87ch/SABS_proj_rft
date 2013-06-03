@@ -51,7 +51,7 @@ public class ReturnDocumentList extends Packet{
 		edNo = pdl.edNo + 1000;
 		edDate = pdl.edDate;
 		edAuthor = Settings.rkc.substring(2) + "000";//pdl.edReceiver;
-		edReceiver = pdl.edAuthor;
+		edReceiver = Settings.bik.substring(2) + "000";
 		
 		setFileName();
 		

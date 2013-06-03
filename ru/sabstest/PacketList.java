@@ -36,13 +36,13 @@ public class PacketList {
 					epd.generateFromXML((Element) nl.item(i));
 					pList.add(epd);
 
-					ConfirmationDocumentList rpack = new ConfirmationDocumentList();
-					if(rpack.generateFromPaymentDocumentList(epd))
-						pList.add(rpack);
-
-					ReturnDocumentList bpack = new ReturnDocumentList();
-					if(bpack.generateFromPaymentDocumentList(epd))
-						pList.add(bpack);
+//					ConfirmationDocumentList rpack = new ConfirmationDocumentList();
+//					if(rpack.generateFromPaymentDocumentList(epd))
+//						pList.add(rpack);
+//
+//					ReturnDocumentList bpack = new ReturnDocumentList();
+//					if(bpack.generateFromPaymentDocumentList(epd))
+//						pList.add(bpack);
 				}
 			}			
 		}

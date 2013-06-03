@@ -397,6 +397,11 @@ public class Settings{
 
 			Log.msg("XML с настройками для генерации R-пакета " + src + " загружен в программу.");
 		}
+		
+		public static class EsidList
+		{
+			
+		}
 	}
 
 //	public static class GenSpack{
