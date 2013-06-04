@@ -32,15 +32,15 @@ public class ReturnDocument {
 	public void readED(Element doc)
 	{
 		po = new PaymentOrder();
-		po.readED((Element) doc.getElementsByTagName("ED101").item(0));
+		po.readED((Element) doc.getElementsByTagNameNS("*","ED101").item(0));
 		
-		Element el = (Element) doc.getElementsByTagName("EDRefID").item(0);
+		Element el = (Element) doc.getElementsByTagNameNS("*","EDRefID").item(0);
 		iEdNo = Integer.parseInt(el.getAttribute("EDNo"));
 		iEdDate = Date.valueOf(el.getAttribute("EDDate"));
 		iEdAuthor = el.getAttribute("EDAuthor");
 	}
 	
-	public void generateFromPaymentDocument(PaymentDocument pd, String author)
+	public void generateFromPaymentDocument(PaymentDocument pd, String author, String resultCode)
 	{
 		iEdAuthor = pd.edAuthor;
 		iEdDate = pd.edDate;
@@ -48,7 +48,7 @@ public class ReturnDocument {
 		
 		po = new PaymentOrder();
 		
-		po.generateReturnDocument(pd, author);
+		po.generateReturnDocument(pd, author, resultCode);
 	}
 	
 	public void insertIntoDbVer(int idPacet, String filename) 

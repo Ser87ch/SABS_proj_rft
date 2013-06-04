@@ -5,9 +5,13 @@ import java.io.File;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 
 /**
@@ -36,7 +40,7 @@ public class Settings{
 
 	public static final String pervfolder = "perv"; 
 	public static final String obrfolder = "obr";
-	
+
 
 	/**
 	 * загрузка настроек из БД
@@ -64,7 +68,7 @@ public class Settings{
 			///DM*
 			///Settings.mainwindowname = rs.getString("NAME");
 			///Log.msg("БИК ПУ: " + Settings.bik + ", имя ПУ: "+Settings.mainwindowname);
-			
+
 
 			rs = db.st.executeQuery("SELECT top 1 OPER_DATE as dt FROM XDM_OPERDAY_PROP WHERE VALUE = 0");
 			rs.next();
@@ -105,7 +109,7 @@ public class Settings{
 		XML.createNode(doc, rootElement, "db", Settings.db);
 		XML.createNode(doc, rootElement, "user", Settings.user);
 		XML.createNode(doc, rootElement, "pwd", Settings.pwd);
-		
+
 		//DM+
 		XML.createNode(doc, rootElement, "dumpname", Settings.dumpname);
 
@@ -137,9 +141,9 @@ public class Settings{
 	}
 
 
-	
-	
-	
+
+
+
 	/**
 	 * настройка генерации данных
 	 * @author Admin
@@ -198,15 +202,15 @@ public class Settings{
 		public static LoginInfo contrvvod;
 		public static LoginInfo formes; 
 		public static LoginInfo contres;
-		
+
 		//DM+
 		public static LoginInfo eocontr;
 		public static LoginInfo eootvet;
-		
+
 		//DM+!!!
 		public static LoginInfo eoadmin;
-		
-		
+
+
 		public static void createXML()
 		{
 			createXML(Settings.testProj + "settings\\login.xml");
@@ -221,28 +225,28 @@ public class Settings{
 			Document doc = XML.createNewDoc();
 			Element rootElement = doc.createElement("login");
 			doc.appendChild(rootElement);
-			
+
 			Element login = doc.createElement("pervvod");
 			rootElement.appendChild(login);
 			XML.createNode(doc, rootElement, "user", pervvod.user);	
 			XML.createNode(doc, rootElement, "pwd", pervvod.pwd);	
 			XML.createNode(doc, rootElement, "sign", pervvod.sign);	
 			XML.createNode(doc, rootElement, "key", pervvod.key);	
-			
+
 			login = doc.createElement("contrvvod");
 			rootElement.appendChild(login);
 			XML.createNode(doc, rootElement, "user", contrvvod.user);	
 			XML.createNode(doc, rootElement, "pwd", contrvvod.pwd);	
 			XML.createNode(doc, rootElement, "sign", contrvvod.sign);	
 			XML.createNode(doc, rootElement, "key", contrvvod.key);	
-			
+
 			login = doc.createElement("formes");
 			rootElement.appendChild(login);
 			XML.createNode(doc, rootElement, "user", formes.user);	
 			XML.createNode(doc, rootElement, "pwd", formes.pwd);	
 			XML.createNode(doc, rootElement, "sign", formes.sign);	
 			XML.createNode(doc, rootElement, "key", formes.key);	
-			
+
 			login = doc.createElement("contres");
 			rootElement.appendChild(login);
 			XML.createNode(doc, rootElement, "user", contres.user);	
@@ -266,7 +270,7 @@ public class Settings{
 			XML.createNode(doc, rootElement, "pwd", eootvet.pwd);	
 			XML.createNode(doc, rootElement, "sign", eootvet.sign);	
 			XML.createNode(doc, rootElement, "key", eootvet.key);	
-			
+
 			//DM+!!!
 			login = doc.createElement("eoadmin");
 			rootElement.appendChild(login);
@@ -276,7 +280,7 @@ public class Settings{
 			XML.createNode(doc, rootElement, "key", eoadmin.key);	
 
 
-			
+
 			XML.createXMLFile(doc, fl);
 			Log.msg("XML с настройками пользователей " + fl + " создан.");				
 
@@ -296,37 +300,37 @@ public class Settings{
 			Element login = (Element) root.getElementsByTagName("pervvod").item(0);
 			pervvod = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
 					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));
-			
+
 			login = (Element) root.getElementsByTagName("contrvvod").item(0);
 			contrvvod = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
 					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
-			
+
 			login = (Element) root.getElementsByTagName("formes").item(0);
 			formes = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
 					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
-			
+
 			login = (Element) root.getElementsByTagName("contres").item(0);
 			contres = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
 					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
-			
+
 			//DM+
 			login = (Element) root.getElementsByTagName("eocontr").item(0);
 			eocontr = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
 					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
-			
+
 			//DM+
 			login = (Element) root.getElementsByTagName("eootvet").item(0);
 			eootvet = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
 					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
-			
+
 			//DM+!!
 			login = (Element) root.getElementsByTagName("eoadmin").item(0);
 			eoadmin = new LoginInfo(XML.getChildValueString("user", login), XML.getChildValueString("pwd", login),
 					XML.getChildValueString("sign", login), XML.getChildValueString("key", login));	
-			
+
 			Log.msg("XML с настройками пользователей " + src + " загружен в программу.");
 		}
-		
+
 		public static class LoginInfo
 		{
 			public String user;
@@ -397,52 +401,112 @@ public class Settings{
 
 			Log.msg("XML с настройками для генерации R-пакета " + src + " загружен в программу.");
 		}
-		
-		public static class EsidList
-		{
-			
-		}
+
+
 	}
 
-//	public static class GenSpack{
-//
-//		public static int numBIK = 0;
-//		public static int numDoc = 0;
-//		public static int firstDoc = 0;
-//
-//		public static void createXML()
-//		{
-//			createXML(Settings.testProj + "settings\\" + Settings.obrfolder + "\\genspack.xml");
-//		}
-//
-//		public static void createXML(String fl)
-//		{
-//			Document doc = XML.createNewDoc();
-//			Element rootElement = doc.createElement("genspack");
-//			doc.appendChild(rootElement);
-//
-//			XML.createNode(doc, rootElement, "numbik", numBIK);	
-//			XML.createNode(doc, rootElement, "numdoc", numDoc);	
-//			XML.createNode(doc, rootElement, "firstdoc", firstDoc);
-//
-//			XML.createXMLFile(doc, fl);
-//			Log.msg("XML с настройками для генерации S-пакета " + fl + " создан.");
-//			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\genspack.xsd",fl);
-//		}
-//
-//		public static void readXML(String src)
-//		{			
-//			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\genspack.xsd",src);				
-//
-//			Element eElement = XML.getXMLRootElement(src);
-//
-//			numBIK = XML.getChildValueInt("numbik", eElement);	
-//			numDoc = XML.getChildValueInt("numdoc", eElement);	
-//			firstDoc = XML.getChildValueInt("firstdoc", eElement);
-//
-//			Log.msg("XML с настройками для генерации S-пакета " + src + " загружен в программу.");
-//		}
-//	}
+	public static class EsidList
+	{
+		private static List <Esid> eList;
+
+		public static void readXML(String src)
+		{
+
+			Element root = XML.getXMLRootElement(src);
+
+			NodeList nl = root.getElementsByTagName("PacketESIDVER_RYM");
+
+			if(nl.getLength() == 0)
+				return;
+			else
+				eList = new ArrayList<Esid>();
+
+			Element el = (Element) nl.item(0);
+
+			nl = el.getElementsByTagName("BIC");
+
+			for(int i = 0; i < nl.getLength(); i++)
+			{
+				Element bic = (Element) nl.item(i);
+
+				eList.add(new Esid(bic.getFirstChild().getNodeValue(), bic.getAttribute("ResultCode")));
+			}			
+
+		}
+
+		public static String getResultCodeByBIC(String bic)
+		{
+			String resB = "", resO = "";
+
+			ListIterator<Esid> li = eList.listIterator();
+			
+			while(li.hasNext())
+			{
+				Esid e = li.next();
+				
+				if(e.bic.equals(bic))
+					resB = e.resultCode;
+				else if(e.bic.equals("*"))
+					resO = e.resultCode;
+			}
+			
+			if(!resB.equals(""))
+				return resB;
+			else
+				return resO;
+		}
+
+		public static class Esid
+		{
+			String bic;
+			String resultCode;
+
+			public Esid(String bic, String resultCode)
+			{
+				this.bic = bic;
+				this.resultCode = resultCode;
+			}
+		}
+	}
+	//	public static class GenSpack{
+	//
+	//		public static int numBIK = 0;
+	//		public static int numDoc = 0;
+	//		public static int firstDoc = 0;
+	//
+	//		public static void createXML()
+	//		{
+	//			createXML(Settings.testProj + "settings\\" + Settings.obrfolder + "\\genspack.xml");
+	//		}
+	//
+	//		public static void createXML(String fl)
+	//		{
+	//			Document doc = XML.createNewDoc();
+	//			Element rootElement = doc.createElement("genspack");
+	//			doc.appendChild(rootElement);
+	//
+	//			XML.createNode(doc, rootElement, "numbik", numBIK);	
+	//			XML.createNode(doc, rootElement, "numdoc", numDoc);	
+	//			XML.createNode(doc, rootElement, "firstdoc", firstDoc);
+	//
+	//			XML.createXMLFile(doc, fl);
+	//			Log.msg("XML с настройками для генерации S-пакета " + fl + " создан.");
+	//			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\genspack.xsd",fl);
+	//		}
+	//
+	//		public static void readXML(String src)
+	//		{			
+	//			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\genspack.xsd",src);				
+	//
+	//			Element eElement = XML.getXMLRootElement(src);
+	//
+	//			numBIK = XML.getChildValueInt("numbik", eElement);	
+	//			numDoc = XML.getChildValueInt("numdoc", eElement);	
+	//			firstDoc = XML.getChildValueInt("firstdoc", eElement);
+	//
+	//			Log.msg("XML с настройками для генерации S-пакета " + src + " загружен в программу.");
+	//		}
+	//	}
 }
 
 

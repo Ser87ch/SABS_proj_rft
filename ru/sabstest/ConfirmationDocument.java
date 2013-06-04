@@ -78,20 +78,20 @@ public class ConfirmationDocument {
 		transKind = doc.getAttribute("TransKind");		
 		resultCode = doc.getAttribute("ResultCode");
 
-		Element accDoc = (Element) doc.getElementsByTagName("AccDoc").item(0);			
+		Element accDoc = (Element) doc.getElementsByTagNameNS("*","AccDoc").item(0);			
 		accDocNo = Integer.parseInt(accDoc.getAttribute("AccDocNo"));
 		accDocDate = Date.valueOf(accDoc.getAttribute("AccDocDate"));
 
 		payer = new Client();
-		payer.readED((Element) doc.getElementsByTagName("ShortPayer").item(0));
+		payer.readED((Element) doc.getElementsByTagNameNS("*","ShortPayer").item(0));
 		payee = new Client();
-		payee.readED((Element) doc.getElementsByTagName("ShortPayee").item(0));
+		payee.readED((Element) doc.getElementsByTagNameNS("*","ShortPayee").item(0));
 		
 	}
 	
-	public void generateFromPaymentDocument(PaymentDocument pd, String author)
+	public void generateFromPaymentDocument(PaymentDocument pd, String author, String resultCode)
 	{
-		resultCode = pd.resultCode;
+		this.resultCode = resultCode;
 		
 		iEdAuthor = pd.edAuthor;
 		iEdDate = pd.edDate;

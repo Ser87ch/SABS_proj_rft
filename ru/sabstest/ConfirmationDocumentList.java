@@ -26,13 +26,13 @@ public class ConfirmationDocumentList extends Packet{
 	public int sum;
 	public String packetCode;
 
-	
+
 	@Override
 	public void setFileName()
 	{
 		filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate) + String.format("%09d", edNo) + ".PacketESIDVER_RYM";
 	}
-	
+
 	/** 
 	 * создает XML Ёѕƒ
 	 * @param fl полный путь к файлу
@@ -69,7 +69,7 @@ public class ConfirmationDocumentList extends Packet{
 
 		Element root = XML.getXMLRootElement(src);
 
-		if(!root.getNodeName().equals("PacketESIDVER_RYM"))		
+		if(!root.getLocalName().equals("PacketESIDVER_RYM"))		
 			return;
 
 		cdList = new ArrayList<ConfirmationDocument>();
@@ -82,7 +82,7 @@ public class ConfirmationDocumentList extends Packet{
 		sum = Integer.parseInt(root.getAttribute("Sum"));
 		packetCode = root.getAttribute("PacketCode");
 
-		NodeList nl = root.getElementsByTagName("ED216");
+		NodeList nl = root.getElementsByTagNameNS("*","ED216");
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
@@ -99,7 +99,7 @@ public class ConfirmationDocumentList extends Packet{
 
 	public boolean generateFromPaymentDocumentList(PaymentDocumentList pdl)
 	{
-		
+
 		firstSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
 		secondSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
 		cdList = new ArrayList <ConfirmationDocument>();		
@@ -110,20 +110,20 @@ public class ConfirmationDocumentList extends Packet{
 		edReceiver = Settings.bik.substring(2) + "000";
 
 		packetCode = "1";
-		
+
 		setFileName();
-		
+
 		for(int i = 0; i < pdl.size(); i++)
 		{
 			PaymentDocument pd = pdl.get(i);
 
-			if(!pd.resultCode.equals("") && (pd.resultCode != null))
+			String resultCode = Settings.EsidList.getResultCodeByBIC(pd.payee.bic);
+			if(resultCode != null && !resultCode.equals(""))
 			{
 				ConfirmationDocument cd = new ConfirmationDocument();
-				cd.generateFromPaymentDocument(pd, edAuthor);
-				cdList.add(cd);
+				cd.generateFromPaymentDocument(pd, edAuthor, resultCode);
+				cdList.add(cd);		
 			}
-
 		}
 
 		if(cdList == null || cdList.size() == 0)
@@ -176,7 +176,7 @@ public class ConfirmationDocumentList extends Packet{
 			db.connect();
 
 			String uic = Settings.bik.substring(2) + "000";
-			
+
 			String query =  "INSERT INTO [dbo].[epay_Packet]\r\n" + 
 			"([ID_Depart], [ID_ARM], [User_Insert], [InOutMode],\r\n" + 
 			" [Date_Oper], [EDNo], [EDDate], [EDAuthor], [EDReceiver], [EDQuantity],\r\n" + 

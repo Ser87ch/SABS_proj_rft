@@ -44,7 +44,7 @@ abstract public class PaymentDocument {
 	DepartmentalInfo tax;
 
 	
-	public String resultCode;
+//	public String resultCode;
 
 	public PaymentDocument()
 	{	
@@ -59,7 +59,7 @@ abstract public class PaymentDocument {
 		//this.chargeOffDate = new Date(0);
 		//this.receiptDate = new Date(0);	
 		this.edNo = 0;
-		this.resultCode = "";
+		
 	}
 
 	@Override
@@ -156,7 +156,7 @@ abstract public class PaymentDocument {
 
 		payee = Client.createClientFromBICPersonalAcc(el);
 		
-		resultCode = gendoc.getAttribute("ResultCode");
+	
 		
 		generateFromXMLByType(gendoc);
 	}
@@ -207,8 +207,9 @@ abstract public class PaymentDocument {
 	public void addCommonEDElements(Document doc, Element rootElement)
 	{
 		rootElement.setAttribute("xmlns", "urn:cbr-ru:ed:v2.0");
-		rootElement.setAttribute("EDNo", Integer.toString(edNo));
+		rootElement.setAttribute("EDNo", Integer.toString(edNo));	
 		rootElement.setAttribute("EDDate", new SimpleDateFormat("yyyy-MM-dd").format(edDate));
+	
 		rootElement.setAttribute("EDAuthor", edAuthor);
 		rootElement.setAttribute("PaytKind", paytKind);
 		rootElement.setAttribute("Sum", Integer.toString(sum));
@@ -251,14 +252,14 @@ abstract public class PaymentDocument {
 		chargeOffDate = XML.getOptionalDateAttr("ChargeOffDate", doc);
 		systemCode = doc.getAttribute("SystemCode");
 
-		Element accDoc = (Element) doc.getElementsByTagName("AccDoc").item(0);			
+		Element accDoc = (Element) doc.getElementsByTagNameNS("*","AccDoc").item(0);			
 		accDocNo = Integer.parseInt(accDoc.getAttribute("AccDocNo"));
 		accDocDate = Date.valueOf(accDoc.getAttribute("AccDocDate"));
 
 		payer = new Client();
-		payer.readED((Element) doc.getElementsByTagName("Payer").item(0));
+		payer.readED((Element) doc.getElementsByTagNameNS("*","Payer").item(0));
 		payee = new Client();
-		payee.readED((Element) doc.getElementsByTagName("Payee").item(0));
+		payee.readED((Element) doc.getElementsByTagNameNS("*","Payee").item(0));
 
 		purpose = XML.getChildValueString("Purpose", doc);
 	}
@@ -271,27 +272,27 @@ abstract public class PaymentDocument {
 	{
 		Element root = XML.getXMLRootElement(src);
 		PaymentDocument pd = null;
-		if(root.getNodeName().equals("ED101"))
+		if(root.getLocalName().equals("ED101"))
 		{
 			pd = new PaymentOrder();
 			pd.readED(root);
 		}
-		else if(root.getNodeName().equals("ED103"))
+		else if(root.getLocalName().equals("ED103"))
 		{
 			pd = new PaymentRequest();
 			pd.readED(root);
 		}
-		else if(root.getNodeName().equals("ED104"))
+		else if(root.getLocalName().equals("ED104"))
 		{
 			pd = new CollectionOrder();
 			pd.readED(root);
 		}
-		else if(root.getNodeName().equals("ED105"))
+		else if(root.getLocalName().equals("ED105"))
 		{
 			pd = new PaymentWarrant();
 			pd.readED(root);
 		}
-		else if(root.getNodeName().equals("ED108"))
+		else if(root.getLocalName().equals("ED108"))
 		{
 			pd = new PaymentOrderRegister();
 			pd.readED(root);

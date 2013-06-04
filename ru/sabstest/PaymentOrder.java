@@ -39,11 +39,12 @@ public class PaymentOrder extends PaymentDocument {
 	@Override
 	public void readED(Element doc)
 	{
-		if(doc.getTagName() == "ED101")
+		
+		if(doc.getLocalName().equals("ED101"))
 		{
 			readCommonEDElements(doc);
 
-			NodeList nl = doc.getElementsByTagName("DepartmentalInfo");
+			NodeList nl = doc.getElementsByTagNameNS("*","DepartmentalInfo");
 			if(nl.getLength() == 1)
 			{
 				tax = new DepartmentalInfo();
@@ -141,7 +142,7 @@ public class PaymentOrder extends PaymentDocument {
 	{
 		insertIntoDbVer(idPacet, filename, 0, null, null);	
 	}
-	public void generateReturnDocument(PaymentDocument pd, String author)
+	public void generateReturnDocument(PaymentDocument pd, String author, String resultCode)
 	{
 		edNo = pd.edNo + 1000;
 		edDate = pd.edDate;
@@ -169,6 +170,6 @@ public class PaymentOrder extends PaymentDocument {
 		purpose = "Возврат ошибочного электронного платежного документа " +  String.format("%06d", sum) + " с датой составления "
 		+ new SimpleDateFormat("dd/MM/yyyy").format(edDate) +", УИС " 
 		+ edAuthor + " на сумму " + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
-		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + " код возврата " + pd.resultCode ;
+		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + " код возврата " + resultCode ;
 	}
 }

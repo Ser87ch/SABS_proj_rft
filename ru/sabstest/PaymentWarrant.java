@@ -54,26 +54,26 @@ public class PaymentWarrant extends PaymentDocument {
 
 	@Override
 	public void readED(Element doc) {
-		if(doc.getTagName().equals("ED105"))
+		if(doc.getLocalName().equals("ED105"))
 		{
 			readCommonEDElements(doc);
 			
 			transContent = doc.getAttribute("TransContent");
 			
-			NodeList nl = doc.getElementsByTagName("DepartmentalInfo");
+			NodeList nl = doc.getElementsByTagNameNS("*","DepartmentalInfo");
 			if(nl.getLength() == 1)
 			{
 				tax = new DepartmentalInfo();
 				tax.readED((Element) nl.item(0));
 			}
 			
-			Element pp = (Element) doc.getElementsByTagName("PartialPayt").item(0);
+			Element pp = (Element) doc.getElementsByTagNameNS("*","PartialPayt").item(0);
 			
 			ppPaytNo = pp.getAttribute("PaytNo");
 			ppTransKind = pp.getAttribute("TransKind");
 			ppSumResidualPayt = XML.getOptionalIntAttr("SumResidualPayt", pp);
 			
-			Element accDoc = (Element) pp.getElementsByTagName("AccDoc").item(0);			
+			Element accDoc = (Element) pp.getElementsByTagNameNS("*","AccDoc").item(0);			
 			ppAccDocDate = Date.valueOf(accDoc.getAttribute("AccDocDate"));
 			ppAccDocNo = accDoc.getAttribute("AccDocNo");
 		}

@@ -15,7 +15,7 @@ public class PacketList {
 
 	public PacketList()
 	{
-
+		pList = new ArrayList<Packet>();
 	}
 
 	public void generateFromXML(String fl)
@@ -30,19 +30,19 @@ public class PacketList {
 			for(int i = 0; i < nl.getLength(); i++)
 			{
 				if(nl.item(i).getNodeType() == Node.ELEMENT_NODE && 
-						(nl.item(i).getNodeName() == "PacketEPDVER" || nl.item(i).getNodeName() == "PacketEPD"))
+						(nl.item(i).getNodeName().equals("PacketEPDVER") || nl.item(i).getNodeName().equals("PacketEPD")))
 				{
 					PaymentDocumentList epd = new PaymentDocumentList();				
 					epd.generateFromXML((Element) nl.item(i));
 					pList.add(epd);
 
-//					ConfirmationDocumentList rpack = new ConfirmationDocumentList();
-//					if(rpack.generateFromPaymentDocumentList(epd))
-//						pList.add(rpack);
-//
-//					ReturnDocumentList bpack = new ReturnDocumentList();
-//					if(bpack.generateFromPaymentDocumentList(epd))
-//						pList.add(bpack);
+					//					ConfirmationDocumentList rpack = new ConfirmationDocumentList();
+					//					if(rpack.generateFromPaymentDocumentList(epd))
+					//						pList.add(rpack);
+					//
+					//					ReturnDocumentList bpack = new ReturnDocumentList();
+					//					if(bpack.generateFromPaymentDocumentList(epd))
+					//						pList.add(bpack);
 				}
 			}			
 		}
@@ -87,5 +87,31 @@ public class PacketList {
 			else
 				DB.insertPacetForReadVer(p.filename);
 		}
+	}
+
+	public void generateEsidFromEPD(PacketList pl)
+	{
+		Iterator<Packet> it = pl.pList.iterator();
+
+		pList = new ArrayList<Packet>();
+
+		while(it.hasNext())
+		{
+			PaymentDocumentList epd = (PaymentDocumentList) it.next();
+
+			ConfirmationDocumentList rpack = new ConfirmationDocumentList();
+			if(rpack.generateFromPaymentDocumentList(epd))
+				pList.add(rpack);
+
+			ReturnDocumentList bpack = new ReturnDocumentList();
+			if(bpack.generateFromPaymentDocumentList(epd))
+				pList.add(bpack);		
+
+		}
+	}
+
+	public void add(Packet p)
+	{
+		pList.add(p);
 	}
 }

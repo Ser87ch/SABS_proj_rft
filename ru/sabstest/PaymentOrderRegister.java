@@ -47,18 +47,18 @@ public class PaymentOrderRegister extends PaymentDocument {
 	@Override
 	public void readED(Element doc)
 	{
-		if(doc.getTagName().equals("ED108"))
+		if(doc.getLocalName().equals("ED108"))
 		{
 			readCommonEDElements(doc);
 
-			NodeList nl = doc.getElementsByTagName("DepartmentalInfo");
+			NodeList nl = doc.getElementsByTagNameNS("*","DepartmentalInfo");
 			if(nl.getLength() == 1)
 			{
 				tax = new DepartmentalInfo();
 				tax.readED((Element) nl.item(0));
 			}
 
-			nl = doc.getElementsByTagName("CreditTransferTransactionInfo");
+			nl = doc.getElementsByTagNameNS("*","CreditTransferTransactionInfo");
 			
 			for(int i = 0; i < nl.getLength(); i++)
 			{
@@ -134,7 +134,7 @@ public class PaymentOrderRegister extends PaymentDocument {
 
 		public void readED(Element tr)
 		{
-			if(tr.getTagName().equals("CreditTransferTransactionInfo"))
+			if(tr.getLocalName().equals("CreditTransferTransactionInfo"))
 			{
 				transactionID = Integer.parseInt(tr.getAttribute("TransactionID"));
 				payerDocNo = XML.getOptionalIntAttr("PayerDocNo", tr);
@@ -147,8 +147,8 @@ public class PaymentOrderRegister extends PaymentDocument {
 				payer = new ClientInfo();
 				payee = new ClientInfo();
 				
-				payer.readED((Element) tr.getElementsByTagName("TransactionPayerInfo").item(0));
-				payee.readED((Element) tr.getElementsByTagName("TransactionPayeeInfo").item(0));
+				payer.readED((Element) tr.getElementsByTagNameNS("*","TransactionPayerInfo").item(0));
+				payee.readED((Element) tr.getElementsByTagNameNS("*","TransactionPayeeInfo").item(0));
 				
 				transactionPurpose = tr.getAttribute("TransactionPurpose");
 				remittanceInfo = tr.getAttribute("RemittanceInfo");

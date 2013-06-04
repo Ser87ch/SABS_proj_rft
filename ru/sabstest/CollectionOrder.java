@@ -38,13 +38,13 @@ public class CollectionOrder extends PaymentDocument {
 	@Override
 	public void readED(Element doc)
 	{
-		if(doc.getTagName().equals("ED104"))
+		if(doc.getLocalName().equals("ED104"))
 		{
 			readCommonEDElements(doc);
 			
 			receiptDateCollectBank = XML.getOptionalDateAttr("ReceiptDateCollectBank", doc);
 			
-			NodeList nl = doc.getElementsByTagName("DepartmentalInfo");
+			NodeList nl = doc.getElementsByTagNameNS("*","DepartmentalInfo");
 			if(nl.getLength() == 1)
 			{
 				tax = new DepartmentalInfo();

@@ -1,9 +1,12 @@
 package ru.sabstest;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -26,6 +29,7 @@ import javax.xml.validation.Validator;
 import org.apache.xerces.impl.dv.util.Base64;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
 
 public class XML {
 
@@ -85,8 +89,10 @@ public class XML {
 		try {
 			File fXmlFile = new File(filename);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			dbFactory.setNamespaceAware(true);
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);			
+			Document doc = dBuilder.parse(fXmlFile);	
+			
 			root = doc.getDocumentElement();
 			root.normalize();
 		} catch (Exception e) {
@@ -98,6 +104,28 @@ public class XML {
 
 	}
 
+	public static Element getXMLRootElementFromString(String src)
+	{
+		Element root = null;
+		try {
+			//InputSource is = new InputSource(new StringReader(src));
+			InputStream is = new ByteArrayInputStream(src.getBytes("Windows-1251"));
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			dbFactory.setNamespaceAware(true);
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(is);				
+			
+			root = doc.getDocumentElement();
+			root.normalize();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			Log.msg(e);
+		}
+		return root;
+
+	}
+	
 	/**
 	 * валидация xml файла xsd
 	 * @param xsd полный путь к xsd
@@ -154,7 +182,7 @@ public class XML {
 	{
 		try{
 			String s;
-			s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
+			s = root.getElementsByTagNameNS("*",sTag).item(0).getFirstChild().getNodeValue();
 			return s == null ? "" : s;
 		}catch(Exception e){
 			return "";
@@ -165,7 +193,7 @@ public class XML {
 	{
 		try{
 			String s;
-			s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
+			s = root.getElementsByTagNameNS("*",sTag).item(0).getFirstChild().getNodeValue();
 			return s == null ? 0 : Integer.parseInt(s);
 		}catch(Exception e){
 			return 0;
@@ -176,7 +204,7 @@ public class XML {
 	{
 		try{
 			String s;
-			s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
+			s = root.getElementsByTagNameNS("*",sTag).item(0).getFirstChild().getNodeValue();
 			return s == null ? new Date(0) : Date.valueOf(s);
 		}catch(Exception e){
 			return new Date(0);
@@ -187,7 +215,7 @@ public class XML {
 	{
 		try{
 			String s;
-			s = root.getElementsByTagName(sTag).item(0).getFirstChild().getNodeValue();
+			s = root.getElementsByTagNameNS("*",sTag).item(0).getFirstChild().getNodeValue();
 			return s == null ? 0 : Float.parseFloat(s);
 		}catch(Exception e){
 			return 0;
@@ -266,11 +294,7 @@ public class XML {
 
 	public static void createXMLFromBase64(String src, String trg)
 	{
-		Element root = XML.getXMLRootElement(src);
-		Element n = (Element) root.getElementsByTagName("sen:Object").item(0);
-		String encodedxml = n.getTextContent();
-		
-		String xml = new String(Base64.decode(encodedxml));
+		String xml = decodeBase64(src);
 
 		try{
 			FileWriter fstream = new FileWriter(trg);
@@ -285,4 +309,15 @@ public class XML {
 			Log.msg(e);
 		}
 	}	
+	
+	public static String decodeBase64(String src)
+	{
+		Element root = XML.getXMLRootElement(src);
+		Element n = (Element) root.getElementsByTagName("sen:Object").item(0);
+		String encodedxml = n.getTextContent();
+		
+		String xml = new String(Base64.decode(encodedxml));
+		
+		return xml;
+	}
 }

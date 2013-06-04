@@ -53,7 +53,7 @@ public class DepartmentalInfo {
 	 */
 	public void readED(Element di)
 	{
-		if(di.getNodeName().equals("DepartmentalInfo"))
+		if(di.getLocalName().equals("DepartmentalInfo"))
 		{
 			drawerStatus = di.getAttribute("DrawerStatus");
 			cbc = di.getAttribute("CBC");

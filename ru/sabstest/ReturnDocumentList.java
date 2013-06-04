@@ -58,11 +58,11 @@ public class ReturnDocumentList extends Packet{
 		for(int i = 0; i < pdl.size(); i++)
 		{
 			PaymentDocument pd = pdl.get(i);
-
-			if(ErrorCode.contains(pd.resultCode))
+			String resultCode = Settings.EsidList.getResultCodeByBIC(pd.payee.bic);
+			if(ErrorCode.contains(resultCode))
 			{
 				ReturnDocument rd = new ReturnDocument();
-				rd.generateFromPaymentDocument(pd, edAuthor);
+				rd.generateFromPaymentDocument(pd, edAuthor, resultCode);
 				rdList.add(rd);
 			}
 
@@ -112,7 +112,7 @@ public class ReturnDocumentList extends Packet{
 	{
 		Element root = XML.getXMLRootElement(src);
 
-		if(!root.getNodeName().equals("PacketEPDVER_B"))		
+		if(!root.getLocalName().equals("PacketEPDVER_B"))		
 			return;
 
 		rdList = new ArrayList<ReturnDocument>();
@@ -125,8 +125,8 @@ public class ReturnDocumentList extends Packet{
 		sum = Integer.parseInt(root.getAttribute("Sum"));
 		
 
-		NodeList nl = root.getElementsByTagName("VERReturnPayt");
-
+		NodeList nl = root.getElementsByTagNameNS("*","VERReturnPayt");
+		
 		for(int i = 0; i < nl.getLength(); i++)
 		{
 			ReturnDocument rd = new ReturnDocument();

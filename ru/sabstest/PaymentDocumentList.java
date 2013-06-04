@@ -206,9 +206,23 @@ public class PaymentDocumentList extends Packet{
 	{
 		Element root = XML.getXMLRootElement(src);
 
-		if(root.getNodeName().equals("PacketEPDVER"))
+		readXML(root);
+	}
+	
+	public void readEncodedFile(String src)
+	{
+		Element root = XML.getXMLRootElementFromString(XML.decodeBase64(src));
+		
+		readXML(root);
+	}
+	
+	public void readXML(Element root)
+	{
+		
+		
+		if(root.getLocalName().equals("PacketEPDVER"))
 			packetType = Packet.Type.PacketEPDVER;
-		else if(root.getNodeName().equals("PacketEPD"))
+		else if(root.getLocalName().equals("PacketEPD"))
 			packetType = Packet.Type.PacketEPD;
 		else
 			return;
@@ -223,8 +237,8 @@ public class PaymentDocumentList extends Packet{
 		sum = Integer.parseInt(root.getAttribute("Sum"));
 		systemCode = root.getAttribute("SystemCode");
 
-		NodeList nl = root.getElementsByTagName("ED101");
-
+		NodeList nl = root.getElementsByTagNameNS("*","ED101");
+		
 		for(int i = 0; i < nl.getLength(); i++)
 		{
 			PaymentDocument pd = new PaymentOrder();
@@ -232,7 +246,7 @@ public class PaymentDocumentList extends Packet{
 			pdList.add(pd);
 		}
 
-		nl = root.getElementsByTagName("ED103");
+		nl = root.getElementsByTagNameNS("*","ED103");
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
@@ -241,7 +255,7 @@ public class PaymentDocumentList extends Packet{
 			pdList.add(pd);
 		}
 
-		nl = root.getElementsByTagName("ED104");
+		nl = root.getElementsByTagNameNS("*","ED104");
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
@@ -250,7 +264,7 @@ public class PaymentDocumentList extends Packet{
 			pdList.add(pd);
 		}
 
-		nl = root.getElementsByTagName("ED105");
+		nl = root.getElementsByTagNameNS("*","ED105");
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
@@ -259,7 +273,7 @@ public class PaymentDocumentList extends Packet{
 			pdList.add(pd);
 		}
 
-		nl = root.getElementsByTagName("ED108");
+		nl = root.getElementsByTagNameNS("*","ED108");
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
@@ -328,14 +342,14 @@ public class PaymentDocumentList extends Packet{
 		//	XML.validate(Settings.testProj + "\\XMLschema\\settings\\generation.xsd", src);
 		//	Element root = XML.getXMLRootElement(src);
 
-		if(root.getNodeName().equals("PacketEPDVER"))
+		if(root.getLocalName().equals("PacketEPDVER"))
 		{
 			packetType = Packet.Type.PacketEPDVER;			
 			firstSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
 			secondSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
 
 		}
-		else if(root.getNodeName().equals("PacketEPD"))
+		else if(root.getLocalName().equals("PacketEPD"))
 		{
 			packetType = Packet.Type.PacketEPD;		
 			firstSign = new Sign(root.getAttribute("key1"),root.getAttribute("profile1"));

@@ -139,7 +139,7 @@ public class Client {
 
 		name = XML.getChildValueString("Name", cl);
 
-		Element bank = (Element) cl.getElementsByTagName("Bank").item(0);
+		Element bank = (Element) cl.getElementsByTagNameNS("*", "Bank").item(0);
 		correspAcc = bank.getAttribute("CorrespAcc");
 		bic = bank.getAttribute("BIC");		
 	}
@@ -157,8 +157,8 @@ public class Client {
 
 		String bicStr, personalAccStr;
 		
-		Element bicEl =(Element) clEl.getElementsByTagName("BIC").item(0);
-		Element paEl =(Element) clEl.getElementsByTagName("PersonalAcc").item(0);
+		Element bicEl =(Element) clEl.getElementsByTagNameNS("*", "BIC").item(0);
+		Element paEl =(Element) clEl.getElementsByTagNameNS("*", "PersonalAcc").item(0);
 		
 		bicStr = bicEl.getFirstChild().getNodeValue();
 		personalAccStr = paEl.getFirstChild().getNodeValue();
