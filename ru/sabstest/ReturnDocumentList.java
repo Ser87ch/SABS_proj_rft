@@ -43,8 +43,8 @@ public class ReturnDocumentList extends Packet{
 	public boolean generateFromPaymentDocumentList(PaymentDocumentList pdl)
 	{
 	
-		firstSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
-		secondSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
+		secondSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
+		firstSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
 		
 		rdList = new ArrayList <ReturnDocument>();		
 

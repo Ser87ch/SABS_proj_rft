@@ -26,10 +26,10 @@ public class Run extends RunHelper
 
 	public void testMain(Object[] args) 
 	{
-		boolean isreset = true, isdeltadb = true, ispervvod = true, 
-		iscontrvvod = true, isformes = true, 
-		iscontres = true, isgenrpack = true, isdeltadbr = true,
-		iscontrrpack = true, isobrrpack = true;
+		boolean isreset = false, isdeltadb = false, ispervvod = true, 
+		iscontrvvod = true, isformes = false, 
+		iscontres = false, isgenrpack = false, isdeltadbr = false,
+		iscontrrpack = false, isobrrpack = false;
 
 		Log.msg("Начало выполнения теста 'Начальный провод с генерацией R пакета'.");
 

@@ -208,18 +208,18 @@ public class PaymentDocumentList extends Packet{
 
 		readXML(root);
 	}
-	
+
 	public void readEncodedFile(String src)
 	{
 		Element root = XML.getXMLRootElementFromString(XML.decodeBase64(src));
-		
+
 		readXML(root);
 	}
-	
+
 	public void readXML(Element root)
 	{
-		
-		
+
+
 		if(root.getLocalName().equals("PacketEPDVER"))
 			packetType = Packet.Type.PacketEPDVER;
 		else if(root.getLocalName().equals("PacketEPD"))
@@ -238,7 +238,7 @@ public class PaymentDocumentList extends Packet{
 		systemCode = root.getAttribute("SystemCode");
 
 		NodeList nl = root.getElementsByTagNameNS("*","ED101");
-		
+
 		for(int i = 0; i < nl.getLength(); i++)
 		{
 			PaymentDocument pd = new PaymentOrder();
@@ -345,8 +345,8 @@ public class PaymentDocumentList extends Packet{
 		if(root.getLocalName().equals("PacketEPDVER"))
 		{
 			packetType = Packet.Type.PacketEPDVER;			
-			firstSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
-			secondSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
+			secondSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
+			firstSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
 
 		}
 		else if(root.getLocalName().equals("PacketEPD"))
@@ -371,90 +371,34 @@ public class PaymentDocumentList extends Packet{
 		setFileName();
 
 		int edNo = Integer.parseInt(root.getAttribute("EDFirstNo"));
+		int sum = XML.getOptionalIntAttr("Sum", root);
 
-		NodeList nl = root.getElementsByTagName("ED101");
-
-		for(int i = 0; i < nl.getLength(); i++)
-		{
-			Element ed = (Element) nl.item(i);
-
-			int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
-			for(int j = 0; j < quantity; j++)
-			{
-				PaymentDocument pd = new PaymentOrder();
-				pd.generateFromXML(ed, edNo, edAuthor);
-				edNo++;
-				pdList.add(pd);
-			}
-		}
-
-		nl = root.getElementsByTagName("ED103");
+		NodeList nl = root.getElementsByTagName("ED");
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
 			Element ed = (Element) nl.item(i);
 
+			String[] typeList = ed.getAttribute("Type").split(",");
 			int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
-			for(int j = 0; j < quantity; j++)
+
+			for(String type:typeList)
 			{
-				PaymentDocument pd = new PaymentRequest();
-				pd.generateFromXML(ed, edNo, edAuthor);
-				edNo++;
-				pdList.add(pd);
+				for(int j = 0; j < quantity; j++)
+				{
+					PaymentDocument pd = PaymentDocument.createByType(type);					
+
+					pd.generateFromXML(ed, edNo, edAuthor, sum);
+					edNo++;
+					if(sum != 0)
+						sum++;
+					pdList.add(pd);
+				}
 			}
-		}
+		}		
 
-		nl = root.getElementsByTagName("ED104");
-
-		for(int i = 0; i < nl.getLength(); i++)
-		{
-			Element ed = (Element) nl.item(i);
-
-			int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
-			for(int j = 0; j < quantity; j++)
-			{
-				PaymentDocument pd = new CollectionOrder();
-				pd.generateFromXML(ed, edNo, edAuthor);
-				edNo++;
-				pdList.add(pd);
-			}
-		}
-
-
-		nl = root.getElementsByTagName("ED105");
-
-		for(int i = 0; i < nl.getLength(); i++)
-		{
-			Element ed = (Element) nl.item(i);
-
-			int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
-			for(int j = 0; j < quantity; j++)
-			{
-				PaymentDocument pd = new PaymentWarrant();
-				pd.generateFromXML(ed, edNo, edAuthor);
-				edNo++;
-				pdList.add(pd);
-			}
-		}
-
-		nl = root.getElementsByTagName("ED108");
-
-		for(int i = 0; i < nl.getLength(); i++)
-		{
-			Element ed = (Element) nl.item(i);
-
-			int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
-			for(int j = 0; j < quantity; j++)
-			{
-				PaymentDocument pd = new PaymentOrderRegister();
-				pd.generateFromXML(ed, edNo, edAuthor);
-				edNo++;
-				pdList.add(pd);
-			}
-		}
-
-		edQuantity = size();
-		sum = sumAll();
+		this.edQuantity = size();
+		this.sum = sumAll();
 
 	}
 

@@ -119,25 +119,12 @@ public class Main {
 
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
-			Settings.EsidList.readXML("C:\\test\\nach\\gen2.xml");
-			//XML.createXMLFromBase64("C:\\test\\nach\\2\\458200200020130701000000090.PacketEPDVER", "C:\\test\\nach\\2\\1s.xml");
 			
-			PaymentDocumentList pdl = new PaymentDocumentList();
-			pdl.readEncodedFile("C:\\test\\nach\\2\\458200200020130701000000090.PacketEPDVER");
+			PacketList pl = new PacketList();
+			pl.generateFromXML("C:\\test\\nach\\gen3.xml");
+
 			
-			ConfirmationDocumentList cdl = new ConfirmationDocumentList();
-			cdl.generateFromPaymentDocumentList(pdl);
-			cdl.filename = "2.xml";
-			cdl.createFile("C:\\test\\nach\\2\\");
-
-			//			XML.createXMLFromBase64("C:\\test\\1r.xml", "C:\\test\\1rde.xml");
-			//			XML.createXMLFromBase64("C:\\test\\1b.xml", "C:\\test\\1bde.xml");
-			//			PaymentDocumentList pdl = new PaymentDocumentList();
-			//			pdl.readFile("C:\\test\\de.xml");
-
-			//	Settings.readXML("C:\\general.xml");
-			//DB.insertPacetForReadUfebs("1su.xml");
-
+			pl.createFile("C:\\test\\nach\\3\\");
 
 			break;
 		}

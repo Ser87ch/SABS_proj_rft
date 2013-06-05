@@ -20,7 +20,7 @@ public class TestR extends TestRHelper
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
 		PaymentDocumentList pdl = new PaymentDocumentList();
-		pdl.readEncodedFile("C:\\test\\nach\\2\\458200200020130701000000088.PacketEPDVER");
+		pdl.readEncodedFile("C:\\s_zpd\\post\\kPuO\\458200200020130701000000113.PacketEPDVER");
 		
 		ConfirmationDocumentList cdl = new ConfirmationDocumentList();
 		cdl.generateFromPaymentDocumentList(pdl);
@@ -29,7 +29,7 @@ public class TestR extends TestRHelper
 
 		pl.add(cdl);
 		
-		callScript("SABS.CreateSignedXML",new Object[]{"C:\\test\\nach\\2", pl});
+		callScript("SABS.CreateSignedXML",new Object[]{"C:\\s_zpd\\post\\kPuI", pl});
 	}
 }
 

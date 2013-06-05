@@ -131,15 +131,15 @@ abstract public class PaymentDocument {
 	 */
 	abstract public void generateFromXMLByType(Element gendoc);
 	
-	public void generateFromXML(Element gendoc, int edNo, String edAuthor)
+	public void generateFromXML(Element gendoc, int edNo, String edAuthor, int sum)
 	{
 		this.edNo = edNo;
 		edDate = Settings.operDate;
 		this.edAuthor = edAuthor;
 		paytKind = "1";
-		sum = XML.getOptionalIntAttr("Sum", gendoc);
-		if(sum == 0)
-			sum = (int) (new Random().nextFloat() * 10000);		
+		this.sum = sum;
+		if(this.sum == 0)
+			this.sum = (int) (new Random().nextFloat() * 10000);		
 		
 		priority = "6";
 		accDocNo = edNo;
@@ -300,4 +300,22 @@ abstract public class PaymentDocument {
 		return pd;
 	}
 
+	
+	public static PaymentDocument createByType(String type)
+	{
+		PaymentDocument pd = null;
+		
+		if(type.equals("101"))
+			pd = new PaymentOrder();
+		else if(type.equals("103"))
+			pd = new PaymentRequest();
+		else if(type.equals("104"))
+			pd = new CollectionOrder();
+		else if(type.equals("105"))
+			pd = new PaymentWarrant();
+		else if(type.equals("108"))
+			pd = new PaymentOrderRegister();
+		
+		return pd;
+	}
 }

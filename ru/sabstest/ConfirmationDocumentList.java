@@ -100,8 +100,8 @@ public class ConfirmationDocumentList extends Packet{
 	public boolean generateFromPaymentDocumentList(PaymentDocumentList pdl)
 	{
 
-		firstSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
-		secondSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
+		firstSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
+		secondSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
 		cdList = new ArrayList <ConfirmationDocument>();		
 
 		edNo = pdl.edNo + 500;
