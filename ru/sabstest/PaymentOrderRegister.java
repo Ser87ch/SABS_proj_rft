@@ -193,6 +193,13 @@ public class PaymentOrderRegister extends PaymentDocument {
 
 	}
 
+
+	@Override
+	public String toStr(String razd, boolean addShift) {
+		
+		return null;
+	}
+
 	
 	
 }
