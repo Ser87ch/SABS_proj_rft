@@ -40,15 +40,15 @@ public class Vvod extends VvodHelper
 		{
 			PaymentDocument pd = pl.get(i);
 			Inputwindow().inputKeys(pd.toStr("{ENTER}",true));
-			Inputwindow().inputKeys("{ENTER}{ENTER}{ENTER}");	
+			//Inputwindow().inputKeys("{ENTER}{ENTER}{ENTER}");	
 
 
 
-			if(ExistDocwindow().exists())
-			{
-				ExistDocOkbutton().click();
-				Log.msg("Похожий документ уже есть в системе.");
-			}
+//			if(ExistDocwindow().exists())
+//			{
+//				ExistDocOkbutton().click();
+//				Log.msg("Похожий документ уже есть в системе.");
+//			}
 
 
 			ProvodNextbutton().click();
@@ -62,7 +62,9 @@ public class Vvod extends VvodHelper
 				
 		Docswindow().inputKeys("{F7}");				
 		
-		Folderwindow().inputKeys("{ExtDown}{ExtDown}");
+		Folderwindow().inputKeys("{ExtDown}{ExtDown}{ExtDown}{ExtDown}{ExtDown}{ExtDown}{ExtDown}{ExtDown}");
+		
+		
 		PrintcheckBox().click();		
 		FolderOkbutton().click();
 		ExistDocOkbutton().click();

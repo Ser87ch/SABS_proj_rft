@@ -88,9 +88,10 @@ public class PaymentWarrant extends PaymentDocument {
 		
 		ppPaytNo = "01";
 		ppTransKind = "01";
-		ppSumResidualPayt = 1;
+		ppSumResidualPayt = 100;
 		ppAccDocNo = "01";
-		ppAccDocDate = Settings.operDate;		
+		ppAccDocDate = Settings.operDate;	
+		transContent = "Частичная оплата";
 		
 	}
 
@@ -185,7 +186,11 @@ public class PaymentWarrant extends PaymentDocument {
 		if(!tax.drawerStatus.equals("") && tax.drawerStatus != null)
 			str = str + razd + tax.cbc + razd + tax.okato + razd + tax.paytReason + razd + tax.taxPeriod + razd + tax.docNo + razd + tax.docDate + razd + tax.taxPaytKind;
 
-		str = str + razd + purpose + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate);
+		str = str + razd + purpose + razd + ppPaytNo + razd + ppTransKind + razd + ppAccDocNo + razd + new SimpleDateFormat("ddMMyyyy").format(ppAccDocDate) + razd +
+		Integer.toString(ppSumResidualPayt).substring(0, Integer.toString(ppSumResidualPayt).length() - 2) + "." + 
+		Integer.toString(ppSumResidualPayt).substring(Integer.toString(ppSumResidualPayt).length() - 2, Integer.toString(ppSumResidualPayt).length()) + razd + 
+		transContent + razd +
+		new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + razd + razd;
 		return str;	
 	}
 }

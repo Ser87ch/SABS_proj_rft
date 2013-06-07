@@ -20,15 +20,38 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>Vvod</b><br>
- * Generated     : <b>2012/12/13 8:57:48</b><br>
+ * Generated     : <b>2013/06/07 13:23:10</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  декабря 13, 2012
+ * @since  июня 07, 2013
  * @author Admin
  */
 public abstract class VvodHelper extends RationalTestScript
 {
+	/**
+	 * ComboListBox: with default state.
+	 *		.class : .Combobox
+	 * 		.name : null
+	 * 		.classIndex : 0
+	 */
+	protected GuiSubitemTestObject ContrcomboBox() 
+	{
+		return new GuiSubitemTestObject(
+                        getMappedTestObject("ContrcomboBox"));
+	}
+	/**
+	 * ComboListBox: with specific test context and state.
+	 *		.class : .Combobox
+	 * 		.name : null
+	 * 		.classIndex : 0
+	 */
+	protected GuiSubitemTestObject ContrcomboBox(TestObject anchor, long flags) 
+	{
+		return new GuiSubitemTestObject(
+                        getMappedTestObject("ContrcomboBox"), anchor, flags);
+	}
+	
 	/**
 	 * ВводИРедактированиеПДРасчетныйДокумент: with default state.
 	 *		.text : Ввод и редактирование ПД - Расчетный документ

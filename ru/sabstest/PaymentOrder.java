@@ -187,7 +187,7 @@ public class PaymentOrder extends PaymentDocument {
 		if(!tax.drawerStatus.equals("") && tax.drawerStatus != null)
 			str = str + razd + tax.cbc + razd + tax.okato + razd + tax.paytReason + razd + tax.taxPeriod + razd + tax.docNo + razd + tax.docDate + razd + tax.taxPaytKind;
 
-		str = str + razd + purpose + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate);
+		str = str + razd + purpose + razd + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + razd;
 		return str;	
 	}
 }

@@ -9,6 +9,7 @@ import ru.sabstest.Init;
 import ru.sabstest.Log;
 import ru.sabstest.Pack;
 import ru.sabstest.PacketList;
+import ru.sabstest.PaymentDocument;
 import ru.sabstest.PaymentDocumentList;
 import ru.sabstest.Settings;
 
@@ -119,7 +120,7 @@ public class Main {
 
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
-			
+						
 			PacketList pl = new PacketList();
 			pl.generateFromXML("C:\\test\\nach\\gen3.xml");
 
