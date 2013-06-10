@@ -133,15 +133,8 @@ abstract public class PaymentDocument {
 		chargeOffDate = Settings.operDate;
 		receiptDate = Settings.operDate;
 
-		Element el = (Element) gendoc.getElementsByTagName("Payer").item(0);		
-
-		payer = Client.createClientFromBICPersonalAcc(el);
-
-		el = (Element) gendoc.getElementsByTagName("Payee").item(0);		
-
-		payee = Client.createClientFromBICPersonalAcc(el);
-		
-	
+		payer = ClientList.getClient(gendoc.getAttribute("IdPayer"));
+		payee = ClientList.getClient(gendoc.getAttribute("IdPayee"));	
 		
 		generateFromXMLByType(gendoc);
 	}

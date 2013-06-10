@@ -19,9 +19,11 @@ public class Test extends TestHelper
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
 		
 		PaymentDocumentList pl = new PaymentDocumentList();
-		pl.readFile("C:\\test\\nach\\3\\1.xml");
+		pl.readFile("C:\\test\\nach\\4\\K7182000.101");
 		
-		callScript("PrProvod.PervVvod.Vvod", new Object[]{ pl});
+		//callScript("PrProvod.PervVvod.Vvod", new Object[]{ pl});
+		
+		callScript("PrProvod.PervVvod.ContrVvod", new Object[]{ pl});
 		
 //		//Settings.readXML("C:\\general.xml");
 //		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");

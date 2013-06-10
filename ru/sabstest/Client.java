@@ -57,33 +57,35 @@ public class Client {
 	 * »зменение контрольного разр€да в счете на правильный
 	 */
 	public void contrrazr() {
-		String contrls;
+		if(!personalAcc.equals("") && personalAcc != null)
+		{
+			String contrls;
 
-		if(bic.substring(6,9).equals("000") || bic.substring(6,9).equals("001") || bic.substring(6,9).equals("002")) {
-			contrls = "0" + bic.substring(4,6) + personalAcc.substring(0, 8) + "0" + personalAcc.substring(9, 20);
-		}
-		else {
-			contrls = bic.substring(6,9) + personalAcc.substring(0, 8) + "0" + personalAcc.substring(9, 20);
-		}
-
-		int contr = 0, k;
-
-		for(k = 0; k < 23; k++) {
-			switch (k % 3) {
-			case 0: contr =  (Character.getNumericValue(contrls.charAt(k)) * 7) % 10 + contr ;
-			break;
-			case 1: contr =  (Character.getNumericValue(contrls.charAt(k)) * 1) % 10 + contr ;
-			break;
-			case 2: contr =  (Character.getNumericValue(contrls.charAt(k)) * 3) % 10 + contr ;
-			break;
+			if(bic.substring(6,9).equals("000") || bic.substring(6,9).equals("001") || bic.substring(6,9).equals("002")) {
+				contrls = "0" + bic.substring(4,6) + personalAcc.substring(0, 8) + "0" + personalAcc.substring(9, 20);
+			}
+			else {
+				contrls = bic.substring(6,9) + personalAcc.substring(0, 8) + "0" + personalAcc.substring(9, 20);
 			}
 
+			int contr = 0, k;
+
+			for(k = 0; k < 23; k++) {
+				switch (k % 3) {
+				case 0: contr =  (Character.getNumericValue(contrls.charAt(k)) * 7) % 10 + contr ;
+				break;
+				case 1: contr =  (Character.getNumericValue(contrls.charAt(k)) * 1) % 10 + contr ;
+				break;
+				case 2: contr =  (Character.getNumericValue(contrls.charAt(k)) * 3) % 10 + contr ;
+				break;
+				}
+
+			}
+
+			contr = ((contr % 10) * 3) % 10;
+
+			personalAcc = personalAcc.substring(0, 8) + Integer.toString(contr) + personalAcc.substring(9, 20);
 		}
-
-		contr = ((contr % 10) * 3) % 10;
-
-		personalAcc = personalAcc.substring(0, 8) + Integer.toString(contr) + personalAcc.substring(9, 20);
-
 	}
 
 	/**
@@ -107,7 +109,7 @@ public class Client {
 		XML.setOptinalAttr(bank, "CorrespAcc", correspAcc);
 		return rootElement;
 	}
-	
+
 	/**
 	 * @param doc документ дл€ создани€ елемента
 	 * @param elementName наименование элемента
@@ -126,7 +128,7 @@ public class Client {
 		XML.setOptinalAttr(bank, "CorrespAcc", correspAcc);
 		return rootElement;
 	}
-	
+
 	/**
 	 * @param cl элемент с реквизитами клиента
 	 * считывает реквизиты клиента из элемента
@@ -156,13 +158,13 @@ public class Client {
 		Client cl = new Client();
 
 		String bicStr, personalAccStr;
-		
+
 		Element bicEl =(Element) clEl.getElementsByTagNameNS("*", "BIC").item(0);
 		Element paEl =(Element) clEl.getElementsByTagNameNS("*", "PersonalAcc").item(0);
-		
+
 		bicStr = bicEl.getFirstChild().getNodeValue();
 		personalAccStr = paEl.getFirstChild().getNodeValue();
-		
+
 		String bic = bicStr.replaceAll("@", Settings.bik);
 		String personalAcc = personalAccStr.replaceAll("@", Settings.bik);
 
@@ -184,37 +186,54 @@ public class Client {
 		else
 			cl.personalAcc = personalAcc;
 
-		if(cl.bic.equals(Settings.bik) && !cl.personalAcc.equals(""))
+		cl.contrrazr();	
+
+		cl.loadFromDB();
+
+
+		return cl;
+	}
+
+	public void loadFromDB()
+	{
+		if(bic.equals(Settings.bik) && !personalAcc.equals(""))
 		{
-			if(cl.personalAcc.substring(0,1).equals("3") || cl.personalAcc.substring(0,1).equals("4"))
+			if(personalAcc.substring(0,1).equals("3") || personalAcc.substring(0,1).equals("4"))
 			{
-				cl.name = DB.selectFirstValueSabsDb("select c.nameshort from dbo.Account a\r\n" + 
+				name = DB.selectFirstValueSabsDb("select c.nameshort from dbo.Account a\r\n" + 
 						"inner join dbo.Acc_Link al on a.id_acc = al.id_acc and al.id_link_type = 2\r\n" + 
 						"inner join dbo.Clientj c on c.id_jur = al.id_obj\r\n" + 
-						"where a.NUM_ACC = '"+ cl.personalAcc + "'"); 
-				cl.inn = DB.selectFirstValueSabsDb("select c.inn from dbo.Account a\r\n" + 
+						"where a.NUM_ACC = '"+ personalAcc + "'"); 
+				inn = DB.selectFirstValueSabsDb("select c.inn from dbo.Account a\r\n" + 
 						"inner join dbo.Acc_Link al on a.id_acc = al.id_acc and al.id_link_type = 2\r\n" + 
 						"inner join dbo.Clientj c on c.id_jur = al.id_obj\r\n" + 
-						"where a.NUM_ACC = '"+ cl.personalAcc + "'"); 
+						"where a.NUM_ACC = '"+ personalAcc + "'"); 
 			}
-			else if(cl.personalAcc.substring(0,1).equals("6"))
+			else if(personalAcc.substring(0,1).equals("6"))
 			{
-				cl.name = DB.selectFirstValueSabsDb("select a.name_short from dbo.Account a where a.NUM_ACC = '" + cl.personalAcc + "'");
+				name = DB.selectFirstValueSabsDb("select a.name_short from dbo.Account a where a.NUM_ACC = '" + personalAcc + "'");
 			}
 		}
 		else
 		{
-			cl.correspAcc = DB.selectFirstValueSabsDb("select top 1 isnull(KSNP,'') ksnp from dbo.BNKSEEK where NEWNUM = '" + cl.bic + "'");
+			correspAcc = DB.selectFirstValueSabsDb("select top 1 isnull(KSNP,'') ksnp from dbo.BNKSEEK where NEWNUM = '" + bic + "'");
 
-			if(!cl.personalAcc.equals(""))
-			{
-				cl.inn = "222222222222";
-				cl.kpp = "111111111";
-				cl.name = "“естовый клиент";
-			}
+
+			inn = "222222222222";
+			kpp = "111111111";
+			name = "“естовый клиент";
+
 		}
-		
-		cl.contrrazr();		
+	}
+
+	public static Client createClientFromBICPersonalAcc(String bic, String ls)
+	{
+		Client cl = new Client(bic, ls);
+
+		cl.contrrazr();
+		cl.loadFromDB();
+
 		return cl;
+
 	}
 }

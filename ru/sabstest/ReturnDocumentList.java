@@ -28,7 +28,7 @@ public class ReturnDocumentList extends Packet{
 	public int edQuantity;
 	public int sum;
 	
-	ReturnDocumentList()
+	public ReturnDocumentList()
 	{
 		packetType = Packet.Type.PacketEPDVER_B;
 		rdList = new ArrayList<ReturnDocument>();
