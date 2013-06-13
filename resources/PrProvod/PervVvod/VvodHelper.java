@@ -20,11 +20,11 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>Vvod</b><br>
- * Generated     : <b>2013/06/07 13:23:10</b><br>
+ * Generated     : <b>2013/06/13 11:57:48</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  июня 07, 2013
+ * @since  июня 13, 2013
  * @author Admin
  */
 public abstract class VvodHelper extends RationalTestScript
@@ -75,6 +75,56 @@ public abstract class VvodHelper extends RationalTestScript
 	{
 		return new TopLevelSubitemTestObject(
                         getMappedTestObject("Docswindow"), anchor, flags);
+	}
+	
+	/**
+	 * ОК: with default state.
+	 *		.text : ОК
+	 * 		.class : .Pushbutton
+	 * 		.name : ОК
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject ErrorOkbutton() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("ErrorOkbutton"));
+	}
+	/**
+	 * ОК: with specific test context and state.
+	 *		.text : ОК
+	 * 		.class : .Pushbutton
+	 * 		.name : ОК
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject ErrorOkbutton(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("ErrorOkbutton"), anchor, flags);
+	}
+	
+	/**
+	 * Ошибка: with default state.
+	 *		.text : Ошибка
+	 * 		.class : #32770
+	 * 		.processName : purs_loader.exe
+	 * 		.name : Ошибка
+	 */
+	protected TopLevelSubitemTestObject Errorwindow() 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("Errorwindow"));
+	}
+	/**
+	 * Ошибка: with specific test context and state.
+	 *		.text : Ошибка
+	 * 		.class : #32770
+	 * 		.processName : purs_loader.exe
+	 * 		.name : Ошибка
+	 */
+	protected TopLevelSubitemTestObject Errorwindow(TestObject anchor, long flags) 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("Errorwindow"), anchor, flags);
 	}
 	
 	/**

@@ -40,9 +40,7 @@ public class Vvod extends VvodHelper
 		{
 			PaymentDocument pd = pl.get(i);
 			Inputwindow().inputKeys(pd.toStr("{ENTER}",true));
-			//Inputwindow().inputKeys("{ENTER}{ENTER}{ENTER}");	
-
-
+			//Inputwindow().inputKeys("{ENTER}{ENTER}{ENTER}");
 
 //			if(ExistDocwindow().exists())
 //			{
@@ -50,6 +48,11 @@ public class Vvod extends VvodHelper
 //				Log.msg("Похожий документ уже есть в системе.");
 //			}
 
+			
+			if(Errorwindow().exists())
+			{
+				ErrorOkbutton().click();				
+			}
 
 			ProvodNextbutton().click();
 			Log.msg("Документ №" + Integer.toString(i + 1) + " введен в САБС.");

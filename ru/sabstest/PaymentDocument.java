@@ -52,7 +52,7 @@ abstract public class PaymentDocument {
 		this.accDocDate = new Date(0);
 		this.transKind = "";
 		this.sum = 0;				
-		this.paytKind = "1";
+		//this.paytKind = "1";
 		this.priority = "6";
 		tax = new DepartmentalInfo("", "", "", "", "", "", "", "");			
 		this.purpose = "Тест";
@@ -116,12 +116,12 @@ abstract public class PaymentDocument {
 	 */
 	abstract public void generateFromXMLByType(Element gendoc);
 	
-	public void generateFromXML(Element gendoc, int edNo, String edAuthor, int sum)
+	public void generateFromXML(Element gendoc, int edNo,  int sum)
 	{
 		this.edNo = edNo;
 		edDate = Settings.operDate;
-		this.edAuthor = edAuthor;
-		paytKind = "1";
+		//this.edAuthor = edAuthor;
+		//paytKind = "1";
 		this.sum = sum;
 		if(this.sum == 0)
 			this.sum = (int) (new Random().nextFloat() * 10000);		
@@ -135,6 +135,8 @@ abstract public class PaymentDocument {
 
 		payer = ClientList.getClient(gendoc.getAttribute("IdPayer"));
 		payee = ClientList.getClient(gendoc.getAttribute("IdPayee"));	
+		
+		this.edAuthor = payer.bic.substring(2) + "000";
 		
 		generateFromXMLByType(gendoc);
 	}

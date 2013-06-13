@@ -12,6 +12,7 @@ import ru.sabstest.Pack;
 import ru.sabstest.PacketList;
 import ru.sabstest.PaymentDocumentList;
 import ru.sabstest.Settings;
+import ru.sabstest.XML;
 
 
 
@@ -121,12 +122,15 @@ public class Main {
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			
-			ClientList.readFile("C:\\test\\nach\\clients.xml");		
-								
-			PacketList pl = new PacketList();
-			pl.generateFromXML("C:\\test\\nach\\gen4.xml");
 			
-			pl.createFile("C:\\test\\nach\\4\\");
+			XML.createXMLFromBase64("C:\\test\\otv\\1\\458200200020130701000000101.PacketEPDVER", "C:\\test\\otv\\1\\ver.xml");
+//			
+//			ClientList.readFile("C:\\test\\nach\\clients.xml");		
+//								
+//			PacketList pl = new PacketList();
+//			pl.generateFromXML("C:\\test\\otv\\gen1.xml");
+//			
+//			pl.createFile("C:\\test\\otv\\1\\");
 
 			break;
 		}

@@ -364,6 +364,7 @@ public class PaymentDocumentList extends Packet{
 
 		edNo = Integer.parseInt(root.getAttribute("EPDNo"));
 		edDate = Settings.operDate;
+		
 		edAuthor = root.getAttribute("EDAuthor");
 		edReceiver = root.getAttribute("EDReceiver");
 		systemCode = "0";
@@ -388,7 +389,7 @@ public class PaymentDocumentList extends Packet{
 				{
 					PaymentDocument pd = PaymentDocument.createByType(type);					
 
-					pd.generateFromXML(ed, edNo, edAuthor, sum);
+					pd.generateFromXML(ed, edNo, sum);
 					edNo++;
 					if(sum != 0)
 						sum++;
@@ -407,7 +408,7 @@ public class PaymentDocumentList extends Packet{
 	 * вставка пакета в БД УЭО
 	 * @param filename полный путь к файлу
 	 */
-	void insertIntoDbUfebs(String filename)
+	public void insertIntoDbUfebs(String filename)
 	{
 		try
 		{
@@ -450,7 +451,7 @@ public class PaymentDocumentList extends Packet{
 	 * вставка пакета в БД ВЭР
 	 * @param filename полный путь к файлу
 	 */
-	void insertIntoDbVer(String filename)
+	public void insertIntoDbVer(String filename)
 	{
 		try
 		{

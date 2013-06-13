@@ -167,10 +167,9 @@ public class PaymentOrder extends PaymentDocument {
 		payee = pd.payer;
 		
 
-		purpose = "Возврат ошибочного электронного платежного документа " +  String.format("%06d", sum) + " с датой составления "
+		purpose = "Возврат ошибочного электронного платежного документа " +  String.format("%06d", pd.edNo) + " с датой составления "
 		+ new SimpleDateFormat("dd/MM/yyyy").format(edDate) +", УИС " 
-		+ edAuthor + " на сумму " + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
-		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + " код возврата " + resultCode ;
+		+ pd.edAuthor + " на сумму " + String.format("%018d", pd.sum).substring(0, 16) + "." + String.format("%018d", pd.sum).substring(16) + " код возврата " + resultCode ;
 	}
 	
 	@Override
