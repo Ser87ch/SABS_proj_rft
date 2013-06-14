@@ -43,8 +43,8 @@ abstract public class PaymentDocument {
 	//Ведомственная информация
 	DepartmentalInfo tax;
 
-	
-//	public String resultCode;
+
+	//	public String resultCode;
 
 	public PaymentDocument()
 	{	
@@ -59,7 +59,7 @@ abstract public class PaymentDocument {
 		//this.chargeOffDate = new Date(0);
 		//this.receiptDate = new Date(0);	
 		this.edNo = 0;
-		
+
 	}
 
 	@Override
@@ -76,7 +76,7 @@ abstract public class PaymentDocument {
 	 */
 	abstract public String toStr(String razd, boolean addShift);
 
-	
+
 	/**
 	 * @param razd разделитель реквизитов
 	 * @return строка для контрольного ввода
@@ -100,14 +100,14 @@ abstract public class PaymentDocument {
 	 * @return элемент
 	 */
 	abstract public Element createED(Document doc);
-	
-	
+
+
 	/**
 	 * считывает реквизиты из элемента
 	 * @param doc элемент
 	 */
 	abstract public void readED(Element doc);
-	
+
 	/**
 	 * генерирует документ на основе элемента из xml генерации
 	 * @param gendoc элемент
@@ -115,8 +115,8 @@ abstract public class PaymentDocument {
 	 * @param edAuthor УИС
 	 */
 	abstract public void generateFromXMLByType(Element gendoc);
-	
-	public void generateFromXML(Element gendoc, int edNo,  int sum)
+
+	public void generateFromXML(Element gendoc, int edNo, String edAuthor, int sum)
 	{
 		this.edNo = edNo;
 		edDate = Settings.operDate;
@@ -125,22 +125,30 @@ abstract public class PaymentDocument {
 		this.sum = sum;
 		if(this.sum == 0)
 			this.sum = (int) (new Random().nextFloat() * 10000);		
-		
+
 		priority = "6";
 		accDocNo = edNo;
 		accDocDate = Settings.operDate;
-		
+
 		chargeOffDate = Settings.operDate;
 		receiptDate = Settings.operDate;
 
 		payer = ClientList.getClient(gendoc.getAttribute("IdPayer"));
 		payee = ClientList.getClient(gendoc.getAttribute("IdPayee"));	
-		
-		this.edAuthor = payer.bic.substring(2) + "000";
-		
+
+		if(edAuthor.substring(0,7).equals(Settings.bik.substring(2)))
+			this.edAuthor = edAuthor;
+		else
+			this.edAuthor = payer.bic.substring(2) + "000";
+
 		generateFromXMLByType(gendoc);
+		
+		String errorCode = gendoc.getAttribute("ErrorCode");
+		
+		if(errorCode != null && !errorCode.equals(""))
+			ErrorCode.addError(this, Integer.parseInt(errorCode));
 	}
-	
+
 	/**
 	 * вставка данных в БД для создания xml УЭО
 	 * @param idPacet ид пакета
@@ -150,14 +158,14 @@ abstract public class PaymentDocument {
 	 * @param filename файл
 	 */
 	abstract public void insertIntoDbUfebs(int idPacet, int pEDNo, Date pacDate, String pAuthor, String filename);
-	
+
 	/**
 	 * вставка данных в БД для создания xml ВЭР
 	 * @param idPacet ид пакета
 	 * @param filename файл
 	 */
 	abstract public void insertIntoDbVer(int idPacet, String filename);
-	
+
 	/**
 	 * создает xml файл с реквизитами документа
 	 * @param полный путь к файлу
@@ -169,7 +177,7 @@ abstract public class PaymentDocument {
 		XML.createXMLFile(doc, fl);
 	}
 
-	
+
 	/**
 	 * считать реквизиты из XML
 	 * @param src путь к файлу
@@ -189,7 +197,7 @@ abstract public class PaymentDocument {
 		rootElement.setAttribute("xmlns", "urn:cbr-ru:ed:v2.0");
 		rootElement.setAttribute("EDNo", Integer.toString(edNo));	
 		rootElement.setAttribute("EDDate", new SimpleDateFormat("yyyy-MM-dd").format(edDate));
-	
+
 		rootElement.setAttribute("EDAuthor", edAuthor);
 		rootElement.setAttribute("PaytKind", paytKind);
 		rootElement.setAttribute("Sum", Integer.toString(sum));
@@ -280,11 +288,11 @@ abstract public class PaymentDocument {
 		return pd;
 	}
 
-	
+
 	public static PaymentDocument createByType(String type)
 	{
 		PaymentDocument pd = null;
-		
+
 		if(type.equals("101"))
 			pd = new PaymentOrder();
 		else if(type.equals("103"))
@@ -295,7 +303,7 @@ abstract public class PaymentDocument {
 			pd = new PaymentWarrant();
 		else if(type.equals("108"))
 			pd = new PaymentOrderRegister();
-		
+
 		return pd;
 	}
 }

@@ -389,7 +389,7 @@ public class PaymentDocumentList extends Packet{
 				{
 					PaymentDocument pd = PaymentDocument.createByType(type);					
 
-					pd.generateFromXML(ed, edNo, sum);
+					pd.generateFromXML(ed, edNo, edAuthor, sum);
 					edNo++;
 					if(sum != 0)
 						sum++;

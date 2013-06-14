@@ -2,9 +2,9 @@ package ru.sabstest;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Random;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -59,15 +59,17 @@ public class PaymentOrderRegister extends PaymentDocument {
 			}
 
 			nl = doc.getElementsByTagNameNS("*","CreditTransferTransactionInfo");
-			
+
+			tiList = new ArrayList <TransactionInfo>();
+
 			for(int i = 0; i < nl.getLength(); i++)
 			{
 				TransactionInfo ti = new TransactionInfo();
 				ti.readED((Element) nl.item(i));
-				
+
 				tiList.add(ti);
 			}		
-			
+
 		}
 	}	
 
@@ -76,22 +78,103 @@ public class PaymentOrderRegister extends PaymentDocument {
 	{
 		transKind = "01";
 		purpose = "Тестовый платежный реестр";		
+
+		tiList = new ArrayList <TransactionInfo>();
+
+		TransactionInfo ti = new TransactionInfo();
+		ti.generate(sum);
+		tiList.add(ti);
 	}
-	
+
 	@Override
 	public void insertIntoDbUfebs(int idPacet, int pEDNo, Date pacDate, String pAuthor, String filename)
 	{
-		
-		
+		try
+		{
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();
+
+			String query = "INSERT INTO [dbo].[UFEBS_Epd]\r\n" + 
+			"([ID_PACET], [ID_DEPART],\r\n" + 
+			" [ID_ARM], [ID_DOC_BON], [InOutMode], [PEpdNo], [PacDate], [PAuthor], \r\n" + 
+			"[EKodObr], [Name], [PrNum], [Dvv], [Sub_ID], [IEdNo], [IEdDate], [IEdAutor], \r\n" + 
+			"[Receiver], [Nd], [Dd], [VidPlNo], [Su], [InnMfkb], [NamKl], [LsKl], [Mfkb], [Krkb], \r\n" + 
+			"[Mf], [Kr], [InnMf], [NamKor], [LsKor], [Vo], [Turn], [Dest], [NKor1], [NKor2], [NKor3], \r\n" + 
+			"[NKor4], [N_Ch_PL], [Shifr], [N_pldok], [D_pl], [Su_ost], [Dppl], [Dkart], [Sop], [SopNo], \r\n" + 
+			"[Dspl], [D_otmet], [TurKind], [SStatus], [Kppa], [Kppb], [CodBclas], [CodOkato], [NalPlat], \r\n" + 
+			"[NalPer], [NdNal], [DdNal], [TypNal], [Typ_Doc], [SS], [NamPost], [Esc_Key], [Esc_Key2])\r\n" + 
+			"VALUES(" + DB.toString(idPacet) + ", null,\r\n" + 
+			"2, null, 0, " + DB.toString(pEDNo) + ", " + DB.toString(pacDate) + ", " + DB.toString(pAuthor) + ",\r\n" + 
+			"0, 'ED108', " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, null, null,\r\n" + 
+			"null, " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ", " + DB.toString(paytKind) + ", " + DB.toString(sum).substring(0,DB.toString(sum).length() - 2) +  "." + DB.toString(sum).substring(DB.toString(sum).length() - 2, DB.toString(sum).length()) + ", " + DB.toString(payer.inn) + ", " + DB.toString(payer.name) + ", " + DB.toString(payer.personalAcc) + ", " + DB.toString(payer.bic) + ", " + DB.toString(payer.correspAcc) + ",\r\n" + 
+			DB.toString(payee.bic) + ", " + DB.toString(payee.correspAcc) + ", " + DB.toString(payee.inn) + ", " + DB.toString(payee.name) + ", " + DB.toString(payee.personalAcc) + ", " + DB.toString(transKind) + ", " + DB.toString(priority) + ", null, " + DB.toString(purpose) + ", null, null,\r\n" + 
+			"null, null, null, null, null, null, " + DB.toString(receiptDate) + ", " + DB.toString(fileDate) + ", null, null, \r\n" + 
+			DB.toString(chargeOffDate) + ", null, null, " + DB.toString(tax.drawerStatus) + ", " + DB.toString(payer.kpp) + ", " + DB.toString(payee.kpp) + ", " + DB.toString(tax.cbc) + ", " + DB.toString(tax.okato) + ", " + DB.toString(tax.paytReason) + ",\r\n" + 
+			DB.toString(tax.taxPeriod) + ", " + DB.toString(tax.docNo) + ", " + DB.toString(tax.docDate) + ", " + DB.toString(tax.taxPaytKind) + ", 'E', null, " + DB.toString(filename) + ", null, null)";			
+			db.st.executeUpdate(query);
+			db.close();		
+
+			int idEPD = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_EPD) from dbo.UFEBS_Epd"));
+
+			for(TransactionInfo ti:tiList)
+			{
+				ti.insertIntoDb(idPacet, idEPD, edNo, edDate, edAuthor);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.msg(e);			
+		}
+
 	}
 
 	@Override
 	public void insertIntoDbVer(int idPacet, String filename) {
+		try
+		{
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();
 
-		
+			String query = "INSERT INTO [dbo].[epay_Epd]\r\n" + 
+			"([ID_PACKET], [ID_DEPART],\r\n" + 
+			" [ID_ARM], [ID_DOC_BON], [InOutMode], [EKodObr], [Name], [EDNo], [EDDate], [EDAuthor],\r\n" + 
+			" [ini_EdNo], [ini_EdDate], [ini_EdAutor],\r\n" + 
+			" [EDReceiver], [AccDocNo], [AccDocDate], [PaytKind], [Summa],\r\n" + 
+			" [payee_INN], [payee_Name], [payee_PersonalAcc], [payee_BIC], [payee_CorrespAcc], [payee_KPP],\r\n" + 
+			" [payer_INN], [payer_Name], [payer_PersonalAcc], [payer_BIC], [payer_CorrespAcc], [payer_KPP],\r\n" + 
+			" [TransKind], [Priority], [Purpose], [PaytCondition], [AcptTerm], [DocDispatchDate],\r\n" + 
+			" [part_PaytNo], [part_TransKind], [part_AccDocNo], [part_AccDocDate], [part_SumResidualPayt], \r\n" + 
+			"[ReceiptDate], [FileDate], [TransContent], [ChargeOffDate], [MaturityDate], [ReceiptDateCollectBank], \r\n" + 
+			"[dep_DrawerStatus], [dep_CBC], [dep_OKATO], [dep_PaytReason], [dep_TaxPeriod], [dep_DocNo], [dep_DocDate], [dep_TaxPaytKind], \r\n" + 
+			"[AcptSum], [Typ_Doc], [SS], [NamPost], [Esc_Key], [Esc_Key2])\r\n" +					 
+			"VALUES(" + DB.toString(idPacet) + ", null,\r\n" + 
+			"2, null, 0, 0, 'ED108'," + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ",\r\n" + 
+			"null, null, null,\r\n" + 
+			"null, " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ", " + DB.toString(paytKind) + ", '" + DB.toString(sum).substring(0,DB.toString(sum).length() - 2) +  "," + DB.toString(sum).substring(DB.toString(sum).length() - 2, DB.toString(sum).length()) + "',\r\n" +
+			DB.toString(payee.inn) + ", " + DB.toString(payee.name) + ", " + DB.toString(payee.personalAcc) + ", " + DB.toString(payee.bic) + ", " + DB.toString(payee.correspAcc)+ ", " + DB.toString(payee.kpp) + ",\r\n" + 
+			DB.toString(payer.inn) + ", " + DB.toString(payer.name) + ", " + DB.toString(payer.personalAcc) + ", " + DB.toString(payer.bic) + ", " + DB.toString(payer.correspAcc)+ ", " + DB.toString(payer.kpp) + ",\r\n" +  
+			DB.toString(transKind) + ", " + DB.toString(priority) + ", " + DB.toString(purpose) + ", null, null, null,\r\n" + 
+			"null, null, null, null, null,\r\n" +
+			DB.toString(receiptDate) + ", " + DB.toString(fileDate) + ", null, " +  DB.toString(chargeOffDate) + ", null, null,\r\n" + 
+			DB.toString(tax.drawerStatus) + ", " + DB.toString(tax.cbc) + ", " + DB.toString(tax.okato) + ", " + DB.toString(tax.taxPeriod) + ", " + DB.toString(tax.docNo) + ", " + DB.toString(tax.docDate) + ", " + DB.toString(tax.taxPaytKind) + ", "  + DB.toString(tax.paytReason) + ",\r\n" + 
+			"null, 'E', null, " + DB.toString(filename) + ", null, null)";			
+			db.st.executeUpdate(query);
+			db.close();		
+
+			int idEPD = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_EPD) from dbo.UFEBS_Epd"));
+
+			for(TransactionInfo ti:tiList)
+			{
+				ti.insertIntoDb(idPacet, idEPD, edNo, edDate, edAuthor);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.msg(e);			
+		}
 	}
 
-	
+
 	/**
 	 * Реестр поручений
 	 * @author Admin
@@ -122,13 +205,13 @@ public class PaymentOrderRegister extends PaymentDocument {
 			rootElement.setAttribute("TransactionDate", new SimpleDateFormat("yyyy-MM-dd").format(transactionDate));
 			rootElement.setAttribute("TransactionSum", Integer.toString(transactionSum));
 			XML.setOptinalAttr(rootElement, "DocIndex", docIndex);
-			
+
 			rootElement.appendChild(payer.createED(doc, "TransactionPayerInfo"));
 			rootElement.appendChild(payee.createED(doc, "TransactionPayeeInfo"));
-			
+
 			XML.setOptinalAttr(rootElement, "TransactionPurpose", transactionPurpose);
 			XML.setOptinalAttr(rootElement, "RemittanceInfo", remittanceInfo);
-			
+
 			return rootElement;
 		}
 
@@ -143,18 +226,57 @@ public class PaymentOrderRegister extends PaymentDocument {
 				transactionDate = Date.valueOf(tr.getAttribute("TransactionDate"));
 				transactionSum = Integer.parseInt(tr.getAttribute("TransactionSum"));
 				docIndex = tr.getAttribute("DocIndex");
-				
+
 				payer = new ClientInfo();
 				payee = new ClientInfo();
-				
+
 				payer.readED((Element) tr.getElementsByTagNameNS("*","TransactionPayerInfo").item(0));
 				payee.readED((Element) tr.getElementsByTagNameNS("*","TransactionPayeeInfo").item(0));
-				
+
 				transactionPurpose = tr.getAttribute("TransactionPurpose");
 				remittanceInfo = tr.getAttribute("RemittanceInfo");
 			}
 		}
+
+		public void generate(int sum)
+		{
+			transactionID = 1;
+			transactionDate = Settings.operDate;
+			transactionSum = sum;
+
+			payer = new ClientInfo("1", "60302810700000000001", "222222222222", "Иванов И.И.", "г. Москва", "Плательщик");
+			payee = new ClientInfo("2", "40703810700000000015", "111111111111", "Петров П.П.", "г. Москва", "Получатель");
+			transactionPurpose = "Запись в реестре";
+		}
+
 		
+		public void insertIntoDb(int idPacket, int idEPD, int edNo, Date edDate, String edAuthor)
+		{
+			try{ 
+				DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+				db.connect();
+
+				String query = "INSERT INTO [dbo].[epay_ED108]([ID_EPD], [ID_PACKET], [ID_DEPART],\r\n" + 
+						" [ID_ARM], [InOutMode], [EDNo], [EDDate], [EDAuthor], [TransactionID], [PayerDocNo], \r\n" + 
+						"[PayerDocDate], [OperationID], [TransactionDate], [TransactionSum], [DocIndex],\r\n" + 
+						" [PayerPersonalID], [PayerAcc], [PayerINN], [PayerPersonName], [PayerPersonAddress],\r\n" + 
+						" [PayerTradeName], [PayeePersonalID], [PayeeAcc], [PayeeINN], [PayeePersonName],\r\n" + 
+						" [PayeePersonAddress], [PayeeTradeName], [TransactionPurpose], [RemittanceInfo])\r\n" +
+						"VALUES(" + DB.toString(idEPD) + ", " + DB.toString(idPacket) + ", null,\r\n" +
+						"2, 0, " + DB.toString(edNo) +  ", " + DB.toString(edDate) + ", "  + DB.toString(edAuthor) + ", " + DB.toString(transactionID) + ", "  + DB.toString(payerDocNo) + ",\r\n" +    
+						DB.toString(payerDocDate) + ", " + DB.toString(operationID) +  ", " + DB.toString(transactionDate) +  ", " + DB.toString(transactionSum) +  ", " + DB.toString(docIndex) +  ",\r\n" + 
+						DB.toString(payer.personID) +  ", " + DB.toString(payer.acc) +  ", " + DB.toString(payer.inn) +  ", " + DB.toString(payer.personName) +  ", " + DB.toString(payer.personAddress) +  ",\r\n" +
+						DB.toString(payer.tradeName) +  ", " + DB.toString(payee.personID) +  ", " + DB.toString(payee.acc) +  ", " + DB.toString(payee.inn) +  ", " + DB.toString(payee.personName) +  ", " + 
+						DB.toString(payee.personAddress) +  ", " + DB.toString(payee.tradeName) +  ", " + DB.toString(transactionPurpose) +  ", " + DB.toString(remittanceInfo) + ")";
+				db.st.executeUpdate(query);
+				db.close();
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+				Log.msg(e);			
+			}
+		}
+
 		public static class ClientInfo
 		{
 			public String personID;
@@ -163,28 +285,46 @@ public class PaymentOrderRegister extends PaymentDocument {
 			public String personName;
 			public String personAddress;
 			public String tradeName;
-			
+
+			ClientInfo()
+			{
+
+			}
+
+
+
+			public ClientInfo(String personID, String acc, String inn,
+					String personName, String personAddress, String tradeName) {
+				super();
+				this.personID = personID;
+				this.acc = acc;
+				this.inn = inn;
+				this.personName = personName;
+				this.personAddress = personAddress;
+				this.tradeName = tradeName;
+			}
+
 			public Element createED(Document doc, String name)
 			{
 				Element rootElement = doc.createElement(name);
-				
+
 				XML.setOptinalAttr(rootElement, "PersonID", personID);
 				XML.setOptinalAttr(rootElement, "Acc", acc);
 				XML.setOptinalAttr(rootElement, "INN", inn);
-				
+
 				XML.createNode(doc, rootElement, "PersonName", personName);
 				XML.createNode(doc, rootElement, "PersonAddress", personAddress);
 				XML.createNode(doc, rootElement, "TradeName", tradeName);
-				
+
 				return rootElement;
 			}
-			
+
 			public void readED(Element cl)
 			{
 				personID = cl.getAttribute("PersonID");
 				acc = cl.getAttribute("Acc");
 				inn = cl.getAttribute("INN");
-				
+
 				personName = XML.getChildValueString("PersonName", cl);
 				personAddress = XML.getChildValueString("PersonAddress", cl);
 				tradeName = XML.getChildValueString("TradeName", cl);
@@ -196,10 +336,10 @@ public class PaymentOrderRegister extends PaymentDocument {
 
 	@Override
 	public String toStr(String razd, boolean addShift) {
-		
+
 		return null;
 	}
 
-	
-	
+
+
 }

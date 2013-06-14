@@ -31,11 +31,11 @@ public class Test extends TestHelper
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
 		PacketList pl = new PacketList();
-		pl.generateFromXML("C:\\test\\otv\\gen1.xml");
+		pl.generateFromXML("C:\\test\\otv\\gen3.xml");
 		//pl.createFile("C:\\test\\");
 	//	pl.insertIntoDB();
 						
-		callScript("SABS.CreateSignedXML",new Object[]{"C:\\test\\otv\\1", pl});
+		callScript("SABS.CreateSignedXML",new Object[]{"C:\\test\\otv\\3\\", pl});
 		
 		
 	}
