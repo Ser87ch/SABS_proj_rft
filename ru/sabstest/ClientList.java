@@ -33,6 +33,6 @@ public class ClientList {
 	
 	public static Client getClient(String id)
 	{
-		return clList.get(id);
+		return new Client(clList.get(id));
 	}
 }

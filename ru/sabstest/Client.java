@@ -52,6 +52,16 @@ public class Client {
 		this.kpp = kpp;
 		this.name = name;
 	}
+	
+	public Client(Client cl)
+	{
+		this.bic = cl.bic;
+		this.correspAcc = cl.correspAcc;
+		this.personalAcc = cl.personalAcc;
+		this.inn = cl.inn;
+		this.kpp = cl.kpp;
+		this.name = cl.name;
+	}
 
 	/**
 	 * Изменение контрольного разряда в счете на правильный
@@ -236,4 +246,6 @@ public class Client {
 		return cl;
 
 	}
+	
+	
 }

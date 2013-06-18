@@ -123,14 +123,14 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			
 			
-	//		XML.createXMLFromBase64("C:\\test\\otv\\3\\452500000020130701000000103.PacketEPDVER", "C:\\test\\otv\\3\\ver.xml");
+//			XML.createXMLFromBase64("C:\\test\\otv\\3\\452500000020130701000000103.PacketEPDVER", "C:\\test\\otv\\3\\ver.xml");
 //			
 			ClientList.readFile("C:\\test\\nach\\clients.xml");		
 								
 			PacketList pl = new PacketList();
 			pl.generateFromXML("C:\\test\\otv\\gen3.xml");
 			
-			pl.createFile("C:\\test\\otv\\3\\");
+			pl.createFile("C:\\test\\otv\\");
 
 			break;
 		}
