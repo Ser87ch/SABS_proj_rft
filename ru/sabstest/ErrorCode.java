@@ -78,6 +78,12 @@ public class ErrorCode {
 		case 36:
 			pd.payee.correspAcc = "";
 			break;
+		case 41:
+			String cr = pd.payer.personalAcc.substring(8,9);
+			int cd = Integer.parseInt(cr) + 1;
+			cd = (cd == 10) ? 0 : cd;
+			pd.payer.personalAcc = pd.payer.personalAcc.substring(0,8) + Integer.toString(cd) + pd.payer.personalAcc.substring(9);
+			break;
 		case 42:
 		//	pd.payer.personalAcc = "a" + pd.payer.personalAcc.substring(1);
 			break;
@@ -89,8 +95,8 @@ public class ErrorCode {
 			pd.payer.personalAcc = "";
 			break;
 		case 45:
-			String cr = pd.payee.personalAcc.substring(8,9);
-			int cd = Integer.parseInt(cr) + 1;
+			cr = pd.payee.personalAcc.substring(8,9);
+			cd = Integer.parseInt(cr) + 1;
 			cd = (cd == 10) ? 0 : cd;
 			pd.payee.personalAcc = pd.payee.personalAcc.substring(0,8) + Integer.toString(cd) + pd.payee.personalAcc.substring(9);
 			break;
@@ -178,7 +184,14 @@ public class ErrorCode {
 			pw = (PaymentWarrant) pd;
 			pw.transContent = "!@abc";
 			break;		
-			
+		case 71:
+			co = (CollectionOrder) pd;
+			co.paytKind = "5";
+			break;
+		case 72:
+			PaymentOrderRegister por = (PaymentOrderRegister) pd;
+			por.tiList.get(0).transactionSum += 1;
+			break;
 		}
 	}
 }
