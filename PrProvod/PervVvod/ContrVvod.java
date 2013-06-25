@@ -20,6 +20,7 @@ public class ContrVvod extends ContrVvodHelper
 	public void testMain(Object[] args) 
 	{
 		Menutree().click(atName("Контрольный ввод"));
+		sleep(1);
 		SABSwindow().inputKeys("{ExtDown}");
 		sleep(1);
 		SABSwindow().inputKeys("{TAB}");
@@ -37,9 +38,13 @@ public class ContrVvod extends ContrVvodHelper
 			PaymentDocument pd = pl.get(i);
 			Inputwindow().inputKeys(pd.toStrContr("{ENTER}"));	
 			Inputwindow().inputKeys("{ENTER}{ENTER}{ENTER}");	
-			ControlTextwindow().inputKeys("{ENTER}{ENTER}{ENTER}");
-			sleep(1);
-			//ControlTextwindow().inputKeys("{ENTER}");
+			ControlTextwindow().inputKeys("{ENTER}{ENTER}");
+			sleep(1.0);
+			ControlTextwindow().inputKeys("{ENTER}");
+			
+			if(pd.transKind.equals("02") || pd.transKind.equals("06"))
+				ControlTextwindow().inputKeys("{ENTER}");
+			
 			Log.msg("Документ №" + Integer.toString(i + 1) + " проконтролирован в САБС.");
 			
 		}

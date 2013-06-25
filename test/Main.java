@@ -128,9 +128,9 @@ public class Main {
 			ClientList.readFile("C:\\test\\nach\\clients.xml");		
 								
 			PacketList pl = new PacketList();
-			pl.generateFromXML("C:\\test\\otv\\gen3.xml");
+			pl.generateFromXML("C:\\test\\gen.xml");
 			
-			pl.createFile("C:\\test\\otv\\");
+			pl.createFile("C:\\test\\");
 
 			break;
 		}

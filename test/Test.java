@@ -19,23 +19,22 @@ public class Test extends TestHelper
 		Init.load();
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
 		
-//		PaymentDocumentList pl = new PaymentDocumentList();
-//		pl.readFile("C:\\test\\nach\\5\\K7182000.101");
-//		
-////		callScript("PrProvod.PervVvod.Vvod", new Object[]{ pl});
-//		
-//		callScript("PrProvod.PervVvod.ContrVvod", new Object[]{ pl});
+		PaymentDocumentList pl = new PaymentDocumentList();
+		pl.readFile("C:\\test\\K7182000.101");
+		
+	//	callScript("PrProvod.PervVvod.Vvod", new Object[]{ pl});
+		
+		callScript("PrProvod.PervVvod.ContrVvod", new Object[]{ pl});
 		
 		//Settings.readXML("C:\\general.xml");
-		ClientList.readFile("C:\\test\\nach\\clients.xml");
-		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
-		
-		PacketList pl = new PacketList();
-		pl.generateFromXML("C:\\test\\otv\\gen5.xml");
-		//pl.createFile("C:\\test\\");
-	//	pl.insertIntoDB();
-						
-		callScript("SABS.CreateSignedXML",new Object[]{"C:\\test\\otv\\5\\", pl});
+//		ClientList.readFile("C:\\test\\nach\\clients.xml");
+//		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
+//		
+//		PacketList pl = new PacketList();
+//		pl.generateFromXML("C:\\test\\otv\\gen5.xml");
+//	
+//						
+//		callScript("SABS.CreateSignedXML",new Object[]{"C:\\test\\otv\\5\\", pl});
 		
 		
 	}
