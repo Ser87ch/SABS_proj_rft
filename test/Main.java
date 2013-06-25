@@ -8,6 +8,7 @@ import ru.sabstest.DB;
 import ru.sabstest.DeltaDB;
 import ru.sabstest.Init;
 import ru.sabstest.Log;
+import ru.sabstest.ModuleList;
 import ru.sabstest.Pack;
 import ru.sabstest.PacketList;
 import ru.sabstest.PaymentDocumentList;
@@ -125,13 +126,15 @@ public class Main {
 			
 //			XML.createXMLFromBase64("C:\\test\\otv\\3\\452500000020130701000000103.PacketEPDVER", "C:\\test\\otv\\3\\ver.xml");
 //			
-			ClientList.readFile("C:\\test\\nach\\clients.xml");		
-								
-			PacketList pl = new PacketList();
-			pl.generateFromXML("C:\\test\\gen.xml");
-			
-			pl.createFile("C:\\test\\");
+//			ClientList.readFile("C:\\test\\nach\\clients.xml");		
+//								
+//			PacketList pl = new PacketList();
+//			pl.generateFromXML("C:\\test\\gen.xml");
+//			
+//			pl.createFile("C:\\test\\");
 
+			ModuleList.readFile("C:\\test\\modules.xml");
+			
 			break;
 		}
 		case ED:
