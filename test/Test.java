@@ -1,10 +1,8 @@
 package test;
 import resources.test.TestHelper;
-import ru.sabstest.ClientList;
 import ru.sabstest.Init;
-import ru.sabstest.PacketList;
-import ru.sabstest.PaymentDocumentList;
 import ru.sabstest.Settings;
+import ru.sabstest.TestCase;
 
 
 
@@ -19,12 +17,13 @@ public class Test extends TestHelper
 		Init.load();
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
 		
-		PaymentDocumentList pl = new PaymentDocumentList();
-		pl.readFile("C:\\test\\K7182000.101");
+		TestCase t = new TestCase();
+		t.readFile("C:\\test\\test1.xml");
 		
-	//	callScript("PrProvod.PervVvod.Vvod", new Object[]{ pl});
-		
-		callScript("PrProvod.PervVvod.ContrVvod", new Object[]{ pl});
+		for(int i = 0; i < t.getSize(); i++)
+		{
+			callScript("SABS.RunTest", new Object[]{t.getStep(i)});
+		}
 		
 		//Settings.readXML("C:\\general.xml");
 //		ClientList.readFile("C:\\test\\nach\\clients.xml");

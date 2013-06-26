@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 
 import ru.sabstest.ModuleList.Module;
 
-public class Test {
+public class TestCase {
 	private List<Step> stList;
 	
 	public void readFile(String src)
@@ -39,6 +39,11 @@ public class Test {
 		return stList.get(i).script;
 	}
 	
+	public Step getStep(int i)
+	{
+		return stList.get(i);
+	}
+	
 	public boolean containsOption(int i, String option)
 	{
 		boolean ctn = false;
@@ -56,14 +61,23 @@ public class Test {
 	public static class Step
 	{
 		int id;
-		String script;
-		String[] options;
+		public String script;
+		public String[] options;
 		
 		Step(int id, String script, String[] options)
 		{
 			this.id = id;
 			this.script = script;
 			this.options = options;
+		}
+		
+		public boolean containsOption(String option)
+		{
+			boolean ctn = false;
+			for(String op:options)
+				if(op.equals(option))
+					ctn = true;
+			return ctn;
 		}
 	}
 }
