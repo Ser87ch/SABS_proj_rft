@@ -101,11 +101,11 @@ public class Init {
 
 		//DM+: 6-->7
 		//for(int i = 1 ; i < 6; i++)
-		for(int i = 1 ; i < 7; i++)	
-		{
-			(new File(Settings.testProj + "data\\" + fld + "\\input\\" + String.format("%03d", i))).mkdir();
-			(new File(Settings.testProj + "data\\" + fld + "\\etalon\\" + String.format("%03d", i))).mkdir();
-		}
+//		for(int i = 1 ; i < 7; i++)	
+//		{
+//			(new File(Settings.testProj + "data\\" + fld + "\\input\\" + String.format("%03d", i))).mkdir();
+//			(new File(Settings.testProj + "data\\" + fld + "\\etalon\\" + String.format("%03d", i))).mkdir();
+//		}
 
 	}
 

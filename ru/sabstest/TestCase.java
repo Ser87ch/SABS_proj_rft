@@ -17,7 +17,7 @@ public class TestCase {
 		
 		stList = new ArrayList<Step>();
 		
-		NodeList nl = el.getElementsByTagName("Test");
+		NodeList nl = el.getElementsByTagName("Step");
 		for(int i = 0; i < nl.getLength(); i++)
 		{
 			int id;

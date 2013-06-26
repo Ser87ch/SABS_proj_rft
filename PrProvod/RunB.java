@@ -183,12 +183,8 @@ public class RunB extends RunBHelper
 			callScript("SABS.SignFile",new String[]{Settings.Sign.signcontr, Settings.fullfolder + "\\input\\002\\rpack_1sgn.txt", Settings.fullfolder + "\\input\\002\\" + rfilename});
 
 			logInfo("Создан R пакет " +  rfilename + " с кодом ошибки 49.");
-			try {
-				Pack.copyFile(Settings.fullfolder + "\\input\\002\\" + rfilename, Settings.path + "post\\kPuI\\" + rfilename);
-			} catch (IOException e) {
-				e.printStackTrace();
-				Log.msg(e);
-			}
+			Pack.copyFile(Settings.fullfolder + "\\input\\002\\" + rfilename, Settings.path + "post\\kPuI\\" + rfilename);
+			
 			String bfilename = Pack.getBPackName();
 
 			callScript("SABS.VFD",new String[]{Settings.Sign.keyobr});
@@ -196,15 +192,9 @@ public class RunB extends RunBHelper
 			callScript("SABS.VFD",new String[]{Settings.Sign.keycontr});
 			callScript("SABS.SignFile",new String[]{Settings.Sign.signcontr, Settings.fullfolder + "\\input\\002\\bpack_1sgn.txt", Settings.fullfolder + "\\input\\002\\" + bfilename});
 			logInfo("Создан B пакет " +  bfilename + " с кодом ошибки 49.");
+						
+			Pack.copyFile(Settings.fullfolder + "\\input\\002\\" + bfilename, Settings.path + "post\\kPuI\\" + bfilename);
 			
-
-			try {
-				Pack.copyFile(Settings.fullfolder + "\\input\\002\\" + bfilename, Settings.path + "post\\kPuI\\" + bfilename);
-			} catch (IOException e) {
-				e.printStackTrace();
-				Log.msg(e);
-			}
-
 		}
 
 		if(isdeltadbr)

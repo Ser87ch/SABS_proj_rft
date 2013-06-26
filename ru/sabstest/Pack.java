@@ -502,40 +502,55 @@ public class Pack {
 		}
 	}
 
-	
+
 	/**
 	 * копирует файл
 	 * @param sourcestr откуда копируетс€
 	 * @param deststr куда копируетс€
 	 * @throws IOException
 	 */
-	public static void copyFile(String sourcestr, String deststr)throws IOException {
-		File sourceFile = new File(sourcestr);
-		File destFile = new File(deststr);
-		destFile.createNewFile();
+	public static void copyFile(String sourcestr, String deststr)
+	{
 		FileChannel source = null;
 		FileChannel destination = null;
-
-		if(!destFile.exists()) {
-			destFile.createNewFile();
-		}	    
-
 		try {
+			File sourceFile = new File(sourcestr);
+			File destFile = new File(deststr);
+			destFile.createNewFile();
+
+
+			if(!destFile.exists()) {
+				destFile.createNewFile();
+			}	    
+
+
 			source = new FileInputStream(sourceFile).getChannel();
 			destination = new FileOutputStream(destFile).getChannel();
 			destination.transferFrom(source, 0, source.size());
 			Log.msg("‘айл " + sourcestr + " скопирован в " + deststr + " .");
 		} 
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			Log.msg(e);
+		}
 		finally {
-			if(source != null) {
-				source.close();
-			}
-			if(destination != null) {
-				destination.close();
+			try {
+				if(source != null) {
+					source.close();
+				}
+				if(destination != null) {
+					destination.close();
+				}
+			} 
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				Log.msg(e);
 			}
 		}
 	}
-	
+
 	public static void copyEoFiles(String sourfolder, String destfolder, String type)
 	{
 		String eofile = "", sourfile="", destfile="";
@@ -551,19 +566,11 @@ public class Pack {
 					if( eofile.substring(0, 1).toLowerCase().equals(type.toLowerCase()))
 					{
 						sourfile = sourfolder+eofile;
-						destfile = destfolder+eofile;
-						
-						try 
-						{
-							copyFile(sourfile,destfile);
-							//Log.msg("пакет Ё— ”‘ЁЅ— Ёќ " + sourfile + " скопирован в —јЅ—.");
-						} 
-						catch (IOException e) {
-							e.printStackTrace();
-							Log.msg(e);
-						}	
+						destfile = destfolder+eofile;						
+						copyFile(sourfile,destfile);
+						//Log.msg("пакет Ё— ”‘ЁЅ— Ёќ " + sourfile + " скопирован в —јЅ—.");							
 					}
-					
+
 				}
 			}
 		}
@@ -651,7 +658,7 @@ public class Pack {
 			return "";
 		}
 	}
-	
+
 	/**
 	 * @return следующее неиспользованное им€ S пакета
 	 */
@@ -844,7 +851,7 @@ public class Pack {
 			Log.msgCMP("R пакет " + fl + " не совпадает с эталонным R пакетом " + fl + " по маске rpack.msk .");
 		return et.equals(sp);
 	}
-	
+
 	/**
 	 * @param etal полный путь к B пакету
 	 * @param fl полный путь к B пакету
@@ -1143,7 +1150,7 @@ public class Pack {
 			}
 		}
 
-		
+
 		/**
 		 * @param sp
 		 * @return совпадают ли пакеты по маске

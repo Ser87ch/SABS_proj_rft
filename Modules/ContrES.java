@@ -1,6 +1,9 @@
 package Modules;
 import resources.Modules.ContrESHelper;
 import ru.sabstest.Log;
+import ru.sabstest.Pack;
+import ru.sabstest.Settings;
+import ru.sabstest.TestCase;
 
 import com.rational.test.ft.*;
 import com.rational.test.ft.object.interfaces.*;
@@ -20,10 +23,22 @@ public class ContrES extends ContrESHelper
 {
 	
 	public void testMain(Object[] args) 
-	{		
+	{	
+		TestCase.Step st = (TestCase.Step) args[0];
+		
+		if(st.containsOption("CopyToSABS"))
+			Pack.copyFile("C:\\test\\otv\\1\\452500000020130701000000101.PacketEPDVER", "C:\\s_zpd\\post\\kPuI\\452500000020130701000000101.PacketEPDVER");
+		
+		callScript("SABS.VFD",new String[]{Settings.Login.contres.key});
+		callScript("SABS.StartSABS",new String[]{Settings.Login.contres.user, Settings.Login.contres.pwd, Settings.Login.contres.sign});
 		
 		Menutree().click(atName("Контроль ЭС "));		
-		ESpanel().click(atPoint(45,15));
+		
+		if(st.containsOption("VERnach"))
+			ESpanel().click(atPoint(45,15));
+		
+		if(st.containsOption("VERotv"))
+			ESpanel().click(atPoint(65,15));
 		
 		while(Errorwindow().exists())
 		{
@@ -33,6 +48,7 @@ public class ContrES extends ContrESHelper
 		Menutree().click(atName("Электронные расчеты"));
 		Log.msg("ЭС проконтролировано.");	
 		
+		callScript("SABS.CloseSABS");
 	}
 }
 

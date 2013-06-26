@@ -1,5 +1,8 @@
 package SABS;
+import java.io.File;
+
 import resources.SABS.NewDataHelper;
+import ru.sabstest.ClientList;
 import ru.sabstest.Init;
 import ru.sabstest.Log;
 import ru.sabstest.PacketList;
@@ -12,46 +15,35 @@ import com.rational.test.tss.TSSUtility;
 
 public class NewData extends NewDataHelper
 {
-	
+
 	public void testMain(Object[] args) 
 	{
 		try {
 			Settings.testProj = TSSUtility.getScriptOption("projFolder");
-			
+
 		} catch (TSSException e) {
 			e.printStackTrace();
 			Log.msg(e);			
 		}		
-		
+
 		if(Settings.testProj == null)
 			Settings.testProj = (String) args[0];
-		
-		Init.mkDataFolder();
-		
-		Settings.readXML(Settings.testProj + "settings\\general.xml");
-		
 
-		PacketList pl = new PacketList();
-		pl.generateFromXML(Settings.testProj + "settings\\gen\\generation001.xml");		
-		pl.createFile(Settings.datafolder + "input\\001\\paydocs.xml");
-		
-		PacketList plb = new PacketList();
-		plb.generateFromXML(Settings.testProj + "settings\\gen\\generation002.xml");	
-		plb.createFile(Settings.datafolder + "input\\002\\paydocs.xml");
-		
-	
-		
-		PacketList pls = new PacketList();
-		pls.generateFromXML(Settings.testProj + "settings\\gen\\generation003.xml");		
-		((PaymentDocumentList) pls.get(0)).createSpack(Settings.datafolder + "input\\003\\spack.txt");	
-		
-		pls = new PacketList();
-		pls.generateFromXML(Settings.testProj + "settings\\gen\\generation004.xml");
-		((PaymentDocumentList) pls.get(0)).createSpack(Settings.datafolder + "input\\004\\spack.txt");
-		
-		pls = new PacketList();
-		pls.generateFromXML(Settings.testProj + "settings\\gen\\generation005.xml");
-		((PaymentDocumentList) pls.get(0)).createSpack(Settings.datafolder + "input\\005\\spack.txt");
+		Init.mkDataFolder();
+
+		Settings.readXML(Settings.testProj + "settings\\general.xml");
+		ClientList.readFile(Settings.testProj + "settings\\clients.xml");
+		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
+
+		File[] files = new File(Settings.testProj + "settings\\generation\\").listFiles();
+
+		for(File f:files)
+		{
+			String src = f.getName();			
+			PacketList pl = new PacketList();
+			pl.generateFromXML(Settings.testProj + "settings\\generation\\" + src);	
+			callScript("SABS.CreateSignedXML",new Object[]{"C:\\test\\otv\\5\\", pl});
+		}
 		Log.close();
 	}
 }

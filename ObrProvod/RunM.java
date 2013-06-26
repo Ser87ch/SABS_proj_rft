@@ -50,12 +50,9 @@ public class RunM extends RunMHelper
 			callScript("SABS.Reset");
 
 		String sfilename = Pack.getPackNameFolder(Settings.datafolder + "\\input\\005\\", "s");
-		try {
-			Pack.copyFile(Settings.datafolder + "\\input\\005\\" + sfilename, Settings.path + "post\\kPuI\\" + sfilename);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Log.msg(e);
-		}
+		
+		Pack.copyFile(Settings.datafolder + "\\input\\005\\" + sfilename, Settings.path + "post\\kPuI\\" + sfilename);
+		
 		logInfo("S пакет " +  sfilename+ " скопирован в САБС.");
 
 		//Создание таблиц и триггеров для лога

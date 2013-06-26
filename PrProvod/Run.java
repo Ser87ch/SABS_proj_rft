@@ -176,13 +176,8 @@ public class Run extends RunHelper
 			callScript("SABS.SignFile",new String[]{Settings.Sign.signcontr, Settings.fullfolder + "\\input\\001\\rpack_1sgn.txt", Settings.fullfolder + "\\input\\001\\" + rfilename});
 			logInfo("Создан R пакет " +  rfilename + " .");
 
-			try {
-				Pack.copyFile(Settings.fullfolder + "\\input\\001\\" + rfilename, Settings.path + "post\\kPuI\\" + rfilename);
-			} catch (IOException e) {
-				e.printStackTrace();
-				Log.msg(e);
-			}
-
+			Pack.copyFile(Settings.fullfolder + "\\input\\001\\" + rfilename, Settings.path + "post\\kPuI\\" + rfilename);
+			
 		}
 		if(isdeltadbr)
 		{
