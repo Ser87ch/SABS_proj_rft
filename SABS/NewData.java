@@ -41,8 +41,9 @@ public class NewData extends NewDataHelper
 		{
 			String src = f.getName();			
 			PacketList pl = new PacketList();
-			pl.generateFromXML(Settings.testProj + "settings\\generation\\" + src);	
-			callScript("SABS.CreateSignedXML",new Object[]{"C:\\test\\otv\\5\\", pl});
+			pl.generateFromXML(Settings.testProj + "settings\\generation\\" + src);
+			new File(Settings.datafolder + "input\\" + src.substring(0,3)).mkdir();
+			callScript("SABS.CreateSignedXML",new Object[]{Settings.datafolder + "input\\" + src.substring(0,3), pl});
 		}
 		Log.close();
 	}
