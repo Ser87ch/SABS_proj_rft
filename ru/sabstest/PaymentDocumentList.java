@@ -209,10 +209,14 @@ public class PaymentDocumentList extends Packet{
 		readXML(root);
 	}
 
-	public void readEncodedFile(String src)
+	public void readEncodedFile(String src, boolean isUTF)
 	{
-		Element root = XML.getXMLRootElementFromString(XML.decodeBase64(src));
-
+		Element root;
+		if(isUTF)
+			root = XML.getXMLRootElementFromStringUTF(XML.decodeBase64(src));
+		else
+			root = XML.getXMLRootElementFromString1251(XML.decodeBase64(src));
+		
 		readXML(root);
 	}
 

@@ -104,12 +104,33 @@ public class XML {
 
 	}
 
-	public static Element getXMLRootElementFromString(String src)
+	public static Element getXMLRootElementFromStringUTF(String src)
 	{
 		Element root = null;
 		try {
 			InputSource is = new InputSource(new StringReader(src));
 		//	InputStream is = new ByteArrayInputStream(src.getBytes("Windows-1251"));
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			dbFactory.setNamespaceAware(true);
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(is);				
+			
+			root = doc.getDocumentElement();
+			root.normalize();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			Log.msg(e);
+		}
+		return root;
+
+	}
+	
+	public static Element getXMLRootElementFromString1251(String src)
+	{
+		Element root = null;
+		try {
+			InputStream is = new ByteArrayInputStream(src.getBytes("Windows-1251"));
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			dbFactory.setNamespaceAware(true);
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

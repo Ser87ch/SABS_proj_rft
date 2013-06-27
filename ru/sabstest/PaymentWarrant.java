@@ -93,6 +93,9 @@ public class PaymentWarrant extends PaymentDocument {
 		ppAccDocDate = Settings.operDate;	
 		transContent = "Частичная оплата";
 		
+		chargeOffDate = Settings.operDate;
+		receiptDate = Settings.operDate;
+		
 	}
 
 	@Override

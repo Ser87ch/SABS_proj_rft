@@ -991,6 +991,12 @@ public class Pack {
 		return files[0].getAbsolutePath();
 	}
 	
+	public static String getDocPervVvod(String num)
+	{
+		File[] files = new File(Settings.datafolder + "input\\" + num).listFiles();
+		return files[0].getAbsolutePath();
+	}
+	
 	public static void copyESIS(String num)
 	{
 		File[] files = new File(Settings.path + "post\\kPuI\\").listFiles();

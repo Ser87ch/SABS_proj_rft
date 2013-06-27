@@ -22,7 +22,7 @@ public class GenESIS extends GenESISHelper
 		Settings.EsidList.readXML(Settings.testProj + "settings\\generation\\" + num + ".xml");
 		
 		PaymentDocumentList pdl = new PaymentDocumentList();
-		pdl.readEncodedFile(Pack.getSPackPath());
+		pdl.readEncodedFile(Pack.getSPackPath(), true);
 		
 		ConfirmationDocumentList cdl = new ConfirmationDocumentList();		
 		ReturnDocumentList rdl = new ReturnDocumentList();		

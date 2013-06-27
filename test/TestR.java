@@ -21,7 +21,7 @@ public class TestR extends TestRHelper
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
 		PaymentDocumentList pdl = new PaymentDocumentList();
-		pdl.readEncodedFile("C:\\s_zpd\\post\\kPuO\\458200200020130701000000027.PacketEPDVER");
+		pdl.readEncodedFile("C:\\s_zpd\\post\\kPuO\\458200200020130701000000027.PacketEPDVER", true);
 		
 		ConfirmationDocumentList cdl = new ConfirmationDocumentList();
 		cdl.generateFromPaymentDocumentList(pdl);

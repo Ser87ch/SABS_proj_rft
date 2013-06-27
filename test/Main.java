@@ -124,7 +124,9 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			
 			
-			XML.createXMLFromBase64("C:\\sabstest\\tests\\a000002\\output\\002\\458200200020130701000000100.PacketEPDVER", "C:\\sabstest\\tests\\a000002\\output\\002\\ver.xml");
+			XML.createXMLFromBase64("C:\\sabstest\\data\\a000001\\input\\003\\458200200020130701000000101.PacketEPDVER", "C:\\sabstest\\data\\a000001\\input\\003\\ver.xml");
+			PaymentDocumentList pdl = new PaymentDocumentList();
+			pdl.readEncodedFile("C:\\sabstest\\data\\a000001\\input\\003\\458200200020130701000000101.PacketEPDVER", false);
 //			
 //			ClientList.readFile("C:\\test\\nach\\clients.xml");		
 //								
@@ -134,7 +136,7 @@ public class Main {
 //			pl.createFile("C:\\test\\");
 
 		
-			
+			pdl.get(26).toStr("{ENTER}", true);
 			break;
 		}
 		case ED:
