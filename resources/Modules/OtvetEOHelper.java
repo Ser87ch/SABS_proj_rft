@@ -19,15 +19,15 @@ import com.rational.test.ft.script.*;
 import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
- * Script Name   : <b>ContrES</b><br>
- * Generated     : <b>2013/06/27 13:04:47</b><br>
+ * Script Name   : <b>OtvetEO</b><br>
+ * Generated     : <b>2013/06/27 13:46:33</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
  * @since  июн€ 27, 2013
  * @author Admin
  */
-public abstract class ContrESHelper extends RationalTestScript
+public abstract class OtvetEOHelper extends RationalTestScript
 {
 	/**
 	 * ќтключитьѕанель: with default state.
@@ -154,9 +154,9 @@ public abstract class ContrESHelper extends RationalTestScript
 	
 	
 
-	protected ContrESHelper()
+	protected OtvetEOHelper()
 	{
-		setScriptName("Modules.ContrES");
+		setScriptName("Modules.OtvetEO");
 	}
 	
 }

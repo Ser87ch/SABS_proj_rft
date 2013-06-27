@@ -39,7 +39,7 @@ public class RunTestCase extends RunTestCaseHelper
 
 		for(int i = 0; i < t.getSize(); i++)
 		{
-			callScript(t.getScript(i), new Object[]{t.getStep(i), (String) args[1]});
+			callScript(t.getScript(i), new Object[]{t.getStep(i).options, (String) args[1]});
 		}
 
 	}

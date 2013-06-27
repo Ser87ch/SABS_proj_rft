@@ -1,4 +1,7 @@
 package Modules;
+import java.util.Arrays;
+import java.util.List;
+
 import resources.Modules.ContrESHelper;
 import ru.sabstest.Log;
 import ru.sabstest.Pack;
@@ -21,44 +24,74 @@ import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 
 public class ContrES extends ContrESHelper
 {
-	
+
 	public void testMain(Object[] args) 
 	{	
-		TestCase.Step st = (TestCase.Step) args[0];
+		List<String> st = Arrays.asList((String[]) args[0]);
 		String num = (String) args[1];
-		
-		if(st.containsOption("CopyToSABS"))
+
+		if(st.contains("CopyToSABS"))
 			Pack.copyToSABS(num);
-		
+
 		callScript("SABS.VFD",new String[]{Settings.Login.contres.key});
 		callScript("SABS.StartSABS",new String[]{Settings.Login.contres.user, Settings.Login.contres.pwd, Settings.Login.contres.sign});
-		
-		Menutree().click(atName(" онтроль Ё— "));		
-		
-		if(st.containsOption("VERnach"))
+
+		if(st.contains("VERnach") || st.contains("VERotv"))
 		{
-			ESpanel().click(atPoint(45,15));
-			while(Errorwindow().exists())
+			Menutree().click(atName(" онтроль Ё— "));		
+
+			if(st.contains("VERnach"))
 			{
-				OKerrorbutton().click();			
+				ESpanel().click(atPoint(45,15));
+				while(Errorwindow().exists())
+				{
+					OKerrorbutton().click();			
+				}
 			}
+
+			if(st.contains("VERotv"))
+			{
+				ESpanel().click(atPoint(65,15));
+				while(Errorwindow().exists())
+				{
+					OKerrorbutton().click();			
+				}
+			}		
+
+			Menutree().click(atName("Ёлектронные расчеты"));
 		}
 		
-		if(st.containsOption("VERotv"))
-		{
-			ESpanel().click(atPoint(65,15));
-			while(Errorwindow().exists())
+		if(st.contains("UFEBSnach") || st.contains("UFEBSotv"))
+		{		
+			Menutree().click(atName(" онтроль Ё— (”‘ЁЅ—)"));
+			
+			if(st.contains("UFEBSnach"))
 			{
-				OKerrorbutton().click();			
+				ESpanel().click(atPoint(45,15));
+				while(Errorwindow().exists())
+				{
+					OKerrorbutton().click();			
+				}
 			}
-		}		
-		
-		if(st.containsOption("CopyFromSABS"))
+
+			if(st.contains("UFEBSotv"))
+			{
+				ESpanel().click(atPoint(65,15));
+				while(Errorwindow().exists())
+				{
+					OKerrorbutton().click();			
+				}
+			}		
+
+			Menutree().click(atName("Ёлектронные расчеты"));
+		}
+
+		if(st.contains("CopyFromSABS"))
 			Pack.copyFromSABS(num);
-		
-		Menutree().click(atName("Ёлектронные расчеты"));
+
+
 		Log.msg("Ё— проконтролировано.");	
-		
+
 		callScript("SABS.CloseSABS");
 	}
 }
