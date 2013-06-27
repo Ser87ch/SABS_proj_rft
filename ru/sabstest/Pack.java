@@ -984,6 +984,19 @@ public class Pack {
 		for(File fl:files)
 			copyFile(fl.getAbsolutePath(), Settings.fullfolder + "\\output\\" + num + "\\" + fl.getName());
 	}
+	
+	public static String getSPackPath()
+	{
+		File[] files = new File(Settings.path + "post\\kPuO\\").listFiles();
+		return files[0].getAbsolutePath();
+	}
+	
+	public static void copyESIS(String num)
+	{
+		File[] files = new File(Settings.path + "post\\kPuI\\").listFiles();
+		Pack.copyFile(files[0].getAbsolutePath(), Settings.fullfolder + "\\input\\" + num + "\\" + files[0].getName());
+	}
+	
 	/**
 	 * Класс Пакет
 	 * @author Admin

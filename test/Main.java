@@ -123,8 +123,8 @@ public class Main {
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			
-			Pack.copyToSABS("101");
-//			XML.createXMLFromBase64("C:\\test\\otv\\3\\452500000020130701000000103.PacketEPDVER", "C:\\test\\otv\\3\\ver.xml");
+			
+			XML.createXMLFromBase64("C:\\sabstest\\tests\\a000002\\output\\002\\458200200020130701000000100.PacketEPDVER", "C:\\sabstest\\tests\\a000002\\output\\002\\ver.xml");
 //			
 //			ClientList.readFile("C:\\test\\nach\\clients.xml");		
 //								
@@ -133,7 +133,7 @@ public class Main {
 //			
 //			pl.createFile("C:\\test\\");
 
-			ModuleList.readFile("C:\\test\\modules.xml");
+		
 			
 			break;
 		}

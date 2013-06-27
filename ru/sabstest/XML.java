@@ -108,8 +108,8 @@ public class XML {
 	{
 		Element root = null;
 		try {
-			//InputSource is = new InputSource(new StringReader(src));
-			InputStream is = new ByteArrayInputStream(src.getBytes("Windows-1251"));
+			InputSource is = new InputSource(new StringReader(src));
+		//	InputStream is = new ByteArrayInputStream(src.getBytes("Windows-1251"));
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			dbFactory.setNamespaceAware(true);
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

@@ -244,7 +244,7 @@ public class PaymentOrderRegister extends PaymentDocument {
 			transactionDate = Settings.operDate;
 			transactionSum = sum;
 
-			payer = new ClientInfo("1", "60302810700000000001", "222222222222", "Иванов И.И.", "г. Москва", "Плательщик");
+			payer = new ClientInfo("1", "60302810700000000001", "222222222222", "Ванов В.В.", "г. Москва", "Плательщик");
 			payee = new ClientInfo("2", "40703810700000000015", "111111111111", "Петров П.П.", "г. Москва", "Получатель");
 			transactionPurpose = "Запись в реестре";
 		}

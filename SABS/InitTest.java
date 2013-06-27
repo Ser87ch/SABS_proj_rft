@@ -28,18 +28,13 @@ public class InitTest extends InitTestHelper
 		} catch (TSSException e) {
 			e.printStackTrace();
 			Log.msg(e);			
-		}
-		
-		
+		}		
 		
 		if(Settings.testProj == null)
-			Settings.testProj = (String) args[0];
-		
-		
+			Settings.testProj = (String) args[0];	
 		
 		Init.mkfolder();		
 		Log.close();
-
 	}
 }
 
