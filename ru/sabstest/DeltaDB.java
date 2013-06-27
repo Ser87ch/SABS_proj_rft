@@ -82,7 +82,7 @@ public class DeltaDB {
 			XML.createXMLFile(doc, Settings.testProj + "\\tests\\" + Settings.folder + "\\output\\" + filename);
 			Log.msg("XML с изменениями в БД " + Settings.testProj + "\\tests\\" + Settings.folder + "\\output\\" + filename + " создан.");			
 
-			XML.validate(Settings.testProj + "XMLSchema\\output\\deltadb.xsd",Settings.testProj + "\\tests\\" +  Settings.folder + "\\output\\" + filename);			
+			//XML.validate(Settings.testProj + "XMLSchema\\output\\deltadb.xsd",Settings.testProj + "\\tests\\" +  Settings.folder + "\\output\\" + filename);			
 
 
 
@@ -461,7 +461,7 @@ public class DeltaDB {
 
 		Log.msg("XML с настройками для подсчета изменений в БД " + fl + " создан.");
 
-		XML.validate(Settings.testProj + "XMLSchema\\settings\\deltadb.xsd",fl);
+		//XML.validate(Settings.testProj + "XMLSchema\\settings\\deltadb.xsd",fl);
 
 	}
 
@@ -537,7 +537,7 @@ public class DeltaDB {
 		{
 			
 
-			XML.validate(Settings.testProj + "XMLSchema\\output\\deltadb.xsd",src);
+		//	XML.validate(Settings.testProj + "XMLSchema\\output\\deltadb.xsd",src);
 
 			Element root = XML.getXMLRootElement(src);
 

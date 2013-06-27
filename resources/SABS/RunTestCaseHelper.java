@@ -19,21 +19,21 @@ import com.rational.test.ft.script.*;
 import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
- * Script Name   : <b>RunTest</b><br>
- * Generated     : <b>2013/06/26 13:08:02</b><br>
+ * Script Name   : <b>RunTestCase</b><br>
+ * Generated     : <b>2013/06/27 10:33:38</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  θώνÿ 26, 2013
+ * @since  θώνÿ 27, 2013
  * @author Admin
  */
-public abstract class RunTestHelper extends RationalTestScript
+public abstract class RunTestCaseHelper extends RationalTestScript
 {
 	
 
-	protected RunTestHelper()
+	protected RunTestCaseHelper()
 	{
-		setScriptName("SABS.RunTest");
+		setScriptName("SABS.RunTestCase");
 	}
 	
 }

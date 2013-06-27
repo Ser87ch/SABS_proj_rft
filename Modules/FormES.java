@@ -1,7 +1,6 @@
 package Modules;
-import resources.Modules.ContrESHelper;
+import resources.Modules.FormESHelper;
 import ru.sabstest.Log;
-import ru.sabstest.Pack;
 import ru.sabstest.Settings;
 import ru.sabstest.TestCase;
 
@@ -19,45 +18,35 @@ import com.rational.test.ft.vp.*;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 
 
-public class ContrES extends ContrESHelper
+public class FormES extends FormESHelper
 {
-	
+
 	public void testMain(Object[] args) 
-	{	
+	{
 		TestCase.Step st = (TestCase.Step) args[0];
-		String num = (String) args[1];
+		//String num = (String) args[1];
 		
-		if(st.containsOption("CopyToSABS"))
-			Pack.copyToSABS(num);
-		
-		callScript("SABS.VFD",new String[]{Settings.Login.contres.key});
-		callScript("SABS.StartSABS",new String[]{Settings.Login.contres.user, Settings.Login.contres.pwd, Settings.Login.contres.sign});
-		
-		Menutree().click(atName("Контроль ЭС "));		
-		
-		if(st.containsOption("VERnach"))
-		{
+		callScript("SABS.VFD",new String[]{Settings.Login.formes.key});
+		callScript("SABS.StartSABS",new String[]{Settings.Login.formes.user, Settings.Login.formes.pwd, Settings.Login.formes.sign});
+
+		Menutree().click(atName("Обработка ЭС"));	
+
+		if(st.containsOption("Otv"))
+			ESpanel().click(atPoint(65,15));	
+
+		if(st.containsOption("Nach"))
 			ESpanel().click(atPoint(45,15));
-			while(Errorwindow().exists())
-			{
-				OKerrorbutton().click();			
-			}
+
+		while(Errorwindow().exists())
+		{
+			OKerrorbutton().click();			
 		}
 		
-		if(st.containsOption("VERotv"))
-		{
-			ESpanel().click(atPoint(65,15));
-			while(Errorwindow().exists())
-			{
-				OKerrorbutton().click();			
-			}
-		}		
-		
-		if(st.containsOption("CopyFromSABS"))
-			Pack.copyFromSABS(num);
-		
+		if(st.containsOption("Vozvr"))
+			;//подумать над реализацией
+
 		Menutree().click(atName("Электронные расчеты"));
-		Log.msg("ЭС проконтролировано.");	
+		Log.msg("ЭС создано.");
 		
 		callScript("SABS.CloseSABS");
 	}

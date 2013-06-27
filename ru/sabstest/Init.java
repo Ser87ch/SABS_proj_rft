@@ -50,14 +50,16 @@ public class Init {
 			Log.msg("Папка для входящих данных теста (" + Settings.fullfolder + "input) создана.");
 			Log.msg("Папка для исходящих данных теста (" + Settings.fullfolder + "output) создана.");
 
-		
-			//DM+: 6-->7
-			//for(int i = 1 ; i < 6; i++)
-			for(int i = 1 ; i < 7; i++)	
+					
+			File[] files = new File(Settings.testProj + "settings\\test\\").listFiles();
+
+			for(File f:files)
 			{
-				(new File(Settings.fullfolder + "\\input\\" + String.format("%03d", i))).mkdir();
-				(new File(Settings.fullfolder + "\\output\\" + String.format("%03d", i))).mkdir();
-			}			
+				String src = f.getName();			
+						
+				(new File(Settings.fullfolder + "\\input\\" + src.substring(0,3))).mkdir();
+				(new File(Settings.fullfolder + "\\output\\" + src.substring(0,3))).mkdir();
+			}
 
 		} catch(Exception e) {
 			e.printStackTrace();

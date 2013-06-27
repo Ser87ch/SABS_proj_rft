@@ -115,7 +115,7 @@ public class Settings{
 
 		XML.createXMLFile(doc, fl);
 		Log.msg("XML c общими настройками " + fl + " создан.");
-		XML.validate(Settings.testProj + "XMLSchema\\settings\\general.xsd", fl);
+	//	XML.validate(Settings.testProj + "XMLSchema\\settings\\general.xsd", fl);
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class Settings{
 	 */
 	public static void readXML(String src)
 	{
-		XML.validate(Settings.testProj + "XMLSchema\\settings\\general.xsd",src);
+		//XML.validate(Settings.testProj + "XMLSchema\\settings\\general.xsd",src);
 
 		Element eElement = XML.getXMLRootElement(src);		
 		server = XML.getChildValueString("server", eElement);	
@@ -175,7 +175,7 @@ public class Settings{
 
 			XML.createXMLFile(doc, fl);
 			Log.msg("XML с настройками для генерации входящих документов " + fl + " создан.");
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\gendoc.xsd", fl);		
+		//	XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\gendoc.xsd", fl);		
 		}
 
 		/**
@@ -184,7 +184,7 @@ public class Settings{
 		 */
 		public static void readXML(String src)
 		{
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\gendoc.xsd",src);
+		//	XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\gendoc.xsd",src);
 
 			Element eElement = XML.getXMLRootElement(src);
 
@@ -284,7 +284,7 @@ public class Settings{
 			XML.createXMLFile(doc, fl);
 			Log.msg("XML с настройками пользователей " + fl + " создан.");				
 
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\login.xsd",fl);
+		//	XML.validate(Settings.testProj + "XMLSchema\\settings\\login.xsd",fl);
 		}
 
 		/**
@@ -293,7 +293,7 @@ public class Settings{
 		 */
 		public static void readXML(String src)
 		{
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\login.xsd",src);
+			//XML.validate(Settings.testProj + "XMLSchema\\settings\\login.xsd",src);
 
 			Element root = XML.getXMLRootElement(src);
 
@@ -381,7 +381,7 @@ public class Settings{
 			XML.createXMLFile(doc, fl);
 
 			Log.msg("XML с настройками для генерации R-пакета " + fl + " создан.");
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\sign.xsd",fl);
+			//XML.validate(Settings.testProj + "XMLSchema\\settings\\sign.xsd",fl);
 		}
 
 		/**
@@ -390,7 +390,7 @@ public class Settings{
 		 */
 		public static void readXML(String src)
 		{
-			XML.validate(Settings.testProj + "XMLSchema\\settings\\sign.xsd",src);
+			//XML.validate(Settings.testProj + "XMLSchema\\settings\\sign.xsd",src);
 
 			Element eElement = XML.getXMLRootElement(src);
 

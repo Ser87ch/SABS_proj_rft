@@ -131,6 +131,7 @@ public class XML {
 	 * @param xsd полный путь к xsd
 	 * @param xml полный путь к xml
 	 */
+	@Deprecated
 	public static void validate(String xsd, String xml)
 	{
 		try {
@@ -156,6 +157,7 @@ public class XML {
 	 * @param xsd полный путь к xsd
 	 * @param xml полный путь к xml
 	 */
+	@Deprecated
 	public static void validate(String[] xsd, String xml)
 	{
 		try {

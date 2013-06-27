@@ -957,7 +957,33 @@ public class Pack {
 			}
 		}
 	}
+	
+	public static void copyToSABS(String num)
+	{
+		File[] files = new File(Settings.datafolder + "input\\" + num).listFiles();
+		
+		for(File fl:files)
+		{
+			if(fl.getName().length() == 40)
+				copyFile(fl.getAbsolutePath(), Settings.path + "post\\kPuI\\" + fl.getName());
+			else
+				copyFile(fl.getAbsolutePath(), Settings.path + "post\\kUfI\\" + fl.getName());
+		}
+	}
 
+	
+	public static void copyFromSABS(String num)
+	{
+		File[] files = new File(Settings.path + "post\\kPuO\\").listFiles();
+		
+		for(File fl:files)
+			copyFile(fl.getAbsolutePath(), Settings.fullfolder + "\\output\\" + num + "\\" + fl.getName());
+		
+		files = new File(Settings.path + "post\\kUfO\\").listFiles();
+		
+		for(File fl:files)
+			copyFile(fl.getAbsolutePath(), Settings.fullfolder + "\\output\\" + num + "\\" + fl.getName());
+	}
 	/**
 	 * Класс Пакет
 	 * @author Admin
