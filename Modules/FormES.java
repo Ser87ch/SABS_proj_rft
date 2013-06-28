@@ -23,16 +23,35 @@ public class FormES extends FormESHelper
 		Menutree().click(atName("Обработка ЭС"));	
 
 		if(st.contains("Otv"))
-			ESpanel().click(atPoint(65,15));	
-
-		if(st.contains("Nach"))
-			ESpanel().click(atPoint(45,15));
-
-		while(Errorwindow().exists())
 		{
-			OKerrorbutton().click();			
+			ESpanel().click(atPoint(65,15));
+			
+			sleep(2.0);
+			
+			while(Errorwindow().exists())
+			{			
+				OKerrorbutton().click();			
+			}			
 		}
 		
+
+		if(st.contains("Nach"))
+		{
+			ESpanel().click(atPoint(25,15));
+			
+			sleep(2.0);
+			
+			ESpanel().click(atPoint(45,15));
+			
+			sleep(2.0);
+			
+			while(Errorwindow().exists())
+			{			
+				OKerrorbutton().click();			
+			}			
+		}
+
+	
 		if(st.contains("Vozvr"))
 			;//подумать над реализацией
 

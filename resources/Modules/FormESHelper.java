@@ -20,11 +20,11 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>FormES</b><br>
- * Generated     : <b>2013/06/27 11:47:37</b><br>
+ * Generated     : <b>2013/06/28 14:06:57</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  θώνÿ 27, 2013
+ * @since  θώνÿ 28, 2013
  * @author Admin
  */
 public abstract class FormESHelper extends RationalTestScript
@@ -150,6 +150,31 @@ public abstract class FormESHelper extends RationalTestScript
 	{
 		return new TopLevelSubitemTestObject(
                         getMappedTestObject("SABSwindow"), anchor, flags);
+	}
+	
+	/**
+	 * OK: with default state.
+	 *		.text : OK
+	 * 		.class : .Pushbutton
+	 * 		.name : OK
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject okbutton() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("okbutton"));
+	}
+	/**
+	 * OK: with specific test context and state.
+	 *		.text : OK
+	 * 		.class : .Pushbutton
+	 * 		.name : OK
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject okbutton(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("okbutton"), anchor, flags);
 	}
 	
 	
