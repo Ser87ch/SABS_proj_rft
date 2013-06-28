@@ -30,6 +30,7 @@ public class Pack {
 	/**
 	 * создает на основе S пакета R пакет
 	 */
+	@Deprecated
 	public static void createRpack()
 	{
 		try {
@@ -137,6 +138,7 @@ public class Pack {
 	/**
 	 * создает на основе S пакета R пакет с ошибкой 49
 	 */
+	@Deprecated
 	public static void createRpackError49()
 	{
 		try {
@@ -252,6 +254,7 @@ public class Pack {
 	/**
 	 * создает на основе S пакета B пакет с ошибкой 49
 	 */
+	@Deprecated
 	public static void createBpackError49()
 	{
 		try {
@@ -551,6 +554,7 @@ public class Pack {
 		}
 	}
 
+	@Deprecated
 	public static void copyEoFiles(String sourfolder, String destfolder, String type)
 	{
 		String eofile = "", sourfile="", destfile="";
@@ -580,6 +584,7 @@ public class Pack {
 	/**
 	 * @return следующее неиспользованное имя R пакета
 	 */
+	@Deprecated
 	public static String getRPackName()
 	{
 		try {
@@ -622,6 +627,7 @@ public class Pack {
 	/**
 	 * @return следующее неиспользованное имя B пакета
 	 */	
+	@Deprecated
 	public static String getBPackName()
 	{
 		try {
@@ -662,6 +668,7 @@ public class Pack {
 	/**
 	 * @return следующее неиспользованное имя S пакета
 	 */
+	@Deprecated
 	public static String getSPackName()
 	{
 		try {
@@ -708,6 +715,7 @@ public class Pack {
 	 * @param type тип пакета
 	 * @return наименование пакета
 	 */
+	@Deprecated
 	public static String getPackNameFolder(String folder, String type)
 	{
 		String pack = "";
@@ -730,6 +738,7 @@ public class Pack {
 	 * @param testnum номер теста из которого копирует пакет
 	 * @return наименование пакета
 	 */	
+	@Deprecated
 	public static String copySPack(String testnum)
 	{
 		try{
@@ -754,6 +763,7 @@ public class Pack {
 	 * @param testnum номер теста из которого копирует пакет
 	 * @return наименование пакета
 	 */
+	@Deprecated
 	public static String copyRPack(String testnum)
 	{
 		try{
@@ -777,6 +787,7 @@ public class Pack {
 	 * @param testnum номер теста из которого копирует пакет
 	 * @return наименование пакета
 	 */
+	@Deprecated
 	public static String copyBPack(String testnum)
 	{
 		try{
@@ -801,6 +812,7 @@ public class Pack {
 	 * @param fl полный путь к S пакету
 	 * @return совпадают ли S пакеты
 	 */
+	@Deprecated
 	public static boolean compareSPack(String etal, String fl)
 	{
 		if(!new File(etal).getName().equals(new File(fl).getName()))
@@ -829,6 +841,7 @@ public class Pack {
 	 * @param fl полный путь к R пакету
 	 * @return совпадают ли R пакеты
 	 */
+	@Deprecated
 	public static boolean compareRPack(String etal, String fl)
 	{
 
@@ -857,6 +870,7 @@ public class Pack {
 	 * @param fl полный путь к B пакету
 	 * @return совпадают ли B пакеты
 	 */
+	@Deprecated
 	public static boolean compareBPack(String etal, String fl)
 	{
 
@@ -1008,6 +1022,7 @@ public class Pack {
 	 * @author Admin
 	 *
 	 */
+	@Deprecated
 	static class SPack
 	{
 		String fl;
