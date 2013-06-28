@@ -1,6 +1,7 @@
 package SABS;
 import resources.SABS.RunTestCaseHelper;
 import ru.sabstest.ClientList;
+import ru.sabstest.DeltaDB;
 import ru.sabstest.Init;
 import ru.sabstest.ModuleList;
 import ru.sabstest.Settings;
@@ -33,6 +34,7 @@ public class RunTestCase extends RunTestCaseHelper
 		ModuleList.readFile(Settings.testProj + "settings\\modules.xml");
 		ClientList.readFile(Settings.testProj + "settings\\clients.xml");
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
+		DeltaDB.readXMLSettings(Settings.testProj + "settings\\deltadb.xml");
 
 		TestCase t = new TestCase();
 		t.readFile(src);

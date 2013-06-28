@@ -95,6 +95,7 @@ public class PaymentWarrant extends PaymentDocument {
 		
 		chargeOffDate = Settings.operDate;
 		receiptDate = Settings.operDate;
+		fileDate = Settings.operDate;
 		
 	}
 
@@ -193,7 +194,8 @@ public class PaymentWarrant extends PaymentDocument {
 		Integer.toString(ppSumResidualPayt).substring(0, Integer.toString(ppSumResidualPayt).length() - 2) + "." + 
 		Integer.toString(ppSumResidualPayt).substring(Integer.toString(ppSumResidualPayt).length() - 2, Integer.toString(ppSumResidualPayt).length()) + razd + 
 		transContent + razd +
-		new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + razd + razd;
+		//new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + razd + razd;
+		razd + razd + razd + razd;
 		return str;	
 	}
 }

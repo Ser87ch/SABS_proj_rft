@@ -24,12 +24,15 @@ import org.w3c.dom.NodeList;
  */
 public class DeltaDB {
 	static private List<TableMeta> tables;
-
+	static private int count = 1;
+	
+	
+	
 	/**
 	 * создает файл с изменениями в БД
 	 * @param filename полный путь к файлу
 	 */
-	public static void createXML(String filename)
+	public static void createXML(String num)
 	{
 		try 
 		{
@@ -79,12 +82,12 @@ public class DeltaDB {
 				Log.msg("Таблица с измениями в БД '" + table + "' записана в XML.");
 			}
 
-			XML.createXMLFile(doc, Settings.testProj + "\\tests\\" + Settings.folder + "\\output\\" + filename);
-			Log.msg("XML с изменениями в БД " + Settings.testProj + "\\tests\\" + Settings.folder + "\\output\\" + filename + " создан.");			
+			XML.createXMLFile(doc, Settings.testProj + "\\tests\\" + Settings.folder + "\\output\\" + num + "\\deltadb" + String.format("%03d", count) + ".xml");
+			Log.msg("XML с изменениями в БД " + Settings.testProj + "\\tests\\" + Settings.folder + "\\output\\" + num + "\\deltadb" + String.format("%03d", count) + ".xml" + " создан.");			
 
 			//XML.validate(Settings.testProj + "XMLSchema\\output\\deltadb.xsd",Settings.testProj + "\\tests\\" +  Settings.folder + "\\output\\" + filename);			
 
-
+			count++;
 
 			db.close();
 		}catch (Exception e) {
