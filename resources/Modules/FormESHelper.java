@@ -20,11 +20,11 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>FormES</b><br>
- * Generated     : <b>2013/06/28 14:06:57</b><br>
+ * Generated     : <b>2013/07/01 11:19:18</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  июня 28, 2013
+ * @since  июля 01, 2013
  * @author Admin
  */
 public abstract class FormESHelper extends RationalTestScript
@@ -175,6 +175,56 @@ public abstract class FormESHelper extends RationalTestScript
 	{
 		return new GuiTestObject(
                         getMappedTestObject("okbutton"), anchor, flags);
+	}
+	
+	/**
+	 * ЗачислитьКлиенту: with default state.
+	 *		.text : Зачислить клиенту
+	 * 		.class : .Pushbutton
+	 * 		.name : Зачислить клиенту
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject payClientbutton() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("payClientbutton"));
+	}
+	/**
+	 * ЗачислитьКлиенту: with specific test context and state.
+	 *		.text : Зачислить клиенту
+	 * 		.class : .Pushbutton
+	 * 		.name : Зачислить клиенту
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject payClientbutton(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("payClientbutton"), anchor, flags);
+	}
+	
+	/**
+	 * ВозвратДокумента: with default state.
+	 *		.text : Возврат документа
+	 * 		.class : .Pushbutton
+	 * 		.name : Возврат документа
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject returnDocbutton() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("returnDocbutton"));
+	}
+	/**
+	 * ВозвратДокумента: with specific test context and state.
+	 *		.text : Возврат документа
+	 * 		.class : .Pushbutton
+	 * 		.name : Возврат документа
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject returnDocbutton(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("returnDocbutton"), anchor, flags);
 	}
 	
 	
