@@ -87,29 +87,7 @@ public class Main {
 			DeltaDB.deleteDBLog();
 			break;
 		}
-		case RPACK:
-		{
-			Init.load();
-			Settings.readXML(Settings.testProj + "settings\\general.xml");
-
-			String spack = Pack.copySPack("001");
-			//XML.validate("C:\\sabstest\\XMLschema\\output\\deltadb.xsd", "C:\\sabstest\\tests\\a000001\\output\\rpack.xml");
-			Settings.Sign.readXML(Settings.testProj + "settings\\genrpack.xml");
-			//Pack.createRpackError49();
-			//Pack.createBpackError49();
-			String s = Pack.getRPackName();
-			System.out.println(spack + s);
-			break;
-		}
-
-		case CMP:
-		{
-			Init.load();
-			Settings.readXML(Settings.testProj + "settings\\general.xml");
-			System.out.println(Pack.compareSPack(Settings.fullfolder + "etalon\\spack.txt", Settings.fullfolder + "output\\spack.txt"));
-			System.out.println(Pack.compareRPack(Settings.fullfolder + "etalon\\rpack.txt", Settings.fullfolder + "output\\rpack.txt"));
-			break;
-		}
+		
 		case CMPDELTA:
 		{
 			Init.load();

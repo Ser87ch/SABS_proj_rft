@@ -24,4 +24,10 @@
 		<sign>CONTROB</sign>	
 		<key>controb.fdd</key>	
 	</contres>
+	<eootvet>
+		<user>kol</user>
+		<pwd>$rfvVFR4</pwd>
+		<sign>OTVETEO</sign>	
+		<key>otveteo.fdd</key>	
+	</eootvet>
 </login>

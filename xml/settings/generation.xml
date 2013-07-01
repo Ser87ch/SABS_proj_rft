@@ -1,3 +1,15 @@
+<Generation>
+	<PacketEPD EDAuthor="4582002401" EDReceiver="4582002000" EPDNo="101" EDFirstNo="100" Sum="101" profile1="OPER_OK_401" key1="oper_ok_401.fdd" profile2="CONTR_OK_401" key2="contr_ok_401.fdd">
+		<ED Type="101,104,105" Quantity="1" IdPayer="14" IdPayee="12"/>
+		<ED Type="101,104,105" Quantity="1" IdPayer="14" IdPayee="10"/>			
+		<ED Type="101,104,105,108" Quantity="1" IdPayer="14" IdPayee="15"/>
+	</PacketEPD>	
+	<PacketEPD EDAuthor="4582555000" EDReceiver="4582002000" EPDNo="102" EDFirstNo="110" Sum="115" profile1="OPER_OK_555" key1="oper_ok_555.fdd" profile2="CONTR_OK_555" key2="contr_ok_555.fdd">
+		<ED Quantity="1" Type="101,103,104,105" IdPayer="15" IdPayee="12"/>
+		<ED Quantity="1" Type="101,103,104,105" IdPayer="15" IdPayee="10"/>
+		<ED Quantity="1" Type="101,103,104,105,108" IdPayer="15" IdPayee="14"/>
+	</PacketEPD>
+</Generation>
 <PacketEPD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="generation.xsd" EDAuthor="4582002000" EPDNo="100" EDFirstNo="100">
 	<ED101 Quantity="2">
 		<Payer>

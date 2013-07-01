@@ -163,6 +163,7 @@ public class Client {
 	 * @param clEl элемент с данными для генерации реквизитов клиентов
 	 * @return нового клиента	 * 
 	 */
+	@Deprecated
 	public static Client createClientFromBICPersonalAcc(Element clEl)
 	{
 		Client cl = new Client();
