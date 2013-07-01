@@ -1,8 +1,5 @@
 package ru.sabstest;
 
-import java.util.Iterator;
-
-import org.w3c.dom.Element;
 
 abstract public class Packet {
 	public Type packetType;

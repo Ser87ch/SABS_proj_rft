@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.util.Arrays;
 import java.util.Calendar;
 
-import javax.xml.crypto.KeySelector.Purpose;
-
 public class ErrorCode {
 	private static final String[] codes = {"39","49"};
 

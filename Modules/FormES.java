@@ -51,7 +51,7 @@ public class FormES extends FormESHelper
 		Menutree().click(atName("Электронные расчеты"));
 
 		if(st.contains("Vozvr"))
-		{
+		{			
 			Menutree().click(atName("Не обработанные ЭС"));		
 			sleep(2.0);
 			SABSwindow().inputKeys("{TAB}");

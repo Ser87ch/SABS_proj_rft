@@ -20,7 +20,7 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>FormES</b><br>
- * Generated     : <b>2013/07/01 11:19:18</b><br>
+ * Generated     : <b>2013/07/01 13:52:18</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 

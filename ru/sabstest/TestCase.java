@@ -6,8 +6,6 @@ import java.util.List;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import ru.sabstest.ModuleList.Module;
-
 public class TestCase {
 	private List<Step> stList;
 	

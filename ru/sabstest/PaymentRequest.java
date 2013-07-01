@@ -2,7 +2,6 @@ package ru.sabstest;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Random;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
