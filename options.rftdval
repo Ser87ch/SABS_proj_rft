@@ -6,8 +6,6 @@
 	<Default Z="false"/>
 	<Name>rt.enable_default_environments</Name>
 	<Default Z="false"/>
-	<Name>rt.time.maximum_wait_for_existence_time</Name>
-	<Default D="900.0"/>
 	<Name>rt.bring_up_logviewer</Name>
 	<Default Z="false"/>
 	<Name>rt.dynamic_find_enable_option</Name>
