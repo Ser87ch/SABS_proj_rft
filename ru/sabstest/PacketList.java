@@ -1,6 +1,7 @@
 package ru.sabstest;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -44,7 +45,8 @@ public class PacketList {
 					//					if(bpack.generateFromPaymentDocumentList(epd))
 					//						pList.add(bpack);
 				}
-			}			
+			}	
+			Collections.sort(pList);
 		}
 	}
 
@@ -106,6 +108,8 @@ public class PacketList {
 			ReturnDocumentList bpack = new ReturnDocumentList();
 			if(bpack.generateFromPaymentDocumentList(epd))
 				pList.add(bpack);		
+			
+			Collections.sort(pList);
 
 		}
 	}

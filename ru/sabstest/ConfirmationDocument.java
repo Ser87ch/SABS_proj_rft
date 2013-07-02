@@ -11,7 +11,7 @@ import org.w3c.dom.Element;
  * @author Admin
  *
  */
-public class ConfirmationDocument {
+public class ConfirmationDocument implements Comparable<ConfirmationDocument>{
 	//реквизиты ЭД
 	public int edNo; //Номер ЭД в течение опердня
 	public Date edDate; //Дата составления ЭД
@@ -33,6 +33,100 @@ public class ConfirmationDocument {
 	public Date iEdDate; //Дата составления ЭД
 	public String iEdAuthor; //Уникальный идентификатор составителя ЭД (УИС)
 	
+	@Override
+	public int compareTo(ConfirmationDocument o) {
+		if(sum < o.sum)
+			return -1;
+		else if(sum > o.sum)
+			return 1;
+		else
+			return 0;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((accDocDate == null) ? 0 : accDocDate.hashCode());
+		result = prime * result + accDocNo;
+		result = prime * result
+				+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
+		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
+		result = prime * result
+				+ ((iEdAuthor == null) ? 0 : iEdAuthor.hashCode());
+		result = prime * result + ((iEdDate == null) ? 0 : iEdDate.hashCode());
+		result = prime * result + ((payee == null) ? 0 : payee.hashCode());
+		result = prime * result + ((payer == null) ? 0 : payer.hashCode());
+		result = prime * result
+				+ ((resultCode == null) ? 0 : resultCode.hashCode());
+		result = prime * result + sum;
+		result = prime * result
+				+ ((transKind == null) ? 0 : transKind.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ConfirmationDocument other = (ConfirmationDocument) obj;
+		if (accDocDate == null) {
+			if (other.accDocDate != null)
+				return false;
+		} else if (!accDocDate.equals(other.accDocDate))
+			return false;
+		if (accDocNo != other.accDocNo)
+			return false;
+		if (edAuthor == null) {
+			if (other.edAuthor != null)
+				return false;
+		} else if (!edAuthor.equals(other.edAuthor))
+			return false;
+		if (edDate == null) {
+			if (other.edDate != null)
+				return false;
+		} else if (!edDate.equals(other.edDate))
+			return false;
+		if (iEdAuthor == null) {
+			if (other.iEdAuthor != null)
+				return false;
+		} else if (!iEdAuthor.equals(other.iEdAuthor))
+			return false;
+		if (iEdDate == null) {
+			if (other.iEdDate != null)
+				return false;
+		} else if (!iEdDate.equals(other.iEdDate))
+			return false;
+		if (payee == null) {
+			if (other.payee != null)
+				return false;
+		} else if (!payee.equals(other.payee))
+			return false;
+		if (payer == null) {
+			if (other.payer != null)
+				return false;
+		} else if (!payer.equals(other.payer))
+			return false;
+		if (resultCode == null) {
+			if (other.resultCode != null)
+				return false;
+		} else if (!resultCode.equals(other.resultCode))
+			return false;
+		if (sum != other.sum)
+			return false;
+		if (transKind == null) {
+			if (other.transKind != null)
+				return false;
+		} else if (!transKind.equals(other.transKind))
+			return false;
+		return true;
+	}
+
 	/**
 	 * создает элемент ED216
 	 * @param doc документ

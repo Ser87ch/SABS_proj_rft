@@ -3,6 +3,7 @@ package ru.sabstest;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -26,6 +27,64 @@ public class ConfirmationDocumentList extends Packet{
 	public int sum;
 	public String packetCode;
 
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((cdList == null) ? 0 : cdList.hashCode());
+		result = prime * result
+				+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
+		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
+		result = prime * result + edQuantity;
+		result = prime * result
+				+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
+		result = prime * result
+				+ ((packetCode == null) ? 0 : packetCode.hashCode());
+		result = prime * result + sum;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ConfirmationDocumentList other = (ConfirmationDocumentList) obj;
+		if (cdList == null) {
+			if (other.cdList != null)
+				return false;
+		} else if (!cdList.equals(other.cdList))
+			return false;
+		if (edAuthor == null) {
+			if (other.edAuthor != null)
+				return false;
+		} else if (!edAuthor.equals(other.edAuthor))
+			return false;
+		if (edDate == null) {
+			if (other.edDate != null)
+				return false;
+		} else if (!edDate.equals(other.edDate))
+			return false;
+		if (edQuantity != other.edQuantity)
+			return false;
+		if (edReceiver == null) {
+			if (other.edReceiver != null)
+				return false;
+		} else if (!edReceiver.equals(other.edReceiver))
+			return false;
+		if (packetCode == null) {
+			if (other.packetCode != null)
+				return false;
+		} else if (!packetCode.equals(other.packetCode))
+			return false;
+		if (sum != other.sum)
+			return false;
+		return true;
+	}
 
 	@Override
 	public void setFileName()
@@ -90,6 +149,7 @@ public class ConfirmationDocumentList extends Packet{
 			cd.readED((Element) nl.item(i));
 			cdList.add(cd);
 		}
+		Collections.sort(cdList);
 	}
 
 	public ConfirmationDocumentList() 
@@ -125,6 +185,7 @@ public class ConfirmationDocumentList extends Packet{
 				cdList.add(cd);		
 			}
 		}
+		Collections.sort(cdList);
 
 		if(cdList == null || cdList.size() == 0)
 			return false;

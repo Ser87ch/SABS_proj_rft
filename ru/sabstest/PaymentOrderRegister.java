@@ -86,6 +86,8 @@ public class PaymentOrderRegister extends PaymentDocument {
 		TransactionInfo ti = new TransactionInfo();
 		ti.generate(sum);
 		tiList.add(ti);
+		
+		Collections.sort(tiList);
 	}
 
 	@Override
@@ -368,8 +370,12 @@ public class PaymentOrderRegister extends PaymentDocument {
 		
 		@Override
 		public int compareTo(TransactionInfo o) {
-			// TODO Auto-generated method stub
-			return 0;
+			if(transactionID < o.transactionID)
+				return -1;
+			else if(transactionID > o.transactionID)
+				return 1;
+			else
+				return 0;
 		}
 
 		public static class ClientInfo

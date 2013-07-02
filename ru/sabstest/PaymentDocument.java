@@ -7,6 +7,8 @@ import java.util.Random;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import ru.sabstest.PaymentOrderRegister.TransactionInfo;
+
 
 
 
@@ -15,7 +17,7 @@ import org.w3c.dom.Element;
  * @author Admin
  *
  */
-abstract public class PaymentDocument {
+abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 	//реквизиты ЭД
 	public int edNo; //Номер ЭД в течение опердня
 	public Date edDate; //Дата составления ЭД
@@ -158,6 +160,16 @@ abstract public class PaymentDocument {
 		} else if (!transKind.equals(other.transKind))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public int compareTo(PaymentDocument o) {
+		if(sum < o.sum)
+			return -1;
+		else if(sum > o.sum)
+			return 1;
+		else
+			return 0;
 	}
 
 	public PaymentDocument()

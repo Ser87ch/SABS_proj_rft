@@ -32,15 +32,66 @@ public class PaymentDocumentList extends Packet{
 	public int sum;
 	public String systemCode;
 
-
-
-
-
-
 	public PaymentDocumentList() 
 	{
 
 	}
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
+		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
+		result = prime * result + edQuantity;
+		result = prime * result
+				+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
+		result = prime * result + ((pdList == null) ? 0 : pdList.hashCode());
+		result = prime * result + sum;
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PaymentDocumentList other = (PaymentDocumentList) obj;
+		if (edAuthor == null) {
+			if (other.edAuthor != null)
+				return false;
+		} else if (!edAuthor.equals(other.edAuthor))
+			return false;
+		if (edDate == null) {
+			if (other.edDate != null)
+				return false;
+		} else if (!edDate.equals(other.edDate))
+			return false;
+		if (edQuantity != other.edQuantity)
+			return false;
+		if (edReceiver == null) {
+			if (other.edReceiver != null)
+				return false;
+		} else if (!edReceiver.equals(other.edReceiver))
+			return false;
+		if (pdList == null) {
+			if (other.pdList != null)
+				return false;
+		} else if (!pdList.equals(other.pdList))
+			return false;
+		if (sum != other.sum)
+			return false;
+		return true;
+	}
+
+
 
 	@Override
 	public void setFileName()

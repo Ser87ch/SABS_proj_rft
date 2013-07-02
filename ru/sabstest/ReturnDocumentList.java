@@ -28,6 +28,57 @@ public class ReturnDocumentList extends Packet{
 	public int edQuantity;
 	public int sum;
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
+		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
+		result = prime * result + edQuantity;
+		result = prime * result
+				+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
+		result = prime * result + ((rdList == null) ? 0 : rdList.hashCode());
+		result = prime * result + sum;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ReturnDocumentList other = (ReturnDocumentList) obj;
+		if (edAuthor == null) {
+			if (other.edAuthor != null)
+				return false;
+		} else if (!edAuthor.equals(other.edAuthor))
+			return false;
+		if (edDate == null) {
+			if (other.edDate != null)
+				return false;
+		} else if (!edDate.equals(other.edDate))
+			return false;
+		if (edQuantity != other.edQuantity)
+			return false;
+		if (edReceiver == null) {
+			if (other.edReceiver != null)
+				return false;
+		} else if (!edReceiver.equals(other.edReceiver))
+			return false;
+		if (rdList == null) {
+			if (other.rdList != null)
+				return false;
+		} else if (!rdList.equals(other.rdList))
+			return false;
+		if (sum != other.sum)
+			return false;
+		return true;
+	}
+
 	public ReturnDocumentList()
 	{
 		packetType = Packet.Type.PacketEPDVER_B;
