@@ -3,6 +3,7 @@ package ru.sabstest;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -69,6 +70,7 @@ public class PaymentOrderRegister extends PaymentDocument {
 
 				tiList.add(ti);
 			}		
+			Collections.sort(tiList);
 
 		}
 	}	
@@ -180,7 +182,7 @@ public class PaymentOrderRegister extends PaymentDocument {
 	 * @author Admin
 	 *
 	 */
-	public static class TransactionInfo
+	public static class TransactionInfo implements Comparable<TransactionInfo>
 	{
 		public int transactionID;
 		public int payerDocNo;
@@ -193,6 +195,93 @@ public class PaymentOrderRegister extends PaymentDocument {
 		public ClientInfo payee;
 		public String transactionPurpose;
 		public String remittanceInfo;
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result
+					+ ((docIndex == null) ? 0 : docIndex.hashCode());
+			result = prime * result
+					+ ((operationID == null) ? 0 : operationID.hashCode());
+			result = prime * result + ((payee == null) ? 0 : payee.hashCode());
+			result = prime * result + ((payer == null) ? 0 : payer.hashCode());
+			result = prime * result
+					+ ((payerDocDate == null) ? 0 : payerDocDate.hashCode());
+			result = prime * result + payerDocNo;
+			result = prime
+					* result
+					+ ((remittanceInfo == null) ? 0 : remittanceInfo.hashCode());
+			result = prime
+					* result
+					+ ((transactionDate == null) ? 0 : transactionDate
+							.hashCode());
+			result = prime * result + transactionID;
+			result = prime
+					* result
+					+ ((transactionPurpose == null) ? 0 : transactionPurpose
+							.hashCode());
+			result = prime * result + transactionSum;
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			TransactionInfo other = (TransactionInfo) obj;
+			if (docIndex == null) {
+				if (other.docIndex != null)
+					return false;
+			} else if (!docIndex.equals(other.docIndex))
+				return false;
+			if (operationID == null) {
+				if (other.operationID != null)
+					return false;
+			} else if (!operationID.equals(other.operationID))
+				return false;
+			if (payee == null) {
+				if (other.payee != null)
+					return false;
+			} else if (!payee.equals(other.payee))
+				return false;
+			if (payer == null) {
+				if (other.payer != null)
+					return false;
+			} else if (!payer.equals(other.payer))
+				return false;
+			if (payerDocDate == null) {
+				if (other.payerDocDate != null)
+					return false;
+			} else if (!payerDocDate.equals(other.payerDocDate))
+				return false;
+			if (payerDocNo != other.payerDocNo)
+				return false;
+			if (remittanceInfo == null) {
+				if (other.remittanceInfo != null)
+					return false;
+			} else if (!remittanceInfo.equals(other.remittanceInfo))
+				return false;
+			if (transactionDate == null) {
+				if (other.transactionDate != null)
+					return false;
+			} else if (!transactionDate.equals(other.transactionDate))
+				return false;
+			if (transactionID != other.transactionID)
+				return false;
+			if (transactionPurpose == null) {
+				if (other.transactionPurpose != null)
+					return false;
+			} else if (!transactionPurpose.equals(other.transactionPurpose))
+				return false;
+			if (transactionSum != other.transactionSum)
+				return false;
+			return true;
+		}
 
 		public Element createED(Document doc)
 		{
@@ -276,6 +365,12 @@ public class PaymentOrderRegister extends PaymentDocument {
 				Log.msg(e);			
 			}
 		}
+		
+		@Override
+		public int compareTo(TransactionInfo o) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 
 		public static class ClientInfo
 		{
@@ -285,6 +380,71 @@ public class PaymentOrderRegister extends PaymentDocument {
 			public String personName;
 			public String personAddress;
 			public String tradeName;
+
+			@Override
+			public int hashCode() {
+				final int prime = 31;
+				int result = 1;
+				result = prime * result + ((acc == null) ? 0 : acc.hashCode());
+				result = prime * result + ((inn == null) ? 0 : inn.hashCode());
+				result = prime
+						* result
+						+ ((personAddress == null) ? 0 : personAddress
+								.hashCode());
+				result = prime * result
+						+ ((personID == null) ? 0 : personID.hashCode());
+				result = prime * result
+						+ ((personName == null) ? 0 : personName.hashCode());
+				result = prime * result
+						+ ((tradeName == null) ? 0 : tradeName.hashCode());
+				return result;
+			}
+
+
+
+			@Override
+			public boolean equals(Object obj) {
+				if (this == obj)
+					return true;
+				if (obj == null)
+					return false;
+				if (getClass() != obj.getClass())
+					return false;
+				ClientInfo other = (ClientInfo) obj;
+				if (acc == null) {
+					if (other.acc != null)
+						return false;
+				} else if (!acc.equals(other.acc))
+					return false;
+				if (inn == null) {
+					if (other.inn != null)
+						return false;
+				} else if (!inn.equals(other.inn))
+					return false;
+				if (personAddress == null) {
+					if (other.personAddress != null)
+						return false;
+				} else if (!personAddress.equals(other.personAddress))
+					return false;
+				if (personID == null) {
+					if (other.personID != null)
+						return false;
+				} else if (!personID.equals(other.personID))
+					return false;
+				if (personName == null) {
+					if (other.personName != null)
+						return false;
+				} else if (!personName.equals(other.personName))
+					return false;
+				if (tradeName == null) {
+					if (other.tradeName != null)
+						return false;
+				} else if (!tradeName.equals(other.tradeName))
+					return false;
+				return true;
+			}
+
+
 
 			ClientInfo()
 			{
@@ -331,6 +491,10 @@ public class PaymentOrderRegister extends PaymentDocument {
 			}
 		}
 
+		
+
+		
+
 	}
 
 
@@ -339,7 +503,4 @@ public class PaymentOrderRegister extends PaymentDocument {
 
 		return null;
 	}
-
-
-
 }

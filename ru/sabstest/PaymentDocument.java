@@ -44,7 +44,121 @@ abstract public class PaymentDocument {
 	DepartmentalInfo tax;
 
 
-	//	public String resultCode;
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((accDocDate == null) ? 0 : accDocDate.hashCode());
+		result = prime * result + accDocNo;
+		result = prime * result
+				+ ((chargeOffDate == null) ? 0 : chargeOffDate.hashCode());
+		result = prime * result
+				+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
+		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
+		result = prime * result + edNo;
+		result = prime * result
+				+ ((fileDate == null) ? 0 : fileDate.hashCode());
+		result = prime * result + ((payee == null) ? 0 : payee.hashCode());
+		result = prime * result + ((payer == null) ? 0 : payer.hashCode());
+		result = prime * result
+				+ ((paytKind == null) ? 0 : paytKind.hashCode());
+		result = prime * result
+				+ ((priority == null) ? 0 : priority.hashCode());
+		result = prime * result + ((purpose == null) ? 0 : purpose.hashCode());
+		result = prime * result
+				+ ((receiptDate == null) ? 0 : receiptDate.hashCode());
+		result = prime * result + sum;
+		result = prime * result + ((tax == null) ? 0 : tax.hashCode());
+		result = prime * result
+				+ ((transKind == null) ? 0 : transKind.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PaymentDocument other = (PaymentDocument) obj;
+		if (accDocDate == null) {
+			if (other.accDocDate != null)
+				return false;
+		} else if (!accDocDate.equals(other.accDocDate))
+			return false;
+		if (accDocNo != other.accDocNo)
+			return false;
+		if (chargeOffDate == null) {
+			if (other.chargeOffDate != null)
+				return false;
+		} else if (!chargeOffDate.equals(other.chargeOffDate))
+			return false;
+		if (edAuthor == null) {
+			if (other.edAuthor != null)
+				return false;
+		} else if (!edAuthor.equals(other.edAuthor))
+			return false;
+		if (edDate == null) {
+			if (other.edDate != null)
+				return false;
+		} else if (!edDate.equals(other.edDate))
+			return false;
+		if (edNo != other.edNo)
+			return false;
+		if (fileDate == null) {
+			if (other.fileDate != null)
+				return false;
+		} else if (!fileDate.equals(other.fileDate))
+			return false;
+		if (payee == null) {
+			if (other.payee != null)
+				return false;
+		} else if (!payee.equals(other.payee))
+			return false;
+		if (payer == null) {
+			if (other.payer != null)
+				return false;
+		} else if (!payer.equals(other.payer))
+			return false;
+		if (paytKind == null) {
+			if (other.paytKind != null)
+				return false;
+		} else if (!paytKind.equals(other.paytKind))
+			return false;
+		if (priority == null) {
+			if (other.priority != null)
+				return false;
+		} else if (!priority.equals(other.priority))
+			return false;
+		if (purpose == null) {
+			if (other.purpose != null)
+				return false;
+		} else if (!purpose.equals(other.purpose))
+			return false;
+		if (receiptDate == null) {
+			if (other.receiptDate != null)
+				return false;
+		} else if (!receiptDate.equals(other.receiptDate))
+			return false;
+		if (sum != other.sum)
+			return false;
+		if (tax == null) {
+			if (other.tax != null)
+				return false;
+		} else if (!tax.equals(other.tax))
+			return false;
+		if (transKind == null) {
+			if (other.transKind != null)
+				return false;
+		} else if (!transKind.equals(other.transKind))
+			return false;
+		return true;
+	}
 
 	public PaymentDocument()
 	{	

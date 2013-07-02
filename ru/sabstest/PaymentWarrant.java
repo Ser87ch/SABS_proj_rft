@@ -21,6 +21,63 @@ public class PaymentWarrant extends PaymentDocument {
 	public String ppAccDocNo; //номер исходного расчетного документа
 	public Date ppAccDocDate; //дата исходного расчетного дкоумента
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((ppAccDocDate == null) ? 0 : ppAccDocDate.hashCode());
+		result = prime * result
+				+ ((ppAccDocNo == null) ? 0 : ppAccDocNo.hashCode());
+		result = prime * result
+				+ ((ppPaytNo == null) ? 0 : ppPaytNo.hashCode());
+		result = prime * result + ppSumResidualPayt;
+		result = prime * result
+				+ ((ppTransKind == null) ? 0 : ppTransKind.hashCode());
+		result = prime * result
+				+ ((transContent == null) ? 0 : transContent.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PaymentWarrant other = (PaymentWarrant) obj;
+		if (ppAccDocDate == null) {
+			if (other.ppAccDocDate != null)
+				return false;
+		} else if (!ppAccDocDate.equals(other.ppAccDocDate))
+			return false;
+		if (ppAccDocNo == null) {
+			if (other.ppAccDocNo != null)
+				return false;
+		} else if (!ppAccDocNo.equals(other.ppAccDocNo))
+			return false;
+		if (ppPaytNo == null) {
+			if (other.ppPaytNo != null)
+				return false;
+		} else if (!ppPaytNo.equals(other.ppPaytNo))
+			return false;
+		if (ppSumResidualPayt != other.ppSumResidualPayt)
+			return false;
+		if (ppTransKind == null) {
+			if (other.ppTransKind != null)
+				return false;
+		} else if (!ppTransKind.equals(other.ppTransKind))
+			return false;
+		if (transContent == null) {
+			if (other.transContent != null)
+				return false;
+		} else if (!transContent.equals(other.transContent))
+			return false;
+		return true;
+	}
+
 	public PaymentWarrant()
 	{
 		super();

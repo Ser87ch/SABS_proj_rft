@@ -22,6 +22,61 @@ public class PaymentRequest extends PaymentDocument {
 	public int acptSum; //сумма исходного расчетного документа, предъ€вленного к акцепту
 	
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + acptSum;
+		result = prime * result + acptTerm;
+		result = prime * result
+				+ ((docDispatchDate == null) ? 0 : docDispatchDate.hashCode());
+		result = prime * result
+				+ ((maturityDate == null) ? 0 : maturityDate.hashCode());
+		result = prime * result
+				+ ((paytCondition == null) ? 0 : paytCondition.hashCode());
+		result = prime
+				* result
+				+ ((receiptDateCollectBank == null) ? 0
+						: receiptDateCollectBank.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PaymentRequest other = (PaymentRequest) obj;
+		if (acptSum != other.acptSum)
+			return false;
+		if (acptTerm != other.acptTerm)
+			return false;
+		if (docDispatchDate == null) {
+			if (other.docDispatchDate != null)
+				return false;
+		} else if (!docDispatchDate.equals(other.docDispatchDate))
+			return false;
+		if (maturityDate == null) {
+			if (other.maturityDate != null)
+				return false;
+		} else if (!maturityDate.equals(other.maturityDate))
+			return false;
+		if (paytCondition == null) {
+			if (other.paytCondition != null)
+				return false;
+		} else if (!paytCondition.equals(other.paytCondition))
+			return false;
+		if (receiptDateCollectBank == null) {
+			if (other.receiptDateCollectBank != null)
+				return false;
+		} else if (!receiptDateCollectBank.equals(other.receiptDateCollectBank))
+			return false;
+		return true;
+	}
+
 	public PaymentRequest()
 	{
 		super();

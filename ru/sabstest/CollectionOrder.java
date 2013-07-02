@@ -15,6 +15,34 @@ public class CollectionOrder extends PaymentDocument {
 
 	public Date receiptDateCollectBank;	
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime
+				* result
+				+ ((receiptDateCollectBank == null) ? 0
+						: receiptDateCollectBank.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CollectionOrder other = (CollectionOrder) obj;
+		if (receiptDateCollectBank == null) {
+			if (other.receiptDateCollectBank != null)
+				return false;
+		} else if (!receiptDateCollectBank.equals(other.receiptDateCollectBank))
+			return false;
+		return true;
+	}
+
 	public CollectionOrder()
 	{
 		super();

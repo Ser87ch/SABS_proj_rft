@@ -15,6 +15,63 @@ public class Client {
 	public String kpp;
 	public String name;
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((bic == null) ? 0 : bic.hashCode());
+		result = prime * result
+				+ ((correspAcc == null) ? 0 : correspAcc.hashCode());
+		result = prime * result + ((inn == null) ? 0 : inn.hashCode());
+		result = prime * result + ((kpp == null) ? 0 : kpp.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((personalAcc == null) ? 0 : personalAcc.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Client other = (Client) obj;
+		if (bic == null) {
+			if (other.bic != null)
+				return false;
+		} else if (!bic.equals(other.bic))
+			return false;
+		if (correspAcc == null) {
+			if (other.correspAcc != null)
+				return false;
+		} else if (!correspAcc.equals(other.correspAcc))
+			return false;
+		if (inn == null) {
+			if (other.inn != null)
+				return false;
+		} else if (!inn.equals(other.inn))
+			return false;
+		if (kpp == null) {
+			if (other.kpp != null)
+				return false;
+		} else if (!kpp.equals(other.kpp))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (personalAcc == null) {
+			if (other.personalAcc != null)
+				return false;
+		} else if (!personalAcc.equals(other.personalAcc))
+			return false;
+		return true;
+	}
+
 	public Client() {
 		this.bic = "";	
 		this.correspAcc = "";
