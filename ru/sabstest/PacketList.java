@@ -1,5 +1,6 @@
 package ru.sabstest;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -19,6 +20,31 @@ public class PacketList {
 		pList = new ArrayList<Packet>();
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((pList == null) ? 0 : pList.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PacketList other = (PacketList) obj;
+		if (pList == null) {
+			if (other.pList != null)
+				return false;
+		} else if (!pList.equals(other.pList))
+			return false;
+		return true;
+	}
+	
 	public void generateFromXML(String fl)
 	{
 		Element root = XML.getXMLRootElement(fl);
@@ -114,8 +140,30 @@ public class PacketList {
 		}
 	}
 
+	
 	public void add(Packet p)
 	{
 		pList.add(p);
+	}
+	
+	public void readFolder(String fld)
+	{
+		File[] files = new File(fld).listFiles();
+		
+		for(File fl:files)
+		{
+			
+			Element root = XML.getXMLRootElement(fl.getAbsolutePath());
+			String type = root.getElementsByTagName("props:DocType").item(0).getTextContent();
+			
+			Packet p = Packet.createPacketByFile(type);			
+			
+			if(p != null)
+			{
+				p.readEncodedFile(fl.getAbsolutePath(), true);
+				pList.add(p);
+			}
+		}
+		//Collections.sort(pList);
 	}
 }

@@ -3,6 +3,7 @@ package ru.sabstest;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -118,7 +119,7 @@ public class ReturnDocumentList extends Packet{
 			}
 
 		}
-		
+		Collections.sort(rdList);
 		
 		if(rdList == null || rdList.size() == 0)
 			return false;
@@ -158,11 +159,10 @@ public class ReturnDocumentList extends Packet{
 		XML.createXMLFile(doc, folder + filename);
 		
 	}
-	
-	void readFile(String src)
+		
+	@Override
+	public void readXML(Element root)
 	{
-		Element root = XML.getXMLRootElement(src);
-
 		if(!root.getLocalName().equals("PacketEPDVER_B"))		
 			return;
 
@@ -184,6 +184,7 @@ public class ReturnDocumentList extends Packet{
 			rd.readED((Element) nl.item(i));
 			rdList.add(rd);
 		}
+		Collections.sort(rdList);
 	}
 	
 	/**

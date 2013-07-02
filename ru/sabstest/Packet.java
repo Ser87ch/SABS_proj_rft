@@ -1,5 +1,7 @@
 package ru.sabstest;
 
+import org.w3c.dom.Element;
+
 
 abstract public class Packet implements Comparable<Packet>{
 	public Type packetType;
@@ -12,7 +14,12 @@ abstract public class Packet implements Comparable<Packet>{
 
 	@Override
 	public int compareTo(Packet o) {
-		return filename.compareTo(o.filename);
+		int i = packetType.compareTo(o.packetType);
+		if(i == 0)
+			return filename.compareTo(o.filename);
+		else 
+			return i;
+		
 	}
 	
 	@Override
@@ -43,12 +50,46 @@ abstract public class Packet implements Comparable<Packet>{
 	public abstract void insertIntoDB();
 
 	public abstract void setFileName();
-
+	
+	public abstract void readXML(Element root);
+	
 	public void insertForRead()
 	{
 		if(packetType == Packet.Type.PacketEPD)
 			DB.insertPacetForReadUfebs(filename);
 		else
 			DB.insertPacetForReadVer(filename);
+	}
+	
+	public void readEncodedFile(String src, boolean isUTF)
+	{
+		Element root;
+		if(isUTF)
+			root = XML.getXMLRootElementFromStringUTF(XML.decodeBase64(src));
+		else
+			root = XML.getXMLRootElementFromString1251(XML.decodeBase64(src));
+		
+		readXML(root);
+	}
+	
+	void readFile(String src)
+	{
+		Element root = XML.getXMLRootElement(src);
+
+		readXML(root);
+	}
+	
+	public static Packet createPacketByFile(String type)
+	{
+		Packet pc = null;		
+				
+		if(type.equals("PacketEPDVER") || type.equals("PacketEPD"))
+			pc = new PaymentDocumentList();
+		else if(type.equals("PacketESIDVER_RYM"))
+			pc = new ConfirmationDocumentList();
+		else if(type.equals("PacketEPDVER_B"))
+			pc = new ReturnDocumentList();
+		
+		return pc;
 	}
 }

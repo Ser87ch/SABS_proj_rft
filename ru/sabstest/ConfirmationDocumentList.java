@@ -122,12 +122,10 @@ public class ConfirmationDocumentList extends Packet{
 
 		XML.createXMLFile(doc, folder + filename);
 	}
-
-	void readFile(String src)
+	
+	@Override
+	public void readXML(Element root)
 	{
-
-		Element root = XML.getXMLRootElement(src);
-
 		if(!root.getLocalName().equals("PacketESIDVER_RYM"))		
 			return;
 
