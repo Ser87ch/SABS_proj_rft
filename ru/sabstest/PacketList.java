@@ -169,6 +169,6 @@ public class PacketList {
 				pList.add(p);
 			}
 		}
-		//Collections.sort(pList);
+		Collections.sort(pList);
 	}
 }
