@@ -1,6 +1,7 @@
 package ru.sabstest;
 
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
@@ -501,6 +502,18 @@ public class DeltaDB {
 		Log.msg("XML с настройками для подсчета изменений в БД " + src + " загружен в программу.");		
 	}
 
+	public static boolean cmpDeltaDBfld(String et, String src)
+	{
+		File[] fset = new File(et).listFiles();		
+		File[] fssrc = new File(src).listFiles();
+		
+		for(int i = 0; i < fset.length; i++)
+			if(!cmpDeltaDB(fset[i].getAbsolutePath(), fssrc[i].getAbsolutePath()))
+				return false;
+		
+		return true;
+	}
+	
 	/**
 	 * @param et первый xml с изменениями в БД
 	 * @param src второй xml с изменениями в БД
