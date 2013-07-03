@@ -91,6 +91,11 @@ public class PacketList {
 	{
 		return pList.get(i);
 	}
+	
+	public int getSize()
+	{
+		return pList.size();
+	}
 
 	public void insertIntoDB()
 	{

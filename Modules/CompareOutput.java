@@ -1,4 +1,6 @@
 package Modules;
+import java.io.File;
+
 import resources.Modules.CompareOutputHelper;
 import com.rational.test.ft.*;
 import com.rational.test.ft.object.interfaces.*;
@@ -12,28 +14,48 @@ import com.rational.test.ft.script.*;
 import com.rational.test.ft.value.*;
 import com.rational.test.ft.vp.*;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
+
+import ru.sabstest.DeltaDB;
 import ru.sabstest.PacketList;
 import ru.sabstest.Settings;
 import ru.sabstest.Log;
 
 public class CompareOutput extends CompareOutputHelper
 {
-	
+
 	public void testMain(Object[] args) 
 	{
 		//List<String> st = Arrays.asList((String[]) args[0]);
 		String num = (String) args[1];
-		
+
 		PacketList plOut = new PacketList();
 		plOut.readFolder(Settings.fullfolder + "\\output\\" + num);
 		PacketList plEt = new PacketList();
 		plEt.readFolder(Settings.datafolder + "etalon\\" + num);
-		
-		if(plOut.equals(plEt))
-			Log.msgCMP("Результаты совпадают с эталонами.");
-		else
-			Log.msgCMP("Результаты не совпадают с эталонами.");
-		
+
+		if(plOut.getSize() != 0 && plEt.getSize() != 0)
+		{
+			if(plOut.equals(plEt))
+			{
+				Log.msgCMP("Результаты совпадают с эталонами.");
+				logTestResult("Результаты совпадают с эталонами.", true);
+			}
+			else
+			{
+				Log.msgCMP("Результаты не совпадают с эталонами.");
+				logTestResult("Результаты не совпадают с эталонами.", false);
+			}
+		}
+		else if(plOut.getSize() == 0)
+		{
+			Log.msg("Отсутствуют выходные данные.");
+			logTestResult("Отсуствуют выходные данные.", false);
+		}
+		else if(plEt.getSize() == 0)
+		{
+			Log.msg("Отсутствуют эталонные данные.");
+			logInfo("Отсуствуют эталонные данные.");
+		}		
 	}
 }
 
