@@ -43,6 +43,7 @@ public class NewData extends NewDataHelper
 			PacketList pl = new PacketList();
 			pl.generateFromXML(Settings.testProj + "settings\\generation\\" + src);
 			new File(Settings.datafolder + "input\\" + src.substring(0,3)).mkdir();
+			new File(Settings.datafolder + "etalon\\" + src.substring(0,3)).mkdir();
 			callScript("SABS.CreateSignedXML",new Object[]{Settings.datafolder + "input\\" + src.substring(0,3), pl});
 		}
 		Log.close();
