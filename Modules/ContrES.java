@@ -86,8 +86,7 @@ public class ContrES extends ContrESHelper
 			Menutree().click(atName("Ёлектронные расчеты"));
 		}
 
-		if(st.contains("CopyFromSABS"))
-			Pack.copyFromSABS(num);
+		
 
 
 		Log.msg("Ё— проконтролировано.");	

@@ -10,7 +10,7 @@ abstract public class Packet implements Comparable<Packet>{
 	public Sign firstSign;
 	public Sign secondSign;
 
-	public enum Type{PacketEPD, PacketEPDVER, PacketESIDVER, PacketEPDVER_B};
+	public enum Type{PacketEPD, PacketEPDVER, PacketESIDVER, PacketESID, PacketEPDVER_B};
 
 	@Override
 	public int compareTo(Packet o) {
@@ -85,7 +85,7 @@ abstract public class Packet implements Comparable<Packet>{
 				
 		if(type.equals("PacketEPDVER") || type.equals("PacketEPD"))
 			pc = new PaymentDocumentList();
-		else if(type.equals("PacketESIDVER_RYM"))
+		else if(type.equals("PacketESIDVER_RYM")) //|| type.equals("PacketESID"))
 			pc = new ConfirmationDocumentList();
 		else if(type.equals("PacketEPDVER_B"))
 			pc = new ReturnDocumentList();

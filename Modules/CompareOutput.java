@@ -28,6 +28,8 @@ public class CompareOutput extends CompareOutputHelper
 		//List<String> st = Arrays.asList((String[]) args[0]);
 		String num = (String) args[1];
 
+		
+		//сравнение ЭС
 		PacketList plOut = new PacketList();
 		plOut.readFolder(Settings.fullfolder + "\\output\\" + num);
 		PacketList plEt = new PacketList();
@@ -57,6 +59,8 @@ public class CompareOutput extends CompareOutputHelper
 			logInfo("Отсуствуют эталонные данные.");
 		}		
 		
+		
+		//сравнение изменений в БД
 		File[] dbet = DeltaDB.getDeltaDBFiles(Settings.datafolder + "etalon\\" + num);
 		File[] dbout = DeltaDB.getDeltaDBFiles(Settings.fullfolder + "\\output\\" + num);
 		

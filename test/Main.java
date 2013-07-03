@@ -5,8 +5,8 @@ package test;
 import ru.sabstest.Init;
 import ru.sabstest.Log;
 import ru.sabstest.PacketList;
-import ru.sabstest.PaymentDocumentList;
 import ru.sabstest.Settings;
+import ru.sabstest.XML;
 
 
 
@@ -18,7 +18,7 @@ public class Main {
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.READ;
+		Test t = Test.O;
 		switch(t)
 		{
 					
@@ -29,9 +29,9 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			
 			
-	//		XML.createXMLFromBase64("C:\\sabstest\\data\\a000002\\input\\003\\458200200020130701000000101.PacketEPDVER", "C:\\sabstest\\data\\a000001\\input\\003\\ver.xml");
-			PaymentDocumentList pdl = new PaymentDocumentList();
-			pdl.readEncodedFile("C:\\sabstest\\data\\a000002\\input\\003\\458200200020130701000000101.PacketEPDVER", false);
+			XML.createXMLFromBase64("C:\\X0010107.401", "C:\\x.xml");
+//			PaymentDocumentList pdl = new PaymentDocumentList();
+//			pdl.readEncodedFile("C:\\sabstest\\data\\a000002\\input\\003\\458200200020130701000000101.PacketEPDVER", false);
 //			
 //			ClientList.readFile("C:\\test\\nach\\clients.xml");		
 //								
@@ -41,7 +41,7 @@ public class Main {
 //			pl.createFile("C:\\test\\");
 
 		
-			pdl.get(26).toStr("{ENTER}", true);
+			
 			break;
 		}
 		case ED:

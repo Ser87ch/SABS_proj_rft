@@ -4,6 +4,7 @@ import java.util.List;
 
 import resources.Modules.OtvetEOHelper;
 import ru.sabstest.Log;
+import ru.sabstest.Pack;
 import ru.sabstest.Settings;
 import ru.sabstest.TestCase;
 
@@ -26,7 +27,7 @@ public class OtvetEO extends OtvetEOHelper
 	public void testMain(Object[] args) 
 	{
 		List<String> st = Arrays.asList((String[]) args[0]);
-		//String num = (String) args[1];
+		String num = (String) args[1];
 		
 		callScript("SABS.VFD",new String[]{Settings.Login.eootvet.key});
 		callScript("SABS.StartSABS",new String[]{Settings.Login.eootvet.user, Settings.Login.eootvet.pwd, Settings.Login.eootvet.sign});
@@ -48,6 +49,9 @@ public class OtvetEO extends OtvetEOHelper
 		Log.msg("ЭС создано.");
 		
 		callScript("SABS.CloseSABS");
+		
+		if(st.contains("CopyFromSABS"))
+			Pack.copyFromSABS(num, false);
 	}
 }
 

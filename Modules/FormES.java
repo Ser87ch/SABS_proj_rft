@@ -4,6 +4,7 @@ import java.util.List;
 
 import resources.Modules.FormESHelper;
 import ru.sabstest.Log;
+import ru.sabstest.Pack;
 import ru.sabstest.Settings;
 
 public class FormES extends FormESHelper
@@ -12,7 +13,7 @@ public class FormES extends FormESHelper
 	public void testMain(Object[] args) 
 	{		
 		List<String> st = Arrays.asList((String[]) args[0]);
-		//String num = (String) args[1];
+		String num = (String) args[1];
 
 		callScript("SABS.VFD",new String[]{Settings.Login.formes.key});
 		callScript("SABS.StartSABS",new String[]{Settings.Login.formes.user, Settings.Login.formes.pwd, Settings.Login.formes.sign});
@@ -84,6 +85,9 @@ public class FormES extends FormESHelper
 		Log.msg("ЭС создано.");
 
 		callScript("SABS.CloseSABS");
+		
+		if(st.contains("CopyFromSABS"))
+			Pack.copyFromSABS(num, true);
 	}
 }
 

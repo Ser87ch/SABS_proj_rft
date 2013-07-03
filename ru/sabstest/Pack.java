@@ -84,11 +84,11 @@ public class Pack {
 			}
 		}
 	}
-	
+
 	public static void copyToSABS(String num)
 	{
 		File[] files = new File(Settings.datafolder + "input\\" + num).listFiles();
-		
+
 		for(File fl:files)
 		{
 			if(fl.getName().length() == 40)
@@ -98,37 +98,42 @@ public class Pack {
 		}
 	}
 
-	
-	public static void copyFromSABS(String num)
+
+	public static void copyFromSABS(String num, boolean isVER)
 	{
-		File[] files = new File(Settings.path + "post\\kPuO\\").listFiles();
-		
-		for(File fl:files)
-			copyFile(fl.getAbsolutePath(), Settings.fullfolder + "\\output\\" + num + "\\" + fl.getName());
-		
-		files = new File(Settings.path + "post\\kUfO\\").listFiles();
-		
-		for(File fl:files)
-			copyFile(fl.getAbsolutePath(), Settings.fullfolder + "\\output\\" + num + "\\" + fl.getName());
+		if(isVER)
+		{
+			File[] files = new File(Settings.path + "post\\oPuO\\").listFiles();
+
+			for(File fl:files)
+				copyFile(fl.getAbsolutePath(), Settings.fullfolder + "\\output\\" + num + "\\" + fl.getName());
+		}
+		else
+		{
+			File[] files = new File(Settings.path + "post\\oUfO\\").listFiles();
+
+			for(File fl:files)
+				copyFile(fl.getAbsolutePath(), Settings.fullfolder + "\\output\\" + num + "\\" + fl.getName());
+		}
 	}
-	
+
 	public static String getSPackPath()
 	{
 		File[] files = new File(Settings.path + "post\\kPuO\\").listFiles();
 		return files[0].getAbsolutePath();
 	}
-	
+
 	public static String getDocPervVvod(String num)
 	{
 		File[] files = new File(Settings.datafolder + "input\\" + num).listFiles();
 		return files[0].getAbsolutePath();
 	}
-	
+
 	public static void copyESIS(String num)
 	{
 		File[] files = new File(Settings.path + "post\\kPuI\\").listFiles();
 		Pack.copyFile(files[0].getAbsolutePath(), Settings.fullfolder + "\\input\\" + num + "\\" + files[0].getName());
 	}
-	
-	
+
+
 }
