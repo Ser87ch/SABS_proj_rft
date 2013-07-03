@@ -21,7 +21,7 @@ import org.w3c.dom.NodeList;
  * @author Admin
  *
  */
-public class PaymentDocumentList extends Packet{
+public class PacketEPD extends Packet{
 	private List<PaymentDocument> pdList;
 
 	public int edNo;
@@ -32,7 +32,7 @@ public class PaymentDocumentList extends Packet{
 	public int sum;
 	public String systemCode;
 
-	public PaymentDocumentList() 
+	public PacketEPD() 
 	{
 
 	}
@@ -63,7 +63,7 @@ public class PaymentDocumentList extends Packet{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PaymentDocumentList other = (PaymentDocumentList) obj;
+		PacketEPD other = (PacketEPD) obj;
 		if (edAuthor == null) {
 			if (other.edAuthor != null)
 				return false;
@@ -200,7 +200,7 @@ public class PaymentDocumentList extends Packet{
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
-			PaymentDocument pd = new PaymentOrder();
+			PaymentDocument pd = new ED101();
 			pd.readED((Element) nl.item(i));
 			pdList.add(pd);
 		}
@@ -209,7 +209,7 @@ public class PaymentDocumentList extends Packet{
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
-			PaymentDocument pd = new PaymentRequest();
+			PaymentDocument pd = new ED103();
 			pd.readED((Element) nl.item(i));
 			pdList.add(pd);
 		}
@@ -218,7 +218,7 @@ public class PaymentDocumentList extends Packet{
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
-			PaymentDocument pd = new CollectionOrder();
+			PaymentDocument pd = new ED104();
 			pd.readED((Element) nl.item(i));
 			pdList.add(pd);
 		}
@@ -227,7 +227,7 @@ public class PaymentDocumentList extends Packet{
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
-			PaymentDocument pd = new PaymentWarrant();
+			PaymentDocument pd = new ED105();
 			pd.readED((Element) nl.item(i));
 			pdList.add(pd);
 		}
@@ -236,7 +236,7 @@ public class PaymentDocumentList extends Packet{
 
 		for(int i = 0; i < nl.getLength(); i++)
 		{
-			PaymentDocument pd = new PaymentOrderRegister();
+			PaymentDocument pd = new ED108();
 			pd.readED((Element) nl.item(i));
 			pdList.add(pd);
 		}

@@ -11,7 +11,7 @@ import org.w3c.dom.Element;
  * @author Admin
  *
  */
-public class ConfirmationDocument implements Comparable<ConfirmationDocument>{
+public class ED216 implements Comparable<ED216>{
 	//реквизиты ЭД
 	public int edNo; //Номер ЭД в течение опердня
 	public Date edDate; //Дата составления ЭД
@@ -34,7 +34,7 @@ public class ConfirmationDocument implements Comparable<ConfirmationDocument>{
 	public String iEdAuthor; //Уникальный идентификатор составителя ЭД (УИС)
 	
 	@Override
-	public int compareTo(ConfirmationDocument o) {
+	public int compareTo(ED216 o) {
 		if(sum < o.sum)
 			return -1;
 		else if(sum > o.sum)
@@ -74,7 +74,7 @@ public class ConfirmationDocument implements Comparable<ConfirmationDocument>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ConfirmationDocument other = (ConfirmationDocument) obj;
+		ED216 other = (ED216) obj;
 		if (accDocDate == null) {
 			if (other.accDocDate != null)
 				return false;

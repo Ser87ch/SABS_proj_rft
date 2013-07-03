@@ -1,3 +1,4 @@
+
 package ru.sabstest;
 
 import java.sql.Date;
@@ -5,122 +6,57 @@ import java.text.SimpleDateFormat;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 
 /**
- * Класс Платежное требование
+ * Класс Платежное поручение
  * @author Admin
  *
  */
-public class PaymentRequest extends PaymentDocument {
-
-	public String paytCondition; //условия оплаты
-	public int acptTerm; //срок для акцепта
-	public Date docDispatchDate; //дата отсылки (вручения) плательщику предусмотренных договором документов
-	public Date receiptDateCollectBank; // дата предоставления документов в банк
-	public Date maturityDate; //окончание срока акцепта
-	public int acptSum; //сумма исходного расчетного документа, предъявленного к акцепту
-	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + acptSum;
-		result = prime * result + acptTerm;
-		result = prime * result
-				+ ((docDispatchDate == null) ? 0 : docDispatchDate.hashCode());
-		result = prime * result
-				+ ((maturityDate == null) ? 0 : maturityDate.hashCode());
-		result = prime * result
-				+ ((paytCondition == null) ? 0 : paytCondition.hashCode());
-		result = prime
-				* result
-				+ ((receiptDateCollectBank == null) ? 0
-						: receiptDateCollectBank.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PaymentRequest other = (PaymentRequest) obj;
-		if (acptSum != other.acptSum)
-			return false;
-		if (acptTerm != other.acptTerm)
-			return false;
-		if (docDispatchDate == null) {
-			if (other.docDispatchDate != null)
-				return false;
-		} else if (!docDispatchDate.equals(other.docDispatchDate))
-			return false;
-		if (maturityDate == null) {
-			if (other.maturityDate != null)
-				return false;
-		} else if (!maturityDate.equals(other.maturityDate))
-			return false;
-		if (paytCondition == null) {
-			if (other.paytCondition != null)
-				return false;
-		} else if (!paytCondition.equals(other.paytCondition))
-			return false;
-		if (receiptDateCollectBank == null) {
-			if (other.receiptDateCollectBank != null)
-				return false;
-		} else if (!receiptDateCollectBank.equals(other.receiptDateCollectBank))
-			return false;
-		return true;
-	}
-
-	public PaymentRequest()
+public class ED101 extends PaymentDocument {
+	public ED101()
 	{
 		super();
 	}
-	
+
 	@Override
-	public Element createED(Document doc) {
-		Element rootElement = doc.createElement("ED103");		
+	public Element createED(Document doc)
+	{
+		Element rootElement = doc.createElement("ED101");		
 
 		addCommonEDElements(doc, rootElement);		
-		
-		XML.setOptinalAttr(rootElement, "PaytCondition", paytCondition);
-		XML.setOptinalAttr(rootElement, "AcptTerm", acptTerm);
-		XML.setOptinalAttr(rootElement, "DocDispatchDate", docDispatchDate);
-		XML.setOptinalAttr(rootElement, "ReceiptDateCollectBank", receiptDateCollectBank);
-		XML.setOptinalAttr(rootElement, "MaturityDate", maturityDate);
-		XML.setOptinalAttr(rootElement, "AcptSum", acptSum);
-		
+
+		if(tax != null && !tax.drawerStatus.equals(""))
+			rootElement.appendChild(tax.createXMLElement(doc));
+
 		return rootElement;
 	}
 
+
 	@Override
-	public void readED(Element doc) {
-		if(doc.getLocalName().equals("ED103"))
+	public void readED(Element doc)
+	{
+		
+		if(doc.getLocalName().equals("ED101"))
 		{
 			readCommonEDElements(doc);
-			
-			paytCondition = doc.getAttribute("PaytCondition");
-			acptTerm = XML.getOptionalIntAttr("AcptTerm", doc);
-			docDispatchDate = XML.getOptionalDateAttr("DocDispatchDate", doc);
-			receiptDateCollectBank = XML.getOptionalDateAttr("ReceiptDateCollectBank", doc);
-			maturityDate = XML.getOptionalDateAttr("MaturityDate", doc);
-			acptSum = XML.getOptionalIntAttr("AcptSum", doc);			
-			
-		}
 
+			NodeList nl = doc.getElementsByTagNameNS("*","DepartmentalInfo");
+			if(nl.getLength() == 1)
+			{
+				tax = new DepartmentalInfo();
+				tax.readED((Element) nl.item(0));
+			}
+
+		}
 	}
-	
+
 	@Override
 	public void generateFromXMLByType(Element gendoc)
 	{
-		transKind = "02";
-		purpose = "Тестовое платежное требование";
-		paytCondition = "1";
+		transKind = "01";
+		purpose = "Тестовое платежное поручение";		
 	}
 
 	@Override
@@ -143,11 +79,11 @@ public class PaymentRequest extends PaymentDocument {
 			"[NalPer], [NdNal], [DdNal], [TypNal], [Typ_Doc], [SS], [NamPost], [Esc_Key], [Esc_Key2])\r\n" + 
 			"VALUES(" + DB.toString(idPacet) + ", null,\r\n" + 
 			"2, null, 0, " + DB.toString(pEDNo) + ", " + DB.toString(pacDate) + ", " + DB.toString(pAuthor) + ",\r\n" + 
-			"0, 'ED103', " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, null, null,\r\n" + 
+			"0, 'ED101', " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, null, null,\r\n" + 
 			"null, " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ", " + DB.toString(paytKind) + ", " + DB.toString(sum).substring(0,DB.toString(sum).length() - 2) +  "." + DB.toString(sum).substring(DB.toString(sum).length() - 2, DB.toString(sum).length()) + ", " + DB.toString(payer.inn) + ", " + DB.toString(payer.name) + ", " + DB.toString(payer.personalAcc) + ", " + DB.toString(payer.bic) + ", " + DB.toString(payer.correspAcc) + ",\r\n" + 
 			DB.toString(payee.bic) + ", " + DB.toString(payee.correspAcc) + ", " + DB.toString(payee.inn) + ", " + DB.toString(payee.name) + ", " + DB.toString(payee.personalAcc) + ", " + DB.toString(transKind) + ", " + DB.toString(priority) + ", null, " + DB.toString(purpose) + ", null, null,\r\n" + 
 			"null, null, null, null, null, null, " + DB.toString(receiptDate) + ", " + DB.toString(fileDate) + ", null, null, \r\n" + 
-			DB.toString(chargeOffDate) + ", " + DB.toString(receiptDateCollectBank) + ", null, " + DB.toString(tax.drawerStatus) + ", " + DB.toString(payer.kpp) + ", " + DB.toString(payee.kpp) + ", " + DB.toString(tax.cbc) + ", " + DB.toString(tax.okato) + ", " + DB.toString(tax.paytReason) + ",\r\n" + 
+			DB.toString(chargeOffDate) + ", null, null, " + DB.toString(tax.drawerStatus) + ", " + DB.toString(payer.kpp) + ", " + DB.toString(payee.kpp) + ", " + DB.toString(tax.cbc) + ", " + DB.toString(tax.okato) + ", " + DB.toString(tax.paytReason) + ",\r\n" + 
 			DB.toString(tax.taxPeriod) + ", " + DB.toString(tax.docNo) + ", " + DB.toString(tax.docDate) + ", " + DB.toString(tax.taxPaytKind) + ", 'E', null, " + DB.toString(filename) + ", null, null)";			
 			db.st.executeUpdate(query);
 			db.close();		
@@ -158,8 +94,8 @@ public class PaymentRequest extends PaymentDocument {
 		}
 	}
 
-	@Override
-	public void insertIntoDbVer(int idPacet, String filename) 
+	
+	public void insertIntoDbVer(int idPacet, String filename, int iEdNo, Date iEdDate, String iEdAuthor) 
 	{
 
 		try
@@ -180,16 +116,16 @@ public class PaymentRequest extends PaymentDocument {
 			"[dep_DrawerStatus], [dep_CBC], [dep_OKATO], [dep_PaytReason], [dep_TaxPeriod], [dep_DocNo], [dep_DocDate], [dep_TaxPaytKind], \r\n" + 
 			"[AcptSum], [Typ_Doc], [SS], [NamPost], [Esc_Key], [Esc_Key2])\r\n" +					 
 			"VALUES(" + DB.toString(idPacet) + ", null,\r\n" + 
-			"2, null, 0, 0, 'ED103'," + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ",\r\n" + 
-			"null, null, null,\r\n" + 
+			"2, null, 0, 0, 'ED101'," + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ",\r\n" + 
+			DB.toString(iEdNo) + "," + DB.toString(iEdDate) + "," + DB.toString(iEdAuthor) + ",\r\n" + 
 			"null, " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ", " + DB.toString(paytKind) + ", '" + DB.toString(sum).substring(0,DB.toString(sum).length() - 2) +  "," + DB.toString(sum).substring(DB.toString(sum).length() - 2, DB.toString(sum).length()) + "',\r\n" +
 			DB.toString(payee.inn) + ", " + DB.toString(payee.name) + ", " + DB.toString(payee.personalAcc) + ", " + DB.toString(payee.bic) + ", " + DB.toString(payee.correspAcc)+ ", " + DB.toString(payee.kpp) + ",\r\n" + 
 			DB.toString(payer.inn) + ", " + DB.toString(payer.name) + ", " + DB.toString(payer.personalAcc) + ", " + DB.toString(payer.bic) + ", " + DB.toString(payer.correspAcc)+ ", " + DB.toString(payer.kpp) + ",\r\n" +  
-			DB.toString(transKind) + ", " + DB.toString(priority) + ", " + DB.toString(purpose) + ", " + DB.toString(paytCondition) + ", " + DB.toString(acptTerm) + ", " + DB.toString(docDispatchDate) + ",\r\n" + 
-			"null, null, null, " + DB.toString(maturityDate) + ", " + DB.toString(receiptDateCollectBank) + ",\r\n" +
+			DB.toString(transKind) + ", " + DB.toString(priority) + ", " + DB.toString(purpose) + ", null, null, null,\r\n" + 
+			"null, null, null, null, null,\r\n" +
 			DB.toString(receiptDate) + ", " + DB.toString(fileDate) + ", null, " +  DB.toString(chargeOffDate) + ", null, null,\r\n" + 
 			DB.toString(tax.drawerStatus) + ", " + DB.toString(tax.cbc) + ", " + DB.toString(tax.okato) + ", " + DB.toString(tax.taxPeriod) + ", " + DB.toString(tax.docNo) + ", " + DB.toString(tax.docDate) + ", " + DB.toString(tax.taxPaytKind) + ", "  + DB.toString(tax.paytReason) + ",\r\n" + 
-			DB.toString(acptSum) + ", 'E', null, " + DB.toString(filename) + ", null, null)";			
+			"null, 'E', null, " + DB.toString(filename) + ", null, null)";			
 			db.st.executeUpdate(query);
 			db.close();		
 
@@ -197,23 +133,58 @@ public class PaymentRequest extends PaymentDocument {
 			e.printStackTrace();
 			Log.msg(e);			
 		}
-	} 
+	}
 	
 	@Override
-	public String toStr(String razd, boolean addShift) {
+	public void insertIntoDbVer(int idPacet, String filename) 
+	{
+		insertIntoDbVer(idPacet, filename, 0, null, null);	
+	}
+	public void generateReturnDocument(PaymentDocument pd, String author, String resultCode)
+	{
+		edNo = pd.edNo + 1000;
+		edDate = pd.edDate;
+		edAuthor = author;
+
+		paytKind = pd.paytKind;
+		sum = pd.sum;
+		transKind = "01";
+		priority = pd.priority;
+		receiptDate = pd.receiptDate;
+		fileDate = pd.fileDate;
+		chargeOffDate = pd.chargeOffDate;
+		systemCode = pd.systemCode;
+					
+		accDocNo = pd.accDocNo;
+		accDocDate = pd.accDocDate;
+
+		payer = new Client(Settings.bik,"30811810000000000003"); 
+		payer.contrrazr();
+		payer.name = "Возврат ошибочного электронного платежного документа";
+		
+		payee = pd.payer;
+		
+
+		purpose = "Возврат ошибочного электронного платежного документа " +  String.format("%06d", pd.edNo) + " с датой составления "
+		+ new SimpleDateFormat("dd/MM/yyyy").format(edDate) +", УИС " 
+		+ pd.edAuthor + " на сумму " + String.format("%018d", pd.sum).substring(0, 16) + "." + String.format("%018d", pd.sum).substring(16) + " код возврата " + resultCode ;
+	}
+	
+	@Override
+	 public String toStr(String razd, boolean addShift){
 		String str = "";
 
 		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd +
 		transKind + razd + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
 		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd +
-		paytKind.toString() + razd + razd + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
-		payer.inn + razd + (addShift ? "+{ExtEnd}" : "") + payer.name + razd + payee.bic + razd + payee.correspAcc + razd +
-		payee.personalAcc + razd + payee.inn + razd + (addShift ? "+{ExtEnd}" : "") + payee.name + razd +
+		paytKind.toString() + razd + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
+		payer.inn + razd + payer.kpp + razd + (addShift ? "+{ExtEnd}" : "") + payer.name + razd + payee.bic + razd + payee.correspAcc + razd +
+		payee.personalAcc + razd + payee.inn + razd + payee.kpp + razd + (addShift ? "+{ExtEnd}" : "") + payee.name + razd +
 		priority + razd + tax.drawerStatus;
 		if(!tax.drawerStatus.equals("") && tax.drawerStatus != null)
 			str = str + razd + tax.cbc + razd + tax.okato + razd + tax.paytReason + razd + tax.taxPeriod + razd + tax.docNo + razd + tax.docDate + razd + tax.taxPaytKind;
 
-		str = str + razd + purpose + razd + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + paytCondition + razd + razd;
+		str = str + razd + purpose + razd + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + razd;
 		return str;	
 	}
 }

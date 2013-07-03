@@ -1,10 +1,10 @@
 package test;
 import resources.test.TestRHelper;
-import ru.sabstest.ConfirmationDocumentList;
+import ru.sabstest.PacketESIDVER;
 import ru.sabstest.Packet;
 import ru.sabstest.PacketList;
-import ru.sabstest.PaymentDocumentList;
-import ru.sabstest.ReturnDocumentList;
+import ru.sabstest.PacketEPD;
+import ru.sabstest.PacketEPDVER_B;
 import ru.sabstest.Settings;
 
 
@@ -20,13 +20,13 @@ public class TestR extends TestRHelper
 		
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
-		PaymentDocumentList pdl = new PaymentDocumentList();
+		PacketEPD pdl = new PacketEPD();
 		pdl.readEncodedFile("C:\\s_zpd\\post\\kPuO\\458200200020130701000000027.PacketEPDVER", true);
 		
-		ConfirmationDocumentList cdl = new ConfirmationDocumentList();
+		PacketESIDVER cdl = new PacketESIDVER();
 		cdl.generateFromPaymentDocumentList(pdl);
 		
-		ReturnDocumentList rdl = new ReturnDocumentList();
+		PacketEPDVER_B rdl = new PacketEPDVER_B();
 		rdl.generateFromPaymentDocumentList(pdl);
 		
 		PacketList pl = new PacketList();

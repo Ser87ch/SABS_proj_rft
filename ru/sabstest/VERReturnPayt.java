@@ -6,8 +6,8 @@ import java.text.SimpleDateFormat;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class ReturnDocument implements Comparable<ReturnDocument> {
-	public PaymentOrder po;
+public class VERReturnPayt implements Comparable<VERReturnPayt> {
+	public ED101 po;
 	
 	//реквизиты исходного ЭД
 	public int iEdNo; //Номер ЭД в течение опердня
@@ -15,7 +15,7 @@ public class ReturnDocument implements Comparable<ReturnDocument> {
 	public String iEdAuthor; //Уникальный идентификатор составителя ЭД (УИС)
 	
 	@Override
-	public int compareTo(ReturnDocument o) {
+	public int compareTo(VERReturnPayt o) {
 		return po.compareTo(o.po);
 	}
 	
@@ -42,7 +42,7 @@ public class ReturnDocument implements Comparable<ReturnDocument> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ReturnDocument other = (ReturnDocument) obj;
+		VERReturnPayt other = (VERReturnPayt) obj;
 		if (iEdAuthor == null) {
 			if (other.iEdAuthor != null)
 				return false;
@@ -80,7 +80,7 @@ public class ReturnDocument implements Comparable<ReturnDocument> {
 	
 	public void readED(Element doc)
 	{
-		po = new PaymentOrder();
+		po = new ED101();
 		po.readED((Element) doc.getElementsByTagNameNS("*","ED101").item(0));
 		
 		Element el = (Element) doc.getElementsByTagNameNS("*","EDRefID").item(0);
@@ -95,7 +95,7 @@ public class ReturnDocument implements Comparable<ReturnDocument> {
 		iEdDate = pd.edDate;
 		iEdNo = pd.edNo;
 		
-		po = new PaymentOrder();
+		po = new ED101();
 		
 		po.generateReturnDocument(pd, author, resultCode);
 	}

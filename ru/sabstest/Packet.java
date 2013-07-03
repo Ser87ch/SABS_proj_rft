@@ -84,11 +84,11 @@ abstract public class Packet implements Comparable<Packet>{
 		Packet pc = null;		
 				
 		if(type.equals("PacketEPDVER") || type.equals("PacketEPD"))
-			pc = new PaymentDocumentList();
+			pc = new PacketEPD();
 		else if(type.equals("PacketESIDVER_RYM")) //|| type.equals("PacketESID"))
-			pc = new ConfirmationDocumentList();
+			pc = new PacketESIDVER();
 		else if(type.equals("PacketEPDVER_B"))
-			pc = new ReturnDocumentList();
+			pc = new PacketEPDVER_B();
 		
 		return pc;
 	}

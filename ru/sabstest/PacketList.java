@@ -60,7 +60,7 @@ public class PacketList {
 				if(nl.item(i).getNodeType() == Node.ELEMENT_NODE && 
 						(nl.item(i).getNodeName().equals("PacketEPDVER") || nl.item(i).getNodeName().equals("PacketEPD")))
 				{
-					PaymentDocumentList epd = new PaymentDocumentList();				
+					PacketEPD epd = new PacketEPD();				
 					epd.generateFromXML((Element) nl.item(i));
 					pList.add(epd);
 
@@ -131,13 +131,13 @@ public class PacketList {
 
 		while(it.hasNext())
 		{
-			PaymentDocumentList epd = (PaymentDocumentList) it.next();
+			PacketEPD epd = (PacketEPD) it.next();
 
-			ConfirmationDocumentList rpack = new ConfirmationDocumentList();
+			PacketESIDVER rpack = new PacketESIDVER();
 			if(rpack.generateFromPaymentDocumentList(epd))
 				pList.add(rpack);
 
-			ReturnDocumentList bpack = new ReturnDocumentList();
+			PacketEPDVER_B bpack = new PacketEPDVER_B();
 			if(bpack.generateFromPaymentDocumentList(epd))
 				pList.add(bpack);		
 			

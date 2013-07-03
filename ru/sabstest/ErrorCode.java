@@ -155,39 +155,39 @@ public class ErrorCode {
 			pd.tax = new DepartmentalInfo("1", "18210302011011000110", "456", "8", "90", "12", "34", "");
 			break;
 		case 64:
-			CollectionOrder co = (CollectionOrder) pd;
+			ED104 co = (ED104) pd;
 			co.receiptDateCollectBank = null;
 			break;
 		case 65:
-			PaymentWarrant pw = (PaymentWarrant) pd;
+			ED105 pw = (ED105) pd;
 			pw.ppPaytNo = "0";
 			break;
 		case 66:
-			pw = (PaymentWarrant) pd;
+			pw = (ED105) pd;
 			pw.ppTransKind = "99";
 			break;
 		case 67:
-			pw = (PaymentWarrant) pd;
+			pw = (ED105) pd;
 			pw.ppAccDocNo = "1";
 			break;
 		case 68:
-			pw = (PaymentWarrant) pd;
+			pw = (ED105) pd;
 			pw.ppAccDocDate = new Date(0);
 			break;
 		case 69:
-			pw = (PaymentWarrant) pd;
+			pw = (ED105) pd;
 			pw.ppSumResidualPayt = 0;
 			break;
 		case 70:
-			pw = (PaymentWarrant) pd;
+			pw = (ED105) pd;
 			pw.transContent = "!@abc";
 			break;		
 		case 71:
-			co = (CollectionOrder) pd;
+			co = (ED104) pd;
 			co.paytKind = "5";
 			break;
 		case 72:
-			PaymentOrderRegister por = (PaymentOrderRegister) pd;
+			ED108 por = (ED108) pd;
 			por.tiList.get(0).transactionSum += 1;
 			break;
 		}

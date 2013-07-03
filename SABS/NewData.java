@@ -6,7 +6,7 @@ import ru.sabstest.ClientList;
 import ru.sabstest.Init;
 import ru.sabstest.Log;
 import ru.sabstest.PacketList;
-import ru.sabstest.PaymentDocumentList;
+import ru.sabstest.PacketEPD;
 import ru.sabstest.Settings;
 
 import com.rational.test.tss.TSSException;

@@ -37,7 +37,7 @@ public class PervVvod extends PervVvodHelper
 		SABSwindow().inputKeys("{TAB}");
 		SABSwindow().inputKeys("{ExtDown}{ExtDown}{ENTER}");
 
-		PaymentDocumentList pl = new PaymentDocumentList();
+		PacketEPD pl = new PacketEPD();
 		pl.readEncodedFile(Pack.getDocPervVvod(num), false);
 
 		Docswindow().inputKeys("{F2}");	

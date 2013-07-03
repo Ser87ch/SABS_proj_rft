@@ -7,7 +7,7 @@ import java.util.Random;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import ru.sabstest.PaymentOrderRegister.TransactionInfo;
+import ru.sabstest.ED108.TransactionInfo;
 
 
 
@@ -388,27 +388,27 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 		PaymentDocument pd = null;
 		if(root.getLocalName().equals("ED101"))
 		{
-			pd = new PaymentOrder();
+			pd = new ED101();
 			pd.readED(root);
 		}
 		else if(root.getLocalName().equals("ED103"))
 		{
-			pd = new PaymentRequest();
+			pd = new ED103();
 			pd.readED(root);
 		}
 		else if(root.getLocalName().equals("ED104"))
 		{
-			pd = new CollectionOrder();
+			pd = new ED104();
 			pd.readED(root);
 		}
 		else if(root.getLocalName().equals("ED105"))
 		{
-			pd = new PaymentWarrant();
+			pd = new ED105();
 			pd.readED(root);
 		}
 		else if(root.getLocalName().equals("ED108"))
 		{
-			pd = new PaymentOrderRegister();
+			pd = new ED108();
 			pd.readED(root);
 		}
 		return pd;
@@ -420,15 +420,15 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 		PaymentDocument pd = null;
 
 		if(type.equals("101"))
-			pd = new PaymentOrder();
+			pd = new ED101();
 		else if(type.equals("103"))
-			pd = new PaymentRequest();
+			pd = new ED103();
 		else if(type.equals("104"))
-			pd = new CollectionOrder();
+			pd = new ED104();
 		else if(type.equals("105"))
-			pd = new PaymentWarrant();
+			pd = new ED105();
 		else if(type.equals("108"))
-			pd = new PaymentOrderRegister();
+			pd = new ED108();
 
 		return pd;
 	}

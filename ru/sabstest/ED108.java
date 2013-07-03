@@ -16,11 +16,11 @@ import org.w3c.dom.NodeList;
  * @author Admin
  *
  */
-public class PaymentOrderRegister extends PaymentDocument {
+public class ED108 extends PaymentDocument {
 
 	public List <TransactionInfo> tiList;
 
-	public PaymentOrderRegister()
+	public ED108()
 	{
 		super();
 	}

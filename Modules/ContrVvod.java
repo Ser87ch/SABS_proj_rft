@@ -35,7 +35,7 @@ public class ContrVvod extends ContrVvodHelper
 		sleep(1);
 		SABSwindow().inputKeys("{ExtDown}{Enter}");
 				
-		PaymentDocumentList pl = new PaymentDocumentList();
+		PacketEPD pl = new PacketEPD();
 		pl.readEncodedFile(Pack.getDocPervVvod(num), false);	
 		
 		ContrDocwindow().inputKeys("{F2}");	
