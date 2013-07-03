@@ -1,6 +1,7 @@
 package ru.sabstest;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -153,7 +154,17 @@ public class PacketList {
 	
 	public void readFolder(String fld)
 	{
-		File[] files = new File(fld).listFiles();
+		FileFilter filter = new FileFilter() {			
+			@Override
+			public boolean accept(File pathname) {
+				if(!pathname.getName().startsWith("deltadb"))
+					return true;
+				else
+					return false;
+			}
+		};	
+		
+		File[] files = new File(fld).listFiles(filter);
 		
 		for(File fl:files)
 		{

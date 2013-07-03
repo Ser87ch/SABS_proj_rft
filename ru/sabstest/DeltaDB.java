@@ -2,6 +2,8 @@ package ru.sabstest;
 
 
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
@@ -502,10 +504,25 @@ public class DeltaDB {
 		Log.msg("XML с настройками для подсчета изменений в БД " + src + " загружен в программу.");		
 	}
 
-	public static boolean cmpDeltaDBfld(String et, String src)
+	public static File[] getDeltaDBFiles(String fld)
 	{
-		File[] fset = new File(et).listFiles();		
-		File[] fssrc = new File(src).listFiles();
+		FileFilter filter = new FileFilter() {			
+			@Override
+			public boolean accept(File pathname) {
+				if(pathname.getName().startsWith("deltadb"))
+					return true;
+				else
+					return false;
+			}
+		};
+		
+		return new File(fld).listFiles(filter);	
+	}
+	
+	public static boolean cmpDeltaDBfld(File[] fset, File[] fssrc)
+	{
+		if(fset.length != fssrc.length)
+			return false;
 		
 		for(int i = 0; i < fset.length; i++)
 			if(!cmpDeltaDB(fset[i].getAbsolutePath(), fssrc[i].getAbsolutePath()))
