@@ -152,6 +152,11 @@ public class ED216 implements Comparable<ED216>{
 		accDoc.setAttribute("AccDocNo", Integer.toString(accDocNo));
 		accDoc.setAttribute("AccDocDate", new SimpleDateFormat("yyyy-MM-dd").format(accDocDate));	
 		
+		Element ref = doc.createElement("EDRefID");
+		ref.setAttribute("EDNo", Integer.toString(iEdNo));
+		ref.setAttribute("EDDate", new SimpleDateFormat("yyyy-MM-dd").format(iEdDate));
+		ref.setAttribute("EDAuthor", iEdAuthor);
+		
 		rootElement.appendChild(payer.createXMLShortElement(doc, "ShortPayer"));
 		rootElement.appendChild(payee.createXMLShortElement(doc, "ShortPayee"));
 		return rootElement;
@@ -175,7 +180,13 @@ public class ED216 implements Comparable<ED216>{
 		Element accDoc = (Element) doc.getElementsByTagNameNS("*","AccDoc").item(0);			
 		accDocNo = Integer.parseInt(accDoc.getAttribute("AccDocNo"));
 		accDocDate = Date.valueOf(accDoc.getAttribute("AccDocDate"));
-
+		
+		Element ref = (Element) doc.getElementsByTagNameNS("*","EDRefID").item(0);
+		iEdNo = Integer.parseInt(ref.getAttribute("EDNo"));
+		iEdDate = Date.valueOf(ref.getAttribute("EDDate"));
+		iEdAuthor = ref.getAttribute("EDAuthor");
+		
+		
 		payer = new Client();
 		payer.readED((Element) doc.getElementsByTagNameNS("*","ShortPayer").item(0));
 		payee = new Client();

@@ -336,7 +336,7 @@ public class XML {
 	public static String decodeBase64(String src)
 	{
 		Element root = XML.getXMLRootElement(src);
-		Element n = (Element) root.getElementsByTagName("sen:Object").item(0);
+		Element n = (Element) root.getElementsByTagNameNS("*", "Object").item(0);
 		String encodedxml = n.getTextContent();
 		
 		String xml = new String(Base64.decode(encodedxml));

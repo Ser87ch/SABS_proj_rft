@@ -170,7 +170,7 @@ public class PacketList {
 		{
 			
 			Element root = XML.getXMLRootElement(fl.getAbsolutePath());
-			String type = root.getElementsByTagName("props:DocType").item(0).getTextContent();
+			String type = root.getElementsByTagNameNS("*", "DocType").item(0).getTextContent();
 			
 			Packet p = Packet.createPacketByFile(type);			
 			

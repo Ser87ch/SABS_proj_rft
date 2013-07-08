@@ -18,7 +18,7 @@ public class Main {
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.O;
+		Test t = Test.READ;
 		switch(t)
 		{
 					
@@ -29,7 +29,7 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			
 			
-			XML.createXMLFromBase64("C:\\X0010107.401", "C:\\x.xml");
+			XML.createXMLFromBase64("C:\\test\\2\\X0010107.401", "C:\\test\\2\\x.xml");
 //			PaymentDocumentList pdl = new PaymentDocumentList();
 //			pdl.readEncodedFile("C:\\sabstest\\data\\a000002\\input\\003\\458200200020130701000000101.PacketEPDVER", false);
 //			
@@ -59,8 +59,12 @@ public class Main {
 		case READ:
 		{
 			PacketList pl = new PacketList();
-			pl.readFolder("C:\\sabstest\\tests\\a000010\\output\\004\\");			
+			pl.readFolder("C:\\test\\2\\");			
+
+			PacketList pl2 = new PacketList();
+			pl2.readFolder("C:\\test\\3\\");
 			
+			System.out.println(pl.equals(pl2));
 			break;
 		}
 
