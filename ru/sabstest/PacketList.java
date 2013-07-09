@@ -176,7 +176,7 @@ public class PacketList {
 			
 			if(p != null)
 			{
-				p.readEncodedFile(fl.getAbsolutePath(), true);
+				p.readEncodedFile(fl.getAbsolutePath(), false);
 				p.filename = fl.getName();
 				pList.add(p);
 			}

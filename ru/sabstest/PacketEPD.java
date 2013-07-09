@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -241,6 +242,8 @@ public class PacketEPD extends Packet{
 			pdList.add(pd);
 		}
 		//System.out.println(toString());
+		
+		Collections.sort(pdList);
 	}
 
 	@Override
@@ -359,7 +362,7 @@ public class PacketEPD extends Packet{
 
 		this.edQuantity = size();
 		this.sum = sumAll();
-
+		Collections.sort(pdList);
 	}
 
 
