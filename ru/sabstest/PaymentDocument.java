@@ -54,13 +54,11 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 		int result = 1;
 		result = prime * result
 				+ ((accDocDate == null) ? 0 : accDocDate.hashCode());
-		result = prime * result + accDocNo;
 		result = prime * result
 				+ ((chargeOffDate == null) ? 0 : chargeOffDate.hashCode());
 		result = prime * result
 				+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
 		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
-		result = prime * result + edNo;
 		result = prime * result
 				+ ((fileDate == null) ? 0 : fileDate.hashCode());
 		result = prime * result + ((payee == null) ? 0 : payee.hashCode());
@@ -93,8 +91,6 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 				return false;
 		} else if (!accDocDate.equals(other.accDocDate))
 			return false;
-		if (accDocNo != other.accDocNo)
-			return false;
 		if (chargeOffDate == null) {
 			if (other.chargeOffDate != null)
 				return false;
@@ -109,8 +105,6 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 			if (other.edDate != null)
 				return false;
 		} else if (!edDate.equals(other.edDate))
-			return false;
-		if (edNo != other.edNo)
 			return false;
 		if (fileDate == null) {
 			if (other.fileDate != null)
