@@ -14,6 +14,8 @@ public class Client {
 	public String inn;
 	public String kpp;
 	public String name;
+	
+	public String edAuthor;
 
 	@Override
 	public int hashCode() {
@@ -276,10 +278,10 @@ public class Client {
 		}
 	}
 
-	public static Client createClientFromBICPersonalAcc(String bic, String ls)
+	public static Client createClientFromBICPersonalAcc(String bic, String ls, String uic)
 	{
 		Client cl = new Client(bic, ls);
-
+		cl.edAuthor = uic;
 		cl.contrrazr();
 		cl.loadFromDB();
 

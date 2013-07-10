@@ -18,14 +18,15 @@ public class ClientList {
 		NodeList nl = el.getElementsByTagName("Client");
 		for(int i = 0; i < nl.getLength(); i++)
 		{
-			String id, bic, ls;
+			String id, bic, ls, uic;
 			Element clEl = (Element) nl.item(i);
 			
 			id = clEl.getAttribute("Id");
 			bic = clEl.getAttribute("BIC");
 			ls = clEl.getAttribute("LS");
+			uic = clEl.getAttribute("UIC");
 			
-			Client cl = Client.createClientFromBICPersonalAcc(bic, ls);
+			Client cl = Client.createClientFromBICPersonalAcc(bic, ls, uic);
 			
 			clList.put(id, cl);
 		}		

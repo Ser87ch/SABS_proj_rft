@@ -256,11 +256,13 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 		payer = ClientList.getClient(gendoc.getAttribute("IdPayer"));
 		payee = ClientList.getClient(gendoc.getAttribute("IdPayee"));	
 
-		if(edAuthor.substring(0,7).equals(Settings.bik.substring(2)))
-			this.edAuthor = edAuthor;
-		else
-			this.edAuthor = payer.bic.substring(2) + "000";
+//		if(edAuthor.substring(0,7).equals(Settings.bik.substring(2)))
+//			this.edAuthor = edAuthor;
+//		else
+//			this.edAuthor = payer.bic.substring(2) + "000";
 
+		this.edAuthor = payer.edAuthor;
+		
 		generateFromXMLByType(gendoc);
 		
 		String errorCode = gendoc.getAttribute("ErrorCode");
