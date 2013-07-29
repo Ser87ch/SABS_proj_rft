@@ -1,6 +1,7 @@
 package ru.sabstest;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -119,8 +120,27 @@ public class Pack {
 
 	public static String getSPackPath()
 	{
-		File[] files = new File(Settings.path + "post\\kPuO\\").listFiles();
-		return files[0].getAbsolutePath();
+		FileFilter ff = new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				if(pathname.getName().endsWith("PacketEPDVER"))
+					return true;				
+				return false;
+			}			
+		};
+		File[] files = new File(Settings.path + "post\\kPuO\\").listFiles(ff);
+		return getLastModifiedFile(files);
+	}
+	
+	public static String getLastModifiedFile(File[] files)
+	{
+		String fl = files[0].getAbsolutePath();
+		
+		for(int i = 1; i < files.length; i++)
+			if(files[i].lastModified() >= files[i - 1].lastModified())
+				fl = files[i].getAbsolutePath();
+				
+		return fl;
 	}
 
 	public static String getDocPervVvod(String num)
