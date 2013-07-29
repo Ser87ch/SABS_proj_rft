@@ -102,6 +102,7 @@ public class Client {
 		this.inn = cl.inn;
 		this.kpp = cl.kpp;
 		this.name = cl.name;
+		this.edAuthor = cl.edAuthor;
 	}
 
 	/**
