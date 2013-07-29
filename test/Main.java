@@ -52,7 +52,7 @@ public class Main {
 			PacketList pdl = new PacketList();
 
 			pdl.generateFromXML("C:\\test\\genver.xml");
-			pdl.createFile("C:\\test\\");
+			
 
 			break;
 		}

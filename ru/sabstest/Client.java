@@ -145,6 +145,7 @@ public class Client {
 	 * @param elementName наименование элемента
 	 * @return элемент с реквизитами клиента
 	 */
+	@Deprecated
 	public Element createXMLElement(Document doc, String elementName)
 	{
 		Element rootElement = doc.createElement(elementName);
@@ -167,6 +168,7 @@ public class Client {
 	 * @param elementName наименование элемента
 	 * @return элемент с краткими реквизитами клиента
 	 */
+	@Deprecated
 	public Element createXMLShortElement(Document doc, String elementName)
 	{
 		Element rootElement = doc.createElement(elementName);

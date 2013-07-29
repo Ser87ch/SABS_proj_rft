@@ -133,6 +133,7 @@ public class PacketEPDVER_B extends Packet{
 	
 
 	@Override
+	@Deprecated
 	public void createFile(String folder) 
 	{
 		Document doc = XML.createNewDoc();

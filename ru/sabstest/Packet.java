@@ -45,6 +45,7 @@ abstract public class Packet implements Comparable<Packet>{
 		return true;
 	}
 
+	@Deprecated
 	public abstract void createFile(String folder);
 
 	public abstract void insertIntoDB();

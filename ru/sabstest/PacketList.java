@@ -77,6 +77,7 @@ public class PacketList {
 		}
 	}
 
+	@Deprecated
 	public void createFile(String folder)
 	{
 		Iterator<Packet> it = pList.iterator();

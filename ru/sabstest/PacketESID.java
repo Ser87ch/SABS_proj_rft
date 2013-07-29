@@ -90,6 +90,7 @@ public class PacketESID extends Packet {
 	}
 
 	@Override
+	@Deprecated
 	public void createFile(String folder) {
 		
 
@@ -97,14 +98,12 @@ public class PacketESID extends Packet {
 
 	@Override
 	public void insertIntoDB() {
-		
-
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setFileName() {
-		
-
+		throw new UnsupportedOperationException();
 	}
 
 	

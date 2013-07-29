@@ -142,6 +142,7 @@ public class DepartmentalInfo {
 	 * @param doc документ
 	 * @return элемент
 	 */
+	@Deprecated
 	public Element createXMLElement(Document doc)
 	{
 		Element rootElement = doc.createElement("DepartmentalInfo");

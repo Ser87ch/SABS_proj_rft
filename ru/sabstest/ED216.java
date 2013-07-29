@@ -132,6 +132,7 @@ public class ED216 implements Comparable<ED216>{
 	 * @param doc документ
 	 * @return элемент
 	 */
+	@Deprecated
 	public Element createED(Document doc)
 	{
 		Element rootElement = doc.createElement("ED216");		

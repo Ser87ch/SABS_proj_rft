@@ -219,6 +219,7 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 	 * @param doc документ
 	 * @return элемент
 	 */
+	@Deprecated
 	abstract public Element createED(Document doc);
 
 
@@ -314,6 +315,7 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 	 * @param doc документ
 	 * @param rootElement элемент
 	 */
+	@Deprecated
 	public void addCommonEDElements(Document doc, Element rootElement)
 	{
 		rootElement.setAttribute("xmlns", "urn:cbr-ru:ed:v2.0");

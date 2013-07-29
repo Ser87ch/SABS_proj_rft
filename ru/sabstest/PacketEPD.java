@@ -251,6 +251,7 @@ public class PacketEPD extends Packet{
 	 * создает XML Ёѕƒ
 	 * @param fl полный путь к файлу
 	 */
+	@Deprecated
 	public void createFile(String folder)
 	{
 		Document doc = XML.createNewDoc();

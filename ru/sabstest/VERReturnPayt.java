@@ -62,7 +62,7 @@ public class VERReturnPayt implements Comparable<VERReturnPayt> {
 	}
 
 
-
+	@Deprecated
 	public Element createED(Document doc)
 	{
 		Element el = doc.createElement("VERReturnPayt");

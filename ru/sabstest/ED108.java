@@ -26,6 +26,7 @@ public class ED108 extends PaymentDocument {
 	}
 
 	@Override
+	@Deprecated
 	public Element createED(Document doc)
 	{
 		Element rootElement = doc.createElement("ED108");		
@@ -285,6 +286,7 @@ public class ED108 extends PaymentDocument {
 			return true;
 		}
 
+		@Deprecated
 		public Element createED(Document doc)
 		{
 			Element rootElement = doc.createElement("CreditTransferTransactionInfo");		
@@ -470,6 +472,7 @@ public class ED108 extends PaymentDocument {
 				this.tradeName = tradeName;
 			}
 
+			@Deprecated
 			public Element createED(Document doc, String name)
 			{
 				Element rootElement = doc.createElement(name);

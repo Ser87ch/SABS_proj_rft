@@ -83,6 +83,7 @@ public class ED103 extends PaymentDocument {
 	}
 	
 	@Override
+	@Deprecated
 	public Element createED(Document doc) {
 		Element rootElement = doc.createElement("ED103");		
 

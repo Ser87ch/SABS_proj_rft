@@ -97,6 +97,7 @@ public class PacketESIDVER extends Packet{
 	 * @param fl полный путь к файлу
 	 */
 	@Override
+	@Deprecated
 	public void createFile(String folder)
 	{
 		Document doc = XML.createNewDoc();
