@@ -10,7 +10,7 @@ abstract public class Packet implements Comparable<Packet>{
 	public Sign firstSign;
 	public Sign secondSign;
 
-	public enum Type{PacketEPD, PacketEPDVER, PacketESIDVER, PacketESID, PacketEPDVER_B};
+	public enum Type{PacketEPD, PacketEPDVER, PacketESIDVER, PacketESID, PacketEPDVER_B, ED243};
 
 	@Override
 	public int compareTo(Packet o) {
