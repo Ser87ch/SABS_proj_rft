@@ -177,7 +177,10 @@ public class PacketList {
 			
 			if(p != null)
 			{
-				p.readEncodedFile(fl.getAbsolutePath(), false);
+				if(type.equals("PacketEPDVER_B"))
+					p.readEncodedFile(fl.getAbsolutePath(), true);
+				else
+					p.readEncodedFile(fl.getAbsolutePath(), false);
 				p.filename = fl.getName();
 				pList.add(p);
 			}
