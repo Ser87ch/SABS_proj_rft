@@ -38,7 +38,7 @@ public class Reset extends ResetHelper
 			Settings.testProj = (String) args[0];
 
 		Init.load();
-		
+		Settings.readXML(Settings.testProj + "settings\\general.xml");
 		//DM+
 		Log.msg("---------Подготовка САБС к тестированию.---------");
 		
