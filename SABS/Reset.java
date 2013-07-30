@@ -2,6 +2,7 @@ package SABS;
 import java.io.File;
 
 import resources.SABS.ResetHelper;
+import ru.sabstest.Init;
 import ru.sabstest.Log;
 import ru.sabstest.Pack;
 import ru.sabstest.Settings;
@@ -17,6 +18,8 @@ import com.rational.test.ft.object.interfaces.generichtmlsubdomain.*;
 import com.rational.test.ft.script.*;
 import com.rational.test.ft.value.*;
 import com.rational.test.ft.vp.*;
+import com.rational.test.tss.TSSException;
+import com.rational.test.tss.TSSUtility;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 
 public class Reset extends ResetHelper
@@ -24,12 +27,17 @@ public class Reset extends ResetHelper
 	
 	public void testMain(Object[] args) 
 	{
-		if(Settings.path == "")
-			Settings.path = "C:\\sabs_zapd\\";
-		
-		//DM+
-		if(Settings.dumpname == "")
-			Settings.dumpname = "0402open_eo0.bkp";
+		try {
+			Settings.testProj = TSSUtility.getScriptOption("projFolder");			
+		} catch (TSSException e) {
+			e.printStackTrace();
+			Log.msg(e);			
+		}		
+
+		if(Settings.testProj == null)
+			Settings.testProj = (String) args[0];
+
+		Init.load();
 		
 		//DM+
 		Log.msg("---------Подготовка САБС к тестированию.---------");
