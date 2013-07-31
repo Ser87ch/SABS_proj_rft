@@ -17,63 +17,63 @@ public class ED243 extends Packet {
 	public String edAuthor; //Уникальный идентификатор составителя ЭД (УИС)
 	public String edReceiver; //УИС составителя
 	public String edDefineRequestCode; //код запроса
-		
+
 	//реквизиты исходного ЭД
 	public int iEdNo; //Номер ЭД в течение опердня
 	public Date iEdDate; //Дата составления ЭД
 	public String iEdAuthor; //Уникальный идентификатор составителя ЭД (УИС)
-	
+
 	public int accDocNo; //номер расчетного документа
 	public Date accDocDate; //Дата выписки расчетного документа
-	
+
 	public String payerAcc;
 	public String payerName;
 	public String payeeAcc;
 	public String payeeName;
 	public int sum;
-	
+
 	public String edDefineRequestText;
 	public List<String> edFieldList;
 	public List<Integer> edReestrInfo; 
-	
+
 	public ED243()
 	{
 		packetType = Packet.Type.ED243;
 	}
-	
-	
-	
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((accDocDate == null) ? 0 : accDocDate.hashCode());
+		+ ((accDocDate == null) ? 0 : accDocDate.hashCode());
 		result = prime * result + accDocNo;
 		result = prime * result
-				+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
+		+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
 		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
 		result = prime
-				* result
-				+ ((edDefineRequestCode == null) ? 0 : edDefineRequestCode
-						.hashCode());
+		* result
+		+ ((edDefineRequestCode == null) ? 0 : edDefineRequestCode
+				.hashCode());
 		result = prime * result
-				+ ((edFieldList == null) ? 0 : edFieldList.hashCode());
+		+ ((edFieldList == null) ? 0 : edFieldList.hashCode());
 		result = prime * result
-				+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
+		+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
 		result = prime * result
-				+ ((edReestrInfo == null) ? 0 : edReestrInfo.hashCode());
+		+ ((edReestrInfo == null) ? 0 : edReestrInfo.hashCode());
 		result = prime * result
-				+ ((iEdAuthor == null) ? 0 : iEdAuthor.hashCode());
+		+ ((iEdAuthor == null) ? 0 : iEdAuthor.hashCode());
 		result = prime * result + ((iEdDate == null) ? 0 : iEdDate.hashCode());
 		result = prime * result
-				+ ((payeeAcc == null) ? 0 : payeeAcc.hashCode());
+		+ ((payeeAcc == null) ? 0 : payeeAcc.hashCode());
 		result = prime * result
-				+ ((payeeName == null) ? 0 : payeeName.hashCode());
+		+ ((payeeName == null) ? 0 : payeeName.hashCode());
 		result = prime * result
-				+ ((payerAcc == null) ? 0 : payerAcc.hashCode());
+		+ ((payerAcc == null) ? 0 : payerAcc.hashCode());
 		result = prime * result
-				+ ((payerName == null) ? 0 : payerName.hashCode());
+		+ ((payerName == null) ? 0 : payerName.hashCode());
 		result = prime * result + sum;
 		return result;
 	}
@@ -199,76 +199,76 @@ public class ED243 extends Packet {
 		edAuthor = root.getAttribute("EDAuthor");
 		edReceiver = root.getAttribute("EDReceiver");		
 		edDefineRequestCode = root.getAttribute("EDDefineRequestCode");
-		
+
 		Element ied = (Element) root.getElementsByTagName("OriginalEPD").item(0);
 		iEdNo = Integer.parseInt(ied.getAttribute("EDNo"));
 		iEdDate = Date.valueOf(ied.getAttribute("EDDate"));
 		iEdAuthor = ied.getAttribute("EDAuthor");
-		
+
 		Element ri = (Element) root.getElementsByTagName("EDDefineRequestInfo").item(0);
 		accDocNo = Integer.parseInt(ri.getAttribute("AccDocNo"));
 		accDocDate = Date.valueOf(ri.getAttribute("AccDocDate"));
 		payerAcc = ri.getAttribute("PayerAcc");
 		payeeAcc = ri.getAttribute("PayeeAcc");	
 		sum = Integer.parseInt(ri.getAttribute("Sum"));
-		
+
 		payerName = ri.getElementsByTagName("PayerName").item(0).getTextContent();
 		payeeName = ri.getElementsByTagName("PayeeName").item(0).getTextContent();
 		edDefineRequestText = ri.getElementsByTagName("EDDefineRequestText").item(0).getTextContent();
-		
+
 		NodeList nl = ri.getElementsByTagName("EDFieldList");
 		if(nl != null && nl.getLength() != 0)
 		{
 			edFieldList = new ArrayList<String>();
-			
+
 			for(int i = 0; i < nl.getLength(); i++)
 				edFieldList.add(((Element)nl.item(i)).getElementsByTagName("FieldNo").item(0).getTextContent());
-			
+
 			Collections.sort(edFieldList);
 		}
-		
+
 		nl = ri.getElementsByTagName("EDReestrInfo");
 		if(nl != null && nl.getLength() != 0)
 		{
 			edReestrInfo = new ArrayList<Integer>();
-			
+
 			for(int i = 0; i < nl.getLength(); i++)
 				edReestrInfo.add(Integer.parseInt(((Element)nl.item(i)).getElementsByTagName("TransactionID").item(0).getTextContent()));
-			
+
 			Collections.sort(edReestrInfo);
 		}
 	}
-	
+
 	public void generateFromXML(Element root)
 	{
 		firstSign = new Sign(root.getAttribute("key1"),root.getAttribute("profile1"));
 		secondSign = new Sign(root.getAttribute("key2"),root.getAttribute("profile2"));
-		
+
 		iEdNo = Integer.parseInt(root.getAttribute("EDNo"));
 		sum = Integer.parseInt(root.getAttribute("Sum"));
 		edDefineRequestCode = root.getAttribute("EDDefineRequestCode");
-		
+
 		Client payer = ClientList.getClient(root.getAttribute("IdPayer"));
 		Client payee = ClientList.getClient(root.getAttribute("IdPayee"));
-					
+
 		edNo = iEdNo + 1500;
 		edDate = Settings.operDate;
 		edAuthor = payer.edAuthor;
 		edReceiver = payee.edAuthor;
-		
+
 		iEdDate = Settings.operDate;
 		iEdAuthor = edReceiver;
-		
+
 		accDocNo = edNo;
 		accDocDate = Settings.operDate;
-		
+
 		payerAcc = payer.personalAcc;
 		payerName = payer.name;
 		payeeAcc = payee.personalAcc;
 		payeeName = payee.name;
-		
+
 		edDefineRequestText = "Текст";
-		
+
 	}
 
 }
