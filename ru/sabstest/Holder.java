@@ -44,7 +44,7 @@ public class Holder<T extends Packet> extends Packet {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Holder other = (Holder) obj;
+		Holder<?> other = (Holder<?>) obj;
 		if (ed == null) {
 			if (other.ed != null)
 				return false;
