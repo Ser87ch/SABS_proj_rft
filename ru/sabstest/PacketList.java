@@ -45,7 +45,7 @@ public class PacketList {
 			return false;
 		return true;
 	}
-	
+
 	public void generateFromXML(String fl)
 	{
 		Element root = XML.getXMLRootElement(fl);
@@ -57,20 +57,15 @@ public class PacketList {
 			NodeList nl = root.getChildNodes();
 			for(int i = 0; i < nl.getLength(); i++)
 			{
-				if(nl.item(i).getNodeType() == Node.ELEMENT_NODE && 
-						(nl.item(i).getNodeName().equals("PacketEPDVER") || nl.item(i).getNodeName().equals("PacketEPD")))
+				if(nl.item(i).getNodeType() == Node.ELEMENT_NODE)
 				{
-					PacketEPD epd = new PacketEPD();				
-					epd.generateFromXML((Element) nl.item(i));
-					pList.add(epd);
-
-					//					ConfirmationDocumentList rpack = new ConfirmationDocumentList();
-					//					if(rpack.generateFromPaymentDocumentList(epd))
-					//						pList.add(rpack);
-					//
-					//					ReturnDocumentList bpack = new ReturnDocumentList();
-					//					if(bpack.generateFromPaymentDocumentList(epd))
-					//						pList.add(bpack);
+					if(nl.item(i).getNodeName().equals("PacketEPDVER") || nl.item(i).getNodeName().equals("PacketEPD"))
+					{
+						PacketEPD epd = new PacketEPD();				
+						epd.generateFromXML((Element) nl.item(i));
+						pList.add(epd);
+					}
+					
 				}
 			}	
 			Collections.sort(pList);
@@ -93,7 +88,7 @@ public class PacketList {
 	{
 		return pList.get(i);
 	}
-	
+
 	public int getSize()
 	{
 		return pList.size();
@@ -117,7 +112,7 @@ public class PacketList {
 		while(it.hasNext())
 		{
 			Packet p = it.next();
-			if(p.packetType == Packet.Type.PacketEPD)
+			if(!p.isVER)
 				DB.insertPacetForReadUfebs(p.filename);
 			else
 				DB.insertPacetForReadVer(p.filename);
@@ -141,18 +136,18 @@ public class PacketList {
 			PacketEPDVER_B bpack = new PacketEPDVER_B();
 			if(bpack.generateFromPaymentDocumentList(epd))
 				pList.add(bpack);		
-			
+
 			Collections.sort(pList);
 
 		}
 	}
 
-	
+
 	public void add(Packet p)
 	{
 		pList.add(p);
 	}
-	
+
 	public void readFolder(String fld)
 	{
 		FileFilter filter = new FileFilter() {			
@@ -164,17 +159,17 @@ public class PacketList {
 					return false;
 			}
 		};	
-		
+
 		File[] files = new File(fld).listFiles(filter);
-		
+
 		for(File fl:files)
 		{
-			
+
 			Element root = XML.getXMLRootElement(fl.getAbsolutePath());
 			String type = root.getElementsByTagNameNS("*", "DocType").item(0).getTextContent();
-			
+
 			Packet p = Packet.createPacketByFile(type);			
-			
+
 			if(p != null)
 			{
 				if(type.equals("PacketEPDVER_B"))

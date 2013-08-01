@@ -153,7 +153,7 @@ public class PacketESIDVER extends Packet{
 
 	public PacketESIDVER() 
 	{
-		packetType = Packet.Type.PacketESIDVER;
+	
 	}
 
 	public boolean generateFromPaymentDocumentList(PacketEPD pdl)

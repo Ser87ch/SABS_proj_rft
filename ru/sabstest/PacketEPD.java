@@ -32,7 +32,7 @@ public class PacketEPD extends Packet{
 	public int edQuantity;
 	public int sum;
 	public String systemCode;
-
+	
 	public PacketEPD() 
 	{
 
@@ -118,7 +118,7 @@ public class PacketEPD extends Packet{
 
 	public boolean isVER()
 	{
-		if(packetType == Packet.Type.PacketEPDVER)
+		if(isVER)
 			return true;
 		return false;
 	}
@@ -181,9 +181,9 @@ public class PacketEPD extends Packet{
 
 
 		if(root.getLocalName().equals("PacketEPDVER"))
-			packetType = Packet.Type.PacketEPDVER;
+			isVER = true;
 		else if(root.getLocalName().equals("PacketEPD"))
-			packetType = Packet.Type.PacketEPD;
+			isVER = false;
 		else
 			return;
 
@@ -307,14 +307,14 @@ public class PacketEPD extends Packet{
 
 		if(root.getLocalName().equals("PacketEPDVER"))
 		{
-			packetType = Packet.Type.PacketEPDVER;			
+			isVER = true;		
 			secondSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
 			firstSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
 
 		}
 		else if(root.getLocalName().equals("PacketEPD"))
 		{
-			packetType = Packet.Type.PacketEPD;		
+			isVER = false;	
 			firstSign = new Sign(root.getAttribute("key1"),root.getAttribute("profile1"));
 			secondSign = new Sign(root.getAttribute("key2"),root.getAttribute("profile2"));
 		}
@@ -462,11 +462,12 @@ public class PacketEPD extends Packet{
 	 */
 	public void insertIntoDB()
 	{
-		if(packetType == Packet.Type.PacketEPD)
+		if(!isVER())
 			insertIntoDbUfebs(filename);
-		else if(packetType == Packet.Type.PacketEPDVER)
+		else if(isVER())
 			insertIntoDbVer(filename);
 	}
+	
 
 }
 

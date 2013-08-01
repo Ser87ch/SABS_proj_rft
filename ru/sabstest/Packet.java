@@ -4,46 +4,18 @@ import org.w3c.dom.Element;
 
 
 abstract public class Packet implements Comparable<Packet>{
-	public Type packetType;
+
 	public String filename;
 
 	public Sign firstSign;
 	public Sign secondSign;
 
-	public enum Type{PacketEPD, PacketEPDVER, PacketESIDVER, PacketESID, PacketEPDVER_B, ED243};
-
-	@Override
-	public int compareTo(Packet o) {
-		int i = packetType.compareTo(o.packetType);
-		if(i == 0)
-			return filename.compareTo(o.filename);
-		else 
-			return i;
-		
-	}
+	public boolean isVER = true;
 	
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((packetType == null) ? 0 : packetType.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Packet other = (Packet) obj;
-		if (packetType != other.packetType)
-			return false;
-		return true;
-	}
+	public int compareTo(Packet o) {		
+			return filename.compareTo(o.filename);		
+	}	
 
 	@Deprecated
 	public abstract void createFile(String folder);
@@ -56,7 +28,7 @@ abstract public class Packet implements Comparable<Packet>{
 	
 	public void insertForRead()
 	{
-		if(packetType == Packet.Type.PacketEPD)
+		if(!isVER)
 			DB.insertPacetForReadUfebs(filename);
 		else
 			DB.insertPacetForReadVer(filename);

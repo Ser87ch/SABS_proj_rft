@@ -82,7 +82,6 @@ public class PacketEPDVER_B extends Packet{
 
 	public PacketEPDVER_B()
 	{
-		packetType = Packet.Type.PacketEPDVER_B;
 		rdList = new ArrayList<VERReturnPayt>();
 	}
 	

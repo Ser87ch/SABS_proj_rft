@@ -12,7 +12,7 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 		String dest = (String) args[0];	
 		PacketList plst = (PacketList) args[1];
 
-		if(plst.pList.get(0).packetType == Packet.Type.PacketEPD)
+		if(!plst.pList.get(0).isVER)
 			for(Packet pl:plst.pList)
 			{
 				pl.insertIntoDB();
@@ -37,7 +37,7 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 				//		}
 
 				sleep(2);
-				if(pl.packetType == Packet.Type.PacketEPD)
+				if(!pl.isVER)
 					run(Settings.path + "\\bin\\clienXML.exe -wd " + dest + " C:\\  999",Settings.path + "\\bin");
 				else
 					run(Settings.path + "\\bin\\clienXML.exe -wdv " + dest + " C:\\  999",Settings.path + "\\bin");
@@ -59,7 +59,7 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 
 				sleep(2);
 
-				if(pl.packetType == Packet.Type.PacketEPD)
+				if(!pl.isVER)
 					run(Settings.path + "\\bin\\clienXML.exe -kd " + dest + " C:\\  999",Settings.path + "\\bin");
 				else
 					run(Settings.path + "\\bin\\clienXML.exe -kdv " + dest + " C:\\  999",Settings.path + "\\bin");

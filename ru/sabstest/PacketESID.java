@@ -20,8 +20,7 @@ public class PacketESID extends Packet {
 	
 	public PacketESID()
 	{
-		super();
-		packetType = Packet.Type.PacketESID;
+			
 	}
 	
 	@Override

@@ -38,7 +38,7 @@ public class ED243 extends Packet {
 
 	public ED243()
 	{
-		packetType = Packet.Type.ED243;
+		isVER = false;
 	}
 
 
