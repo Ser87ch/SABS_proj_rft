@@ -22,9 +22,10 @@ public class GenerateFromXMLList extends GenerateList<Element> {
 			{
 				if(nl.item(i).getNodeType() == Node.ELEMENT_NODE)
 				{
-					Generate<Element> gen = Packet.createGenFromXMLByFile(nl.item(i).getNodeName());			
-					if(gen.generateFrom((Element) nl.item(i)))
-						pList.add(gen);
+					Generate<Element> gen = Packet.createGenFromXMLByFile(nl.item(i).getNodeName());	
+					if(gen != null)
+						if(gen.generateFrom((Element) nl.item(i)))
+							pList.add(gen);
 				}
 			}	
 			//Collections.sort(pList);
