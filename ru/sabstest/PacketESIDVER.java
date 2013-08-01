@@ -19,11 +19,7 @@ import org.w3c.dom.NodeList;
  */
 public class PacketESIDVER extends Packet implements Generate<PacketEPD>, ReadED{
 	private List<ED216> cdList;
-
-	public int edNo;
-	public Date edDate;
-	public String edAuthor;
-	public String edReceiver;
+	
 	public int edQuantity;
 	public int sum;
 	public String packetCode;
@@ -34,14 +30,7 @@ public class PacketESIDVER extends Packet implements Generate<PacketEPD>, ReadED
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((cdList == null) ? 0 : cdList.hashCode());
-		result = prime * result
-				+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
-		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
 		result = prime * result + edQuantity;
-		result = prime * result
-				+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
-		result = prime * result
-				+ ((packetCode == null) ? 0 : packetCode.hashCode());
 		result = prime * result + sum;
 		return result;
 	}
@@ -60,27 +49,7 @@ public class PacketESIDVER extends Packet implements Generate<PacketEPD>, ReadED
 				return false;
 		} else if (!cdList.equals(other.cdList))
 			return false;
-		if (edAuthor == null) {
-			if (other.edAuthor != null)
-				return false;
-		} else if (!edAuthor.equals(other.edAuthor))
-			return false;
-		if (edDate == null) {
-			if (other.edDate != null)
-				return false;
-		} else if (!edDate.equals(other.edDate))
-			return false;
 		if (edQuantity != other.edQuantity)
-			return false;
-		if (edReceiver == null) {
-			if (other.edReceiver != null)
-				return false;
-		} else if (!edReceiver.equals(other.edReceiver))
-			return false;
-		if (packetCode == null) {
-			if (other.packetCode != null)
-				return false;
-		} else if (!packetCode.equals(other.packetCode))
 			return false;
 		if (sum != other.sum)
 			return false;

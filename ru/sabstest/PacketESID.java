@@ -11,11 +11,6 @@ import org.w3c.dom.NodeList;
 
 public class PacketESID extends Packet implements ReadED{
 
-	//реквизиты ЭД
-	public int edNo; //Номер ЭД в течение опердня
-	public Date edDate; //Дата составления ЭД
-	public String edAuthor; //Уникальный идентификатор составителя ЭД (УИС)
-	public String edReceiver; //УИС составителя
 	public String edCreationTime; //Время составления ЭД
 	public List<ED206> lt;
 	
@@ -48,11 +43,6 @@ public class PacketESID extends Packet implements ReadED{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
-		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
-		result = prime * result
-				+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
 		result = prime * result + ((lt == null) ? 0 : lt.hashCode());
 		return result;
 	}
@@ -66,21 +56,6 @@ public class PacketESID extends Packet implements ReadED{
 		if (getClass() != obj.getClass())
 			return false;
 		PacketESID other = (PacketESID) obj;
-		if (edAuthor == null) {
-			if (other.edAuthor != null)
-				return false;
-		} else if (!edAuthor.equals(other.edAuthor))
-			return false;
-		if (edDate == null) {
-			if (other.edDate != null)
-				return false;
-		} else if (!edDate.equals(other.edDate))
-			return false;
-		if (edReceiver == null) {
-			if (other.edReceiver != null)
-				return false;
-		} else if (!edReceiver.equals(other.edReceiver))
-			return false;
 		if (lt == null) {
 			if (other.lt != null)
 				return false;

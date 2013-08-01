@@ -2,28 +2,29 @@ package ru.sabstest;
 
 import java.io.File;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 import org.w3c.dom.Element;
 
-public class Holder<T extends ReadED> extends Packet implements ReadED {
+public class ED208 extends Packet implements ReadED {
 
+	public String resultCode;
 	
 	//реквизиты исходного ЭД
 	public int iEdNo; //Номер ЭД в течение опердня
 	public Date iEdDate; //Дата составления ЭД
 	public String iEdAuthor; //Уникальный идентификатор составителя ЭД (УИС)
-
-	public T ed;
-
+	
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((ed == null) ? 0 : ed.hashCode());
 		result = prime * result
 				+ ((iEdAuthor == null) ? 0 : iEdAuthor.hashCode());
 		result = prime * result + ((iEdDate == null) ? 0 : iEdDate.hashCode());
+		result = prime * result
+				+ ((resultCode == null) ? 0 : resultCode.hashCode());
 		return result;
 	}
 
@@ -35,12 +36,7 @@ public class Holder<T extends ReadED> extends Packet implements ReadED {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Holder<?> other = (Holder<?>) obj;
-		if (ed == null) {
-			if (other.ed != null)
-				return false;
-		} else if (!ed.equals(other.ed))
-			return false;
+		ED208 other = (ED208) obj;
 		if (iEdAuthor == null) {
 			if (other.iEdAuthor != null)
 				return false;
@@ -51,46 +47,38 @@ public class Holder<T extends ReadED> extends Packet implements ReadED {
 				return false;
 		} else if (!iEdDate.equals(other.iEdDate))
 			return false;
+		if (resultCode == null) {
+			if (other.resultCode != null)
+				return false;
+		} else if (!resultCode.equals(other.resultCode))
+			return false;
 		return true;
 	}
 
-//	@Override
-//	public void insertIntoDB() {
-//		
-//
-//	}
-//
-//	@Override
-//	public void setFileName() {
-//		filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate) + String.format("%09d", edNo) + ".7" + ed.getClass().getName().substring(1);
-//	}
+	@Override
+	public int compareTo(ReadED o) {
+		return compareTo((Packet) o);
+	}
+
+	@Override
+	public void readEncodedFile(File src, boolean isUTF) {
+		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
+		filename = src.getName();
+	}
 
 	@Override
 	public void readXML(Element root) {
 		edNo = Integer.parseInt(root.getAttribute("EDNo"));
 		edDate = Date.valueOf(root.getAttribute("EDDate"));
 		edAuthor = root.getAttribute("EDAuthor");
-		edReceiver = root.getAttribute("EDReceiver");	
-
-		Element ied = (Element) root.getElementsByTagName("InitialED").item(0);
+		edReceiver = root.getAttribute("EDReceiver");
+		resultCode = root.getAttribute("ResultCode");
+		
+		Element ied = (Element) root.getElementsByTagName("EDRefID").item(0);
 		iEdNo = Integer.parseInt(ied.getAttribute("EDNo"));
 		iEdDate = Date.valueOf(ied.getAttribute("EDDate"));
 		iEdAuthor = ied.getAttribute("EDAuthor");
 
-		ied = (Element) root.getElementsByTagName(ed.getClass().getName()).item(0);
-
-		ed.readXML(ied);		
-	}
-	
-	public void readEncodedFile(File src, boolean isUTF)
-	{
-		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
-		filename = src.getName();
-	}
-	
-	@Override
-	public int compareTo(ReadED o) {
-		return compareTo((Packet) o);
 	}
 
 }

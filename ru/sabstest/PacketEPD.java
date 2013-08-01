@@ -24,11 +24,7 @@ import org.w3c.dom.NodeList;
  */
 public class PacketEPD extends Packet implements Generate<Element>, ReadED{
 	private List<PaymentDocument> pdList;
-
-	public int edNo;
-	public Date edDate;
-	public String edAuthor;
-	public String edReceiver;
+	
 	public int edQuantity;
 	public int sum;
 	public String systemCode;
@@ -43,12 +39,7 @@ public class PacketEPD extends Packet implements Generate<Element>, ReadED{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-		+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
-		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
 		result = prime * result + edQuantity;
-		result = prime * result
-		+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
 		result = prime * result + ((pdList == null) ? 0 : pdList.hashCode());
 		result = prime * result + sum;
 		return result;
@@ -65,22 +56,7 @@ public class PacketEPD extends Packet implements Generate<Element>, ReadED{
 		if (getClass() != obj.getClass())
 			return false;
 		PacketEPD other = (PacketEPD) obj;
-		if (edAuthor == null) {
-			if (other.edAuthor != null)
-				return false;
-		} else if (!edAuthor.equals(other.edAuthor))
-			return false;
-		if (edDate == null) {
-			if (other.edDate != null)
-				return false;
-		} else if (!edDate.equals(other.edDate))
-			return false;
 		if (edQuantity != other.edQuantity)
-			return false;
-		if (edReceiver == null) {
-			if (other.edReceiver != null)
-				return false;
-		} else if (!edReceiver.equals(other.edReceiver))
 			return false;
 		if (pdList == null) {
 			if (other.pdList != null)

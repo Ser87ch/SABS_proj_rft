@@ -12,11 +12,6 @@ import org.w3c.dom.NodeList;
 
 public class ED243 extends Packet implements Generate<Element>, ReadED{
 
-	//реквизиты ЭД
-	public int edNo; //Номер ЭД в течение опердня
-	public Date edDate; //Дата составления ЭД
-	public String edAuthor; //Уникальный идентификатор составителя ЭД (УИС)
-	public String edReceiver; //УИС составителя
 	public String edDefineRequestCode; //код запроса
 
 	//реквизиты исходного ЭД
@@ -49,32 +44,23 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-		+ ((accDocDate == null) ? 0 : accDocDate.hashCode());
+				+ ((accDocDate == null) ? 0 : accDocDate.hashCode());
 		result = prime * result + accDocNo;
-		result = prime * result
-		+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
-		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
 		result = prime
-		* result
-		+ ((edDefineRequestCode == null) ? 0 : edDefineRequestCode
-				.hashCode());
+				* result
+				+ ((edDefineRequestCode == null) ? 0 : edDefineRequestCode
+						.hashCode());
 		result = prime * result
-		+ ((edFieldList == null) ? 0 : edFieldList.hashCode());
+				+ ((edFieldList == null) ? 0 : edFieldList.hashCode());
 		result = prime * result
-		+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
+				+ ((edReestrInfo == null) ? 0 : edReestrInfo.hashCode());
 		result = prime * result
-		+ ((edReestrInfo == null) ? 0 : edReestrInfo.hashCode());
-		result = prime * result
-		+ ((iEdAuthor == null) ? 0 : iEdAuthor.hashCode());
+				+ ((iEdAuthor == null) ? 0 : iEdAuthor.hashCode());
 		result = prime * result + ((iEdDate == null) ? 0 : iEdDate.hashCode());
 		result = prime * result
-		+ ((payeeAcc == null) ? 0 : payeeAcc.hashCode());
+				+ ((payeeAcc == null) ? 0 : payeeAcc.hashCode());
 		result = prime * result
-		+ ((payeeName == null) ? 0 : payeeName.hashCode());
-		result = prime * result
-		+ ((payerAcc == null) ? 0 : payerAcc.hashCode());
-		result = prime * result
-		+ ((payerName == null) ? 0 : payerName.hashCode());
+				+ ((payerAcc == null) ? 0 : payerAcc.hashCode());
 		result = prime * result + sum;
 		return result;
 	}
@@ -97,16 +83,6 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 			return false;
 		if (accDocNo != other.accDocNo)
 			return false;
-		if (edAuthor == null) {
-			if (other.edAuthor != null)
-				return false;
-		} else if (!edAuthor.equals(other.edAuthor))
-			return false;
-		if (edDate == null) {
-			if (other.edDate != null)
-				return false;
-		} else if (!edDate.equals(other.edDate))
-			return false;
 		if (edDefineRequestCode == null) {
 			if (other.edDefineRequestCode != null)
 				return false;
@@ -116,11 +92,6 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 			if (other.edFieldList != null)
 				return false;
 		} else if (!edFieldList.equals(other.edFieldList))
-			return false;
-		if (edReceiver == null) {
-			if (other.edReceiver != null)
-				return false;
-		} else if (!edReceiver.equals(other.edReceiver))
 			return false;
 		if (edReestrInfo == null) {
 			if (other.edReestrInfo != null)
@@ -142,20 +113,10 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 				return false;
 		} else if (!payeeAcc.equals(other.payeeAcc))
 			return false;
-		if (payeeName == null) {
-			if (other.payeeName != null)
-				return false;
-		} else if (!payeeName.equals(other.payeeName))
-			return false;
 		if (payerAcc == null) {
 			if (other.payerAcc != null)
 				return false;
 		} else if (!payerAcc.equals(other.payerAcc))
-			return false;
-		if (payerName == null) {
-			if (other.payerName != null)
-				return false;
-		} else if (!payerName.equals(other.payerName))
 			return false;
 		if (sum != other.sum)
 			return false;
@@ -164,7 +125,7 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 
 	@Override
 	public void insertIntoDB() {
-		// TODO Auto-generated method stub
+		// TODO 
 
 	}
 

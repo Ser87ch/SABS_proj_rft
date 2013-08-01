@@ -1,5 +1,6 @@
 package ru.sabstest;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,53 @@ abstract public class Packet{
 	public Sign secondSign;
 
 	public boolean isVER = true;
+	
+	//реквизиты ЭД
+	public int edNo; //Номер ЭД в течение опердня
+	public Date edDate; //Дата составления ЭД
+	public String edAuthor; //Уникальный идентификатор составителя ЭД (УИС)
+	public String edReceiver; //УИС составителя
+	
 		
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
+		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
+		result = prime * result
+				+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Packet other = (Packet) obj;
+		if (edAuthor == null) {
+			if (other.edAuthor != null)
+				return false;
+		} else if (!edAuthor.equals(other.edAuthor))
+			return false;
+		if (edDate == null) {
+			if (other.edDate != null)
+				return false;
+		} else if (!edDate.equals(other.edDate))
+			return false;
+		if (edReceiver == null) {
+			if (other.edReceiver != null)
+				return false;
+		} else if (!edReceiver.equals(other.edReceiver))
+			return false;
+		return true;
+	}
+
 	public int compareTo(Packet o) {		
 			return filename.compareTo(o.filename);		
 	}	
