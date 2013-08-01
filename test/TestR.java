@@ -1,10 +1,13 @@
 package test;
+import java.io.File;
+
 import resources.test.TestRHelper;
-import ru.sabstest.PacketESIDVER;
-import ru.sabstest.Packet;
-import ru.sabstest.PacketList;
+import ru.sabstest.GenerateFromPacketEPDList;
+import ru.sabstest.GenerateList;
 import ru.sabstest.PacketEPD;
 import ru.sabstest.PacketEPDVER_B;
+import ru.sabstest.PacketESIDVER;
+import ru.sabstest.ReadEDList;
 import ru.sabstest.Settings;
 
 
@@ -21,18 +24,12 @@ public class TestR extends TestRHelper
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
 		PacketEPD pdl = new PacketEPD();
-		pdl.readEncodedFile("C:\\s_zpd\\post\\kPuO\\458200200020130701000000027.PacketEPDVER", true);
+		pdl.readEncodedFile(new File("C:\\s_zpd\\post\\kPuO\\458200200020130701000000027.PacketEPDVER"), true);
 		
-		PacketESIDVER cdl = new PacketESIDVER();
-		cdl.generateFromPaymentDocumentList(pdl);
+		GenerateFromPacketEPDList pl = new GenerateFromPacketEPDList();
 		
-		PacketEPDVER_B rdl = new PacketEPDVER_B();
-		rdl.generateFromPaymentDocumentList(pdl);
+		pl.generateFromPacketEPD(pdl);
 		
-		PacketList pl = new PacketList();
-
-		pl.add(cdl);
-		pl.add(rdl);
 		callScript("SABS.CreateSignedXML",new Object[]{"C:\\s_zpd\\post\\kPuI", pl});
 	}
 }

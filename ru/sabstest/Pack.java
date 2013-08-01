@@ -143,10 +143,10 @@ public class Pack {
 		return fl;
 	}
 
-	public static String getDocPervVvod(String num)
+	public static File getDocPervVvod(String num)
 	{
 		File[] files = new File(Settings.datafolder + "input\\" + num).listFiles();
-		return files[0].getAbsolutePath();
+		return files[0];
 	}
 
 	public static void copyESIS(String num)

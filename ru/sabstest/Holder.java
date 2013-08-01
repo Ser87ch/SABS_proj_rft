@@ -1,11 +1,12 @@
 package ru.sabstest;
 
+import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 import org.w3c.dom.Element;
 
-public class Holder<T extends Packet> extends Packet {
+public class Holder<T extends ReadED> extends Packet implements ReadED {
 
 	//реквизиты ЭД
 	public int edNo; //Номер ЭД в течение опердня
@@ -78,23 +79,16 @@ public class Holder<T extends Packet> extends Packet {
 		return true;
 	}
 
-	@Override
-	@Deprecated
-	public void createFile(String folder) {
-		throw new UnsupportedOperationException();
-
-	}
-
-	@Override
-	public void insertIntoDB() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setFileName() {
-		filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate) + String.format("%09d", edNo) + ".7" + ed.getClass().getName().substring(1);
-	}
+//	@Override
+//	public void insertIntoDB() {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public void setFileName() {
+//		filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate) + String.format("%09d", edNo) + ".7" + ed.getClass().getName().substring(1);
+//	}
 
 	@Override
 	public void readXML(Element root) {
@@ -111,6 +105,17 @@ public class Holder<T extends Packet> extends Packet {
 		ied = (Element) root.getElementsByTagName(ed.getClass().getName()).item(0);
 
 		ed.readXML(ied);		
+	}
+	
+	public void readEncodedFile(File src, boolean isUTF)
+	{
+		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
+		filename = src.getName();
+	}
+	
+	@Override
+	public int compareTo(ReadED o) {
+		return compareTo((Packet) o);
 	}
 
 }

@@ -16,7 +16,7 @@ import com.rational.test.ft.vp.*;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 
 import ru.sabstest.DeltaDB;
-import ru.sabstest.PacketList;
+import ru.sabstest.ReadEDList;
 import ru.sabstest.Settings;
 import ru.sabstest.Log;
 
@@ -30,9 +30,9 @@ public class CompareOutput extends CompareOutputHelper
 
 		
 		//сравнение ЭС
-		PacketList plOut = new PacketList();
+		ReadEDList plOut = new ReadEDList();
 		plOut.readFolder(Settings.fullfolder + "\\output\\" + num);
-		PacketList plEt = new PacketList();
+		ReadEDList plEt = new ReadEDList();
 		plEt.readFolder(Settings.datafolder + "etalon\\" + num);
 
 		if(plOut.getSize() != 0 && plEt.getSize() != 0)

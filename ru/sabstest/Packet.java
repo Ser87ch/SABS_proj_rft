@@ -1,9 +1,12 @@
 package ru.sabstest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.Element;
 
 
-abstract public class Packet implements Comparable<Packet>{
+abstract public class Packet{
 
 	public String filename;
 
@@ -11,21 +14,11 @@ abstract public class Packet implements Comparable<Packet>{
 	public Sign secondSign;
 
 	public boolean isVER = true;
-	
-	@Override
+		
 	public int compareTo(Packet o) {		
 			return filename.compareTo(o.filename);		
 	}	
-
-	@Deprecated
-	public abstract void createFile(String folder);
-
-	public abstract void insertIntoDB();
-
-	public abstract void setFileName();
-	
-	public abstract void readXML(Element root);
-	
+		
 	public void insertForRead()
 	{
 		if(!isVER)
@@ -34,7 +27,7 @@ abstract public class Packet implements Comparable<Packet>{
 			DB.insertPacetForReadVer(filename);
 	}
 	
-	public void readEncodedFile(String src, boolean isUTF)
+	public Element getEncodedElement(String src, boolean isUTF)
 	{
 		Element root;
 		if(isUTF)
@@ -42,19 +35,14 @@ abstract public class Packet implements Comparable<Packet>{
 		else
 			root = XML.getXMLRootElementFromString1251(XML.decodeBase64(src));
 		
-		readXML(root);
+		return root;
 	}
 	
-	void readFile(String src)
-	{
-		Element root = XML.getXMLRootElement(src);
-
-		readXML(root);
-	}
 	
-	public static Packet createPacketByFile(String type)
+	
+	public static ReadED createReadEDByFile(String type)
 	{
-		Packet pc = null;		
+		ReadED pc = null;		
 				
 		if(type.equals("PacketEPDVER") || type.equals("PacketEPD"))
 			pc = new PacketEPD();
@@ -64,7 +52,43 @@ abstract public class Packet implements Comparable<Packet>{
 			pc = new PacketEPDVER_B();
 		else if(type.equals("PacketESID"))
 			pc = new PacketESID();
+		else if(type.equals("ED243"))
+			pc = new ED243();
 		
 		return pc;
+	}
+	
+	public static Generate<Element> createGenFromXMLByFile(String type)
+	{
+		Generate<Element> pc = null;		
+				
+		if(type.equals("PacketEPDVER") || type.equals("PacketEPD"))
+			pc = new PacketEPD();		
+		else if(type.equals("ED243"))
+			pc = new ED243();
+		
+		return pc;
+	}
+	
+	public static List<Generate<PacketEPD>> createGenFromEPD()
+	{
+		List<Generate<PacketEPD>> pc = new ArrayList<Generate<PacketEPD>>(); 
+		pc.add(new PacketESIDVER());
+		pc.add(new PacketEPDVER_B());			
+		return pc;
+	}
+	
+	
+	public Sign[] getSigns()
+	{
+		Sign[] sgn = {firstSign, secondSign};
+		return sgn;
+	}
+	
+	public boolean isVER()
+	{
+		if(isVER)
+			return true;
+		return false;
 	}
 }

@@ -3,9 +3,10 @@ import java.io.File;
 
 import resources.SABS.NewDataHelper;
 import ru.sabstest.ClientList;
+import ru.sabstest.GenerateFromXMLList;
 import ru.sabstest.Init;
 import ru.sabstest.Log;
-import ru.sabstest.PacketList;
+import ru.sabstest.ReadEDList;
 import ru.sabstest.PacketEPD;
 import ru.sabstest.Settings;
 
@@ -40,7 +41,7 @@ public class NewData extends NewDataHelper
 		for(File f:files)
 		{
 			String src = f.getName();			
-			PacketList pl = new PacketList();
+			GenerateFromXMLList pl = new GenerateFromXMLList();
 			pl.generateFromXML(Settings.testProj + "settings\\generation\\" + src);
 			new File(Settings.datafolder + "input\\" + src.substring(0,3)).mkdir();
 			new File(Settings.datafolder + "etalon\\" + src.substring(0,3)).mkdir();

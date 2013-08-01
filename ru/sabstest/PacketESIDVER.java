@@ -1,5 +1,6 @@
 package ru.sabstest;
 
+import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import org.w3c.dom.NodeList;
  * @author Admin
  *
  */
-public class PacketESIDVER extends Packet{
+public class PacketESIDVER extends Packet implements Generate<PacketEPD>, ReadED{
 	private List<ED216> cdList;
 
 	public int edNo;
@@ -95,8 +96,7 @@ public class PacketESIDVER extends Packet{
 	/** 
 	 * создает XML Ёѕƒ
 	 * @param fl полный путь к файлу
-	 */
-	@Override
+	 */	
 	@Deprecated
 	public void createFile(String folder)
 	{
@@ -156,7 +156,7 @@ public class PacketESIDVER extends Packet{
 	
 	}
 
-	public boolean generateFromPaymentDocumentList(PacketEPD pdl)
+	public boolean generateFrom(PacketEPD pdl)
 	{
 
 		firstSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
@@ -268,5 +268,15 @@ public class PacketESIDVER extends Packet{
 			Log.msg(e);			
 		}
 	}
+	
+	public void readEncodedFile(File src, boolean isUTF)
+	{
+		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
+		filename = src.getName();
+	}
 
+	@Override
+	public int compareTo(ReadED o) {
+		return compareTo((Packet) o);
+	}
 }

@@ -2,9 +2,13 @@ package test;
 
 
 
+import org.w3c.dom.Element;
+
+import ru.sabstest.GenerateFromXMLList;
+import ru.sabstest.GenerateList;
 import ru.sabstest.Init;
 import ru.sabstest.Log;
-import ru.sabstest.PacketList;
+import ru.sabstest.ReadEDList;
 import ru.sabstest.Settings;
 import ru.sabstest.XML;
 
@@ -49,7 +53,7 @@ public class Main {
 
 			Init.load();
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
-			PacketList pdl = new PacketList();
+			GenerateFromXMLList pdl = new GenerateFromXMLList();
 
 			pdl.generateFromXML("C:\\test\\genver.xml");
 			
@@ -58,10 +62,10 @@ public class Main {
 		}
 		case READ:
 		{
-			PacketList pl = new PacketList();
+			ReadEDList pl = new ReadEDList();
 			pl.readFolder("C:\\test\\2\\");			
 
-			PacketList pl2 = new PacketList();
+			ReadEDList pl2 = new ReadEDList();
 			pl2.readFolder("C:\\test\\3\\");
 			
 			System.out.println(pl.equals(pl2));

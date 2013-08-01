@@ -1,5 +1,6 @@
 package ru.sabstest;
 
+import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-public class ED243 extends Packet {
+public class ED243 extends Packet implements Generate<Element>, ReadED{
 
 	//реквизиты ЭД
 	public int edNo; //Номер ЭД в течение опердня
@@ -161,14 +162,6 @@ public class ED243 extends Packet {
 		return true;
 	}
 
-
-
-	@Override
-	@Deprecated
-	public void createFile(String folder) {
-		throw new UnsupportedOperationException();
-	}
-
 	@Override
 	public void insertIntoDB() {
 		// TODO Auto-generated method stub
@@ -239,7 +232,7 @@ public class ED243 extends Packet {
 		}
 	}
 
-	public void generateFromXML(Element root)
+	public boolean generateFrom(Element root)
 	{
 		firstSign = new Sign(root.getAttribute("key1"),root.getAttribute("profile1"));
 		secondSign = new Sign(root.getAttribute("key2"),root.getAttribute("profile2"));
@@ -268,7 +261,20 @@ public class ED243 extends Packet {
 		payeeName = payee.name;
 
 		edDefineRequestText = "Текст";
+		
+		return true;
 
 	}
 
+	
+	public void readEncodedFile(File src, boolean isUTF)
+	{
+		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
+		filename = src.getName();
+	}
+	
+	@Override
+	public int compareTo(ReadED o) {
+		return compareTo((Packet) o);
+	}
 }

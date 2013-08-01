@@ -1,5 +1,6 @@
 package ru.sabstest;
 
+import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import org.w3c.dom.NodeList;
  * @author Admin
  *
  */
-public class PacketEPDVER_B extends Packet{
+public class PacketEPDVER_B extends Packet implements ReadED, Generate<PacketEPD>{
 	private List<VERReturnPayt> rdList;
 	
 	public int edNo;
@@ -91,7 +92,7 @@ public class PacketEPDVER_B extends Packet{
 		filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate) + String.format("%09d", edNo) + ".PacketEPDVER_B";
 	}
 		
-	public boolean generateFromPaymentDocumentList(PacketEPD pdl)
+	public boolean generateFrom(PacketEPD pdl)
 	{
 	
 		secondSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
@@ -130,8 +131,7 @@ public class PacketEPDVER_B extends Packet{
 		}
 	}
 	
-
-	@Override
+	
 	@Deprecated
 	public void createFile(String folder) 
 	{
@@ -255,5 +255,16 @@ public class PacketEPDVER_B extends Packet{
 			e.printStackTrace();
 			Log.msg(e);			
 		}
+	}
+	
+	public void readEncodedFile(File src, boolean isUTF)
+	{
+		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
+		filename = src.getName();
+	}
+	
+	@Override
+	public int compareTo(ReadED o) {
+		return compareTo((Packet) o);
 	}
 }

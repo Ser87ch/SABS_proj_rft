@@ -22,7 +22,7 @@ import org.w3c.dom.NodeList;
  * @author Admin
  *
  */
-public class PacketEPD extends Packet{
+public class PacketEPD extends Packet implements Generate<Element>, ReadED{
 	private List<PaymentDocument> pdList;
 
 	public int edNo;
@@ -32,23 +32,23 @@ public class PacketEPD extends Packet{
 	public int edQuantity;
 	public int sum;
 	public String systemCode;
-	
+
 	public PacketEPD() 
 	{
 
 	}
-	
-	
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
+		+ ((edAuthor == null) ? 0 : edAuthor.hashCode());
 		result = prime * result + ((edDate == null) ? 0 : edDate.hashCode());
 		result = prime * result + edQuantity;
 		result = prime * result
-				+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
+		+ ((edReceiver == null) ? 0 : edReceiver.hashCode());
 		result = prime * result + ((pdList == null) ? 0 : pdList.hashCode());
 		result = prime * result + sum;
 		return result;
@@ -116,12 +116,7 @@ public class PacketEPD extends Packet{
 		}
 	}
 
-	public boolean isVER()
-	{
-		if(isVER)
-			return true;
-		return false;
-	}
+	
 
 	/**
 	 * @return количество документов в пакете
@@ -174,7 +169,7 @@ public class PacketEPD extends Packet{
 
 
 
-		
+
 	@Override
 	public void readXML(Element root)
 	{
@@ -242,11 +237,11 @@ public class PacketEPD extends Packet{
 			pdList.add(pd);
 		}
 		//System.out.println(toString());
-		
+
 		Collections.sort(pdList);
 	}
 
-	@Override
+	
 	/** 
 	 * создает XML Ёѕƒ
 	 * @param fl полный путь к файлу
@@ -299,7 +294,7 @@ public class PacketEPD extends Packet{
 	 * генерирует Ёѕƒ из xml
 	 * @param src полный путь к файлу
 	 */
-	public void generateFromXML(Element root)
+	public boolean generateFrom(Element root)
 	{
 
 		//	XML.validate(Settings.testProj + "\\XMLschema\\settings\\generation.xsd", src);
@@ -319,7 +314,7 @@ public class PacketEPD extends Packet{
 			secondSign = new Sign(root.getAttribute("key2"),root.getAttribute("profile2"));
 		}
 		else
-			return;
+			return false;
 
 
 
@@ -327,7 +322,7 @@ public class PacketEPD extends Packet{
 
 		edNo = Integer.parseInt(root.getAttribute("EPDNo"));
 		edDate = Settings.operDate;
-		
+
 		edAuthor = root.getAttribute("EDAuthor");
 		edReceiver = root.getAttribute("EDReceiver");
 		systemCode = "0";
@@ -360,10 +355,16 @@ public class PacketEPD extends Packet{
 				}
 			}
 		}		
-
-		this.edQuantity = size();
-		this.sum = sumAll();
-		Collections.sort(pdList);
+		
+		if(pdList == null || pdList.size() == 0)
+			return false;
+		else
+		{
+			this.edQuantity = size();
+			this.sum = sumAll();
+			Collections.sort(pdList);
+			return true;
+		}
 	}
 
 
@@ -467,7 +468,18 @@ public class PacketEPD extends Packet{
 		else if(isVER())
 			insertIntoDbVer(filename);
 	}
-	
+
+	public void readEncodedFile(File src, boolean isUTF)
+	{
+		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
+		filename = src.getName();
+	}
+
+
+	@Override
+	public int compareTo(ReadED o) {
+		return compareTo((Packet) o);
+	}
 
 }
 

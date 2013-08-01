@@ -1,5 +1,6 @@
 package ru.sabstest;
 
+import java.io.File;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +9,7 @@ import java.util.List;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-public class PacketESID extends Packet {
+public class PacketESID extends Packet implements ReadED{
 
 	//реквизиты ЭД
 	public int edNo; //Номер ЭД в течение опердня
@@ -87,26 +88,17 @@ public class PacketESID extends Packet {
 			return false;
 		return true;
 	}
-
-	@Override
-	@Deprecated
-	public void createFile(String folder) {
-		
-
-	}
-
-	@Override
-	public void insertIntoDB() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void setFileName() {
-		throw new UnsupportedOperationException();
-	}
-
 	
+	public void readEncodedFile(File src, boolean isUTF)
+	{
+		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
+		filename = src.getName();
+	}
 
+	@Override
+	public int compareTo(ReadED o) {
+		return compareTo((Packet) o);
+	}
 }
 
 	
