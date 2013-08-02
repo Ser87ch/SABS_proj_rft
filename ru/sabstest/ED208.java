@@ -5,7 +5,7 @@ import java.sql.Date;
 
 import org.w3c.dom.Element;
 
-public class ED208 extends Packet implements ReadED {
+public class ED208 extends Packet implements ReadED, Generate<ED243> {
 
 	public String resultCode;
 	
@@ -77,4 +77,22 @@ public class ED208 extends Packet implements ReadED {
 		iEdAuthor = ied.getAttribute("EDAuthor");
 	}
 
+	
+	@Override
+	public boolean generateFrom(ED243 source) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setFileName() {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	@Override
+	public void insertIntoDB() {
+		throw new UnsupportedOperationException();
+		
+	}
 }

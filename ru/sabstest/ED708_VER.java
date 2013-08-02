@@ -6,8 +6,9 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 
 	@Override
 	public boolean generateFrom(ED743_VER source) {
-		// TODO Auto-generated method stub
-		return false;
+		ed = new ED208();
+		ed.generateFrom(source.ed);
+		return true;
 	}
 	
 	@Override

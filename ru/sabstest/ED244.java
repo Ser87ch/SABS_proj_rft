@@ -5,7 +5,7 @@ import java.sql.Date;
 
 import org.w3c.dom.Element;
 
-public class ED244 extends Packet implements ReadED {
+public class ED244 extends Packet implements ReadED, Generate<ED243> {
 
 	public String edDefineRequestCode; //код запроса
 	public String edDefineAnswerCode; //код ответа
@@ -36,6 +36,24 @@ public class ED244 extends Packet implements ReadED {
 		iEdNo = Integer.parseInt(ied.getAttribute("EDNo"));
 		iEdDate = Date.valueOf(ied.getAttribute("EDDate"));
 		iEdAuthor = ied.getAttribute("EDAuthor");
+	}
+
+	@Override
+	public boolean generateFrom(ED243 source) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setFileName() {
+		throw new UnsupportedOperationException();
+		
+	}
+
+	@Override
+	public void insertIntoDB() {
+		throw new UnsupportedOperationException();
+		
 	}
 
 }
