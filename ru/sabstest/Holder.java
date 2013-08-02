@@ -54,16 +54,6 @@ public class Holder<T extends ReadED> extends Packet implements ReadED {
 		return true;
 	}
 
-//	@Override
-//	public void insertIntoDB() {
-//		
-//
-//	}
-//
-//	@Override
-//	public void setFileName() {
-//		filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate) + String.format("%09d", edNo) + ".7" + ed.getClass().getName().substring(1);
-//	}
 
 	@Override
 	public void readXML(Element root) {
@@ -89,5 +79,7 @@ public class Holder<T extends ReadED> extends Packet implements ReadED {
 	public int compareTo(ReadED o) {
 		return compareTo((Packet) o);
 	}
+
+	
 
 }
