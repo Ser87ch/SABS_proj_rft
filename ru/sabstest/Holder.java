@@ -67,10 +67,7 @@ public class Holder<T extends ReadED> extends Packet implements ReadED {
 
 	@Override
 	public void readXML(Element root) {
-		edNo = Integer.parseInt(root.getAttribute("EDNo"));
-		edDate = Date.valueOf(root.getAttribute("EDDate"));
-		edAuthor = root.getAttribute("EDAuthor");
-		edReceiver = root.getAttribute("EDReceiver");	
+		super.readXML(root);
 
 		Element ied = (Element) root.getElementsByTagName("InitialED").item(0);
 		iEdNo = Integer.parseInt(ied.getAttribute("EDNo"));

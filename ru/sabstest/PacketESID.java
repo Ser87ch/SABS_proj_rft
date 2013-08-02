@@ -21,10 +21,7 @@ public class PacketESID extends Packet implements ReadED{
 	
 	@Override
 	public void readXML(Element doc) {
-		edNo = Integer.parseInt(doc.getAttribute("EDNo"));
-		edDate = Date.valueOf(doc.getAttribute("EDDate"));
-		edAuthor = doc.getAttribute("EDAuthor");
-		edReceiver = doc.getAttribute("EDReceiver");
+		super.readXML(doc);
 		edCreationTime = doc.getAttribute("EDCreationTime");
 		
 		NodeList nl = doc.getElementsByTagNameNS("*", "ED206");
