@@ -5,9 +5,11 @@ import java.sql.Date;
 
 import org.w3c.dom.Element;
 
-public class ED208 extends Packet implements ReadED {
+public class ED201 extends Packet implements ReadED {
 
-	public String resultCode;
+	public String ctrlCode; //Код результата контроля ЭД
+	public String ctrlTime; //Время проведения контроля ЭД 
+	public String annotation; //Текст пояснения
 	
 	//реквизиты исходного ЭД
 	public int iEdNo; //Номер ЭД в течение опердня
@@ -21,10 +23,10 @@ public class ED208 extends Packet implements ReadED {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
+				+ ((ctrlCode == null) ? 0 : ctrlCode.hashCode());
+		result = prime * result
 				+ ((iEdAuthor == null) ? 0 : iEdAuthor.hashCode());
 		result = prime * result + ((iEdDate == null) ? 0 : iEdDate.hashCode());
-		result = prime * result
-				+ ((resultCode == null) ? 0 : resultCode.hashCode());
 		return result;
 	}
 
@@ -36,7 +38,12 @@ public class ED208 extends Packet implements ReadED {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ED208 other = (ED208) obj;
+		ED201 other = (ED201) obj;
+		if (ctrlCode == null) {
+			if (other.ctrlCode != null)
+				return false;
+		} else if (!ctrlCode.equals(other.ctrlCode))
+			return false;
 		if (iEdAuthor == null) {
 			if (other.iEdAuthor != null)
 				return false;
@@ -46,11 +53,6 @@ public class ED208 extends Packet implements ReadED {
 			if (other.iEdDate != null)
 				return false;
 		} else if (!iEdDate.equals(other.iEdDate))
-			return false;
-		if (resultCode == null) {
-			if (other.resultCode != null)
-				return false;
-		} else if (!resultCode.equals(other.resultCode))
 			return false;
 		return true;
 	}
@@ -69,7 +71,8 @@ public class ED208 extends Packet implements ReadED {
 	@Override
 	public void readXML(Element root) {
 		super.readXML(root);
-		resultCode = root.getAttribute("ResultCode");
+		ctrlCode = root.getAttribute("CtrlCode");
+		ctrlTime = root.getAttribute("CtrlTime");
 		
 		Element ied = (Element) root.getElementsByTagName("EDRefID").item(0);
 		iEdNo = Integer.parseInt(ied.getAttribute("EDNo"));
