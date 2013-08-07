@@ -40,8 +40,18 @@ public class ED244 extends Packet implements ReadED, Generate<ED243> {
 
 	@Override
 	public boolean generateFrom(ED243 source) {
-		// TODO Auto-generated method stub
-		return false;
+		edNo = source.edNo + 2500;
+		edDate = source.edDate;
+		edAuthor = source.edReceiver;
+		edReceiver = source.edAuthor;
+		
+		iEdAuthor = source.edAuthor;
+		iEdDate = source.edDate;
+		iEdNo = source.edNo;
+		
+		edDefineRequestCode = source.edDefineRequestCode;
+		edDefineAnswerCode = ""; //TODO разобраться с кодом ответа
+		return true;
 	}
 
 	@Override

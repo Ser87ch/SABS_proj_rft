@@ -125,7 +125,7 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 
 	@Override
 	public void insertIntoDB() {
-		// TODO 
+		// TODO вставка
 
 	}
 

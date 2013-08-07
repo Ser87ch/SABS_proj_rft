@@ -22,7 +22,7 @@ public class Main {
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.READ;
+		Test t = Test.O;
 		switch(t)
 		{
 					
@@ -33,7 +33,9 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			
 			
-			XML.createXMLFromBase64("C:\\test\\2\\X0010107.401", "C:\\test\\2\\x.xml");
+			XML.createXMLFromBase64("C:\\test\\1\\003700200020130701000000039.ED744_VER", "C:\\test\\1\\744.xml");
+			XML.createXMLFromBase64("C:\\test\\1\\003700200020130701000000040.ED743_VER", "C:\\test\\1\\743.xml");
+			XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000023.ED708_VER", "C:\\test\\1\\708.xml");
 //			PaymentDocumentList pdl = new PaymentDocumentList();
 //			pdl.readEncodedFile("C:\\sabstest\\data\\a000002\\input\\003\\458200200020130701000000101.PacketEPDVER", false);
 //			
