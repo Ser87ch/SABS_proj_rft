@@ -15,6 +15,9 @@ public class ED104 extends PaymentDocument {
 
 	public Date receiptDateCollectBank;	
 	
+	public boolean is114 = false;
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -48,6 +51,13 @@ public class ED104 extends PaymentDocument {
 		super();
 	}
 	
+	
+	public ED104(boolean is114)
+	{
+		super();
+		this.is114 = is114;		
+	}
+	
 	@Override
 	@Deprecated
 	public Element createED(Document doc)
@@ -67,9 +77,12 @@ public class ED104 extends PaymentDocument {
 	@Override
 	public void readED(Element doc)
 	{
-		if(doc.getLocalName().equals("ED104"))
+		if(doc.getLocalName().equals("ED104") || doc.getLocalName().equals("ED114"))
 		{
 			readCommonEDElements(doc);
+			
+			if(doc.getLocalName().equals("ED114") || purpose.startsWith("!"))
+				is114 = true;
 			
 			receiptDateCollectBank = XML.getOptionalDateAttr("ReceiptDateCollectBank", doc);
 			
@@ -87,7 +100,9 @@ public class ED104 extends PaymentDocument {
 	public void generateFromXMLByType(Element gendoc)
 	{		
 		transKind = "06";	
-		purpose = "Тестовое инкассовое поручение";		
+		purpose = "Тестовое инкассовое поручение";	
+		if(is114)
+			purpose = "1" + purpose;
 		receiptDateCollectBank = Settings.operDate;
 	}
 
@@ -174,7 +189,7 @@ public class ED104 extends PaymentDocument {
 		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd +
 		transKind + razd + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
 		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd +
-		paytKind.toString() + razd + razd + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
+		paytKind.toString() + razd + (is114 ? "{ExtDown}" : "") + razd + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
 		payer.inn + razd + payer.kpp + razd + (addShift ? "+{ExtEnd}" : "") + payer.name + razd + payee.bic + razd + payee.correspAcc + razd +
 		payee.personalAcc + razd + payee.inn + razd + payee.kpp + razd + (addShift ? "+{ExtEnd}" : "") + payee.name + razd +
 		priority + razd + tax.drawerStatus;

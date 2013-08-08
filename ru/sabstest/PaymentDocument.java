@@ -421,8 +421,12 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 			pd = new ED101();
 		else if(type.equals("103"))
 			pd = new ED103();
+		else if(type.equals("113"))
+			pd = new ED103(true);
 		else if(type.equals("104"))
 			pd = new ED104();
+		else if(type.equals("114"))
+			pd = new ED104(true);
 		else if(type.equals("105"))
 			pd = new ED105();
 		else if(type.equals("108"))

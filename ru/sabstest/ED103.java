@@ -21,6 +21,7 @@ public class ED103 extends PaymentDocument {
 	public Date maturityDate; //окончание срока акцепта
 	public int acptSum; //сумма исходного расчетного документа, предъявленного к акцепту
 	
+	public boolean is113 = false;
 	
 	@Override
 	public int hashCode() {
@@ -81,6 +82,12 @@ public class ED103 extends PaymentDocument {
 	{
 		super();
 	}
+
+	public ED103(boolean is113)
+	{
+		super();
+		this.is113 = is113;
+	}
 	
 	@Override
 	@Deprecated
@@ -101,9 +108,12 @@ public class ED103 extends PaymentDocument {
 
 	@Override
 	public void readED(Element doc) {
-		if(doc.getLocalName().equals("ED103"))
+		if(doc.getLocalName().equals("ED103") || doc.getLocalName().equals("ED113"))
 		{
 			readCommonEDElements(doc);
+			
+			if(doc.getLocalName().equals("ED114") || purpose.startsWith("!"))
+				is113 = true;
 			
 			paytCondition = doc.getAttribute("PaytCondition");
 			acptTerm = XML.getOptionalIntAttr("AcptTerm", doc);
@@ -121,6 +131,8 @@ public class ED103 extends PaymentDocument {
 	{
 		transKind = "02";
 		purpose = "Тестовое платежное требование";
+		if(is113)
+			purpose = "1" + purpose;
 		paytCondition = "1";
 	}
 
@@ -207,7 +219,7 @@ public class ED103 extends PaymentDocument {
 		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd +
 		transKind + razd + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
 		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd +
-		paytKind.toString() + razd + razd + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
+		paytKind.toString() + razd + (is113 ? "{ExtDown}" : "") + razd + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
 		payer.inn + razd + (addShift ? "+{ExtEnd}" : "") + payer.name + razd + payee.bic + razd + payee.correspAcc + razd +
 		payee.personalAcc + razd + payee.inn + razd + (addShift ? "+{ExtEnd}" : "") + payee.name + razd +
 		priority + razd + tax.drawerStatus;
