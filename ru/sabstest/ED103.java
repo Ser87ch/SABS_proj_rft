@@ -112,7 +112,7 @@ public class ED103 extends PaymentDocument {
 		{
 			readCommonEDElements(doc);
 			
-			if(doc.getLocalName().equals("ED114") || purpose.startsWith("!"))
+			if(doc.getLocalName().equals("ED113") || purpose.startsWith("1"))
 				is113 = true;
 			
 			paytCondition = doc.getAttribute("PaytCondition");
@@ -131,9 +131,15 @@ public class ED103 extends PaymentDocument {
 	{
 		transKind = "02";
 		purpose = "Тестовое платежное требование";
+		docDispatchDate = Settings.operDate;
+		receiptDateCollectBank = Settings.operDate;
+		maturityDate = Settings.operDate;
 		if(is113)
 			purpose = "1" + purpose;
-		paytCondition = "1";
+		if(gendoc.hasAttribute("PaytCondition"))
+			paytCondition = gendoc.getAttribute("PaytCondition");
+		else
+			paytCondition = "1";
 	}
 
 	@Override
@@ -218,15 +224,30 @@ public class ED103 extends PaymentDocument {
 
 		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd +
 		transKind + razd + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
-		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd +
-		paytKind.toString() + razd + (is113 ? "{ExtDown}" : "") + razd + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
+		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd; 
+		
+		str = str + ((paytKind.equals("P") || paytKind.equals("T")) ? "{Num~}+{TAB}{ExtLeft}" : "") + 
+		(paytKind.equals("P") ? "{ExtLeft}" : "") + razd + 
+		((paytKind.equals("P") || paytKind.equals("T")) ? razd : "") + (is113 ? "{ExtDown}" : "") + razd;
+		
+		str = str + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
 		payer.inn + razd + (addShift ? "+{ExtEnd}" : "") + payer.name + razd + payee.bic + razd + payee.correspAcc + razd +
 		payee.personalAcc + razd + payee.inn + razd + (addShift ? "+{ExtEnd}" : "") + payee.name + razd +
 		priority + razd + tax.drawerStatus;
 		if(!tax.drawerStatus.equals("") && tax.drawerStatus != null)
 			str = str + razd + tax.cbc + razd + tax.okato + razd + tax.paytReason + razd + tax.taxPeriod + razd + tax.docNo + razd + tax.docDate + razd + tax.taxPaytKind;
 
-		str = str + razd + purpose + razd + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + paytCondition + razd + razd;
+		str = str + razd + purpose + razd;
+		
+		if(!is113)
+			str = str + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + paytCondition + razd + razd;
+		else
+		{
+			str = str + Integer.toString(acptTerm) + razd + new SimpleDateFormat("ddMMyyyy").format(docDispatchDate) + razd +
+			new SimpleDateFormat("ddMMyyyy").format(maturityDate) + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDateCollectBank) + razd +
+			((paytKind.equals("P") || paytKind.equals("T")) ? "" : new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd) +
+			paytCondition + razd + razd;
+		}
 		return str;	
 	}
 }

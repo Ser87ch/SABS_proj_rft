@@ -1,6 +1,7 @@
 package test;
 import resources.test.TestHelper;
 import ru.sabstest.ClientList;
+import ru.sabstest.GenerateFromXMLList;
 import ru.sabstest.Init;
 import ru.sabstest.ModuleList;
 import ru.sabstest.Settings;
@@ -23,21 +24,21 @@ public class Test extends TestHelper
 		ClientList.readFile(Settings.testProj + "settings\\clients.xml");
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
-		TestCase t = new TestCase();
-		t.readFile("C:\\test\\test1.xml");
-		
-		for(int i = 0; i < t.getSize(); i++)
-		{
-			callScript(t.getScript(i), new Object[]{t.getStep(i)});
-		}
+//		TestCase t = new TestCase();
+//		t.readFile("C:\\test\\test1.xml");
+//		
+//		for(int i = 0; i < t.getSize(); i++)
+//		{
+//			callScript(t.getScript(i), new Object[]{t.getStep(i)});
+//		}
 		
 		//Settings.readXML("C:\\general.xml");
 		
-//		PacketList pl = new PacketList();
-//		pl.generateFromXML("C:\\test\\otv\\gen5.xml");
-//	
-//						
-//		callScript("SABS.CreateSignedXML",new Object[]{"C:\\test\\otv\\5\\", pl});
+		GenerateFromXMLList pl = new GenerateFromXMLList();
+		pl.generateFromXML("C:\\sabstest\\settings\\generation\\007.xml");
+	
+		
+		callScript("SABS.CreateSignedXML",new Object[]{"C:\\sabstest\\data\\a000002\\input\\007\\", pl});
 		
 		
 	}

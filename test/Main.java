@@ -3,6 +3,7 @@ package test;
 
 
 import org.w3c.dom.Element;
+import static java.lang.System.out; 
 
 import ru.sabstest.GenerateFromXMLList;
 import ru.sabstest.GenerateList;
@@ -22,7 +23,7 @@ public class Main {
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.O;
+		Test t = Test.READ;
 		switch(t)
 		{
 					
@@ -67,10 +68,8 @@ public class Main {
 			ReadEDList pl = new ReadEDList();
 			pl.readFolder("C:\\test\\2\\");			
 
-			ReadEDList pl2 = new ReadEDList();
-			pl2.readFolder("C:\\test\\3\\");
-			
-			System.out.println(pl.equals(pl2));
+			out.println(pl.toString());
+		
 			break;
 		}
 

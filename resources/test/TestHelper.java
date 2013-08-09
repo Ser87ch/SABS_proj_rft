@@ -20,11 +20,11 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>Test</b><br>
- * Generated     : <b>2013/04/04 11:59:49</b><br>
+ * Generated     : <b>2013/08/09 13:30:28</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  апреля 04, 2013
+ * @since  августа 09, 2013
  * @author Admin
  */
 public abstract class TestHelper extends RationalTestScript

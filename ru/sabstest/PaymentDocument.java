@@ -253,6 +253,7 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 
 		chargeOffDate = Settings.operDate;
 		receiptDate = Settings.operDate;
+		fileDate = Settings.operDate;
 
 		payer = ClientList.getClient(gendoc.getAttribute("IdPayer"));
 		payee = ClientList.getClient(gendoc.getAttribute("IdPayee"));	
@@ -268,8 +269,12 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 		
 		String errorCode = gendoc.getAttribute("ErrorCode");
 		
+		paytKind = gendoc.getAttribute("PaytKind");
+		
 		if(errorCode != null && !errorCode.equals(""))
 			ErrorCode.addError(this, Integer.parseInt(errorCode));
+		
+		
 	}
 
 	/**
