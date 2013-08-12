@@ -190,9 +190,10 @@ public class ED104 extends PaymentDocument {
 		transKind + razd + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
 		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd;
 
-		str = str + ((paytKind.equals("P") || paytKind.equals("T")) ? "{Num~}+{TAB}{ExtLeft}" : "") + 
+		str = str + ((paytKind.equals("P") || paytKind.equals("T")) ? " "+ razd : "") + razd +
+		(is114 ? "{ExtDown}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
 		(paytKind.equals("P") ? "{ExtLeft}" : "") + razd + 
-		((paytKind.equals("P") || paytKind.equals("T")) ? razd : "") + (is114 ? "{ExtDown}" : "") + razd;
+		((paytKind.equals("P") || paytKind.equals("T")) ? razd : "");
 
 		str = str + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
 		payer.inn + razd + payer.kpp + razd + (addShift ? "+{ExtEnd}" : "") + payer.name + razd + payee.bic + razd + payee.correspAcc + razd +

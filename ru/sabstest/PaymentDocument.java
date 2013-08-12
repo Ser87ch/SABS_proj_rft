@@ -207,7 +207,9 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 
 		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd + transKind + razd +
 		Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
-		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd + paytKind.toString() + razd + 
+		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd + 
+		((paytKind.equals("P") || paytKind.equals("T")) ? " +{TAB}{ExtLeft}" : "") +  (paytKind.equals("P") ? "{ExtLeft}" : "") + 
+		((paytKind.equals("P") || paytKind.equals("T")) ? razd : "") + razd + 
 		payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd + payee.bic + razd + payee.correspAcc + razd +
 		payee.personalAcc + razd + priority;
 

@@ -31,9 +31,20 @@ public class PervVvod extends PervVvodHelper
 		String num = (String) args[1];
 
 		callScript("SABS.VFD",new String[]{Settings.Login.pervvod.key});
-		callScript("SABS.StartSABS",new String[]{Settings.Login.pervvod.user, Settings.Login.pervvod.pwd, Settings.Login.pervvod.sign});
 		
-		Menutree().click(atName("¬вод документов"));
+		Runnable r = new Runnable() {
+			
+			@Override
+			public void run() {
+				callScript("SABS.StartSABS",new String[]{Settings.Login.pervvod.user, Settings.Login.pervvod.pwd, Settings.Login.pervvod.sign});
+				
+			}
+		};
+		r.run();
+		
+		SABSwindow().waitForExistence();
+		
+		Menutree().click(atName("¬вод документов"));		
 		SABSwindow().inputKeys("{TAB}");
 		SABSwindow().inputKeys("{ExtDown}{ExtDown}{ENTER}");
 
@@ -47,7 +58,10 @@ public class PervVvod extends PervVvodHelper
 		for(int i = 0; i < pl.size(); i++)
 		{
 			PaymentDocument pd = pl.get(i);
-			Inputwindow().inputKeys(pd.toStr("{ENTER}",true));
+			String s = pd.toStr("{ENTER}",true);
+			Inputwindow().inputKeys(s);
+			
+			
 			//Inputwindow().inputKeys("{ENTER}{ENTER}{ENTER}");
 
 //			if(ExistDocwindow().exists())

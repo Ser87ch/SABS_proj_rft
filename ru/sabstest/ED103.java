@@ -205,8 +205,8 @@ public class ED103 extends PaymentDocument {
 			DB.toString(payee.inn) + ", " + DB.toString(payee.name) + ", " + DB.toString(payee.personalAcc) + ", " + DB.toString(payee.bic) + ", " + DB.toString(payee.correspAcc)+ ", " + DB.toString(payee.kpp) + ",\r\n" + 
 			DB.toString(payer.inn) + ", " + DB.toString(payer.name) + ", " + DB.toString(payer.personalAcc) + ", " + DB.toString(payer.bic) + ", " + DB.toString(payer.correspAcc)+ ", " + DB.toString(payer.kpp) + ",\r\n" +  
 			DB.toString(transKind) + ", " + DB.toString(priority) + ", " + DB.toString(purpose) + ", " + DB.toString(paytCondition) + ", " + DB.toString(acptTerm) + ", " + DB.toString(docDispatchDate) + ",\r\n" + 
-			"null, null, null, " + DB.toString(maturityDate) + ", " + DB.toString(receiptDateCollectBank) + ",\r\n" +
-			DB.toString(receiptDate) + ", " + DB.toString(fileDate) + ", null, " +  DB.toString(chargeOffDate) + ", null, null,\r\n" + 
+			"null, null, null, null, null,\r\n" +
+			DB.toString(receiptDate) + ", " + DB.toString(fileDate) + ", null, " +  DB.toString(chargeOffDate) + ", " + DB.toString(maturityDate) + ", " + DB.toString(receiptDateCollectBank) + ",\r\n" + 
 			DB.toString(tax.drawerStatus) + ", " + DB.toString(tax.cbc) + ", " + DB.toString(tax.okato) + ", " + DB.toString(tax.taxPeriod) + ", " + DB.toString(tax.docNo) + ", " + DB.toString(tax.docDate) + ", " + DB.toString(tax.taxPaytKind) + ", "  + DB.toString(tax.paytReason) + ",\r\n" + 
 			DB.toString(acptSum) + ", 'E', null, " + DB.toString(filename) + ", null, null)";			
 			db.st.executeUpdate(query);
@@ -226,13 +226,16 @@ public class ED103 extends PaymentDocument {
 		transKind + razd + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
 		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd; 
 		
-		str = str + ((paytKind.equals("P") || paytKind.equals("T")) ? "{Num~}+{TAB}{ExtLeft}" : "") + 
+		str = str + ((paytKind.equals("P") || paytKind.equals("T")) ? " "+ razd : "") + razd +
+		(is113 ? "{ExtDown}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
 		(paytKind.equals("P") ? "{ExtLeft}" : "") + razd + 
-		((paytKind.equals("P") || paytKind.equals("T")) ? razd : "") + (is113 ? "{ExtDown}" : "") + razd;
+		((paytKind.equals("P") || paytKind.equals("T")) ? razd : "");
 		
 		str = str + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
-		payer.inn + razd + (addShift ? "+{ExtEnd}" : "") + payer.name + razd + payee.bic + razd + payee.correspAcc + razd +
-		payee.personalAcc + razd + payee.inn + razd + (addShift ? "+{ExtEnd}" : "") + payee.name + razd +
+		payer.inn + razd + 
+		(addShift ? "+{ExtEnd}" : "") + payer.name + razd + payee.bic + razd + payee.correspAcc + razd +
+		payee.personalAcc + razd + payee.inn + razd + 
+		(addShift ? "+{ExtEnd}" : "") + payee.name + razd +
 		priority + razd + tax.drawerStatus;
 		if(!tax.drawerStatus.equals("") && tax.drawerStatus != null)
 			str = str + razd + tax.cbc + razd + tax.okato + razd + tax.paytReason + razd + tax.taxPeriod + razd + tax.docNo + razd + tax.docDate + razd + tax.taxPaytKind;

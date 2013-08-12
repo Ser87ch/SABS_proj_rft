@@ -20,11 +20,11 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>PervVvod</b><br>
- * Generated     : <b>2013/06/27 16:19:28</b><br>
+ * Generated     : <b>2013/08/12 12:08:56</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  июня 27, 2013
+ * @since  августа 12, 2013
  * @author Admin
  */
 public abstract class PervVvodHelper extends RationalTestScript

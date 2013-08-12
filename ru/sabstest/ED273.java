@@ -2,11 +2,13 @@ package ru.sabstest;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.w3c.dom.Element;
 
 public class ED273 extends Packet implements ReadED, Generate<Element> {
 
+	public List<PaymentDocument> pd;
 	
 	public ED273()
 	{

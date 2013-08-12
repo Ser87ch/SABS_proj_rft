@@ -34,9 +34,9 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			
 			
-			XML.createXMLFromBase64("C:\\test\\1\\003700200020130701000000039.ED744_VER", "C:\\test\\1\\744.xml");
-			XML.createXMLFromBase64("C:\\test\\1\\003700200020130701000000040.ED743_VER", "C:\\test\\1\\743.xml");
-			XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000023.ED708_VER", "C:\\test\\1\\708.xml");
+			XML.createXMLFromBase64("C:\\sabstest\\data\\a000002\\input\\007\\458200200020130701000000101.PacketEPDVER", "C:\\sabstest\\data\\a000002\\input\\007\\1.xml");
+//			XML.createXMLFromBase64("C:\\test\\1\\003700200020130701000000040.ED743_VER", "C:\\test\\1\\743.xml");
+//			XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000023.ED708_VER", "C:\\test\\1\\708.xml");
 //			PaymentDocumentList pdl = new PaymentDocumentList();
 //			pdl.readEncodedFile("C:\\sabstest\\data\\a000002\\input\\003\\458200200020130701000000101.PacketEPDVER", false);
 //			
@@ -66,7 +66,7 @@ public class Main {
 		case READ:
 		{
 			ReadEDList pl = new ReadEDList();
-			pl.readFolder("C:\\test\\2\\");			
+			pl.readFolder("C:\\sabstest\\data\\a000002\\input\\007\\");			
 
 			out.println(pl.toString());
 		
