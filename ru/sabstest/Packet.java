@@ -9,6 +9,9 @@ import org.w3c.dom.Element;
 
 abstract public class Packet{
 
+	public enum Type{PacketEPD, PacketEPDVER, PacketESIDVER_RYM, PacketEPDVER_B, PacketESID, 
+		ED201, ED208, ED243, ED244, ED273, ED708_VER, ED743_VER, ED744_VER, ED773_VER};
+	
 	public String filename;
 
 	public Sign firstSign;
@@ -89,18 +92,52 @@ abstract public class Packet{
 	
 	public static ReadED createReadEDByFile(String type)
 	{
-		ReadED pc = null;		
-				
-		if(type.equals("PacketEPDVER") || type.equals("PacketEPD"))
+		ReadED pc = null;	
+		
+		Type t = Type.valueOf(type);
+		
+		switch(t)
+		{
+		case PacketEPD:
 			pc = new PacketEPD();
-		else if(type.equals("PacketESIDVER_RYM"))
+			break;
+		case PacketEPDVER:
+			pc = new PacketEPD();
+			break;
+		case PacketESIDVER_RYM:
 			pc = new PacketESIDVER();
-		else if(type.equals("PacketEPDVER_B"))
+			break;
+		case PacketEPDVER_B:
 			pc = new PacketEPDVER_B();
-		else if(type.equals("PacketESID"))
+			break;
+		case PacketESID:
 			pc = new PacketESID();
-		else if(type.equals("ED243"))
+			break;
+		case ED208:
+			pc = new ED208();
+			break;
+		case ED243:
 			pc = new ED243();
+			break;
+		case ED244:
+			pc = new ED244();
+			break;
+		case ED273:
+			pc = new ED273();
+			break;
+		case ED708_VER:
+			pc = new ED708_VER();
+			break;
+		case ED743_VER:
+			pc = new ED743_VER();
+			break;
+		case ED744_VER:
+			pc = new ED744_VER();
+			break;
+		case ED773_VER:
+			pc = new ED773_VER();
+			break;
+		}
 		
 		return pc;
 	}
@@ -109,10 +146,23 @@ abstract public class Packet{
 	{
 		Generate<Element> pc = null;		
 				
-		if(type.equals("PacketEPDVER") || type.equals("PacketEPD"))
-			pc = new PacketEPD();		
-		else if(type.equals("ED243"))
+Type t = Type.valueOf(type);
+		
+		switch(t)
+		{
+		case PacketEPD:
+			pc = new PacketEPD();
+			break;
+		case PacketEPDVER:
+			pc = new PacketEPD();
+			break;
+		case ED243:
 			pc = new ED243();
+			break;
+		case ED273:
+			pc = new ED273();
+			break;
+		}
 		
 		return pc;
 	}
