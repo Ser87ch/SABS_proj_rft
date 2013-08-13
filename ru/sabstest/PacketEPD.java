@@ -14,6 +14,7 @@ import java.util.ListIterator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
@@ -142,14 +143,9 @@ public class PacketEPD extends Packet implements Generate<Element>, ReadED{
 	}
 
 
-
-
-
-
 	@Override
 	public void readXML(Element root)
 	{
-
 
 		if(root.getLocalName().equals("PacketEPDVER"))
 			isVER = true;
@@ -165,50 +161,14 @@ public class PacketEPD extends Packet implements Generate<Element>, ReadED{
 		sum = Integer.parseInt(root.getAttribute("Sum"));
 		systemCode = root.getAttribute("SystemCode");
 
-		NodeList nl = root.getElementsByTagNameNS("*","ED101");
-
+		NodeList nl = root.getChildNodes();
 		for(int i = 0; i < nl.getLength(); i++)
-		{
-			PaymentDocument pd = new ED101();
-			pd.readED((Element) nl.item(i));
-			pdList.add(pd);
-		}
-
-		nl = root.getElementsByTagNameNS("*","ED103");
-
-		for(int i = 0; i < nl.getLength(); i++)
-		{
-			PaymentDocument pd = new ED103();
-			pd.readED((Element) nl.item(i));
-			pdList.add(pd);
-		}
-
-		nl = root.getElementsByTagNameNS("*","ED104");
-
-		for(int i = 0; i < nl.getLength(); i++)
-		{
-			PaymentDocument pd = new ED104();
-			pd.readED((Element) nl.item(i));
-			pdList.add(pd);
-		}
-
-		nl = root.getElementsByTagNameNS("*","ED105");
-
-		for(int i = 0; i < nl.getLength(); i++)
-		{
-			PaymentDocument pd = new ED105();
-			pd.readED((Element) nl.item(i));
-			pdList.add(pd);
-		}
-
-		nl = root.getElementsByTagNameNS("*","ED108");
-
-		for(int i = 0; i < nl.getLength(); i++)
-		{
-			PaymentDocument pd = new ED108();
-			pd.readED((Element) nl.item(i));
-			pdList.add(pd);
-		}
+			if(nl.item(i).getNodeType() == Node.ELEMENT_NODE)
+			{
+				PaymentDocument pd = PaymentDocument.createDocFromXML((Element) nl.item(i));
+				if(pd != null)
+					pdList.add(pd);
+			}
 		//System.out.println(toString());
 
 		Collections.sort(pdList);

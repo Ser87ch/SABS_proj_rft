@@ -387,35 +387,26 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 	 * @param src полный путь к файлу
 	 * @return платежный документ считанный из xml
 	 */
-	public static PaymentDocument createDocFromXML(String src)
+	public static PaymentDocument createDocFromXML(Element root)
 	{
-		Element root = XML.getXMLRootElement(src);
 		PaymentDocument pd = null;
 		if(root.getLocalName().equals("ED101"))
-		{
 			pd = new ED101();
-			pd.readED(root);
-		}
 		else if(root.getLocalName().equals("ED103"))
-		{
 			pd = new ED103();
-			pd.readED(root);
-		}
+		else if(root.getLocalName().equals("ED113"))
+			pd = new ED103(true);		
 		else if(root.getLocalName().equals("ED104"))
-		{
 			pd = new ED104();
-			pd.readED(root);
-		}
+		else if(root.getLocalName().equals("ED114"))
+			pd = new ED104(true);
 		else if(root.getLocalName().equals("ED105"))
-		{
 			pd = new ED105();
-			pd.readED(root);
-		}
 		else if(root.getLocalName().equals("ED108"))
-		{
 			pd = new ED108();
+			
+		if(pd != null)
 			pd.readED(root);
-		}
 		return pd;
 	}
 

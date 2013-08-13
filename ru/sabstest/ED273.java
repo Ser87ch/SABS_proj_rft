@@ -2,14 +2,43 @@ package ru.sabstest;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class ED273 extends Packet implements ReadED, Generate<Element> {
 
-	public List<PaymentDocument> pd;
+	public List<PaymentDocument> pdl;
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((pdl == null) ? 0 : pdl.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ED273 other = (ED273) obj;
+		if (pdl == null) {
+			if (other.pdl != null)
+				return false;
+		} else if (!pdl.equals(other.pdl))
+			return false;
+		return true;
+	}
+
 	public ED273()
 	{
 		isVER = false;
@@ -25,10 +54,27 @@ public class ED273 extends Packet implements ReadED, Generate<Element> {
 		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
 		filename = src.getName();
 	}
+	
+	@Override
+	public void readXML(Element root) {
+		super.readXML(root);
+		
+		pdl = new ArrayList<PaymentDocument>();
+		NodeList nl = root.getChildNodes();
+		for(int i = 0; i < nl.getLength(); i++)
+			if(nl.item(i).getNodeType() == Node.ELEMENT_NODE)
+			{
+				PaymentDocument pd = PaymentDocument.createDocFromXML((Element) nl.item(i));
+				if(pd != null)
+					pdl.add(pd);
+			}
+		
+		Collections.sort(pdl);
+	}
 
 	@Override
 	public boolean generateFrom(Element source) {
-		// TODO Auto-generated method stub
+		// TODO генерация из xml
 		return false;
 	}
 
