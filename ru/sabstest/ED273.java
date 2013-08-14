@@ -97,7 +97,7 @@ public class ED273 extends Packet implements ReadED, Generate<Element> {
 
 	@Override
 	public void insertIntoDB() {
-		// TODO Auto-generated method stub
+		// TODO вставка в БД
 		
 	}
 

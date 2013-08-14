@@ -146,7 +146,7 @@ abstract public class Packet{
 	{
 		Generate<Element> pc = null;		
 				
-Type t = Type.valueOf(type);
+		Type t = Type.valueOf(type);
 		
 		switch(t)
 		{

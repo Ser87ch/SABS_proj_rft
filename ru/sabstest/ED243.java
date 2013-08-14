@@ -192,9 +192,6 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 
 	public boolean generateFrom(Element root)
 	{
-		firstSign = new Sign(root.getAttribute("key1"),root.getAttribute("profile1"));
-		secondSign = new Sign(root.getAttribute("key2"),root.getAttribute("profile2"));
-
 		iEdNo = Integer.parseInt(root.getAttribute("EDNo"));
 		sum = Integer.parseInt(root.getAttribute("Sum"));
 		edDefineRequestCode = root.getAttribute("EDDefineRequestCode");
@@ -206,6 +203,10 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		edDate = Settings.operDate;
 		edAuthor = payer.edAuthor;
 		edReceiver = payee.edAuthor;
+		
+		Sign[] s = ClientList.getSignByUIC(edAuthor);
+		firstSign = s[0];
+		secondSign = s[1];
 
 		iEdDate = Settings.operDate;
 		iEdAuthor = edReceiver;

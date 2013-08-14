@@ -229,27 +229,12 @@ public class PacketEPD extends Packet implements Generate<Element>, ReadED{
 	 */
 	public boolean generateFrom(Element root)
 	{
-
-		//	XML.validate(Settings.testProj + "\\XMLschema\\settings\\generation.xsd", src);
-		//	Element root = XML.getXMLRootElement(src);
-
-		if(root.getLocalName().equals("PacketEPDVER"))
-		{
+		if(root.getLocalName().equals("PacketEPDVER"))		
 			isVER = true;		
-			secondSign = new Sign(Settings.Sign.keycontr,Settings.Sign.signcontr);
-			firstSign = new Sign(Settings.Sign.keyobr,Settings.Sign.signobr);
-
-		}
-		else if(root.getLocalName().equals("PacketEPD"))
-		{
-			isVER = false;	
-			firstSign = new Sign(root.getAttribute("key1"),root.getAttribute("profile1"));
-			secondSign = new Sign(root.getAttribute("key2"),root.getAttribute("profile2"));
-		}
+		else if(root.getLocalName().equals("PacketEPD"))		
+			isVER = false;			
 		else
 			return false;
-
-
 
 		pdList = new ArrayList<PaymentDocument>();
 
@@ -260,6 +245,10 @@ public class PacketEPD extends Packet implements Generate<Element>, ReadED{
 		edReceiver = root.getAttribute("EDReceiver");
 		systemCode = "0";
 
+		Sign[] s = ClientList.getSignByUIC(edAuthor);
+		firstSign = s[0];
+		secondSign = s[1];
+		
 		setFileName();
 
 		int edNo = Integer.parseInt(root.getAttribute("EDFirstNo"));

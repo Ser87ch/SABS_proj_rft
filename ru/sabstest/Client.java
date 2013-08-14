@@ -16,6 +16,9 @@ public class Client {
 	public String name;
 	
 	public String edAuthor;
+	
+	public Sign firstSign;
+	public Sign secondSign;
 
 	@Override
 	public int hashCode() {
@@ -103,6 +106,9 @@ public class Client {
 		this.kpp = cl.kpp;
 		this.name = cl.name;
 		this.edAuthor = cl.edAuthor;
+		
+		this.firstSign = cl.firstSign;
+		this.secondSign = cl.secondSign;
 	}
 
 	/**
@@ -281,10 +287,13 @@ public class Client {
 		}
 	}
 
-	public static Client createClientFromBICPersonalAcc(String bic, String ls, String uic)
+	public static Client createClientFromBICPersonalAcc(String bic, String ls, String uic, Sign sign1, Sign sign2)
 	{
 		Client cl = new Client(bic, ls);
 		cl.edAuthor = uic;
+		cl.firstSign = sign1;
+		cl.secondSign = sign2;
+		
 		cl.contrrazr();
 		cl.loadFromDB();
 

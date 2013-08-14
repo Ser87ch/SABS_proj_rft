@@ -30,5 +30,45 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 		// TODO вставка
 		
 	}
+	
+	public Generate<ED773_VER> getGenerateED773()
+	{
+		return new Generate<ED773_VER>() {
+			
+			@Override
+			public void setFileName() {
+				this.setFileName();
+				
+			}
+			
+			@Override
+			public boolean isVER() {
+				return this.isVER();
+			}
+			
+			@Override
+			public void insertIntoDB() {
+				this.insertIntoDB();
+				
+			}
+			
+			@Override
+			public void insertForRead() {
+				this.insertForRead();
+				
+			}
+			
+			@Override
+			public Sign[] getSigns() {
+				return this.getSigns();
+			}
+			
+			@Override
+			public boolean generateFrom(ED773_VER source) {
+				// TODO генерация из ED773
+				return false;
+			}
+		};
+	}
 
 }
