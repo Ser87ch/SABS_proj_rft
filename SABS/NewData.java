@@ -33,8 +33,8 @@ public class NewData extends NewDataHelper
 		Init.mkDataFolder();
 
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
-		ClientList.readFile(Settings.testProj + "settings\\clients.xml");
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
+		ClientList.readFile(Settings.testProj + "settings\\clients.xml");
 
 		File[] files = new File(Settings.testProj + "settings\\generation\\").listFiles();
 

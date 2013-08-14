@@ -29,9 +29,9 @@ public class ClientList {
 			ls = clEl.getAttribute("LS");
 			uic = clEl.getAttribute("UIC");
 			profile1 = clEl.getAttribute("profile1");
-			sign1 = clEl.getAttribute("sign1");
+			sign1 = clEl.getAttribute("key1");
 			profile2 = clEl.getAttribute("profile2");
-			sign2 = clEl.getAttribute("sign2");
+			sign2 = clEl.getAttribute("key2");
 
 
 			if(profile1.equals(""))

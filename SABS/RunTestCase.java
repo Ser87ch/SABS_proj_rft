@@ -50,8 +50,8 @@ public class RunTestCase extends RunTestCaseHelper
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
 		Settings.Login.readXML(Settings.testProj + "settings\\login.xml");
 		ModuleList.readFile(Settings.testProj + "settings\\modules.xml");
-		ClientList.readFile(Settings.testProj + "settings\\clients.xml");
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
+		ClientList.readFile(Settings.testProj + "settings\\clients.xml");		
 		DeltaDB.readXMLSettings(Settings.testProj + "settings\\deltadb.xml");
 
 		TestCase t = new TestCase();
