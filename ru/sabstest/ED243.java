@@ -149,7 +149,7 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 			"VALUES(null, null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ",\r\n" +
 			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edDefineRequestCode) + ", null, " + DB.toString(idED243) +  ",\r\n" +
 			"null, " + DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", null, '43',\r\n" +
-			"null, null, nlll, null, null, null,\r\n" +
+			"null, null, null, null, null, null,\r\n" +
 			"null, null, null, '0')";			
 			db.st.executeUpdate(query);
 
@@ -254,6 +254,8 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 
 		edDefineRequestText = "Текст";
 
+		setFileName();
+		
 		return true;
 
 	}
