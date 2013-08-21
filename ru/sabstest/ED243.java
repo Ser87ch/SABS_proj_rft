@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -44,23 +45,23 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((accDocDate == null) ? 0 : accDocDate.hashCode());
+		+ ((accDocDate == null) ? 0 : accDocDate.hashCode());
 		result = prime * result + accDocNo;
 		result = prime
-				* result
-				+ ((edDefineRequestCode == null) ? 0 : edDefineRequestCode
-						.hashCode());
+		* result
+		+ ((edDefineRequestCode == null) ? 0 : edDefineRequestCode
+				.hashCode());
 		result = prime * result
-				+ ((edFieldList == null) ? 0 : edFieldList.hashCode());
+		+ ((edFieldList == null) ? 0 : edFieldList.hashCode());
 		result = prime * result
-				+ ((edReestrInfo == null) ? 0 : edReestrInfo.hashCode());
+		+ ((edReestrInfo == null) ? 0 : edReestrInfo.hashCode());
 		result = prime * result
-				+ ((iEdAuthor == null) ? 0 : iEdAuthor.hashCode());
+		+ ((iEdAuthor == null) ? 0 : iEdAuthor.hashCode());
 		result = prime * result + ((iEdDate == null) ? 0 : iEdDate.hashCode());
 		result = prime * result
-				+ ((payeeAcc == null) ? 0 : payeeAcc.hashCode());
+		+ ((payeeAcc == null) ? 0 : payeeAcc.hashCode());
 		result = prime * result
-				+ ((payerAcc == null) ? 0 : payerAcc.hashCode());
+		+ ((payerAcc == null) ? 0 : payerAcc.hashCode());
 		result = prime * result + sum;
 		return result;
 	}
@@ -125,7 +126,39 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 
 	@Override
 	public void insertIntoDB() {
-		// TODO вставка
+		try
+		{
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();
+			String query =  "INSERT INTO [dbo].[epay_ED243DEF]([ID_PACKET], [ID_ARM], [AccDocNo], [AccDocDate],\r\n" + 
+			" [PayeeAcc], [PayerAcc], [Sum], [PayerName], [PayeeName], [EDDefineRequestText],\r\n" + 
+			" [PayeeINN], [PayerINN], [EnterDate], [PayeeCorrAcc], [PayeeBIC], [Purpose], [Address])\r\n" + 
+			"VALUES(null, '0', " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ",\r\n" +  
+			DB.toString(payeeAcc) + ", " + DB.toString(payerAcc) + ", " + DB.toString(sum) + ", " + DB.toString(payerName) + ", " + DB.toString(payeeName) + ", " + DB.toString(edDefineRequestText) + ",\r\n" +   
+			"null, null, null, null, null, null, null)";			
+			db.st.executeUpdate(query);
+
+
+			int idED243 = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_ED243DEF) from dbo.epay_ED243DEF"));
+
+			query =  "INSERT [dbo].[UFEBS_Es201]([ID_PACET], [ID_DEPART], [EdNo], [EdDate],\r\n" + 
+			" [EdAuthor], [EdReceiv], [CtrlCode], [CtrlTime], [Annotat],\r\n" + 
+			" [MsgId], [IEdNo], [IEdDate], [IEdAuth], [FTime], [EsidCod],\r\n" + 
+			" [PEpdNo], [PacDate], [PAuthor], [BeginDat], [EndDat], [BIC],\r\n" + 
+			" [ACC], [Annotat1], [StopReas], [ID_ARM])\r\n" + 
+			"VALUES(null, null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ",\r\n" +
+			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edDefineRequestCode) + ", null, " + DB.toString(idED243) +  ",\r\n" +
+			"null, " + DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", null, '43',\r\n" +
+			"null, null, nlll, null, null, null,\r\n" +
+			"null, null, null, '0')";			
+			db.st.executeUpdate(query);
+
+			db.close();		
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.msg(e);			
+		}
 
 	}
 
@@ -203,7 +236,7 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		edDate = Settings.operDate;
 		edAuthor = payer.edAuthor;
 		edReceiver = payee.edAuthor;
-		
+
 		Sign[] s = ClientList.getSignByUIC(edAuthor);
 		firstSign = s[0];
 		secondSign = s[1];
@@ -220,18 +253,18 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		payeeName = payee.name;
 
 		edDefineRequestText = "Текст";
-		
+
 		return true;
 
 	}
 
-	
+
 	public void readEncodedFile(File src, boolean isUTF)
 	{
 		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
 		filename = src.getName();
 	}
-	
+
 	@Override
 	public int compareTo(ReadED o) {
 		return compareTo((Packet) o);
