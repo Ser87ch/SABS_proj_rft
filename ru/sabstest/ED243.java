@@ -235,7 +235,7 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		Client payer = ClientList.getClient(root.getAttribute("IdPayer"));
 		Client payee = ClientList.getClient(root.getAttribute("IdPayee"));
 
-		edNo = iEdNo + 1500;
+		edNo = iEdNo + 333;
 		edDate = Settings.operDate;
 		edAuthor = payer.edAuthor;
 		edReceiver = payee.edAuthor;
