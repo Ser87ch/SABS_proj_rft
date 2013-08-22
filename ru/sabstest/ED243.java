@@ -133,24 +133,24 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 			
 			int idPacet = insertIntoDBPacket(db, sum);
 			
-			String query =  "INSERT INTO [dbo].[epay_ED243DEF]([ID_PACKET], [ID_ARM], [AccDocNo], [AccDocDate],\r\n" + 
-			" [PayeeAcc], [PayerAcc], [Sum], [PayerName], [PayeeName], [EDDefineRequestText],\r\n" + 
-			" [PayeeINN], [PayerINN], [EnterDate], [PayeeCorrAcc], [PayeeBIC], [Purpose], [Address])\r\n" + 
-			"VALUES(null, '0', " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ",\r\n" +  
-			DB.toString(payeeAcc) + ", " + DB.toString(payerAcc) + ", " + DB.toString(sum) + ", " + DB.toString(payerName) + ", " + DB.toString(payeeName) + ", " + DB.toString(edDefineRequestText) + ",\r\n" +   
-			"null, null, null, null, null, null, null)";			
-			db.st.executeUpdate(query);
+//			String query =  "INSERT INTO [dbo].[epay_ED243DEF]([ID_PACKET], [ID_ARM], [AccDocNo], [AccDocDate],\r\n" + 
+//			" [PayeeAcc], [PayerAcc], [Sum], [PayerName], [PayeeName], [EDDefineRequestText],\r\n" + 
+//			" [PayeeINN], [PayerINN], [EnterDate], [PayeeCorrAcc], [PayeeBIC], [Purpose], [Address])\r\n" + 
+//			"VALUES(null, '0', " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ",\r\n" +  
+//			DB.toString(payeeAcc) + ", " + DB.toString(payerAcc) + ", " + DB.toString(sum) + ", " + DB.toString(payerName) + ", " + DB.toString(payeeName) + ", " + DB.toString(edDefineRequestText) + ",\r\n" +   
+//			"null, null, null, null, null, null, null)";			
+//			db.st.executeUpdate(query);
+//
+//
+//			int idED243 = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_ED243DEF) from dbo.epay_ED243DEF"));
 
-
-			int idED243 = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_ED243DEF) from dbo.epay_ED243DEF"));
-
-			query =  "INSERT [dbo].[UFEBS_Es201]([ID_PACET], [ID_DEPART], [EdNo], [EdDate],\r\n" + 
+			String query =  "INSERT [dbo].[UFEBS_Es201]([ID_PACET], [ID_DEPART], [EdNo], [EdDate],\r\n" + 
 			" [EdAuthor], [EdReceiv], [CtrlCode], [CtrlTime], [Annotat],\r\n" + 
 			" [MsgId], [IEdNo], [IEdDate], [IEdAuth], [FTime], [EsidCod],\r\n" + 
 			" [PEpdNo], [PacDate], [PAuthor], [BeginDat], [EndDat], [BIC],\r\n" + 
 			" [ACC], [Annotat1], [StopReas], [ID_ARM])\r\n" + 
 			"VALUES(" + DB.toString(idPacet) + ", null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ",\r\n" +
-			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edDefineRequestCode) + ", null, " + DB.toString(idED243) +  ",\r\n" +
+			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edDefineRequestCode) + ", null, null,\r\n" + //" + DB.toString(idED243) +  "
 			"null, " + DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", null, '43',\r\n" +
 			"null, null, null, null, null, null,\r\n" +
 			"null, null, null, '0')";			
