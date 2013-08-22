@@ -220,7 +220,7 @@ abstract public class Packet{
 					" 0, 4, 3, 0, 1, null, null,\r\n" + 
 					" null, null, null, 20, '', NULL, NULL, NULL, NULL)";			
 					db.st.executeUpdate(query);
-					db.close();			 
+								 
 
 					idPacket = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_PACKET) from dbo.epay_Packet"));
 				} catch (Exception e) {
@@ -247,7 +247,7 @@ abstract public class Packet{
 					" 0, 1, 3, 0, 1, null, null,\r\n" + 
 					" null, null, null, 20, '', NULL, NULL, NULL, NULL)";			
 					db.st.executeUpdate(query);
-					db.close();
+					
 
 					idPacket = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_PACET) from dbo.UFEBS_Pacet"));
 				} catch (Exception e) {
