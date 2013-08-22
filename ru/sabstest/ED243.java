@@ -33,9 +33,12 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 	public List<String> edFieldList;
 	public List<Integer> edReestrInfo; 
 
+	static int i = 200;
+	
 	public ED243()
 	{
 		isVER = false;
+		i++;
 	}
 
 
@@ -235,7 +238,7 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		Client payer = ClientList.getClient(root.getAttribute("IdPayer"));
 		Client payee = ClientList.getClient(root.getAttribute("IdPayee"));
 
-		edNo = iEdNo + 333;
+		edNo = i;
 		edDate = Settings.operDate;
 		edAuthor = payer.edAuthor;
 		edReceiver = payee.edAuthor;
