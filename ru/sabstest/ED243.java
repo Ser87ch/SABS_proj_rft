@@ -130,6 +130,9 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		{
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
+			
+			int idPacet = insertIntoDBPacket(db, sum);
+			
 			String query =  "INSERT INTO [dbo].[epay_ED243DEF]([ID_PACKET], [ID_ARM], [AccDocNo], [AccDocDate],\r\n" + 
 			" [PayeeAcc], [PayerAcc], [Sum], [PayerName], [PayeeName], [EDDefineRequestText],\r\n" + 
 			" [PayeeINN], [PayerINN], [EnterDate], [PayeeCorrAcc], [PayeeBIC], [Purpose], [Address])\r\n" + 
@@ -146,7 +149,7 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 			" [MsgId], [IEdNo], [IEdDate], [IEdAuth], [FTime], [EsidCod],\r\n" + 
 			" [PEpdNo], [PacDate], [PAuthor], [BeginDat], [EndDat], [BIC],\r\n" + 
 			" [ACC], [Annotat1], [StopReas], [ID_ARM])\r\n" + 
-			"VALUES(null, null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ",\r\n" +
+			"VALUES(" + DB.toString(idPacet) + ", null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ",\r\n" +
 			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edDefineRequestCode) + ", null, " + DB.toString(idED243) +  ",\r\n" +
 			"null, " + DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", null, '43',\r\n" +
 			"null, null, null, null, null, null,\r\n" +
