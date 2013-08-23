@@ -36,6 +36,11 @@ public class OtvetEO extends OtvetEOHelper
 
 		if(st.contains("Otv"))
 			ESpanel().click(atPoint(65,15));	
+		
+		while(Errorwindow().exists())
+		{
+			OKerrorbutton().click();			
+		}
 
 		if(st.contains("Nach"))
 			ESpanel().click(atPoint(45,15));
