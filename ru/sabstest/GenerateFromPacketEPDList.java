@@ -8,14 +8,13 @@ import org.w3c.dom.Element;
 public class GenerateFromPacketEPDList extends GenerateList<PacketEPD> {
 	public void generateFromPacketEPD(PacketEPD pd)
 	{
-		List <Generate<PacketEPD>> genList = Packet.createGenFromEPD();
+		pList = Packet.createGenFromEPD();
 		
-		pList = new ArrayList<Generate<PacketEPD>> ();
-		
-		for(Generate<PacketEPD> gen:genList)
+		for(int i = 0; i < pList.size(); i++)
 		{
-			if(gen.generateFrom(pd))
-				pList.add(gen);
+			Generate<PacketEPD> gen = pList.get(i);
+			if(!gen.generateFrom(pd))
+				pList.remove(i);
 		}
 	}
 }

@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 import org.w3c.dom.Element;
 
-public class Holder<T extends ReadED> extends Packet implements ReadED {
+public abstract class Holder<T extends ReadED> extends Packet implements ReadED {
 
 	
 	//реквизиты исходного Ёƒ
@@ -64,7 +64,9 @@ public class Holder<T extends ReadED> extends Packet implements ReadED {
 		iEdDate = Date.valueOf(ied.getAttribute("EDDate"));
 		iEdAuthor = ied.getAttribute("EDAuthor");
 
-		ied = (Element) root.getElementsByTagNameNS("*", ed.getClass().getName()).item(0);
+		ed = createHolderObject();
+		
+		ied = (Element) root.getElementsByTagNameNS("*", ed.getClass().getSimpleName()).item(0);
 
 		ed.readXML(ied);		
 	}
@@ -81,5 +83,5 @@ public class Holder<T extends ReadED> extends Packet implements ReadED {
 	}
 
 	
-
+	abstract T createHolderObject();
 }

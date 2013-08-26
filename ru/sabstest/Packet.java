@@ -175,6 +175,17 @@ abstract public class Packet{
 			return pc;
 		}
 
+		
+		public static List<Generate<ED743_VER>> createGenFromED743(int size)
+		{
+			List<Generate<ED743_VER>> pc = new ArrayList<Generate<ED743_VER>>();
+			for(int i = 0; i < size; i++)
+			{
+				pc.add(new ED708_VER());
+				pc.add(new ED744_VER());
+			}
+			return pc;
+		}
 
 		public Sign[] getSigns()
 		{

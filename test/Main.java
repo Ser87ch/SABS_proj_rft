@@ -23,7 +23,7 @@ public class Main {
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.O;
+		Test t = Test.READ;
 		switch(t)
 		{
 					
@@ -34,7 +34,7 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			
 			
-			XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000475.ED743_VER", "C:\\test\\1\\1.xml");
+			XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000475.ED743_VER", "C:\\test\\1.xml");
 //			XML.createXMLFromBase64("C:\\test\\1\\003700200020130701000000040.ED743_VER", "C:\\test\\1\\743.xml");
 //			XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000023.ED708_VER", "C:\\test\\1\\708.xml");
 //			PaymentDocumentList pdl = new PaymentDocumentList();

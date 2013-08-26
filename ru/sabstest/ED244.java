@@ -2,8 +2,13 @@ package ru.sabstest;
 
 import java.io.File;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import ru.sabstest.ED208.CodeList.Code;
 
 public class ED244 extends Packet implements ReadED, Generate<ED243> {
 
@@ -50,8 +55,13 @@ public class ED244 extends Packet implements ReadED, Generate<ED243> {
 		iEdNo = source.edNo;
 		
 		edDefineRequestCode = source.edDefineRequestCode;
-		edDefineAnswerCode = ""; //TODO разобраться с кодом ответа
-		return true;
+		edDefineAnswerCode = CodeList.getAnswerCodeByNo(source.iEdNo);
+		
+		if(edDefineAnswerCode.equals(""))
+			return false;
+		else
+			return true;
+		
 	}
 
 	@Override
@@ -66,4 +76,53 @@ public class ED244 extends Packet implements ReadED, Generate<ED243> {
 		
 	}
 
+	
+	public static class CodeList
+	{
+		private static List <Code> eList;
+
+		public static void readXML(String src)
+		{
+
+			Element root = XML.getXMLRootElement(src);
+
+			NodeList nl = root.getElementsByTagName("ED744_VER");
+
+			if(nl.getLength() == 0)
+				return;
+			else
+				eList = new ArrayList<Code>();
+
+			for(int i = 0; i < nl.getLength(); i++)
+			{
+				Element ed = (Element) nl.item(i);
+
+				String edNo = ed.getAttribute("EDNo");
+				String edDefineAnswerCode = ed.getAttribute("EDDefineAnswerCode");
+			
+				eList.add(new Code(edNo, edDefineAnswerCode));
+			}			
+
+		}
+
+		public static String getAnswerCodeByNo(int edNo)
+		{
+			for(Code c:eList)
+				if(c.edNo.equals(Integer.toString(edNo)))
+					return c.edDefineAnswerCode;
+			return "";
+		}
+
+		public static class Code
+		{
+			String edNo;
+			String edDefineAnswerCode;
+
+			public Code(String edNo, String edDefineAnswerCode)
+			{
+				this.edNo = edNo;
+				this.edDefineAnswerCode = edDefineAnswerCode;
+			}
+		}
+	}
 }

@@ -16,8 +16,8 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 		iEdAuthor = source.edAuthor;
 		
 		ed = new ED208();
-		ed.generateFrom(source.ed);
-		return true;
+		
+		return ed.generateFrom(source.ed);
 	}
 	
 	@Override
@@ -69,6 +69,11 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 				return false;
 			}
 		};
+	}
+
+	@Override
+	ED208 createHolderObject() {
+		return new ED208();
 	}
 
 }

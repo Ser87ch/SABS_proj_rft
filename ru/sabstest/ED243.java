@@ -34,7 +34,7 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 	public List<Integer> edReestrInfo; 
 
 	static int i = 200;
-	
+
 	public ED243()
 	{
 		isVER = false;
@@ -133,19 +133,19 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		{
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
-			
+
 			int idPacet = insertIntoDBPacket(db, sum, true);
-			
-//			String query =  "INSERT INTO [dbo].[epay_ED243DEF]([ID_PACKET], [ID_ARM], [AccDocNo], [AccDocDate],\r\n" + 
-//			" [PayeeAcc], [PayerAcc], [Sum], [PayerName], [PayeeName], [EDDefineRequestText],\r\n" + 
-//			" [PayeeINN], [PayerINN], [EnterDate], [PayeeCorrAcc], [PayeeBIC], [Purpose], [Address])\r\n" + 
-//			"VALUES(null, '0', " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ",\r\n" +  
-//			DB.toString(payeeAcc) + ", " + DB.toString(payerAcc) + ", " + DB.toString(sum) + ", " + DB.toString(payerName) + ", " + DB.toString(payeeName) + ", " + DB.toString(edDefineRequestText) + ",\r\n" +   
-//			"null, null, null, null, null, null, null)";			
-//			db.st.executeUpdate(query);
-//
-//
-//			int idED243 = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_ED243DEF) from dbo.epay_ED243DEF"));
+
+			//			String query =  "INSERT INTO [dbo].[epay_ED243DEF]([ID_PACKET], [ID_ARM], [AccDocNo], [AccDocDate],\r\n" + 
+			//			" [PayeeAcc], [PayerAcc], [Sum], [PayerName], [PayeeName], [EDDefineRequestText],\r\n" + 
+			//			" [PayeeINN], [PayerINN], [EnterDate], [PayeeCorrAcc], [PayeeBIC], [Purpose], [Address])\r\n" + 
+			//			"VALUES(null, '0', " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ",\r\n" +  
+			//			DB.toString(payeeAcc) + ", " + DB.toString(payerAcc) + ", " + DB.toString(sum) + ", " + DB.toString(payerName) + ", " + DB.toString(payeeName) + ", " + DB.toString(edDefineRequestText) + ",\r\n" +   
+			//			"null, null, null, null, null, null, null)";			
+			//			db.st.executeUpdate(query);
+			//
+			//
+			//			int idED243 = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_ED243DEF) from dbo.epay_ED243DEF"));
 
 			String query =  "INSERT [dbo].[UFEBS_Es201]([ID_PACET], [ID_DEPART], [EdNo], [EdDate],\r\n" + 
 			" [EdAuthor], [EdReceiv], [CtrlCode], [CtrlTime], [Annotat],\r\n" + 
@@ -196,36 +196,40 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		iEdAuthor = ied.getAttribute("EDAuthor");
 
 		Element ri = (Element) root.getElementsByTagNameNS("*", "EDDefineRequestInfo").item(0);
-		accDocNo = Integer.parseInt(ri.getAttribute("AccDocNo"));
-		accDocDate = Date.valueOf(ri.getAttribute("AccDocDate"));
-		payerAcc = ri.getAttribute("PayerAcc");
-		payeeAcc = ri.getAttribute("PayeeAcc");	
-		sum = Integer.parseInt(ri.getAttribute("Sum"));
 
-		payerName = ri.getElementsByTagNameNS("*", "PayerName").item(0).getTextContent();
-		payeeName = ri.getElementsByTagNameNS("*", "PayeeName").item(0).getTextContent();
-		edDefineRequestText = ri.getElementsByTagNameNS("*", "EDDefineRequestText").item(0).getTextContent();
-
-		NodeList nl = ri.getElementsByTagNameNS("*", "EDFieldList");
-		if(nl != null && nl.getLength() != 0)
+		if(ri != null)
 		{
-			edFieldList = new ArrayList<String>();
+			accDocNo = Integer.parseInt(ri.getAttribute("AccDocNo"));
+			accDocDate = Date.valueOf(ri.getAttribute("AccDocDate"));
+			payerAcc = ri.getAttribute("PayerAcc");
+			payeeAcc = ri.getAttribute("PayeeAcc");	
+			sum = Integer.parseInt(ri.getAttribute("Sum"));
 
-			for(int i = 0; i < nl.getLength(); i++)
-				edFieldList.add(((Element)nl.item(i)).getElementsByTagNameNS("*", "FieldNo").item(0).getTextContent());
+			payerName = ri.getElementsByTagNameNS("*", "PayerName").item(0).getTextContent();
+			payeeName = ri.getElementsByTagNameNS("*", "PayeeName").item(0).getTextContent();
+			edDefineRequestText = ri.getElementsByTagNameNS("*", "EDDefineRequestText").item(0).getTextContent();
 
-			Collections.sort(edFieldList);
-		}
+			NodeList nl = ri.getElementsByTagNameNS("*", "EDFieldList");
+			if(nl != null && nl.getLength() != 0)
+			{
+				edFieldList = new ArrayList<String>();
 
-		nl = ri.getElementsByTagNameNS("*", "EDReestrInfo");
-		if(nl != null && nl.getLength() != 0)
-		{
-			edReestrInfo = new ArrayList<Integer>();
+				for(int i = 0; i < nl.getLength(); i++)
+					edFieldList.add(((Element)nl.item(i)).getElementsByTagNameNS("*", "FieldNo").item(0).getTextContent());
 
-			for(int i = 0; i < nl.getLength(); i++)
-				edReestrInfo.add(Integer.parseInt(((Element)nl.item(i)).getElementsByTagNameNS("*", "TransactionID").item(0).getTextContent()));
+				Collections.sort(edFieldList);
+			}
 
-			Collections.sort(edReestrInfo);
+			nl = ri.getElementsByTagNameNS("*", "EDReestrInfo");
+			if(nl != null && nl.getLength() != 0)
+			{
+				edReestrInfo = new ArrayList<Integer>();
+
+				for(int i = 0; i < nl.getLength(); i++)
+					edReestrInfo.add(Integer.parseInt(((Element)nl.item(i)).getElementsByTagNameNS("*", "TransactionID").item(0).getTextContent()));
+
+				Collections.sort(edReestrInfo);
+			}
 		}
 	}
 
@@ -261,7 +265,7 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		edDefineRequestText = "Текст";
 
 		setFileName();
-		
+
 		return true;
 
 	}

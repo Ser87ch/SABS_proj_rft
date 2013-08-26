@@ -12,6 +12,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+
 /**
  * Пакет ЭСИС
  * @author Admin
@@ -142,7 +143,7 @@ public class PacketESIDVER extends Packet implements Generate<PacketEPD>, ReadED
 		{
 			PaymentDocument pd = pdl.get(i);
 
-			String resultCode = Settings.EsidList.getResultCodeByBIC(pd.payee.bic);
+			String resultCode = CodeList.getResultCodeByBIC(pd.payee.bic);
 			if(resultCode != null && !resultCode.equals(""))
 			{
 				ED216 cd = new ED216();
@@ -244,5 +245,69 @@ public class PacketESIDVER extends Packet implements Generate<PacketEPD>, ReadED
 	@Override
 	public int compareTo(ReadED o) {
 		return compareTo((Packet) o);
+	}
+	
+	public static class CodeList
+	{
+		private static List <Code> eList;
+
+		public static void readXML(String src)
+		{
+
+			Element root = XML.getXMLRootElement(src);
+
+			NodeList nl = root.getElementsByTagName("PacketESIDVER_RYM");
+
+			if(nl.getLength() == 0)
+				return;
+			else
+				eList = new ArrayList<Code>();
+
+			Element el = (Element) nl.item(0);
+
+			nl = el.getElementsByTagName("BIC");
+
+			for(int i = 0; i < nl.getLength(); i++)
+			{
+				Element bic = (Element) nl.item(i);
+
+				eList.add(new Code(bic.getFirstChild().getNodeValue(), bic.getAttribute("ResultCode")));
+			}			
+
+		}
+
+		public static String getResultCodeByBIC(String bic)
+		{
+			String resB = "", resO = "";
+
+			ListIterator<Code> li = eList.listIterator();
+			
+			while(li.hasNext())
+			{
+				Code e = li.next();
+				
+				if(e.bic.equals(bic))
+					resB = e.resultCode;
+				else if(e.bic.equals("*"))
+					resO = e.resultCode;
+			}
+			
+			if(!resB.equals(""))
+				return resB;
+			else
+				return resO;
+		}
+
+		public static class Code
+		{
+			String bic;
+			String resultCode;
+
+			public Code(String bic, String resultCode)
+			{
+				this.bic = bic;
+				this.resultCode = resultCode;
+			}
+		}
 	}
 }

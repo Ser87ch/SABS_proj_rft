@@ -32,4 +32,9 @@ public class ED774_VER extends Holder<ED274> implements Generate<ED773_VER> {
 		
 	}
 
+	@Override
+	ED274 createHolderObject() {
+		return new ED274();
+	}
+
 }

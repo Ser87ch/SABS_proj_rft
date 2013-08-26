@@ -5,6 +5,7 @@ import resources.Modules.GenESISHelper;
 import ru.sabstest.GenerateFromPacketEPDList;
 import ru.sabstest.Pack;
 import ru.sabstest.PacketEPD;
+import ru.sabstest.PacketESIDVER;
 import ru.sabstest.Settings;
 
 public class GenESIS extends GenESISHelper
@@ -15,7 +16,7 @@ public class GenESIS extends GenESISHelper
 		//List<String> st = Arrays.asList((String[]) args[0]);
 		String num = (String) args[1];
 		
-		Settings.EsidList.readXML(Settings.testProj + "settings\\generation\\" + num + ".xml");
+		PacketESIDVER.CodeList.readXML(Settings.testProj + "settings\\generation\\" + num + ".xml");
 		
 		PacketEPD pdl = new PacketEPD();
 		pdl.readEncodedFile(new File(Pack.getSPackPath()), false);

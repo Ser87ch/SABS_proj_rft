@@ -57,18 +57,8 @@ public class ReadEDList {
 		return pList.size();
 	}
 	
-	public void readFolder(String fld)
+	public void readFolderByFilter(String fld, FileFilter filter)
 	{
-		FileFilter filter = new FileFilter() {			
-			@Override
-			public boolean accept(File pathname) {
-				if(!pathname.getName().startsWith("deltadb"))
-					return true;
-				else
-					return false;
-			}
-		};	
-
 		File[] files = new File(fld).listFiles(filter);
 
 		for(File fl:files)
@@ -91,5 +81,32 @@ public class ReadEDList {
 		Collections.sort(pList);
 	}
 	
+	public void readFolder(String fld)
+	{
+		FileFilter filter = new FileFilter() {			
+			@Override
+			public boolean accept(File pathname) {
+				if(!pathname.getName().startsWith("deltadb"))
+					return true;
+				else
+					return false;
+			}
+		};	
+		readFolderByFilter(fld, filter);
+	}
 	
+	public void readFolderByType(String fld, final String type)
+	{
+		FileFilter filter = new FileFilter() {			
+			@Override
+			public boolean accept(File pathname) {
+				if(!pathname.getName().endsWith(type))
+					return true;
+				else
+					return false;
+			}
+		};	
+		readFolderByFilter(fld, filter);
+	}
 }
+

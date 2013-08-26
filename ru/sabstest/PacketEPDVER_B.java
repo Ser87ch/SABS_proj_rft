@@ -86,7 +86,7 @@ public class PacketEPDVER_B extends Packet implements ReadED, Generate<PacketEPD
 		for(int i = 0; i < pdl.size(); i++)
 		{
 			PaymentDocument pd = pdl.get(i);
-			String resultCode = Settings.EsidList.getResultCodeByBIC(pd.payee.bic);
+			String resultCode = PacketESIDVER.CodeList.getResultCodeByBIC(pd.payee.bic);
 			if(ErrorCode.contains(resultCode))
 			{
 				VERReturnPayt rd = new VERReturnPayt();

@@ -16,8 +16,8 @@ public class ED744_VER extends Holder<ED244> implements Generate<ED743_VER> {
 		iEdAuthor = source.edAuthor;
 		
 		ed = new ED244();
-		ed.generateFrom(source.ed);
-		return true;
+		
+		return ed.generateFrom(source.ed);
 	}
 
 	@Override
@@ -29,6 +29,11 @@ public class ED744_VER extends Holder<ED244> implements Generate<ED743_VER> {
 	public void insertIntoDB() {
 		// TODO вставка
 
+	}
+
+	@Override
+	ED244 createHolderObject() {
+		return new ED244();
 	}
 
 }

@@ -19,7 +19,7 @@ public class TestR extends TestRHelper
 		Settings.testProj = (String) args[0];
 		
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
-		Settings.EsidList.readXML("C:\\test\\nach\\gen5.xml");
+		PacketESIDVER.CodeList.readXML("C:\\test\\nach\\gen5.xml");
 		
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
 		
