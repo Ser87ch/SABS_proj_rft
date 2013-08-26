@@ -9,16 +9,22 @@ public class GenerateFromED743List extends GenerateList<ED743_VER> {
 	public void generateFromReadEDList(ReadEDList el)
 	{
 		pList = Packet.createGenFromED743(el.getSize());		
-		
+		int j = 0;
 		for(int i = 0; i < el.pList.size(); i++)
 		{
 			ED743_VER ed743 = (ED743_VER) el.get(i);
-			
-			if(!pList.get(2 * i).generateFrom(ed743))
-				pList.remove(2 * i);
-			
-			if(!pList.get(2 * i + 1).generateFrom(ed743))
-				pList.remove(2 * i + 1);
+
+			if(!pList.get(2 * i - j).generateFrom(ed743))
+			{
+				pList.remove(2 * i - j);
+				j++;
+			}
+
+			if(!pList.get(2 * i + 1 - j).generateFrom(ed743))
+			{
+				pList.remove(2 * i + 1 - j);
+				j++;
+			}
 		}
 	}
 }
