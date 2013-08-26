@@ -100,7 +100,7 @@ public class ReadEDList {
 		FileFilter filter = new FileFilter() {			
 			@Override
 			public boolean accept(File pathname) {
-				if(!pathname.getName().endsWith(type))
+				if(pathname.getName().endsWith(type))
 					return true;
 				else
 					return false;
