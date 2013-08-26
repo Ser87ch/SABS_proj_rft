@@ -1,23 +1,18 @@
 package ru.sabstest;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.Element;
+import java.util.Iterator;
 
 public class GenerateFromPacketEPDList extends GenerateList<PacketEPD> {
 	public void generateFromPacketEPD(PacketEPD pd)
 	{
 		pList = Packet.createGenFromEPD();
-		int j = 0;
-		for(int i = 0; i < pList.size(); i++)
+		Iterator<Generate<PacketEPD>> it = pList.iterator();
+		
+		while(it.hasNext())
 		{
-			Generate<PacketEPD> gen = pList.get(i - j);
+			Generate<PacketEPD> gen = it.next();
 			if(!gen.generateFrom(pd))
-			{
-				pList.remove(i - j);
-				j++;
-			}
+				it.remove();			
 		}
 	}
 }
