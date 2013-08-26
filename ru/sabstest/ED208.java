@@ -71,7 +71,7 @@ public class ED208 extends Packet implements ReadED, Generate<ED243> {
 		super.readXML(root);
 		resultCode = root.getAttribute("ResultCode");
 		
-		Element ied = (Element) root.getElementsByTagName("EDRefID").item(0);
+		Element ied = (Element) root.getElementsByTagNameNS("*", "EDRefID").item(0);
 		iEdNo = Integer.parseInt(ied.getAttribute("EDNo"));
 		iEdDate = Date.valueOf(ied.getAttribute("EDDate"));
 		iEdAuthor = ied.getAttribute("EDAuthor");

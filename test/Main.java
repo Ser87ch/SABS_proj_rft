@@ -23,7 +23,7 @@ public class Main {
 	{
 		Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.READ;
+		Test t = Test.O;
 		switch(t)
 		{
 					
@@ -34,7 +34,7 @@ public class Main {
 			Settings.readXML(Settings.testProj + "settings\\general.xml");
 			
 			
-			XML.createXMLFromBase64("C:\\sabstest\\data\\a000002\\input\\007\\458200200020130701000000101.PacketEPDVER", "C:\\sabstest\\data\\a000002\\input\\007\\1.xml");
+			XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000475.ED743_VER", "C:\\test\\1\\1.xml");
 //			XML.createXMLFromBase64("C:\\test\\1\\003700200020130701000000040.ED743_VER", "C:\\test\\1\\743.xml");
 //			XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000023.ED708_VER", "C:\\test\\1\\708.xml");
 //			PaymentDocumentList pdl = new PaymentDocumentList();
@@ -66,7 +66,7 @@ public class Main {
 		case READ:
 		{
 			ReadEDList pl = new ReadEDList();
-			pl.readFolder("C:\\sabstest\\data\\a000002\\input\\007\\");			
+			pl.readFolder("C:\\test\\1\\");			
 
 			out.println(pl.toString());
 		

@@ -190,40 +190,40 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 		super.readXML(root);
 		edDefineRequestCode = root.getAttribute("EDDefineRequestCode");
 
-		Element ied = (Element) root.getElementsByTagName("OriginalEPD").item(0);
+		Element ied = (Element) root.getElementsByTagNameNS("*", "OriginalEPD").item(0);
 		iEdNo = Integer.parseInt(ied.getAttribute("EDNo"));
 		iEdDate = Date.valueOf(ied.getAttribute("EDDate"));
 		iEdAuthor = ied.getAttribute("EDAuthor");
 
-		Element ri = (Element) root.getElementsByTagName("EDDefineRequestInfo").item(0);
+		Element ri = (Element) root.getElementsByTagNameNS("*", "EDDefineRequestInfo").item(0);
 		accDocNo = Integer.parseInt(ri.getAttribute("AccDocNo"));
 		accDocDate = Date.valueOf(ri.getAttribute("AccDocDate"));
 		payerAcc = ri.getAttribute("PayerAcc");
 		payeeAcc = ri.getAttribute("PayeeAcc");	
 		sum = Integer.parseInt(ri.getAttribute("Sum"));
 
-		payerName = ri.getElementsByTagName("PayerName").item(0).getTextContent();
-		payeeName = ri.getElementsByTagName("PayeeName").item(0).getTextContent();
-		edDefineRequestText = ri.getElementsByTagName("EDDefineRequestText").item(0).getTextContent();
+		payerName = ri.getElementsByTagNameNS("*", "PayerName").item(0).getTextContent();
+		payeeName = ri.getElementsByTagNameNS("*", "PayeeName").item(0).getTextContent();
+		edDefineRequestText = ri.getElementsByTagNameNS("*", "EDDefineRequestText").item(0).getTextContent();
 
-		NodeList nl = ri.getElementsByTagName("EDFieldList");
+		NodeList nl = ri.getElementsByTagNameNS("*", "EDFieldList");
 		if(nl != null && nl.getLength() != 0)
 		{
 			edFieldList = new ArrayList<String>();
 
 			for(int i = 0; i < nl.getLength(); i++)
-				edFieldList.add(((Element)nl.item(i)).getElementsByTagName("FieldNo").item(0).getTextContent());
+				edFieldList.add(((Element)nl.item(i)).getElementsByTagNameNS("*", "FieldNo").item(0).getTextContent());
 
 			Collections.sort(edFieldList);
 		}
 
-		nl = ri.getElementsByTagName("EDReestrInfo");
+		nl = ri.getElementsByTagNameNS("*", "EDReestrInfo");
 		if(nl != null && nl.getLength() != 0)
 		{
 			edReestrInfo = new ArrayList<Integer>();
 
 			for(int i = 0; i < nl.getLength(); i++)
-				edReestrInfo.add(Integer.parseInt(((Element)nl.item(i)).getElementsByTagName("TransactionID").item(0).getTextContent()));
+				edReestrInfo.add(Integer.parseInt(((Element)nl.item(i)).getElementsByTagNameNS("*", "TransactionID").item(0).getTextContent()));
 
 			Collections.sort(edReestrInfo);
 		}

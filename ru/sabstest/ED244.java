@@ -32,7 +32,7 @@ public class ED244 extends Packet implements ReadED, Generate<ED243> {
 		edDefineRequestCode = root.getAttribute("EDDefineRequestCode");
 		edDefineAnswerCode = root.getAttribute("EDDefineAnswerCode");
 
-		Element ied = (Element) root.getElementsByTagName("OriginalEPD").item(0);
+		Element ied = (Element) root.getElementsByTagNameNS("*", "OriginalEPD").item(0);
 		iEdNo = Integer.parseInt(ied.getAttribute("EDNo"));
 		iEdDate = Date.valueOf(ied.getAttribute("EDDate"));
 		iEdAuthor = ied.getAttribute("EDAuthor");

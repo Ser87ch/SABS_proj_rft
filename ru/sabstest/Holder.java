@@ -59,12 +59,12 @@ public class Holder<T extends ReadED> extends Packet implements ReadED {
 	public void readXML(Element root) {
 		super.readXML(root);
 
-		Element ied = (Element) root.getElementsByTagName("InitialED").item(0);
+		Element ied = (Element) root.getElementsByTagNameNS("*", "InitialED").item(0);
 		iEdNo = Integer.parseInt(ied.getAttribute("EDNo"));
 		iEdDate = Date.valueOf(ied.getAttribute("EDDate"));
 		iEdAuthor = ied.getAttribute("EDAuthor");
 
-		ied = (Element) root.getElementsByTagName(ed.getClass().getName()).item(0);
+		ied = (Element) root.getElementsByTagNameNS("*", ed.getClass().getName()).item(0);
 
 		ed.readXML(ied);		
 	}
