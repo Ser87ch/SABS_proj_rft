@@ -1,30 +1,25 @@
 package ru.sabstest;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.Element;
+import java.util.Iterator;
 
 public class GenerateFromED743List extends GenerateList<ED743_VER> {
 	public void generateFromReadEDList(ReadEDList el)
 	{
 		pList = Packet.createGenFromED743(el.getSize());		
-		int j = 0;
-		for(int i = 0; i < el.pList.size(); i++)
+		
+		Iterator<Generate<ED743_VER>> itG = pList.iterator();
+		
+		Iterator<ReadED> itR = el.pList.iterator();
+		
+		while(itR.hasNext())
 		{
-			ED743_VER ed743 = (ED743_VER) el.get(i);
+			ED743_VER ed743 = (ED743_VER) itR.next();
 
-			if(!pList.get(2 * i - j).generateFrom(ed743))
-			{
-				pList.remove(2 * i - j);
-				j++;
-			}
+			if(!itG.next().generateFrom(ed743))
+				itG.remove();			
 
-			if(!pList.get(2 * i + 1 - j).generateFrom(ed743))
-			{
-				pList.remove(2 * i + 1 - j);
-				j++;
-			}
+			if(!itG.next().generateFrom(ed743))
+				itG.remove();
 		}
 	}
 }
