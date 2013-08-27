@@ -20,6 +20,11 @@ public class ED244 extends Packet implements ReadED, Generate<ED243> {
 	public Date iEdDate; //Дата составления ЭД
 	public String iEdAuthor; //Уникальный идентификатор составителя ЭД (УИС)
 	
+	//реквизиты исходного ЭД
+	public int oEdNo; //Номер ЭД в течение опердня
+	public Date oEdDate; //Дата составления ЭД
+	public String oEdAuthor; //Уникальный идентификатор составителя ЭД (УИС)
+	
 	@Override
 	public int compareTo(ReadED o) {
 		return compareTo((Packet) o);
@@ -53,6 +58,10 @@ public class ED244 extends Packet implements ReadED, Generate<ED243> {
 		iEdAuthor = source.edAuthor;
 		iEdDate = source.edDate;
 		iEdNo = source.edNo;
+		
+		oEdAuthor = source.iEdAuthor;
+		oEdDate = source.iEdDate;
+		oEdNo = source.iEdNo;
 		
 		edDefineRequestCode = source.edDefineRequestCode;
 		edDefineAnswerCode = CodeList.getAnswerCodeByNo(source.iEdNo);

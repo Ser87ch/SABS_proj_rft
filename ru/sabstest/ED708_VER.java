@@ -11,9 +11,9 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 		edAuthor = source.edReceiver;
 		edReceiver = source.edAuthor;
 		
-		iEdNo = source.edNo;
-		iEdDate = source.edDate;
-		iEdAuthor = source.edAuthor;
+		iEdNo = source.ed.edNo + 3500;
+		iEdDate = source.ed.edDate;
+		iEdAuthor = source.ed.edReceiver;
 		
 		ed = new ED208();
 		
@@ -27,7 +27,31 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 
 	@Override
 	public void insertIntoDB() {
-		// TODO вставка
+		try
+		{
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();
+
+			int idPacet = insertIntoDBPacket(db, 0, true);
+			
+			String query =  "INSERT INTO [dbo].[epay_EDVer]([[ID_PACKET], [ID_DEPART], [ID_ARM], [InOutMode],\r\n" + 
+					" [EDNo], [EDDate], [EDAuthor], [EDReceiver],\r\n" + 
+					" [ini_EdNo], [ini_EdDate], [ini_EdAutor], [PacetCode], [EDQuantity], [Summa],\r\n" + 
+					" [VerificationDate], [VerificationCode], [MSGID], [Annotation], [CtrlCode],\r\n" + 
+					" [CtrlTime], [ErrorDiagnostic], [VCtrlCode])\r\n" +					 
+			"VALUES(" + DB.toString(idPacet) + ", null, '0', '0',\r\n" +
+			DB.toString(edNo) + ", " + DB.toString(edDate) + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ",\r\n" +
+			DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", null, " + DB.toString(ed.iEdNo) + ", " + DB.toString(ed.edAuthor) + ",\r\n" + 
+			DB.toString(ed.iEdDate) + ", "  + DB.toString(ed.edNo) + ", null, " + DB.toString(ed.annotation) + ", '16', \r\n" +  
+			DB.toString(ed.resultCode) + ", null, " + DB.toString(ed.ctrlCode) + ")";			
+			db.st.executeUpdate(query);
+			
+			db.close();		
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.msg(e);			
+		}
 		
 	}
 	
