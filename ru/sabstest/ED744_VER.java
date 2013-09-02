@@ -15,6 +15,10 @@ public class ED744_VER extends Holder<ED244> implements Generate<ED743_VER> {
 		iEdDate = source.ed.edDate;
 		iEdAuthor = source.ed.edReceiver;
 		
+		Sign[] s = ClientList.getSignByUIC(edAuthor);
+		firstSign = s[0];
+		secondSign = s[1];
+		
 		ed = new ED244();
 		
 		setFileName();
