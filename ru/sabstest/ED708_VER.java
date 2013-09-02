@@ -39,7 +39,7 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
 
-			int idPacet = insertIntoDBPacket(db, 0, true);
+			int idPacet = insertIntoDBPacket(db, 0, "16");
 			
 			String query =  "INSERT INTO [dbo].[epay_EDVer]([ID_PACKET], [ID_DEPART], [ID_ARM], [InOutMode],\r\n" + 
 					" [EDNo], [EDDate], [EDAuthor], [EDReceiver],\r\n" + 

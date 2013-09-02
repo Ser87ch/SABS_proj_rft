@@ -134,7 +134,7 @@ public class ED243 extends Packet implements Generate<Element>, ReadED{
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
 
-			int idPacet = insertIntoDBPacket(db, sum, true);
+			int idPacet = insertIntoDBPacket(db, sum, "1");
 
 			//			String query =  "INSERT INTO [dbo].[epay_ED243DEF]([ID_PACKET], [ID_ARM], [AccDocNo], [AccDocDate],\r\n" + 
 			//			" [PayeeAcc], [PayerAcc], [Sum], [PayerName], [PayeeName], [EDDefineRequestText],\r\n" + 
