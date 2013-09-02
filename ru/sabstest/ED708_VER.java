@@ -21,6 +21,9 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 		
 		ed = new ED208();
 		
+		
+		setFileName();
+		
 		return ed.generateFrom(source.ed);
 	}
 	
