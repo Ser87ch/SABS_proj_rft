@@ -229,7 +229,7 @@ abstract public class Packet{
 					" 0, null, null, null, " + DB.toString(uic) + ", " + DB.toString(uic) + ", 1, \r\n" +  //Mesto MesFrom?
 					" 5, null, '20120202', 3, 1, 0, 0,\r\n" + 
 					" 0, 4, 3, 0, 1, null, null,\r\n" + 
-					" null, null, null, 20, '', NULL, NULL, NULL, NULL)";			
+					" null, null, null, 20, '', NULL, NULL, NULL, '4')";			
 					db.st.executeUpdate(query);
 								 
 
@@ -256,7 +256,7 @@ abstract public class Packet{
 					" 0, null, null, null, " + DB.toString(edReceiver) + ", " + DB.toString(edAuthor) + ", 1, \r\n" +  //Mesto MesFrom?
 					" 5, null, '20120202', 3, 1, 1, 1,\r\n" + 
 					" 0, 1, 3, 0, 1, null, null,\r\n" + 
-					" null, null, null, 20, '', NULL, NULL, NULL, NULL)";			
+					" null, null, null, 20, '', NULL, NULL, NULL, '4')";			
 					db.st.executeUpdate(query);
 					
 
