@@ -42,7 +42,7 @@ public class ED744_VER extends Holder<ED244> implements Generate<ED743_VER> {
 					" [VerificationDate], [VerificationCode], [MSGID], [Annotation], [CtrlCode],\r\n" + 
 					" [CtrlTime], [ErrorDiagnostic], [VCtrlCode])\r\n" +					 
 			"VALUES(" + DB.toString(idPacet) + ", null, '0', '0',\r\n" +
-			DB.toString(edNo) + ", " + DB.toString(edDate) + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ",\r\n" +
+			DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ",\r\n" +
 			DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", null, " + DB.toString(ed.iEdNo) + ", " + DB.toString(ed.edAuthor) + ",\r\n" + 
 			DB.toString(ed.iEdDate) + ", "  + DB.toString(ed.oEdNo) + ", " + DB.toString(ed.oEdAuthor) +  ", " + DB.toString(ed.edReceiver) + ", '18', \r\n" +  
 			DB.toString(ed.edDefineRequestCode) + ", " + DB.toString(ed.oEdDate) + ", " + DB.toString(ed.edDefineAnswerCode) + ")";			
