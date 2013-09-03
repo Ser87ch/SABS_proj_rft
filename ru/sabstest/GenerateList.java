@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -43,6 +44,22 @@ public class GenerateList<T> {
 			return false;
 		return true;
 	}	
+	
+	public void sortBySign()
+	{
+		Collections.sort(pList, new Comparator<Generate<T>>() {
+
+			@Override
+			public int compare(Generate<T> o1, Generate<T> o2) {
+				Sign[] sg1 = o1.getSigns();
+				Sign[] sg2 = o2.getSigns();
+				String s1 = sg1[0].profile;
+				String s2 = sg2[0].profile;
+				
+				return s1.compareTo(s2);
+			}
+		});
+	}
 
 //	public Packet get(int i)
 //	{

@@ -1,4 +1,6 @@
 package SABS;
+import java.util.Iterator;
+
 import resources.SABS.CreateSignedXMLHelper;
 import ru.sabstest.Generate;
 import ru.sabstest.GenerateList;
@@ -13,10 +15,22 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 		String dest = (String) args[0];	
 		GenerateList<?> plst = (GenerateList<?>) args[1];
 
+		plst.sortBySign();
+
+		Iterator<?> it = plst.pList.iterator();
+		Generate<?> pl2 = (Generate<?>) it.next();
 		//	if(!plst.pList.get(0).isVER)
-		for(Generate<?> pl:plst.pList)
+		while(it.hasNext())
 		{
-			pl.insertIntoDB();
+			Generate<?> pl = pl2;
+			
+			
+			while(it.hasNext() && pl.getSigns()[0].profile.equals(pl2.getSigns()[0].profile))
+			{
+				pl2.insertIntoDB();
+				pl2 = (Generate<?>) it.next();
+			}
+			
 			Sign[] sgn = pl.getSigns();
 			String profile = sgn[0].profile;		
 			String key = sgn[0].key;
