@@ -210,10 +210,11 @@ abstract public class Packet{
 		public int insertIntoDBPacket(DB db, int sum, String type)
 		{
 			int idPacket = 0;
+			String uic = Settings.bik.substring(2) + "000";
 			if(isVER)
 			{
 				try{
-					String uic = Settings.bik.substring(2) + "000";
+					
 
 					String query =  "INSERT INTO [dbo].[epay_Packet]\r\n" + 
 					"([ID_Depart], [ID_ARM], [User_Insert], [InOutMode],\r\n" + 
@@ -253,7 +254,7 @@ abstract public class Packet{
 					"VALUES(null, 0, null, 0,\r\n" + 
 					DB.toString(Settings.operDate) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", 1,\r\n" + 
 					DB.toString(sum) + ", null, null, " + DB.toString(type) + ", " + DB.toString(filename) + ", 0, 0, \r\n" + 
-					" 0, null, null, null, " + DB.toString(edReceiver) + ", " + DB.toString(edAuthor) + ", 1, \r\n" +  //Mesto MesFrom?
+					" 0, null, null, null, " + DB.toString(uic) + ", " + DB.toString(edAuthor) + ", 1, \r\n" +  //Mesto MesFrom?
 					" 5, null, '20120202', 3, 1, 1, 1,\r\n" + 
 					" 0, 1, 3, 0, 1, null, null,\r\n" + 
 					" null, null, null, 20, '', NULL, NULL, NULL, '4')";			
