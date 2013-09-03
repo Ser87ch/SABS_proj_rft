@@ -1,5 +1,7 @@
 package SABS;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import resources.SABS.CreateSignedXMLHelper;
 import ru.sabstest.Generate;
@@ -24,9 +26,10 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 		{
 			Generate<?> pl = pl2;
 			
-			
+			List<Generate<?>> lg = new ArrayList<Generate<?>>();
 			while(it.hasNext() && pl.getSigns()[0].profile.equals(pl2.getSigns()[0].profile))
 			{
+				lg.add(pl2);
 				pl2.insertIntoDB();
 				pl2 = (Generate<?>) it.next();
 			}
@@ -58,7 +61,8 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 			else
 				run(Settings.path + "\\bin\\clienXML.exe -wdv " + dest + " C:\\  999",Settings.path + "\\bin");
 
-			pl.insertForRead();
+			for(Generate<?> gen:lg)
+				gen.insertForRead();
 
 			callScript("SABS.VFD",new String[]{key2});
 			sleep(2);
