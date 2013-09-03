@@ -153,7 +153,7 @@ public class Pack {
 	{
 		File[] files = new File(Settings.path + "post\\kPuI\\").listFiles();
 		for(File fl:files)
-			Pack.copyFile(fl.getAbsolutePath(), Settings.fullfolder + "\\input\\" + num + "\\" + files[0].getName());
+			Pack.copyFile(fl.getAbsolutePath(), Settings.fullfolder + "\\input\\" + num + "\\" + fl.getName());
 	}
 
 
