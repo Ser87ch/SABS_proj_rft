@@ -152,7 +152,8 @@ public class Pack {
 	public static void copyESIS(String num)
 	{
 		File[] files = new File(Settings.path + "post\\kPuI\\").listFiles();
-		Pack.copyFile(files[0].getAbsolutePath(), Settings.fullfolder + "\\input\\" + num + "\\" + files[0].getName());
+		for(File fl:files)
+			Pack.copyFile(fl.getAbsolutePath(), Settings.fullfolder + "\\input\\" + num + "\\" + files[0].getName());
 	}
 
 
