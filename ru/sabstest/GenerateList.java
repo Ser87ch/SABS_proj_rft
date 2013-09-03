@@ -71,7 +71,7 @@ public class GenerateList<T> {
 		
 		for(int i = 1; i < pList.size(); i++)
 		{
-			if(pList.get(i).getSigns()[0].profile.equals(pList.get(i + 1).getSigns()[1].profile))
+			if(pList.get(i).getSigns()[0].profile.equals(pList.get(i - 1).getSigns()[1].profile))
 				lstGen.add(pList.get(i));
 			else
 			{
