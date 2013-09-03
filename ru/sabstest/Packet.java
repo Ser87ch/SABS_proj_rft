@@ -252,7 +252,7 @@ abstract public class Packet{
 					" [OID], [WriteSig], [Verify], [Pr_ufebs], [Forme221], [IEdNo], [IEdDate],\r\n" + 
 					" [IEdAuth], [Esc_Key], [Esc_key2], [Seanc], [FilePath], [ManName], [QueName], [KcoiKgur], [TypeObr])\r\n" + 
 					"VALUES(null, 0, null, 0,\r\n" + 
-					DB.toString(Settings.operDate) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", 1,\r\n" + 
+					DB.toString(Settings.operDate) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(uic) + ", 1,\r\n" + 
 					DB.toString(sum) + ", null, null, " + DB.toString(type) + ", " + DB.toString(filename) + ", 0, 0, \r\n" + 
 					" 0, null, null, null, " + DB.toString(uic) + ", " + DB.toString(edAuthor) + ", 1, \r\n" +  //Mesto MesFrom?
 					" 5, null, '20120202', 3, 1, 1, 1,\r\n" + 
