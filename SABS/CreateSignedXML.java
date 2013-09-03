@@ -17,22 +17,20 @@ public class CreateSignedXML extends CreateSignedXMLHelper
 		String dest = (String) args[0];	
 		GenerateList<?> plst = (GenerateList<?>) args[1];
 
-		plst.sortBySign();
-
-		Iterator<?> it = plst.pList.iterator();
-		Generate<?> pl2 = (Generate<?>) it.next();
+		
+		List<List<Generate<?>>> llG = plst.getSubListBySign();
+		
+		Iterator<List<Generate<?>>> it = llG.iterator();
+		
 		//	if(!plst.pList.get(0).isVER)
 		while(it.hasNext())
 		{
-			Generate<?> pl = pl2;
-			
-			List<Generate<?>> lg = new ArrayList<Generate<?>>();
-			while(it.hasNext() && pl.getSigns()[0].profile.equals(pl2.getSigns()[0].profile))
-			{
-				lg.add(pl2);
-				pl2.insertIntoDB();
-				pl2 = (Generate<?>) it.next();
-			}
+							
+			List<Generate<?>> lg = it.next();
+			Generate<?> pl = lg.get(0);
+						
+			for(Generate<?> gen:lg)
+				gen.insertIntoDB();
 			
 			Sign[] sgn = pl.getSigns();
 			String profile = sgn[0].profile;		

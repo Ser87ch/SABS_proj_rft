@@ -1,6 +1,7 @@
 package test;
 import resources.test.TestHelper;
 import ru.sabstest.ClientList;
+import ru.sabstest.DeltaDB;
 import ru.sabstest.GenerateFromXMLList;
 import ru.sabstest.Init;
 import ru.sabstest.ModuleList;
@@ -21,8 +22,10 @@ public class Test extends TestHelper
 		Settings.readXML(Settings.testProj + "settings\\general.xml");
 		Settings.Login.readXML(Settings.testProj + "settings\\login.xml");
 		ModuleList.readFile(Settings.testProj + "settings\\modules.xml");
-		ClientList.readFile(Settings.testProj + "settings\\clients.xml");
 		Settings.Sign.readXML(Settings.testProj + "settings\\sign.xml");
+		ClientList.readFile(Settings.testProj + "settings\\clients.xml");		
+		DeltaDB.readXMLSettings(Settings.testProj + "settings\\deltadb.xml");
+		
 		
 //		TestCase t = new TestCase();
 //		t.readFile("C:\\test\\test1.xml");

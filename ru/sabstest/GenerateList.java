@@ -44,7 +44,7 @@ public class GenerateList<T> {
 			return false;
 		return true;
 	}	
-	
+
 	public void sortBySign()
 	{
 		Collections.sort(pList, new Comparator<Generate<T>>() {
@@ -55,21 +55,44 @@ public class GenerateList<T> {
 				Sign[] sg2 = o2.getSigns();
 				String s1 = sg1[0].profile;
 				String s2 = sg2[0].profile;
-				
+
 				return s1.compareTo(s2);
 			}
 		});
 	}
 
-//	public Packet get(int i)
-//	{
-//		return pList.get(i);
-//	}
+	public List<List<Generate<?>>> getSubListBySign()
+	{
+		sortBySign();
+		List<List<Generate<?>>> llG = new ArrayList<List<Generate<?>>>();
 
-//	public int getSize()
-//	{
-//		return pList.size();
-//	}
+		List<Generate<?>> lstGen = new ArrayList<Generate<?>>();
+		lstGen.add(pList.get(0));
+		
+		for(int i = 1; i < pList.size(); i++)
+		{
+			if(pList.get(i).getSigns()[0].profile.equals(pList.get(i + 1).getSigns()[1].profile))
+				lstGen.add(pList.get(i));
+			else
+			{
+				llG.add(lstGen);
+				lstGen = new ArrayList<Generate<?>>();
+				lstGen.add(pList.get(i));
+			}
+		}
+		llG.add(lstGen);
+		return llG;
+	}
+
+	//	public Packet get(int i)
+	//	{
+	//		return pList.get(i);
+	//	}
+
+	//	public int getSize()
+	//	{
+	//		return pList.size();
+	//	}
 
 	public void insertIntoDB()
 	{
@@ -94,28 +117,28 @@ public class GenerateList<T> {
 		}
 	}
 
-//	public void generateEsidFromEPD(ReadEDList pl)
-//	{
-//		Iterator<Packet> it = pl.pList.iterator();
-//
-//		pList = new ArrayList<Packet>();
-//
-//		while(it.hasNext())
-//		{
-//			PacketEPD epd = (PacketEPD) it.next();
-//
-//			PacketESIDVER rpack = new PacketESIDVER();
-//			if(rpack.generateFrom(epd))
-//				pList.add(rpack);
-//
-//			PacketEPDVER_B bpack = new PacketEPDVER_B();
-//			if(bpack.generateFrom(epd))
-//				pList.add(bpack);		
-//
-//			Collections.sort(pList);
-//
-//		}
-//	}
+	//	public void generateEsidFromEPD(ReadEDList pl)
+	//	{
+	//		Iterator<Packet> it = pl.pList.iterator();
+	//
+	//		pList = new ArrayList<Packet>();
+	//
+	//		while(it.hasNext())
+	//		{
+	//			PacketEPD epd = (PacketEPD) it.next();
+	//
+	//			PacketESIDVER rpack = new PacketESIDVER();
+	//			if(rpack.generateFrom(epd))
+	//				pList.add(rpack);
+	//
+	//			PacketEPDVER_B bpack = new PacketEPDVER_B();
+	//			if(bpack.generateFrom(epd))
+	//				pList.add(bpack);		
+	//
+	//			Collections.sort(pList);
+	//
+	//		}
+	//	}
 
 
 	public void add(Generate<T> p)
