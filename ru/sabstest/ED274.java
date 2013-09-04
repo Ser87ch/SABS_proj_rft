@@ -20,8 +20,22 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 	
 	@Override
 	public boolean generateFrom(ED273 source) {
-		// TODO генерация 274
-		return false;
+		edNo = source.edNo + 5500;
+		edDate = source.edDate;
+		edAuthor = source.edReceiver;
+		edReceiver = source.edAuthor;
+
+		infoCode = "8";
+		
+		refEdAuthor = source.edAuthor;
+		refEdDate = source.edDate;
+		refEdNo = source.edNo;
+		
+		iEdAuthor = source.pdl.get(0).edAuthor;
+		iEdDate = source.pdl.get(0).edDate;
+		iEdNo = source.pdl.get(0).edNo;
+		
+		return true;		
 	}
 
 	@Override

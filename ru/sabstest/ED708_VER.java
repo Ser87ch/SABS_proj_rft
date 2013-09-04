@@ -96,8 +96,26 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 			
 			@Override
 			public boolean generateFrom(ED773_VER source) {
-				// TODO генерация из ED773
-				return false;
+				edNo = source.edNo + 4000;
+				edDate = source.edDate;
+				edAuthor = source.edReceiver;
+				edReceiver = source.edAuthor;
+				
+				iEdNo = source.ed.edNo + 4500;
+				iEdDate = source.ed.edDate;
+				iEdAuthor = source.ed.edReceiver;
+				
+				Sign[] s = ClientList.getSignByUIC(edAuthor);
+				firstSign = s[0];
+				secondSign = s[1];
+				
+				ed = new ED208();
+				
+				
+				setFileName();
+				
+				return ed.generateFrom(source.ed);
+				
 			}
 		};
 	}

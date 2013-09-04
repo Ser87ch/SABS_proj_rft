@@ -259,6 +259,9 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 
 		payer = ClientList.getClient(gendoc.getAttribute("IdPayer"));
 		payee = ClientList.getClient(gendoc.getAttribute("IdPayee"));	
+		
+		if(gendoc.hasAttribute("PayerLS"))
+			payer.personalAcc = gendoc.getAttribute("PayerLS");
 
 //		if(edAuthor.substring(0,7).equals(Settings.bik.substring(2)))
 //			this.edAuthor = edAuthor;

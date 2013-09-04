@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,7 +14,7 @@ import org.w3c.dom.NodeList;
 public class ED273 extends Packet implements ReadED, Generate<Element> {
 
 	public List<PaymentDocument> pdl;
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -43,7 +44,7 @@ public class ED273 extends Packet implements ReadED, Generate<Element> {
 	{
 		isVER = false;
 	}
-	
+
 	@Override
 	public int compareTo(ReadED o) {
 		return compareTo((Packet) o);
@@ -54,11 +55,11 @@ public class ED273 extends Packet implements ReadED, Generate<Element> {
 		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
 		filename = src.getName();
 	}
-	
+
 	@Override
 	public void readXML(Element root) {
 		super.readXML(root);
-		
+
 		pdl = new ArrayList<PaymentDocument>();
 		NodeList nl = root.getChildNodes();
 		for(int i = 0; i < nl.getLength(); i++)
@@ -68,7 +69,7 @@ public class ED273 extends Packet implements ReadED, Generate<Element> {
 				if(pd != null)
 					pdl.add(pd);
 			}
-		
+
 		Collections.sort(pdl);
 	}
 
@@ -92,13 +93,45 @@ public class ED273 extends Packet implements ReadED, Generate<Element> {
 			filename = filename + edAuthor.substring(2,4) + edAuthor.substring(7,10) + "." + String.format("%03d", edNo);
 		else
 			filename = filename + edAuthor.substring(2,7) + "." + String.format("%03d", edNo);
-		
+
 	}
 
 	@Override
 	public void insertIntoDB() {
-		// TODO вставка в БД
-		
+		try
+		{
+			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
+			db.connect();
+
+			int idPacet = insertIntoDBPacket(db, 0, "1");
+
+			
+			String query =  "INSERT [dbo].[UFEBS_Es201]([ID_PACET], [ID_DEPART], [EdNo], [EdDate],\r\n" + 
+			" [EdAuthor], [EdReceiv], [CtrlCode], [CtrlTime], [Annotat],\r\n" + 
+			" [MsgId], [IEdNo], [IEdDate], [IEdAuth], [FTime], [EsidCod],\r\n" + 
+			" [PEpdNo], [PacDate], [PAuthor], [BeginDat], [EndDat], [BIC],\r\n" + 
+			" [ACC], [Annotat1], [StopReas], [ID_ARM])\r\n" + 
+			"VALUES(" + DB.toString(idPacet) + ", null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ",\r\n" +
+			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", '', null, null,\r\n" +
+			"null, '', '', '', null, '43',\r\n" +
+			DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, null, null,\r\n" +
+			"null, null, null, '0')";			
+			db.st.executeUpdate(query);		
+			
+			db.close();
+
+
+
+			ListIterator <PaymentDocument> iter = pdl.listIterator();
+			while(iter.hasNext())
+			{
+				iter.next().insertIntoDbUfebs(idPacet, edNo, edDate, edAuthor, filename);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.msg(e);			
+		}
+
 	}
 
 }
