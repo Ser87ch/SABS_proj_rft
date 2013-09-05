@@ -65,9 +65,9 @@ public class ED743_VER extends Holder<ED243> implements Generate<Element> {
 					" [CtrlTime], [ErrorDiagnostic], [VCtrlCode])\r\n" +					 
 			"VALUES(" + DB.toString(idPacet) + ", '', '0', '0',\r\n" +
 			DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ",\r\n" +
-			DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", '', " + DB.toString(ed.iEdNo) + ", " + DB.toString(ed.edAuthor) + ",\r\n" + 
-			DB.toString(ed.iEdDate) + ", '', '', " + DB.toString(ed.edReceiver) + ", '17', \r\n" +  
-			DB.toString(ed.edDefineRequestCode) + ", '', '')";			
+			DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", 0, 0, '', \r\n" + 
+			"'', " + DB.toString(ed.iEdNo) + ", " + DB.toString(ed.iEdAuthor) + ", " + DB.toString(ed.edReceiver) + ", '17', \r\n" +  
+			DB.toString(ed.edDefineRequestCode) + ", " + DB.toString(ed.iEdDate) + ", '')";			
 			db.st.executeUpdate(query);
 			
 			db.close();		
