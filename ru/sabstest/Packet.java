@@ -159,6 +159,9 @@ abstract public class Packet{
 			case ED243:
 				pc = new ED243();
 				break;
+			case ED743_VER:
+				pc = new ED743_VER();
+				break;
 			case ED273:
 				pc = new ED273();
 				break;
@@ -183,6 +186,17 @@ abstract public class Packet{
 			{
 				pc.add(new ED708_VER());
 				pc.add(new ED744_VER());
+			}
+			return pc;
+		}
+		
+		public static List<Generate<ED773_VER>> createGenFromED773(int size)
+		{
+			List<Generate<ED773_VER>> pc = new ArrayList<Generate<ED773_VER>>();
+			for(int i = 0; i < size; i++)
+			{
+				pc.add((new ED708_VER()).getGenerateED773());
+				pc.add(new ED774_VER());
 			}
 			return pc;
 		}

@@ -38,10 +38,10 @@ public class Test extends TestHelper
 		//Settings.readXML("C:\\general.xml");
 		
 		GenerateFromXMLList pl = new GenerateFromXMLList();
-		pl.generateFromXML("C:\\sabstest\\settings\\generation\\007.xml");
+		pl.generateFromXML("C:\\sabstest\\settings\\generation\\106.xml");
 	
 		
-		callScript("SABS.CreateSignedXML",new Object[]{"C:\\sabstest\\data\\a000003\\input\\007\\", pl});
+		callScript("SABS.CreateSignedXML",new Object[]{"C:\\sabstest\\data\\a000003\\input\\106\\", pl});
 		
 		
 		

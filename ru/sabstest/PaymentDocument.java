@@ -398,11 +398,11 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 		else if(root.getLocalName().equals("ED103"))
 			pd = new ED103();
 		else if(root.getLocalName().equals("ED113"))
-			pd = new ED103(true);		
+			pd = new ED103(true, false);		
 		else if(root.getLocalName().equals("ED104"))
 			pd = new ED104();
 		else if(root.getLocalName().equals("ED114"))
-			pd = new ED104(true);
+			pd = new ED104(true, false);
 		else if(root.getLocalName().equals("ED105"))
 			pd = new ED105();
 		else if(root.getLocalName().equals("ED108"))
@@ -423,16 +423,28 @@ abstract public class PaymentDocument implements Comparable<PaymentDocument> {
 		else if(type.equals("103"))
 			pd = new ED103();
 		else if(type.equals("113"))
-			pd = new ED103(true);
+			pd = new ED103(false, true);
 		else if(type.equals("104"))
 			pd = new ED104();
 		else if(type.equals("114"))
-			pd = new ED104(true);
+			pd = new ED104(false, true);
 		else if(type.equals("105"))
 			pd = new ED105();
 		else if(type.equals("108"))
 			pd = new ED108();
 
+		return pd;
+	}
+	
+	public static PaymentDocument createByTypeED273(String type)
+	{
+		PaymentDocument pd = null;
+
+		if(type.equals("113"))
+			pd = new ED103(true, false);	
+		else if(type.equals("114"))
+			pd = new ED104(true, false);
+	
 		return pd;
 	}
 }

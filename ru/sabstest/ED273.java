@@ -13,13 +13,13 @@ import org.w3c.dom.NodeList;
 
 public class ED273 extends Packet implements ReadED, Generate<Element> {
 
-	public List<PaymentDocument> pdl;
+	public List<PaymentDocument> pdList;
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((pdl == null) ? 0 : pdl.hashCode());
+		result = prime * result + ((pdList == null) ? 0 : pdList.hashCode());
 		return result;
 	}
 
@@ -32,10 +32,10 @@ public class ED273 extends Packet implements ReadED, Generate<Element> {
 		if (getClass() != obj.getClass())
 			return false;
 		ED273 other = (ED273) obj;
-		if (pdl == null) {
-			if (other.pdl != null)
+		if (pdList == null) {
+			if (other.pdList != null)
 				return false;
-		} else if (!pdl.equals(other.pdl))
+		} else if (!pdList.equals(other.pdList))
 			return false;
 		return true;
 	}
@@ -60,23 +60,73 @@ public class ED273 extends Packet implements ReadED, Generate<Element> {
 	public void readXML(Element root) {
 		super.readXML(root);
 
-		pdl = new ArrayList<PaymentDocument>();
+		pdList = new ArrayList<PaymentDocument>();
 		NodeList nl = root.getChildNodes();
 		for(int i = 0; i < nl.getLength(); i++)
 			if(nl.item(i).getNodeType() == Node.ELEMENT_NODE)
 			{
 				PaymentDocument pd = PaymentDocument.createDocFromXML((Element) nl.item(i));
 				if(pd != null)
-					pdl.add(pd);
+					pdList.add(pd);
 			}
 
-		Collections.sort(pdl);
+		Collections.sort(pdList);
 	}
 
 	@Override
-	public boolean generateFrom(Element source) {
-		// TODO генерация из xml
-		return false;
+	public boolean generateFrom(Element root) {
+
+
+		pdList = new ArrayList<PaymentDocument>();
+
+		edNo = Integer.parseInt(root.getAttribute("EPDNo"));
+		edDate = Settings.operDate;
+
+		edAuthor = root.getAttribute("EDAuthor");
+		edReceiver = root.getAttribute("EDReceiver");
+
+
+		Sign[] s = ClientList.getSignByUIC(edAuthor);
+		firstSign = s[0];
+		secondSign = s[1];
+
+		setFileName();
+
+		int edNo = Integer.parseInt(root.getAttribute("EDFirstNo"));
+		int sum = XML.getOptionalIntAttr("Sum", root);
+
+		NodeList nl = root.getElementsByTagName("ED");
+
+		for(int i = 0; i < nl.getLength(); i++)
+		{
+			Element ed = (Element) nl.item(i);
+
+			String[] typeList = ed.getAttribute("Type").split(",");
+			int quantity = Integer.parseInt(ed.getAttribute("Quantity"));
+
+			for(String type:typeList)
+			{
+				for(int j = 0; j < quantity; j++)
+				{
+					PaymentDocument pd = PaymentDocument.createByTypeED273(type);					
+
+					pd.generateFromXML(ed, edNo, edAuthor, sum);
+					edNo++;
+					if(sum != 0)
+						sum++;
+					pdList.add(pd);
+				}
+			}
+		}		
+
+		if(pdList == null || pdList.size() == 0)
+			return false;
+		else
+		{
+
+			Collections.sort(pdList);
+			return true;
+		}
 	}
 
 	@Override
@@ -105,7 +155,7 @@ public class ED273 extends Packet implements ReadED, Generate<Element> {
 
 			int idPacet = insertIntoDBPacket(db, 0, "1");
 
-			
+
 			String query =  "INSERT [dbo].[UFEBS_Es201]([ID_PACET], [ID_DEPART], [EdNo], [EdDate],\r\n" + 
 			" [EdAuthor], [EdReceiv], [CtrlCode], [CtrlTime], [Annotat],\r\n" + 
 			" [MsgId], [IEdNo], [IEdDate], [IEdAuth], [FTime], [EsidCod],\r\n" + 
@@ -113,16 +163,16 @@ public class ED273 extends Packet implements ReadED, Generate<Element> {
 			" [ACC], [Annotat1], [StopReas], [ID_ARM])\r\n" + 
 			"VALUES(" + DB.toString(idPacet) + ", null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ",\r\n" +
 			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", '', null, null,\r\n" +
-			"null, '', '', '', null, '43',\r\n" +
+			"null, '', '', '', null, '73',\r\n" +
 			DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, null, null,\r\n" +
 			"null, null, null, '0')";			
 			db.st.executeUpdate(query);		
-			
+
 			db.close();
 
 
 
-			ListIterator <PaymentDocument> iter = pdl.listIterator();
+			ListIterator <PaymentDocument> iter = pdList.listIterator();
 			while(iter.hasNext())
 			{
 				iter.next().insertIntoDbUfebs(idPacet, edNo, edDate, edAuthor, filename);

@@ -15,7 +15,7 @@ public class ED104 extends PaymentDocument {
 
 	public Date receiptDateCollectBank;	
 
-	public boolean is114 = false;
+	public boolean is114Vvod = false, is114 = false;;
 
 
 	@Override
@@ -52,10 +52,11 @@ public class ED104 extends PaymentDocument {
 	}
 
 
-	public ED104(boolean is114)
+	public ED104(boolean is114, boolean is114Vvod)
 	{
 		super();
-		this.is114 = is114;		
+		this.is114Vvod = is114Vvod;		
+		this.is114 = is114;
 	}
 
 	@Override
@@ -81,8 +82,8 @@ public class ED104 extends PaymentDocument {
 		{
 			readCommonEDElements(doc);
 
-			if(doc.getLocalName().equals("ED114") || purpose.startsWith("1"))
-				is114 = true;
+			if(purpose.startsWith("1"))
+				is114Vvod = true;
 
 			receiptDateCollectBank = XML.getOptionalDateAttr("ReceiptDateCollectBank", doc);
 
@@ -101,7 +102,7 @@ public class ED104 extends PaymentDocument {
 	{		
 		transKind = "06";	
 		purpose = "Тестовое инкассовое поручение";	
-		if(is114)
+		if(is114Vvod)
 			purpose = "1" + purpose;
 		receiptDateCollectBank = Settings.operDate;
 	}
@@ -115,6 +116,8 @@ public class ED104 extends PaymentDocument {
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
 
+			String type = is114 ? "ED114" :"ED104";
+			
 			String query = "INSERT INTO [dbo].[UFEBS_Epd]\r\n" + 
 			"([ID_PACET], [ID_DEPART],\r\n" + 
 			" [ID_ARM], [ID_DOC_BON], [InOutMode], [PEpdNo], [PacDate], [PAuthor], \r\n" + 
@@ -126,7 +129,7 @@ public class ED104 extends PaymentDocument {
 			"[NalPer], [NdNal], [DdNal], [TypNal], [Typ_Doc], [SS], [NamPost], [Esc_Key], [Esc_Key2])\r\n" + 
 			"VALUES(" + DB.toString(idPacet) + ", null,\r\n" + 
 			"2, null, 0, " + DB.toString(pEDNo) + ", " + DB.toString(pacDate) + ", " + DB.toString(pAuthor) + ",\r\n" + 
-			"0, 'ED104', " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, null, null,\r\n" + 
+			"0, " + DB.toString(type) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, null, null,\r\n" + 
 			"null, " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ", " + DB.toString(paytKind) + ", " + DB.toString(sum).substring(0,DB.toString(sum).length() - 2) +  "." + DB.toString(sum).substring(DB.toString(sum).length() - 2, DB.toString(sum).length()) + ", " + DB.toString(payer.inn) + ", " + DB.toString(payer.name) + ", " + DB.toString(payer.personalAcc) + ", " + DB.toString(payer.bic) + ", " + DB.toString(payer.correspAcc) + ",\r\n" + 
 			DB.toString(payee.bic) + ", " + DB.toString(payee.correspAcc) + ", " + DB.toString(payee.inn) + ", " + DB.toString(payee.name) + ", " + DB.toString(payee.personalAcc) + ", " + DB.toString(transKind) + ", " + DB.toString(priority) + ", null, " + DB.toString(purpose) + ", null, null,\r\n" + 
 			"null, null, null, null, null, null, " + DB.toString(receiptDate) + ", " + DB.toString(fileDate) + ", null, null, \r\n" + 
@@ -191,7 +194,7 @@ public class ED104 extends PaymentDocument {
 		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd;
 
 		str = str + ((paytKind.equals("P") || paytKind.equals("T")) ? " "+ razd : "") + razd +
-		(is114 ? "{ExtDown}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
+		(is114Vvod ? "{ExtDown}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
 		(paytKind.equals("P") ? "{ExtLeft}" : "") + razd + 
 		((paytKind.equals("P") || paytKind.equals("T")) ? razd : "");
 
@@ -204,7 +207,7 @@ public class ED104 extends PaymentDocument {
 
 		str = str + razd + purpose + razd;
 
-		if(!is114)
+		if(!is114Vvod)
 			str = str + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDateCollectBank) + razd +
 			new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + razd;
 		else	

@@ -21,7 +21,7 @@ public class ED103 extends PaymentDocument {
 	public Date maturityDate; //окончание срока акцепта
 	public int acptSum; //сумма исходного расчетного документа, предъявленного к акцепту
 	
-	public boolean is113 = false;
+	public boolean is113Vvod = false, is113 = false;
 	
 	@Override
 	public int hashCode() {
@@ -83,9 +83,10 @@ public class ED103 extends PaymentDocument {
 		super();
 	}
 
-	public ED103(boolean is113)
+	public ED103(boolean is113, boolean is113Vvod)
 	{
 		super();
+		this.is113Vvod = is113Vvod;
 		this.is113 = is113;
 	}
 	
@@ -112,8 +113,8 @@ public class ED103 extends PaymentDocument {
 		{
 			readCommonEDElements(doc);
 			
-			if(doc.getLocalName().equals("ED113") || purpose.startsWith("1"))
-				is113 = true;
+			if(purpose.startsWith("1"))
+				is113Vvod = true;
 			
 			paytCondition = doc.getAttribute("PaytCondition");
 			acptTerm = XML.getOptionalIntAttr("AcptTerm", doc);
@@ -134,7 +135,7 @@ public class ED103 extends PaymentDocument {
 		docDispatchDate = Settings.operDate;
 		receiptDateCollectBank = Settings.operDate;
 		maturityDate = Settings.operDate;
-		if(is113)
+		if(is113Vvod)
 			purpose = "1" + purpose;
 		if(gendoc.hasAttribute("PaytCondition"))
 			paytCondition = gendoc.getAttribute("PaytCondition");
@@ -151,6 +152,8 @@ public class ED103 extends PaymentDocument {
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
 
+			String type = is113 ? "ED113" :"ED103";
+			
 			String query = "INSERT INTO [dbo].[UFEBS_Epd]\r\n" + 
 			"([ID_PACET], [ID_DEPART],\r\n" + 
 			" [ID_ARM], [ID_DOC_BON], [InOutMode], [PEpdNo], [PacDate], [PAuthor], \r\n" + 
@@ -162,7 +165,7 @@ public class ED103 extends PaymentDocument {
 			"[NalPer], [NdNal], [DdNal], [TypNal], [Typ_Doc], [SS], [NamPost], [Esc_Key], [Esc_Key2])\r\n" + 
 			"VALUES(" + DB.toString(idPacet) + ", null,\r\n" + 
 			"2, null, 0, " + DB.toString(pEDNo) + ", " + DB.toString(pacDate) + ", " + DB.toString(pAuthor) + ",\r\n" + 
-			"0, 'ED103', " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, null, null,\r\n" + 
+			"0," + DB.toString(type) + ", " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, null, null,\r\n" + 
 			"null, " + DB.toString(accDocNo) + ", " + DB.toString(accDocDate) + ", " + DB.toString(paytKind) + ", " + DB.toString(sum).substring(0,DB.toString(sum).length() - 2) +  "." + DB.toString(sum).substring(DB.toString(sum).length() - 2, DB.toString(sum).length()) + ", " + DB.toString(payer.inn) + ", " + DB.toString(payer.name) + ", " + DB.toString(payer.personalAcc) + ", " + DB.toString(payer.bic) + ", " + DB.toString(payer.correspAcc) + ",\r\n" + 
 			DB.toString(payee.bic) + ", " + DB.toString(payee.correspAcc) + ", " + DB.toString(payee.inn) + ", " + DB.toString(payee.name) + ", " + DB.toString(payee.personalAcc) + ", " + DB.toString(transKind) + ", " + DB.toString(priority) + ", null, " + DB.toString(purpose) + ", null, null,\r\n" + 
 			"null, null, null, null, null, null, " + DB.toString(receiptDate) + ", " + DB.toString(fileDate) + ", null, null, \r\n" + 
@@ -227,7 +230,7 @@ public class ED103 extends PaymentDocument {
 		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd; 
 		
 		str = str + ((paytKind.equals("P") || paytKind.equals("T")) ? " "+ razd : "") + razd +
-		(is113 ? "{ExtDown}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
+		(is113Vvod ? "{ExtDown}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
 		(paytKind.equals("P") ? "{ExtLeft}" : "") + razd + 
 		((paytKind.equals("P") || paytKind.equals("T")) ? razd : "");
 		
@@ -242,7 +245,7 @@ public class ED103 extends PaymentDocument {
 
 		str = str + razd + purpose + razd;
 		
-		if(!is113)
+		if(!is113Vvod)
 			str = str + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + paytCondition + razd + razd;
 		else
 		{
