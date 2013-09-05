@@ -56,7 +56,7 @@ public class ED743_VER extends Holder<ED243> implements Generate<Element> {
 			DB db = new DB(Settings.server, Settings.db, Settings.user, Settings.pwd);
 			db.connect();
 
-			int idPacet = insertIntoDBPacket(db, 0, "18");
+			int idPacet = insertIntoDBPacket(db, 0, "17");
 			
 			String query =  "INSERT INTO [dbo].[epay_EDVer]([ID_PACKET], [ID_DEPART], [ID_ARM], [InOutMode],\r\n" + 
 					" [EDNo], [EDDate], [EDAuthor], [EDReceiver],\r\n" + 
@@ -66,7 +66,7 @@ public class ED743_VER extends Holder<ED243> implements Generate<Element> {
 			"VALUES(" + DB.toString(idPacet) + ", '', '0', '0',\r\n" +
 			DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ",\r\n" +
 			DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", '', " + DB.toString(ed.iEdNo) + ", " + DB.toString(ed.edAuthor) + ",\r\n" + 
-			DB.toString(ed.iEdDate) + ", '', '', " + DB.toString(ed.edReceiver) + ", '18', \r\n" +  
+			DB.toString(ed.iEdDate) + ", '', '', " + DB.toString(ed.edReceiver) + ", '17', \r\n" +  
 			DB.toString(ed.edDefineRequestCode) + ", '', '')";			
 			db.st.executeUpdate(query);
 			
