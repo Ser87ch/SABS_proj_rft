@@ -26,6 +26,11 @@ public class ED244 extends Packet implements ReadED, Generate<ED243> {
 	public Date oEdDate; //Дата составления ЭД
 	public String oEdAuthor; //Уникальный идентификатор составителя ЭД (УИС)
 	
+	public ED244()
+	{
+		isVER = false;
+	}
+	
 	@Override
 	public int compareTo(ReadED o) {
 		return compareTo((Packet) o);
