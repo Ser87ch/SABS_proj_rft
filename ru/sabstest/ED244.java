@@ -67,6 +67,13 @@ public class ED244 extends Packet implements ReadED, Generate<ED243> {
 		edDefineRequestCode = source.edDefineRequestCode;
 		edDefineAnswerCode = CodeList.getAnswerCodeByNo(source.iEdNo);
 		
+		Sign[] s = ClientList.getSignByUIC(edAuthor);
+		firstSign = s[0];
+		secondSign = s[1];
+		
+		setFileName();
+
+		
 		if(edDefineAnswerCode.equals(""))
 			return false;
 		else
