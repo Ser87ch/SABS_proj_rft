@@ -22,7 +22,7 @@ public class Gen244 extends Gen244Helper
 		
 		GenerateFromED243List pl = new GenerateFromED243List();
 		pl.generateFromReadEDList(rl);
-		callScript("SABS.CreateSignedXML",new Object[]{Settings.path + "post\\kPuI\\", pl});
+		callScript("SABS.CreateSignedXML",new Object[]{Settings.path + "post\\kuFI\\", pl});
 		Pack.copyESIS(num);
 	}
 }
