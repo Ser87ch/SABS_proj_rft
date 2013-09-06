@@ -100,7 +100,11 @@ public class ReadEDList {
 		FileFilter filter = new FileFilter() {			
 			@Override
 			public boolean accept(File pathname) {
-				if(pathname.getName().endsWith(type))
+				
+				Element root = XML.getXMLRootElement(pathname.getAbsolutePath());
+				String docType = root.getElementsByTagNameNS("*", "DocType").item(0).getTextContent();
+
+				if(docType.equals(type))
 					return true;
 				else
 					return false;

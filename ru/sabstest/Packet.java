@@ -190,6 +190,16 @@ abstract public class Packet{
 			return pc;
 		}
 		
+		public static List<Generate<ED243>> createGenFromED243(int size)
+		{
+			List<Generate<ED243>> pc = new ArrayList<Generate<ED243>>();
+			for(int i = 0; i < size; i++)
+			{
+				pc.add(new ED244());			
+			}
+			return pc;
+		}
+		
 		public static List<Generate<ED773_VER>> createGenFromED773(int size)
 		{
 			List<Generate<ED773_VER>> pc = new ArrayList<Generate<ED773_VER>>();
