@@ -143,7 +143,7 @@ public class ED208 extends Packet implements ReadED, Generate<ED243> {
 
 			Element root = XML.getXMLRootElement(src);
 
-			NodeList nl = root.getElementsByTagName("ED708_VER");
+			NodeList nl = root.getElementsByTagName("ED208");
 
 			if(nl.getLength() == 0)
 				return;

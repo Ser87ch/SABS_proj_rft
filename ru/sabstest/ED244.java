@@ -132,7 +132,7 @@ public class ED244 extends Packet implements ReadED, Generate<ED243> {
 
 			Element root = XML.getXMLRootElement(src);
 
-			NodeList nl = root.getElementsByTagName("ED744_VER");
+			NodeList nl = root.getElementsByTagName("ED244");
 
 			if(nl.getLength() == 0)
 				return;
