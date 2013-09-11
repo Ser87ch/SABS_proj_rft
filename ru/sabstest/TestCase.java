@@ -27,6 +27,9 @@ public class TestCase {
 			script = ModuleList.getScript(clEl.getAttribute("Module"));			
 			options = clEl.getAttribute("Options").split(",");
 			
+			if(clEl.getAttribute("Run").toLowerCase().equals("n"))
+				continue;
+			
 			Step st = new Step(id, script, options);			
 			stList.add(st);
 		}	
