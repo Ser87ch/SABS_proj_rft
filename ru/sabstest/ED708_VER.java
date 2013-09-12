@@ -4,6 +4,18 @@ import java.text.SimpleDateFormat;
 
 public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 
+	int ed773No;
+	
+	public ED708_VER(int i)
+	{
+		ed773No = i;
+	}
+	
+	public ED708_VER()
+	{
+		
+	}
+	
 	@Override
 	public boolean generateFrom(ED743_VER source) {
 		edNo = source.edNo + 3000;
@@ -109,7 +121,7 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 				firstSign = s[0];
 				secondSign = s[1];
 				
-				ed = new ED208();
+				ed = new ED208(ed773No);
 				
 				
 				setFileName();

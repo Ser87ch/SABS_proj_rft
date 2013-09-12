@@ -22,8 +22,18 @@ public class ED208 extends Packet implements ReadED, Generate<ED243> {
 	public String ctrlCode;
 	public String annotation;
 
+	public int ed273No;
 
-
+	public ED208(int i)
+	{
+		ed273No = i;
+	}
+	
+	public ED208()
+	{
+		
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -115,9 +125,9 @@ public class ED208 extends Packet implements ReadED, Generate<ED243> {
 
 		resultCode = "2";
 			
-		iEdAuthor = source.edAuthor;
-		iEdDate = source.edDate;
-		iEdNo = source.edNo;
+		iEdAuthor = source.pdList.get(ed273No).edAuthor;
+		iEdDate = source.pdList.get(ed273No).edDate;
+		iEdNo = source.pdList.get(ed273No).edNo;
 		
 		return true;
 	}

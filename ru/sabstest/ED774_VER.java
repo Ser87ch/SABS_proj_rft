@@ -4,6 +4,13 @@ import java.text.SimpleDateFormat;
 
 public class ED774_VER extends Holder<ED274> implements Generate<ED773_VER> {
 
+	int ed773No;
+	
+	public ED774_VER(int i)
+	{
+		ed773No = i;
+	}
+	
 	@Override
 	public boolean generateFrom(ED773_VER source) {
 		edNo = source.edNo + 2500;
@@ -15,7 +22,7 @@ public class ED774_VER extends Holder<ED274> implements Generate<ED773_VER> {
 		iEdDate = source.edDate;
 		iEdAuthor = source.edAuthor;
 		
-		ed = new ED274();
+		ed = new ED274(ed773No);
 		ed.generateFrom(source.ed);
 		return true;
 	}

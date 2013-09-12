@@ -178,7 +178,7 @@ abstract public class Packet{
 			return pc;
 		}
 
-		
+
 		public static List<Generate<ED743_VER>> createGenFromED743(int size)
 		{
 			List<Generate<ED743_VER>> pc = new ArrayList<Generate<ED743_VER>>();
@@ -189,7 +189,7 @@ abstract public class Packet{
 			}
 			return pc;
 		}
-		
+
 		public static List<Generate<ED243>> createGenFromED243(int size)
 		{
 			List<Generate<ED243>> pc = new ArrayList<Generate<ED243>>();
@@ -199,14 +199,17 @@ abstract public class Packet{
 			}
 			return pc;
 		}
-		
-		public static List<Generate<ED773_VER>> createGenFromED773(int size)
+
+		public static List<Generate<ED773_VER>> createGenFromED773(ReadEDList source)
 		{
 			List<Generate<ED773_VER>> pc = new ArrayList<Generate<ED773_VER>>();
-			for(int i = 0; i < size; i++)
+			for(ReadED re:source.pList)
 			{
-				pc.add((new ED708_VER()).getGenerateED773());
-				pc.add(new ED774_VER());
+				for(int i = 0; i < ((ED773_VER) re).ed.pdList.size(); i++)
+				{
+					pc.add((new ED708_VER(i)).getGenerateED773());
+					pc.add(new ED774_VER(i));
+				}
 			}
 			return pc;
 		}
@@ -218,10 +221,8 @@ abstract public class Packet{
 		}
 
 		public boolean isVER()
-		{
-			if(isVER)
-				return true;
-			return false;
+		{			
+			return isVER;
 		}
 
 		public void readXML(Element root) {
@@ -238,7 +239,7 @@ abstract public class Packet{
 			if(isVER)
 			{
 				try{
-					
+
 
 					String query =  "INSERT INTO [dbo].[epay_Packet]\r\n" + 
 					"([ID_Depart], [ID_ARM], [User_Insert], [InOutMode],\r\n" + 
@@ -256,7 +257,7 @@ abstract public class Packet{
 					" 0, 4, 3, 0, 1, null, null,\r\n" + 
 					" null, null, null, 20, '', NULL, NULL, NULL, '4')";			
 					db.st.executeUpdate(query);
-								 
+
 
 					idPacket = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_PACKET) from dbo.epay_Packet"));
 				} catch (Exception e) {
@@ -283,7 +284,7 @@ abstract public class Packet{
 					" 0, 1, 3, 0, 1, null, null,\r\n" + 
 					" null, null, null, 20, '', NULL, NULL, NULL, '4')";			
 					db.st.executeUpdate(query);
-					
+
 
 					idPacket = Integer.parseInt(DB.selectFirstValueSabsDb("select max(ID_PACET) from dbo.UFEBS_Pacet"));
 				} catch (Exception e) {

@@ -20,6 +20,18 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 	public Date refEdDate; //Дата составления ЭД
 	public String refEdAuthor; //Уникальный идентификатор составителя ЭД (УИС)
 	
+	public int ed273No;
+	
+	public ED274(int i)
+	{
+		ed273No = i;
+	}
+	
+	public ED274()
+	{
+		
+	}
+	
 	@Override
 	public boolean generateFrom(ED273 source) {
 		edNo = source.edNo + 5500;
@@ -33,9 +45,9 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 		refEdDate = source.edDate;
 		refEdNo = source.edNo;
 		
-		iEdAuthor = source.pdList.get(0).edAuthor;
-		iEdDate = source.pdList.get(0).edDate;
-		iEdNo = source.pdList.get(0).edNo;
+		iEdAuthor = source.pdList.get(ed273No).edAuthor;
+		iEdDate = source.pdList.get(ed273No).edDate;
+		iEdNo = source.pdList.get(ed273No).edNo;
 		
 		return true;		
 	}
