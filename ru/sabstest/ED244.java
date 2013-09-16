@@ -119,9 +119,9 @@ public class ED244 extends Packet implements ReadED, Generate<ED243> {
 			" [ACC], [Annotat1], [StopReas], [ID_ARM])\r\n" + 
 			"VALUES(" + DB.toString(idPacet) + ", null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ",\r\n" +
 			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(edDefineRequestCode) + ", " + DB.toString(edDefineAnswerCode) + ", null,\r\n" + //" + DB.toString(idED243) +  "
-			"null, " + DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", null, '44',\r\n" +
-			DB.toString(oEdNo) + ", " + DB.toString(oEdDate) + ", " + DB.toString(oEdAuthor) + ", null, null, null,\r\n" +
-			"null, null, null, '0')";			
+			"null, " + DB.toString(oEdNo) + ", " + DB.toString(oEdDate) + ", " + DB.toString(oEdAuthor) + ", null, '44',\r\n" +
+			DB.toString(oEdNo) + ", " + DB.toString(oEdDate) + ", " + DB.toString(oEdAuthor) + ", " + DB.toString(iEdDate) + ", null, null,\r\n" +
+			DB.toString(iEdAuthor) + ", null, " + DB.toString(iEdNo) + ", '0')";			
 			db.st.executeUpdate(query);
 
 			db.close();		
