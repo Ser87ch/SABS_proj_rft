@@ -92,7 +92,7 @@ public class Pack {
 
 		for(File fl:files)
 		{
-			if(fl.getName().length() >= 40)
+			if(fl.getName().length() >= 33)
 				copyFile(fl.getAbsolutePath(), Settings.path + "post\\kPuI\\" + fl.getName());
 			else
 				copyFile(fl.getAbsolutePath(), Settings.path + "post\\kUfI\\" + fl.getName());
