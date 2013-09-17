@@ -28,12 +28,12 @@ public class ED208 extends Packet implements ReadED, Generate<ED243> {
 	{
 		ed273No = i;
 	}
-	
+
 	public ED208()
 	{
-		
+
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -106,7 +106,7 @@ public class ED208 extends Packet implements ReadED, Generate<ED243> {
 		resultCode = CodeList.getResultCodeByNo(source.iEdNo);
 		ctrlCode = CodeList.getCtrlCodeByNo(source.iEdNo);
 		annotation = CodeList.getAnnotationByNo(source.iEdNo);		
-		
+
 		iEdAuthor = source.edAuthor;
 		iEdDate = source.edDate;
 		iEdNo = source.edNo;
@@ -115,8 +115,24 @@ public class ED208 extends Packet implements ReadED, Generate<ED243> {
 		else
 			return true;
 	}
-	
-	
+
+
+	public boolean generateFrom(ED244 source) {
+		edNo = source.edNo + 3500;
+		edDate = source.edDate;
+		edAuthor = source.edReceiver;
+		edReceiver = source.edAuthor;
+
+		resultCode = "2";
+
+		iEdAuthor = source.edAuthor;
+		iEdDate = source.edDate;
+		iEdNo = source.edNo;
+
+		return true;
+	}
+
+
 	public boolean generateFrom(ED273 source) {
 		edNo = source.edNo + 4500;
 		edDate = source.edDate;
@@ -124,11 +140,11 @@ public class ED208 extends Packet implements ReadED, Generate<ED243> {
 		edReceiver = source.edAuthor;
 
 		resultCode = "2";
-			
+
 		iEdAuthor = source.pdList.get(ed273No).edAuthor;
 		iEdDate = source.pdList.get(ed273No).edDate;
 		iEdNo = source.pdList.get(ed273No).edNo;
-		
+
 		return true;
 	}
 

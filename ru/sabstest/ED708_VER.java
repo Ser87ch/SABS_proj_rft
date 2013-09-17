@@ -131,6 +131,64 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 			}
 		};
 	}
+	
+	public Generate<ED744_VER> getGenerateED744()
+	{
+		return new Generate<ED744_VER>() {
+			
+			@Override
+			public void setFileName() {
+				this.setFileName();
+				
+			}
+			
+			@Override
+			public boolean isVER() {
+				return this.isVER();
+			}
+			
+			@Override
+			public void insertIntoDB() {
+				this.insertIntoDB();
+				
+			}
+			
+			@Override
+			public void insertForRead() {
+				this.insertForRead();
+				
+			}
+			
+			@Override
+			public Sign[] getSigns() {
+				return this.getSigns();
+			}
+			
+			@Override
+			public boolean generateFrom(ED744_VER source) {
+				edNo = source.edNo + 4000;
+				edDate = source.edDate;
+				edAuthor = source.edReceiver;
+				edReceiver = source.edAuthor;
+				
+				iEdNo = source.ed.edNo + 4500;
+				iEdDate = source.ed.edDate;
+				iEdAuthor = source.ed.edReceiver;
+				
+				Sign[] s = ClientList.getSignByUIC(edAuthor);
+				firstSign = s[0];
+				secondSign = s[1];
+				
+				ed = new ED208();
+				
+				
+				setFileName();
+				
+				return ed.generateFrom(source.ed);
+				
+			}
+		};
+	}
 
 	@Override
 	ED208 createHolderObject() {

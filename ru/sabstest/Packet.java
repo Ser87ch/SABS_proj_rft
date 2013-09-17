@@ -189,6 +189,17 @@ abstract public class Packet{
 			}
 			return pc;
 		}
+		
+		public static List<Generate<ED744_VER>> createGenFromED744(int size)
+		{
+			List<Generate<ED744_VER>> pc = new ArrayList<Generate<ED744_VER>>();
+			for(int i = 0; i < size; i++)
+			{
+				pc.add(new ED708_VER().getGenerateED744());
+				
+			}
+			return pc;
+		}
 
 		public static List<Generate<ED243>> createGenFromED243(int size)
 		{
