@@ -80,30 +80,30 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 			
 			@Override
 			public void setFileName() {
-				this.setFileName();
+				ED708_VER.this.setFileName();
 				
 			}
 			
 			@Override
 			public boolean isVER() {
-				return this.isVER();
+				return ED708_VER.this.isVER();
 			}
 			
 			@Override
 			public void insertIntoDB() {
-				this.insertIntoDB();
+				ED708_VER.this.insertIntoDB();
 				
 			}
 			
 			@Override
 			public void insertForRead() {
-				this.insertForRead();
+				ED708_VER.this.insertForRead();
 				
 			}
 			
 			@Override
 			public Sign[] getSigns() {
-				return this.getSigns();
+				return ED708_VER.this.getSigns();
 			}
 			
 			@Override
@@ -138,30 +138,30 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 			
 			@Override
 			public void setFileName() {
-				this.setFileName();
+				ED708_VER.this.setFileName();
 				
 			}
 			
 			@Override
 			public boolean isVER() {
-				return this.isVER();
+				return ED708_VER.this.isVER();
 			}
 			
 			@Override
 			public void insertIntoDB() {
-				this.insertIntoDB();
+				ED708_VER.this.insertIntoDB();
 				
 			}
 			
 			@Override
 			public void insertForRead() {
-				this.insertForRead();
+				ED708_VER.this.insertForRead();
 				
 			}
 			
 			@Override
 			public Sign[] getSigns() {
-				return this.getSigns();
+				return ED708_VER.this.getSigns();
 			}
 			
 			@Override
