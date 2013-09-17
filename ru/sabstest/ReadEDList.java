@@ -46,7 +46,7 @@ public class ReadEDList {
 		return true;
 	}
 
-	
+
 	public ReadED get(int i)
 	{
 		return pList.get(i);
@@ -56,31 +56,34 @@ public class ReadEDList {
 	{
 		return pList.size();
 	}
-	
+
 	public void readFolderByFilter(String fld, FileFilter filter)
 	{
 		File[] files = new File(fld).listFiles(filter);
 
-		for(File fl:files)
+		if(files != null && files.length > 0)
 		{
-
-			Element root = XML.getXMLRootElement(fl.getAbsolutePath());
-			String type = root.getElementsByTagNameNS("*", "DocType").item(0).getTextContent();
-
-			ReadED p = Packet.createReadEDByFile(type);			
-
-			if(p != null)
+			for(File fl:files)
 			{
-				if(type.equals("PacketEPDVER_B"))
-					p.readEncodedFile(fl, true);
-				else
-					p.readEncodedFile(fl, false);			
-				pList.add(p);
+
+				Element root = XML.getXMLRootElement(fl.getAbsolutePath());
+				String type = root.getElementsByTagNameNS("*", "DocType").item(0).getTextContent();
+
+				ReadED p = Packet.createReadEDByFile(type);			
+
+				if(p != null)
+				{
+					if(type.equals("PacketEPDVER_B"))
+						p.readEncodedFile(fl, true);
+					else
+						p.readEncodedFile(fl, false);			
+					pList.add(p);
+				}
 			}
+			Collections.sort(pList);
 		}
-		Collections.sort(pList);
 	}
-	
+
 	public void readFolder(String fld)
 	{
 		FileFilter filter = new FileFilter() {			
@@ -94,13 +97,13 @@ public class ReadEDList {
 		};	
 		readFolderByFilter(fld, filter);
 	}
-	
+
 	public void readFolderByType(String fld, final String type)
 	{
 		FileFilter filter = new FileFilter() {			
 			@Override
 			public boolean accept(File pathname) {
-				
+
 				Element root = XML.getXMLRootElement(pathname.getAbsolutePath());
 				String docType = root.getElementsByTagNameNS("*", "DocType").item(0).getTextContent();
 
