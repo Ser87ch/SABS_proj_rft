@@ -15,7 +15,8 @@ public class GenerateFromED744List extends GenerateList<ED744_VER> {
 		{
 			ED744_VER ed744 = (ED744_VER) itR.next();
 		
-			if(!itG.next().generateFrom(ed744))
+			Generate<ED744_VER> ed708 = itG.next();
+			if(!ed708.generateFrom(ed744))
 				itG.remove();		
 
 			
