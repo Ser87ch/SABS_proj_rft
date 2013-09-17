@@ -50,7 +50,7 @@ public class ED774_VER extends Holder<ED274> implements Generate<ED773_VER> {
 			"VALUES(" + DB.toString(idPacet) + ", '', '0', '0',\r\n" +
 			DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ",\r\n" +
 			DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", '', " + DB.toString(ed.iEdNo) + ", " + DB.toString(ed.edAuthor) + ",\r\n" + 
-			DB.toString(ed.iEdDate) + ", "  + DB.toString(ed.edNo) + ", '', " + DB.toString(ed.annotation) + ", '20 ', \r\n" +  
+			DB.toString(ed.iEdDate) + ", "  + DB.toString(ed.edNo) + ", '', " + DB.toString(ed.annotation) + ", '20', \r\n" +  
 			DB.toString("") + ", '', " + DB.toString("") + ")";			
 			db.st.executeUpdate(query);
 			

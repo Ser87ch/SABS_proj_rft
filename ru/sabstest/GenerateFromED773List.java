@@ -16,10 +16,12 @@ public class GenerateFromED773List extends GenerateList<ED773_VER> {
 		{
 			ED773_VER ed773 = (ED773_VER) itR.next();
 
-			if(!itG.next().generateFrom(ed773))
+			Generate<ED773_VER> g = itG.next();
+			if(!g.generateFrom(ed773))
 				itG.remove();			
 
-			if(!itG.next().generateFrom(ed773))
+			g = itG.next();
+			if(!g.generateFrom(ed773))
 				itG.remove();
 		}
 	}
