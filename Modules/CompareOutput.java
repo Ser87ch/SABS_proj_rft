@@ -64,7 +64,7 @@ public class CompareOutput extends CompareOutputHelper
 		File[] dbet = DeltaDB.getDeltaDBFiles(Settings.datafolder + "etalon\\" + num);
 		File[] dbout = DeltaDB.getDeltaDBFiles(Settings.fullfolder + "\\output\\" + num);
 		
-		if(dbet.length != 0 && dbout.length != 0)
+		if(dbet!= null && dbout != null && dbet.length != 0 && dbout.length != 0)
 		{
 			if(DeltaDB.cmpDeltaDBfld(dbet, dbout))
 			{
@@ -77,12 +77,12 @@ public class CompareOutput extends CompareOutputHelper
 				logTestResult("Изменения в БД не совпадают с эталонами.", false);
 			}
 		}
-		else if(dbout.length == 0 && dbet.length != 0)
+		else if((dbout.length == 0 || dbout == null) && dbet.length != 0 && dbet != null)
 		{
 			Log.msg("Отсутствуют выходные изменения в БД.");
 			logTestResult("Отсуствуют выходные изменения в БД.", false);
 		}
-		else if(dbet.length == 0 && dbout.length != 0)
+		else if((dbet.length == 0 || dbet == null) && dbout.length != 0 && dbout != null)
 		{
 			Log.msg("Отсутствуют эталонные изменения в БД.");
 			logInfo("Отсуствуют эталонные изменения в БД.");
