@@ -34,7 +34,7 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 	
 	@Override
 	public boolean generateFrom(ED273 source) {
-		edNo = source.edNo + 5500;
+		edNo = source.pdList.get(ed273No).edNo + 5500;
 		edDate = source.edDate;
 		edAuthor = source.edReceiver;
 		edReceiver = source.edAuthor;

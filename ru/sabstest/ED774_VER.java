@@ -13,7 +13,7 @@ public class ED774_VER extends Holder<ED274> implements Generate<ED773_VER> {
 	
 	@Override
 	public boolean generateFrom(ED773_VER source) {
-		edNo = source.edNo + 2500;
+		edNo = source.ed.pdList.get(ed773No).edNo + 2500;
 		edDate = source.edDate;
 		edAuthor = source.edReceiver;
 		edReceiver = source.edAuthor;
