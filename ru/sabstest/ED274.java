@@ -40,7 +40,7 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 		edReceiver = source.edAuthor;
 
 		infoCode = "8";
-		
+		annotation = "Положительные результаты всех видов контролей, предшествующих исполнению";
 		refEdAuthor = source.edAuthor;
 		refEdDate = source.edDate;
 		refEdNo = source.edNo;
