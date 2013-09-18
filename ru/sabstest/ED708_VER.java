@@ -108,7 +108,7 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 			
 			@Override
 			public boolean generateFrom(ED773_VER source) {
-				edNo = source.edNo + 4000;
+				edNo = source.ed.pdList.get(ed773No).edNo + 4000;
 				edDate = source.edDate;
 				edAuthor = source.edReceiver;
 				edReceiver = source.edAuthor;

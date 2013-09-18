@@ -134,7 +134,7 @@ public class ED208 extends Packet implements ReadED, Generate<ED243> {
 
 
 	public boolean generateFrom(ED273 source) {
-		edNo = source.edNo + 4500;
+		edNo = source.pdList.get(ed273No).edNo + 4500;
 		edDate = source.edDate;
 		edAuthor = source.edReceiver;
 		edReceiver = source.edAuthor;
