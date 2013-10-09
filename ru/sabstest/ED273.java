@@ -163,7 +163,7 @@ public class ED273 extends Packet implements ReadED, Generate<Element> {
 			" [ACC], [Annotat1], [StopReas], [ID_ARM])\r\n" + 
 			"VALUES(" + DB.toString(idPacet) + ", null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ",\r\n" +
 			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(idPacet) + ", '1', null,\r\n" +
-			"null, '', '', '', null, '273',\r\n" +
+			"null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, '273',\r\n" +
 			DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, null, null,\r\n" +
 			"null, '0', null, '0')";			
 			db.st.executeUpdate(query);		
