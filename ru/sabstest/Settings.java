@@ -79,7 +79,7 @@ public class Settings{
 			File dir = new File(Settings.testProj + "data\\");
 
 			String[] children = dir.list();
-			if(children.length == 0)
+			if(children.length != 0)
 			{
 				String filename = children[children.length - 1];
 				Settings.datafolder = Settings.testProj + "data\\" + filename + "\\";
