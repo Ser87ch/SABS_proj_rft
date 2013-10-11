@@ -79,10 +79,12 @@ public class Settings{
 			File dir = new File(Settings.testProj + "data\\");
 
 			String[] children = dir.list();
-			String filename = children[children.length - 1];
-			Settings.datafolder = Settings.testProj + "data\\" + filename + "\\";
-			Log.msg("Данные для теста находятся в " + Settings.testProj + "data\\" + filename + "\\");
-
+			if(children.length == 0)
+			{
+				String filename = children[children.length - 1];
+				Settings.datafolder = Settings.testProj + "data\\" + filename + "\\";
+				Log.msg("Данные для теста находятся в " + Settings.testProj + "data\\" + filename + "\\");
+			}
 			db.close();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -115,7 +117,7 @@ public class Settings{
 
 		XML.createXMLFile(doc, fl);
 		Log.msg("XML c общими настройками " + fl + " создан.");
-	//	XML.validate(Settings.testProj + "XMLSchema\\settings\\general.xsd", fl);
+		//	XML.validate(Settings.testProj + "XMLSchema\\settings\\general.xsd", fl);
 	}
 
 	/**
@@ -175,7 +177,7 @@ public class Settings{
 
 			XML.createXMLFile(doc, fl);
 			Log.msg("XML с настройками для генерации входящих документов " + fl + " создан.");
-		//	XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\gendoc.xsd", fl);		
+			//	XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\gendoc.xsd", fl);		
 		}
 
 		/**
@@ -184,7 +186,7 @@ public class Settings{
 		 */
 		public static void readXML(String src)
 		{
-		//	XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\gendoc.xsd",src);
+			//	XML.validate(Settings.testProj + "XMLSchema\\settings\\gen\\gendoc.xsd",src);
 
 			Element eElement = XML.getXMLRootElement(src);
 
@@ -284,7 +286,7 @@ public class Settings{
 			XML.createXMLFile(doc, fl);
 			Log.msg("XML с настройками пользователей " + fl + " создан.");				
 
-		//	XML.validate(Settings.testProj + "XMLSchema\\settings\\login.xsd",fl);
+			//	XML.validate(Settings.testProj + "XMLSchema\\settings\\login.xsd",fl);
 		}
 
 		/**
