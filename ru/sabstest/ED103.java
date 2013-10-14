@@ -226,13 +226,13 @@ public class ED103 extends PaymentDocument {
 		String str = "";
 
 		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd +
-		transKind + razd + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
-		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd; 
+		transKind + razd + (is113Vvod ? "{ExtDown}" : "") + razd + paytCondition +		
+		razd + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
+		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd; 		
 		
 		str = str + ((paytKind.equals("P") || paytKind.equals("T")) ? " "+ razd : "") + razd +
-		(is113Vvod ? "{ExtDown}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
-		(paytKind.equals("P") ? "{ExtLeft}" : "") + razd + 
-		((paytKind.equals("P") || paytKind.equals("T")) ? razd : "");
+		((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
+		(paytKind.equals("P") ? "{ExtLeft}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? razd : "");
 		
 		str = str + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
 		payer.inn + razd + 
@@ -246,13 +246,14 @@ public class ED103 extends PaymentDocument {
 		str = str + razd + purpose + razd;
 		
 		if(!is113Vvod)
-			str = str + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + paytCondition + razd + razd;
+			str = str + razd + Integer.toString(acptTerm) + razd + new SimpleDateFormat("ddMMyyyy").format(docDispatchDate) + razd +
+			new SimpleDateFormat("ddMMyyyy").format(maturityDate) + razd +
+			new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDate) +
+			razd + razd;
 		else
 		{
-			str = str + Integer.toString(acptTerm) + razd + new SimpleDateFormat("ddMMyyyy").format(docDispatchDate) + razd +
-			new SimpleDateFormat("ddMMyyyy").format(maturityDate) + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDateCollectBank) + razd +
-			((paytKind.equals("P") || paytKind.equals("T")) ? "" : new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd) +
-			paytCondition + razd + razd;
+			str = str + Integer.toString(acptTerm) + razd + new SimpleDateFormat("ddMMyyyy").format(docDispatchDate) + razd + razd +
+			razd;
 		}
 		return str;	
 	}

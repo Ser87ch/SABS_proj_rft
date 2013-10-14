@@ -190,13 +190,13 @@ public class ED104 extends PaymentDocument {
 		String str = "";
 
 		str = Integer.toString(accDocNo) + razd + new SimpleDateFormat("ddMMyyyy").format(accDocDate) + razd +
-		transKind + razd + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
+		transKind + razd + (is114Vvod ? "{ExtDown}" : "") + razd +
+		Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
 		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd;
 
 		str = str + ((paytKind.equals("P") || paytKind.equals("T")) ? " "+ razd : "") + razd +
-		(is114Vvod ? "{ExtDown}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
-		(paytKind.equals("P") ? "{ExtLeft}" : "") + razd + 
-		((paytKind.equals("P") || paytKind.equals("T")) ? razd : "");
+		((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
+		(paytKind.equals("P") ? "{ExtLeft}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? razd : "");
 
 		str = str + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
 		payer.inn + razd + payer.kpp + razd + (addShift ? "+{ExtEnd}" : "") + payer.name + razd + payee.bic + razd + payee.correspAcc + razd +
@@ -208,14 +208,10 @@ public class ED104 extends PaymentDocument {
 		str = str + razd + purpose + razd;
 
 		if(!is114Vvod)
-			str = str + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + new SimpleDateFormat("ddMMyyyy").format(receiptDateCollectBank) + razd +
-			new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd + razd;
+			str = str + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + ((paytKind.equals("P") || paytKind.equals("T")) ? "" : razd) + razd;
 		else	
 		{
-			str = str + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd +
-			((paytKind.equals("P") || paytKind.equals("T")) ? "" : new SimpleDateFormat("ddMMyyyy").format(receiptDateCollectBank) + razd +
-					new SimpleDateFormat("ddMMyyyy").format(receiptDate) + razd) +
-					new SimpleDateFormat("ddMMyyyy").format(fileDate) + razd + razd;
+			str = str + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + razd + razd;
 		}
 		return str;	
 	}
