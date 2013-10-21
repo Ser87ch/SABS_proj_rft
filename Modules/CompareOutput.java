@@ -37,10 +37,15 @@ public class CompareOutput extends CompareOutputHelper
 
 		if(plOut.getSize() != 0 && plEt.getSize() != 0)
 		{
-			if(plOut.equals(plEt))
+			boolean cmp = plOut.equals(plEt);
+			
+			vpManual("CompareOutput", cmp, true).performTest();
+			
+			if(cmp)
 			{
 				Log.msgCMP("Результаты совпадают с эталонами.");
 				logTestResult("Результаты совпадают с эталонами.", true);
+				
 			}
 			else
 			{

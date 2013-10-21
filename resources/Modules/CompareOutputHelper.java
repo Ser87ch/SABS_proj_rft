@@ -20,12 +20,12 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>CompareOutput</b><br>
- * Generated     : <b>2013/07/02 16:04:25</b><br>
+ * Generated     : <b>2013/10/21 9:25:40</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  июл€ 02, 2013
- * @author Admin
+ * @since  окт€бр€ 21, 2013
+ * @author admin
  */
 public abstract class CompareOutputHelper extends RationalTestScript
 {
