@@ -21,24 +21,29 @@ public class CloseSABS extends CloseSABSHelper
 	public void testMain(Object[] args) 
 	{
 		try{
-			
-			
-			SABSwindow(ANY,MAY_EXIT).click(CLOSE_BUTTON);
-			Closebutton().click();
-			
-			if(SKADerbutton().exists())
-				SKADerbutton().click();
-			
+
 			if(SABSwindow().exists())
 			{
+				if(SKADerbutton().exists())
+					SKADerbutton().click();
+				
 				SABSwindow(ANY,MAY_EXIT).click(CLOSE_BUTTON);
 				Closebutton().click();
+
+				if(SKADerbutton().exists())
+					SKADerbutton().click();
+
+				if(SABSwindow().exists())
+				{
+					SABSwindow(ANY,MAY_EXIT).click(CLOSE_BUTTON);
+					Closebutton().click();
+				}
+
+
+
+				Log.msg("САБС закрыт.");
 			}
-			
-				
-			
-			Log.msg("САБС закрыт.");
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 			Log.msg(e);

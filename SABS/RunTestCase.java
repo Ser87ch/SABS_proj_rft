@@ -57,9 +57,15 @@ public class RunTestCase extends RunTestCaseHelper
 		TestCase t = new TestCase();
 		t.readFile(src);
 
-		for(int i = 0; i < t.getSize(); i++)
-		{
-			callScript(t.getScript(i), new Object[]{t.getStep(i).options, num});
+		try {
+			for(int i = 0; i < t.getSize(); i++)
+			{
+				callScript(t.getScript(i), new Object[]{t.getStep(i).options, num});
+			}
+		} catch (Exception e) {
+			callScript("SABS.CloseSABS");
+			e.printStackTrace();
+			Log.msg(e);			
 		}
 
 	}
