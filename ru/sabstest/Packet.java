@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
 abstract public class Packet{
 
 	public enum Type{PacketEPD, PacketEPDVER, PacketESIDVER_RYM, PacketEPDVER_B, PacketESID, 
-		ED201, ED208, ED243, ED244, ED273, ED708_VER, ED743_VER, ED744_VER, ED773_VER};
+		ED201, ED208, ED243, ED244, ED273, ED274, ED708_VER, ED743_VER, ED744_VER, ED773_VER};
 
 		public String filename;
 
@@ -201,6 +201,19 @@ abstract public class Packet{
 			return pc;
 		}
 
+		public static List<Generate<ED273>> createGenFromED273(GenerateFromXMLList source)
+		{
+			List<Generate<ED273>> pc = new ArrayList<Generate<ED273>>();
+			for(Generate<Element> re:source.pList)
+			{
+				for(int i = 0; i < ((ED273) re).pdList.size(); i++)
+				{					
+					pc.add(new ED274(i));
+				}
+			}
+			return pc;
+		}
+		
 		public static List<Generate<ED243>> createGenFromED243(int size)
 		{
 			List<Generate<ED243>> pc = new ArrayList<Generate<ED243>>();

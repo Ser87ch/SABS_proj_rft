@@ -3,7 +3,12 @@ package ru.sabstest;
 import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ListIterator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 public class ED274 extends Packet implements Generate<ED273>, ReadED {
 
@@ -25,19 +30,20 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 	public ED274(int i)
 	{
 		ed273No = i;
+		isVER = false;
 	}
 	
 	public ED274()
 	{
-		
+		isVER = false;
 	}
 	
 	@Override
 	public boolean generateFrom(ED273 source) {
-		edNo = source.pdList.get(ed273No).edNo + 5500;
+		edNo = source.pdList.get(ed273No).edNo + 111;
 		edDate = source.edDate;
-		edAuthor = source.edReceiver;
-		edReceiver = source.edAuthor;
+		edAuthor = source.pdList.get(ed273No).payee.edAuthor;
+		edReceiver = source.edReceiver;
 
 		infoCode = "8";
 		annotation = "Положительные результаты всех видов контролей, предшествующих исполнению";
@@ -49,7 +55,18 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 		iEdDate = source.pdList.get(ed273No).edDate;
 		iEdNo = source.pdList.get(ed273No).edNo;
 		
-		return true;		
+		Sign[] s = ClientList.getSignByUIC(edAuthor);
+		firstSign = s[0];
+		secondSign = s[1];
+		
+		setFileName();
+		
+		if((EPDNoList.eList == null) || (EPDNoList.eList.size() == 0))
+			return true;
+		else if(EPDNoList.eList.contains(Integer.toString(source.edNo)))
+			return true;
+		else 
+			return false;
 	}
 
 	@Override
@@ -110,4 +127,23 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 		
 	}
 
+	public static class EPDNoList
+	{
+		public static List<String> eList;
+		
+		public static void readXML(String src)
+		{
+
+			Element root = XML.getXMLRootElement(src);
+
+			NodeList nl = root.getElementsByTagName("ED274");
+
+			if(nl.getLength() == 0)
+				return;
+			
+			eList = new ArrayList<String>();
+			
+			eList.addAll(Arrays.asList(((Element)nl.item(0)).getAttribute("EPDNo").split(",")));
+		}
+	}
 }
