@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OptionDefaults L=".OptionDefaults">
+	<Name>rt.unexpected_window_playback_option</Name>
+	<Default Z="false"/>
+	<Name>rt.visual_script_enable</Name>
+	<Default Z="false"/>
 	<Name>rt.enable_default_environments</Name>
 	<Default Z="false"/>
 	<Name>rt.dynamic_find_enable_option</Name>
-	<Default Z="false"/>
-	<Name>rt.unexpected_window_playback_option</Name>
 	<Default Z="false"/>
 </OptionDefaults>

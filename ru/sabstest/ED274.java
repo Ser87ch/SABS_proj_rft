@@ -103,9 +103,9 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 			" [ACC], [Annotat1], [StopReas], [ID_ARM])\r\n" + 
 			"VALUES(" + DB.toString(idPacet) + ", null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ",\r\n" +
 			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(infoCode) + ", null, " + DB.toString(annotation) + ",\r\n" +
-			"null, '', '', '', null, '274',\r\n" +
-			DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", null, null, null,\r\n" +
-			"null, null, null, '0')";			
+			"null, " + DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdDate) + ", null, '274',\r\n" +
+			DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(refEdDate) + ", null, null,\r\n" +
+			DB.toString(refEdAuthor) + ", '0', " + DB.toString(refEdNo) + ", '0')";			
 			db.st.executeUpdate(query);		
 
 			db.close();			
