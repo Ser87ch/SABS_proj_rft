@@ -102,8 +102,8 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 			" [PEpdNo], [PacDate], [PAuthor], [BeginDat], [EndDat], [BIC],\r\n" + 
 			" [ACC], [Annotat1], [StopReas], [ID_ARM])\r\n" + 
 			"VALUES(" + DB.toString(idPacet) + ", null, " + DB.toString(edNo) + ", " + DB.toString(edDate) + ",\r\n" +
-			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(infoCode) + ", null, " + DB.toString(annotation) + ",\r\n" +
-			"null, " + DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdDate) + ", null, '274',\r\n" +
+			DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ", " + DB.toString(infoCode) + ", " + DB.toString(infoCode) + ", " + DB.toString(annotation) + ",\r\n" +
+			"null, " + DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", null, '274',\r\n" +
 			DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(refEdDate) + ", null, null,\r\n" +
 			DB.toString(refEdAuthor) + ", '0', " + DB.toString(refEdNo) + ", '0')";			
 			db.st.executeUpdate(query);		
