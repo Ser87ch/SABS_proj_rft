@@ -103,7 +103,10 @@ public class ED104 extends PaymentDocument {
 		transKind = "06";	
 		purpose = "Тестовое инкассовое поручение";	
 		if(is114Vvod)
+		{
+			edAuthor = payee.edAuthor;
 			purpose = "1" + purpose;
+		}
 		receiptDateCollectBank = Settings.operDate;
 	}
 

@@ -136,7 +136,10 @@ public class ED103 extends PaymentDocument {
 		receiptDateCollectBank = Settings.operDate;
 		maturityDate = Settings.operDate;
 		if(is113Vvod)
+		{
 			purpose = "1" + purpose;
+			edAuthor = payee.edAuthor;
+		}
 		if(gendoc.hasAttribute("PaytCondition"))
 			paytCondition = gendoc.getAttribute("PaytCondition");
 		else
