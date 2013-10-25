@@ -66,6 +66,31 @@ public class Pack {
 
 
 	/**
+	 * @param dest папка, содержимое которой копируется
+	 * @param src папка, в которую копируется
+	 */
+	public static void copyDest(File src, File dest)
+	{
+		if(src.isDirectory())
+		{
+			if(!dest.exists())
+				dest.mkdir();
+			
+			String files[] = src.list();
+			
+			for(String fl:files)
+				copyDest(new File(src,fl), new File(dest,fl));
+		}
+		else
+			copyFile(src.getAbsolutePath(), dest.getAbsolutePath());
+	}
+	
+	public static void copy(String src, String dest)
+	{
+		copyDest(new File(src), new File(dest));
+	}
+	
+	/**
 	 * удаление содержимого папки
 	 * @param fld папка
 	 */

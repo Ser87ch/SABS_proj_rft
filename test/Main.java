@@ -3,6 +3,7 @@ package test;
 
 
 import org.w3c.dom.Element;
+
 import static java.lang.System.out; 
 
 import ru.sabstest.GenerateFromXMLList;
@@ -12,6 +13,7 @@ import ru.sabstest.Log;
 import ru.sabstest.ReadEDList;
 import ru.sabstest.Settings;
 import ru.sabstest.XML;
+import ru.sabstest.Pack;
 
 
 
@@ -65,10 +67,11 @@ public class Main {
 		}
 		case READ:
 		{
-			ReadEDList pl = new ReadEDList();
-			pl.readFolder("C:\\test\\1\\");			
-
-			out.println(pl.toString());
+			Init.mkDataFolder("008");
+//			ReadEDList pl = new ReadEDList();
+//			pl.readFolder("C:\\test\\1\\");			
+//
+//			out.println(pl.toString());
 		
 			break;
 		}

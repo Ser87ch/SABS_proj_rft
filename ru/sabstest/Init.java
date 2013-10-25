@@ -68,10 +68,7 @@ public class Init {
 
 	}
 
-	/**
-	 * создает папки для новых данных
-	 */
-	public static void mkDataFolder()
+	private static String getNewDataFolderName()
 	{
 		File dir = new File(Settings.testProj + "data\\");
 		String  fld;
@@ -90,7 +87,16 @@ public class Init {
 				fld = filename.substring(0, 1) + myFormat.format(new Integer(i));
 			}
 		}
-
+		return fld;
+	}
+	
+	/**
+	 * создает папки для новых данных
+	 */
+	public static void mkDataFolder()
+	{		
+		String  fld = getNewDataFolderName();
+		
 		Settings.datafolder = Settings.testProj + "data\\" + fld + "\\";
 
 		(new File(Settings.testProj + "data\\" + fld)).mkdir();
@@ -101,14 +107,32 @@ public class Init {
 		Log.msg("Папка входящих данных для теста " + Settings.testProj + "data\\" + fld +  "\\input создана.");		
 		Log.msg("Папка эталонных данных для теста "+ Settings.testProj + "data\\" + fld +  "\\etalon создана.");
 
-		//DM+: 6-->7
-		//for(int i = 1 ; i < 6; i++)
-//		for(int i = 1 ; i < 7; i++)	
-//		{
-//			(new File(Settings.testProj + "data\\" + fld + "\\input\\" + String.format("%03d", i))).mkdir();
-//			(new File(Settings.testProj + "data\\" + fld + "\\etalon\\" + String.format("%03d", i))).mkdir();
-//		}
-
+	}
+	
+	/**
+	 * копирует предыдущие данные, кроме номер теста
+	 * @param num номер теста
+	 */
+	public static void mkDataFolder(String num)
+	{
+		String  fld = getNewDataFolderName();
+		
+		Settings.datafolder = Settings.testProj + "data\\" + fld + "\\";
+		
+		File dir = new File(Settings.testProj + "data\\");
+		String[] children = dir.list();
+		if (children == null || children.length == 0)
+			return;
+	
+		String filename = Settings.testProj + "data\\" + children[children.length - 1] + "\\";
+		
+		Pack.copy(filename, Settings.datafolder);		
+		
+		Pack.clearFolder(new File(Settings.datafolder + "\\etalon\\" + num));
+		Pack.clearFolder(new File(Settings.datafolder + "\\input\\" + num));
+		new File(Settings.datafolder + "log.txt").delete();
+		Log.createGen();
+		
 	}
 
 	/**
