@@ -1,5 +1,6 @@
 package Modules;
 import resources.Modules.Gen708774Helper;
+import ru.sabstest.ED274;
 import ru.sabstest.GenerateFromED773List;
 import ru.sabstest.Pack;
 import ru.sabstest.ReadEDList;
@@ -13,6 +14,7 @@ public class Gen708774 extends Gen708774Helper
 		//List<String> st = Arrays.asList((String[]) args[0]);
 		String num = (String) args[1];
 		
+		ED274.ED274CodeList.readXML(Settings.testProj + "settings\\generation\\" + num + ".xml");
 		
 		ReadEDList rl = new ReadEDList();
 		rl.readFolderByType(Settings.path + "post\\kPuO\\","ED773_VER");	
