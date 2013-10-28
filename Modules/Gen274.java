@@ -15,7 +15,7 @@ public class Gen274 extends Gen274Helper
 		//List<String> st = Arrays.asList((String[]) args[0]);
 		String num = (String) args[1];
 		
-		ED274.EPDNoList.readXML(Settings.testProj + "settings\\generation\\" + num + ".xml");
+		ED274.ED274CodeList.readXML(Settings.testProj + "settings\\generation\\" + num + ".xml");
 				
 		GenerateFromXMLList rl = new GenerateFromXMLList();
 		rl.generateFromXML(Settings.testProj + "settings\\generation\\" + num + ".xml");

@@ -30,7 +30,7 @@ public class NewTestCaseData extends NewTestCaseDataHelper
 		if(Settings.testProj == null)
 		{
 			Settings.testProj = (String) args[0];
-			num = "008";
+			num = (String) args[1];
 		}
 		Init.mkDataFolder(num);
 

@@ -4,7 +4,7 @@ import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.w3c.dom.Element;
@@ -45,8 +45,12 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 		edAuthor = source.pdList.get(ed273No).payee.edAuthor;
 		edReceiver = source.edReceiver;
 
-		infoCode = "8";
-		annotation = "Положительные результаты всех видов контролей, предшествующих исполнению";
+		
+		ED274CodeList.Code c = ED274CodeList.getInfoCode(source.pdList.get(ed273No).edNo);
+		if(c == null)
+			return false;
+		infoCode = c.infoCode;
+		annotation = c.annotation;
 		refEdAuthor = source.edAuthor;
 		refEdDate = source.edDate;
 		refEdNo = source.edNo;
@@ -61,12 +65,7 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 		
 		setFileName();
 		
-		if((EPDNoList.eList == null) || (EPDNoList.eList.size() == 0))
-			return true;
-		else if(EPDNoList.eList.contains(Integer.toString(source.edNo)))
-			return true;
-		else 
-			return false;
+		return true;
 	}
 
 	@Override
@@ -127,9 +126,9 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 		
 	}
 
-	public static class EPDNoList
+	public static class ED274CodeList
 	{
-		public static List<String> eList;
+		public static List<Code> eList;
 		
 		public static void readXML(String src)
 		{
@@ -141,9 +140,63 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 			if(nl.getLength() == 0)
 				return;
 			
-			eList = new ArrayList<String>();
+			eList = new ArrayList<Code>();
 			
-			eList.addAll(Arrays.asList(((Element)nl.item(0)).getAttribute("EPDNo").split(",")));
+			for(int i = 0; i < nl.getLength(); i++)
+			{
+				Element el = (Element) nl.item(i);
+				
+				int edNo = Integer.parseInt(el.getAttribute("EDNo"));
+				String infoCode = el.getAttribute("InfoCode");
+				
+				eList.add(new Code(edNo, infoCode));
+			}
+		}
+		
+		public static Code getInfoCode(int edNo)
+		{
+			Iterator<Code> it = eList.listIterator();
+			
+			while(it.hasNext())
+			{
+				Code c = it.next();
+				if(c.edNo == edNo)
+					return c;
+			}
+			return null;			
+		}
+		
+		public static class Code
+		{
+			int edNo;
+			String infoCode, annotation;
+			
+			Code(int edNo, String infoCode)
+			{
+				this.edNo = edNo;
+				this.infoCode = infoCode;
+				getAnnotation();
+			}
+			
+			public void getAnnotation()
+			{
+				if(infoCode.equals("1"))
+					annotation = "Отрицательный результат визуального контроля";
+				else if(infoCode.equals("2"))
+					annotation = "Изменившиеся реквизиты плательщика (получателя), которые не позволяют исполнить инкассовое поручение, либо платежное требование (например, отзыв лицензии у одной из сторон)";
+				else if(infoCode.equals("3"))
+					annotation = "Отказ от акцепта";
+				else if(infoCode.equals("4"))
+					annotation = "Частичный отказ от акцепта";
+				else if(infoCode.equals("5"))
+					annotation = "Неполучение акцепта";
+				else if(infoCode.equals("6"))
+					annotation = "Недостаточность денежных средств на счете плательщика";
+				else if(infoCode.equals("7"))
+					annotation = "Иные результаты приема к исполнению";
+				else if(infoCode.equals("8"))
+					annotation = "Положительные результаты всех видов контролей, предшествующих исполнению";
+			}
 		}
 	}
 }
