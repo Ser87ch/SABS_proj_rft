@@ -30,8 +30,7 @@ public class ED774_VER extends Holder<ED274> implements Generate<ED773_VER> {
 		setFileName();
 		
 		ed = new ED274(ed773No);
-		ed.generateFrom(source.ed);
-		return true;
+		return ed.generateFrom(source.ed);		
 	}
 
 	@Override
