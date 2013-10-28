@@ -46,7 +46,7 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 		edReceiver = source.edReceiver;
 
 		
-		ED274CodeList.Code c = ED274CodeList.getInfoCode(source.pdList.get(ed273No).edNo);
+		ED274CodeList.Code c = ED274CodeList.getInfoCode(source.pdList.get(ed273No).sum);
 		if(c == null)
 			return false;
 		infoCode = c.infoCode;
