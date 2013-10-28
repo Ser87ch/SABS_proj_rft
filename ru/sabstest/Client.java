@@ -204,6 +204,7 @@ public class Client {
 		Element bank = (Element) cl.getElementsByTagNameNS("*", "Bank").item(0);
 		correspAcc = bank.getAttribute("CorrespAcc");
 		bic = bank.getAttribute("BIC");		
+		edAuthor = bic.substring(2) + "000"; 
 	}
 
 	/**
