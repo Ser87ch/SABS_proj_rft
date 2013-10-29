@@ -70,9 +70,9 @@ public class ReadEDList {
 				String type = root.getElementsByTagNameNS("*", "DocType").item(0).getTextContent();
 
 				if(type.equals("PacketEPDVER_B"))
-					type = Packet.getEncodedElement(fl.getAbsolutePath(), true).getNodeName();
+					type = Packet.getEncodedElement(fl.getAbsolutePath(), true).getLocalName();
 				else
-					type = Packet.getEncodedElement(fl.getAbsolutePath(), false).getNodeName();
+					type = Packet.getEncodedElement(fl.getAbsolutePath(), false).getLocalName();
 				
 				ReadED p = Packet.createReadEDByFile(type);			
 
