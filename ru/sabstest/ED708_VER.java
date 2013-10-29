@@ -60,7 +60,7 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 					" [CtrlTime], [ErrorDiagnostic], [VCtrlCode])\r\n" +					 
 			"VALUES(" + DB.toString(idPacet) + ", '', '0', '0',\r\n" +
 			DB.toString(edNo) + ", " + DB.toString(edDate) + ", " + DB.toString(edAuthor) + ", " + DB.toString(edReceiver) + ",\r\n" +
-			DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", '', " + DB.toString(ed.iEdNo) + ", " + DB.toString(ed.edAuthor) + ",\r\n" + 
+			DB.toString(iEdNo) + ", " + DB.toString(iEdDate) + ", " + DB.toString(iEdAuthor) + ", '', " + DB.toString(ed.iEdNo) + ", " + DB.toString(ed.iEdAuthor) + ",\r\n" + 
 			DB.toString(ed.iEdDate) + ", "  + DB.toString(ed.edNo) + ", '', " + DB.toString(ed.annotation) + ", '16', \r\n" +  
 			DB.toString(ed.resultCode) + ", '', " + DB.toString(ed.ctrlCode) + ")";			
 			db.st.executeUpdate(query);
