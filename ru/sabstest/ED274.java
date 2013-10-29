@@ -42,8 +42,8 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 	public boolean generateFrom(ED273 source) {
 		edNo = source.pdList.get(ed273No).edNo + 111;
 		edDate = source.edDate;
-		edAuthor = source.pdList.get(ed273No).payee.edAuthor;
-		edReceiver = source.edReceiver;
+		edAuthor = source.edReceiver;//source.pdList.get(ed273No).payee.edAuthor;
+		edReceiver = source.edAuthor;//source.edReceiver;
 
 		
 		ED274CodeList.Code c = ED274CodeList.getInfoCode(source.pdList.get(ed273No).sum);

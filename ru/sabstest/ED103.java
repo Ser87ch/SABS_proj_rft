@@ -233,9 +233,9 @@ public class ED103 extends PaymentDocument {
 		razd + Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
 		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd; 		
 		
-		str = str + ((paytKind.equals("P") || paytKind.equals("T")) ? " "+ razd : "") + razd +
-		((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
-		(paytKind.equals("P") ? "{ExtLeft}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? razd : "");
+		str = str + ((paytKind.equals("2") || paytKind.equals("3")) ? " "+ razd : "") + razd +
+		((paytKind.equals("2") || paytKind.equals("3")) ? "+{TAB}{ExtLeft}" : "") + 
+		(paytKind.equals("2") ? "{ExtLeft}" : "") + ((paytKind.equals("2") || paytKind.equals("3")) ? razd : "");
 		
 		str = str + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
 		payer.inn + razd + 

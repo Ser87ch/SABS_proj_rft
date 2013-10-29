@@ -113,7 +113,7 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 				edAuthor = source.edReceiver;
 				edReceiver = source.edAuthor;
 				
-				iEdNo = source.ed.edNo + 4500;
+				iEdNo = source.ed.pdList.get(ed773No).edNo + 4500;
 				iEdDate = source.ed.edDate;
 				iEdAuthor = source.ed.edReceiver;
 				

@@ -196,9 +196,9 @@ public class ED104 extends PaymentDocument {
 		Integer.toString(sum).substring(0, Integer.toString(sum).length() - 2) + "." + 
 		Integer.toString(sum).substring(Integer.toString(sum).length() - 2, Integer.toString(sum).length()) + razd;
 
-		str = str + ((paytKind.equals("P") || paytKind.equals("T")) ? " "+ razd : "") + razd +
-		((paytKind.equals("P") || paytKind.equals("T")) ? "+{TAB}{ExtLeft}" : "") + 
-		(paytKind.equals("P") ? "{ExtLeft}" : "") + ((paytKind.equals("P") || paytKind.equals("T")) ? razd : "");
+		str = str + ((paytKind.equals("2") || paytKind.equals("3")) ? " "+ razd : "") + razd +
+		((paytKind.equals("2") || paytKind.equals("3")) ? "+{TAB}{ExtLeft}" : "") + 
+		(paytKind.equals("2") ? "{ExtLeft}" : "") + ((paytKind.equals("2") || paytKind.equals("3")) ? razd : "");
 
 		str = str + payer.bic + razd + payer.correspAcc + razd + payer.personalAcc + razd +
 		payer.inn + razd + payer.kpp + razd + (addShift ? "+{ExtEnd}" : "") + payer.name + razd + payee.bic + razd + payee.correspAcc + razd +
@@ -210,7 +210,7 @@ public class ED104 extends PaymentDocument {
 		str = str + razd + purpose + razd;
 
 		if(!is114Vvod)
-			str = str + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + ((paytKind.equals("P") || paytKind.equals("T")) ? "" : razd) + razd;
+			str = str + razd + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + ((paytKind.equals("2") || paytKind.equals("3")) ? "" : razd) + razd;
 		else	
 		{
 			str = str + new SimpleDateFormat("ddMMyyyy").format(chargeOffDate) + razd + razd + razd;
