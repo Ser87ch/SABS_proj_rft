@@ -194,7 +194,8 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 			{
 				this.edNo = edNo;
 				this.infoCode = infoCode;
-				getAnnotation();
+				//getAnnotation();
+				annotation = "Текст пояснения";
 			}
 			
 			public void getAnnotation()
