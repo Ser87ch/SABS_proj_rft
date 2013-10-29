@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
 abstract public class Packet{
 
 	public enum Type{PacketEPD, PacketEPDVER, PacketESIDVER_RYM, PacketEPDVER_B, PacketESID, 
-		ED201, ED208, ED243, ED244, ED273, ED274, ED708_VER, ED743_VER, ED744_VER, ED773_VER};
+		ED201, ED208, ED243, ED244, ED273, ED274, ED708_VER, ED743_VER, ED744_VER, ED773_VER, ED774_VER};
 
 		public String filename;
 
@@ -125,6 +125,9 @@ abstract public class Packet{
 			case ED273:
 				pc = new ED273();
 				break;
+			case ED274:
+				pc = new ED274();
+				break;
 			case ED708_VER:
 				pc = new ED708_VER();
 				break;
@@ -136,6 +139,9 @@ abstract public class Packet{
 				break;
 			case ED773_VER:
 				pc = new ED773_VER();
+				break;
+			case ED774_VER:
+				pc = new ED774_VER();
 				break;
 			}
 

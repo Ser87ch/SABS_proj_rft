@@ -6,6 +6,11 @@ public class ED774_VER extends Holder<ED274> implements Generate<ED773_VER> {
 
 	int ed773No;
 	
+	public ED774_VER()
+	{
+		
+	}
+	
 	public ED774_VER(int i)
 	{
 		ed773No = i;
