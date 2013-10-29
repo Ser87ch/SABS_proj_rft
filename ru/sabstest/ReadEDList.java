@@ -68,12 +68,12 @@ public class ReadEDList {
 
 				Element root = XML.getXMLRootElement(fl.getAbsolutePath());
 				String type = root.getElementsByTagNameNS("*", "DocType").item(0).getTextContent();
-
+				try{
 				if(type.equals("PacketEPDVER_B"))
 					type = Packet.getEncodedElement(fl.getAbsolutePath(), true).getLocalName();
 				else
 					type = Packet.getEncodedElement(fl.getAbsolutePath(), false).getLocalName();
-				
+				}catch(Exception e){continue;}
 				ReadED p = Packet.createReadEDByFile(type);			
 
 				if(p != null)
