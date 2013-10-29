@@ -202,7 +202,7 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 				if(infoCode.equals("1"))
 					annotation = "Отрицательный результат визуального контроля";
 				else if(infoCode.equals("2"))
-					annotation = "Изменившиеся реквизиты плательщика (получателя), которые не позволяют исполнить инкассовое поручение, либо платежное требование (например, отзыв лицензии у одной из сторон)";
+					annotation = "Изменившиеся реквизиты плательщика (получателя)";
 				else if(infoCode.equals("3"))
 					annotation = "Отказ от акцепта";
 				else if(infoCode.equals("4"))
