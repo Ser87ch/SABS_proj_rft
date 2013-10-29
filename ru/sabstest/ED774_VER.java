@@ -16,7 +16,7 @@ public class ED774_VER extends Holder<ED274> implements Generate<ED773_VER> {
 		edNo = source.ed.pdList.get(ed773No).edNo + 2500;
 		edDate = source.edDate;
 		edAuthor = source.edReceiver;
-		edReceiver = source.edAuthor;
+		edReceiver = source.ed.edAuthor;
 		
 		iEdNo = source.edNo;
 		iEdDate = source.edDate;
