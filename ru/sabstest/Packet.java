@@ -77,7 +77,7 @@ abstract public class Packet{
 				DB.insertPacetForReadVer(filename);
 		}
 
-		public Element getEncodedElement(String src, boolean isUTF)
+		public static Element getEncodedElement(String src, boolean isUTF)
 		{
 			Element root;
 			if(isUTF)
