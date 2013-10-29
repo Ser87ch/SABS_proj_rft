@@ -38,6 +38,24 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 		isVER = false;
 	}
 	
+	
+	@Override
+	public void readXML(Element root) {
+		super.readXML(root);
+		infoCode = root.getAttribute("InfoCode");
+		annotation = root.getElementsByTagNameNS("*", "Annotation").item(0).getTextContent();
+		
+		Element el = (Element) root.getElementsByTagNameNS("*", "InitialED").item(0);
+		iEdNo = Integer.parseInt(el.getAttribute("EDNo"));
+		iEdDate = Date.valueOf(el.getAttribute("EDDate"));
+		iEdAuthor = el.getAttribute("EDAuthor");
+		
+		el = (Element) root.getElementsByTagNameNS("*", "EDRefID").item(0);
+		refEdNo = Integer.parseInt(el.getAttribute("EDNo"));
+		refEdDate = Date.valueOf(el.getAttribute("EDDate"));
+		refEdAuthor = el.getAttribute("EDAuthor");
+	}
+	
 	@Override
 	public boolean generateFrom(ED273 source) {
 		edNo = source.pdList.get(ed273No).edNo + 111;
@@ -122,7 +140,8 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 
 	@Override
 	public void readEncodedFile(File src, boolean isUTF) {
-		throw new UnsupportedOperationException();
+		readXML(getEncodedElement(src.getAbsolutePath(), isUTF));
+		filename = src.getName();
 		
 	}
 
