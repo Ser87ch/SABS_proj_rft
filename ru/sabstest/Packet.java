@@ -171,6 +171,9 @@ abstract public class Packet{
 			case ED273:
 				pc = new ED273();
 				break;
+			case ED773_VER:
+				pc = new ED773_VER();
+				break;
 			}
 
 			return pc;
