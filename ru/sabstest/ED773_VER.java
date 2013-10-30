@@ -45,7 +45,7 @@ public class ED773_VER extends Holder<ED273> implements Generate<Element> {
 		    Settings.pwd);
 	    db.connect();
 
-	    int idPacet = insertIntoDBPacket(db, 0, "17");
+	    int idPacet = insertIntoDBPacket(db, 0, "19");
 
 	    String query = "INSERT INTO [dbo].[epay_EDVer]([ID_PACKET], [ID_DEPART], [ID_ARM], [InOutMode],\r\n"
 		    + " [EDNo], [EDDate], [EDAuthor], [EDReceiver],\r\n"
