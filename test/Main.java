@@ -1,84 +1,70 @@
 package test;
 
-
-
-import org.w3c.dom.Element;
-
-import static java.lang.System.out; 
-
 import ru.sabstest.GenerateFromXMLList;
-import ru.sabstest.GenerateList;
 import ru.sabstest.Init;
 import ru.sabstest.Log;
-import ru.sabstest.ReadEDList;
 import ru.sabstest.Settings;
 import ru.sabstest.XML;
-import ru.sabstest.Pack;
-
-
-
 
 public class Main {
-	enum Test {O,ED,READ}
+    enum Test {
+	O, ED, READ
+    }
 
-	public static void main(String[] args)
-	{
-		Settings.testProj = "C:\\sabstest\\";
+    public static void main(String[] args) {
+	Settings.testProj = "C:\\sabstest\\";
 
-		Test t = Test.READ;
-		switch(t)
-		{
-					
-		case O:
-		{
+	Test t = Test.READ;
+	switch (t) {
 
-			Init.load();
-			Settings.readXML(Settings.testProj + "settings\\general.xml");
-			
-			
-			XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000475.ED743_VER", "C:\\test\\1.xml");
-//			XML.createXMLFromBase64("C:\\test\\1\\003700200020130701000000040.ED743_VER", "C:\\test\\1\\743.xml");
-//			XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000023.ED708_VER", "C:\\test\\1\\708.xml");
-//			PaymentDocumentList pdl = new PaymentDocumentList();
-//			pdl.readEncodedFile("C:\\sabstest\\data\\a000002\\input\\003\\458200200020130701000000101.PacketEPDVER", false);
-//			
-//			ClientList.readFile("C:\\test\\nach\\clients.xml");		
-//								
-//			PacketList pl = new PacketList();
-//			pl.generateFromXML("C:\\test\\gen.xml");
-//			
-//			pl.createFile("C:\\test\\");
+	case O: {
 
-		
-			
-			break;
-		}
-		case ED:
-		{
+	    Init.load();
+	    Settings.readXML(Settings.testProj + "settings\\general.xml");
 
-			Init.load();
-			Settings.readXML(Settings.testProj + "settings\\general.xml");
-			GenerateFromXMLList pdl = new GenerateFromXMLList();
+	    XML.createXMLFromBase64(
+		    "C:\\test\\1\\458200200020130701000000475.ED743_VER",
+		    "C:\\test\\1.xml");
+	    // XML.createXMLFromBase64("C:\\test\\1\\003700200020130701000000040.ED743_VER",
+	    // "C:\\test\\1\\743.xml");
+	    // XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000023.ED708_VER",
+	    // "C:\\test\\1\\708.xml");
+	    // PaymentDocumentList pdl = new PaymentDocumentList();
+	    // pdl.readEncodedFile("C:\\sabstest\\data\\a000002\\input\\003\\458200200020130701000000101.PacketEPDVER",
+	    // false);
+	    //
+	    // ClientList.readFile("C:\\test\\nach\\clients.xml");
+	    //
+	    // PacketList pl = new PacketList();
+	    // pl.generateFromXML("C:\\test\\gen.xml");
+	    //
+	    // pl.createFile("C:\\test\\");
 
-			pdl.generateFromXML("C:\\test\\genver.xml");
-			
-
-			break;
-		}
-		case READ:
-		{
-			Init.mkDataFolder("008");
-//			ReadEDList pl = new ReadEDList();
-//			pl.readFolder("C:\\test\\1\\");			
-//
-//			out.println(pl.toString());
-		
-			break;
-		}
-
-		}
-
-		Log.close();
+	    break;
 	}
+	case ED: {
+
+	    Init.load();
+	    Settings.readXML(Settings.testProj + "settings\\general.xml");
+	    GenerateFromXMLList pdl = new GenerateFromXMLList();
+
+	    pdl.generateFromXML("C:\\test\\genver.xml");
+
+	    break;
+	}
+	case READ: {
+	    Init.mkDataFolder("008");
+	    // ReadEDList pl = new ReadEDList();
+	    // pl.readFolder("C:\\test\\1\\");
+	    //
+	    // out.println(pl.toString());
+
+	    break;
+	}
+
+	}
+
+	Log.close();
+    }
 
 }
