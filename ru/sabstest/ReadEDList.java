@@ -104,6 +104,19 @@ public class ReadEDList {
 		String docType = root.getElementsByTagNameNS("*", "DocType")
 			.item(0).getTextContent();
 
+		try {
+		    if (docType.equals("PacketEPDVER_B"))
+			docType = Packet.getEncodedElement(
+				pathname.getAbsolutePath(), true)
+				.getLocalName();
+		    else
+			docType = Packet.getEncodedElement(
+				pathname.getAbsolutePath(), false)
+				.getLocalName();
+		} catch (Exception e) {
+		    return false;
+		}
+
 		if (docType.equals(type))
 		    return true;
 		else

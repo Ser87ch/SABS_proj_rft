@@ -105,7 +105,7 @@ public class ED773_VER extends Holder<ED273> implements Generate<Element> {
 		    + DB.toString(ed.edDate)
 		    + ", "
 		    + DB.toString(ed.edAuthor)
-		    + ", '19',\r\n"
+		    + ", '273',\r\n"
 		    + DB.toString(ed.edNo)
 		    + ", "
 		    + DB.toString(ed.edDate)
