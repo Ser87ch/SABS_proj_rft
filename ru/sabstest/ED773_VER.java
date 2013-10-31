@@ -47,6 +47,8 @@ public class ED773_VER extends Holder<ED273> implements Generate<Element> {
 
 	    int idPacet = insertIntoDBPacket(db, 0, "19");
 
+	    int idPacket273 = ed.insertIntoDBPacket(db, 0, "1");
+
 	    String query = "INSERT INTO [dbo].[epay_EDVer]([ID_PACKET], [ID_DEPART], [ID_ARM], [InOutMode],\r\n"
 		    + " [EDNo], [EDDate], [EDAuthor], [EDReceiver],\r\n"
 		    + " [ini_EdNo], [ini_EdDate], [ini_EdAutor], [PacetCode], [EDQuantity], [Summa],\r\n"
@@ -68,7 +70,9 @@ public class ED773_VER extends Holder<ED273> implements Generate<Element> {
 		    + DB.toString(iEdDate)
 		    + ", "
 		    + DB.toString(iEdAuthor)
-		    + ", 0, 0, '', \r\n"
+		    + ", "
+		    + DB.toString(idPacket273)
+		    + ", 0, '', \r\n"
 		    + "'', "
 		    + DB.toString("")
 		    + ", "
@@ -76,12 +80,46 @@ public class ED773_VER extends Holder<ED273> implements Generate<Element> {
 		    + ", "
 		    + DB.toString("")
 		    + ", '19', \r\n"
-		    + DB.toString("") + ", " + DB.toString("") + ", '')";
+		    + DB.toString("")
+		    + ", "
+		    + DB.toString("") + ", '')";
+	    db.st.executeUpdate(query);
+
+	    query = "INSERT INTO [dbo].[UFEBS_REsid]([ID_PACET], [ID_DEPART],\r\n"
+		    + " [ID_ARM], [EdNo], [EdDate], [EdAuthor], [EdReceiv],\r\n"
+		    + "[IEdNo], [IEdDate], [IEdAuth],\r\n"
+		    + " [EsidCod], [PEpdNo], [PacDate], [PAuthor])\r\n"
+		    + "VALUES("
+		    + DB.toString(idPacket273)
+		    + ", '', '0',\r\n"
+		    + DB.toString(ed.edNo)
+		    + ", "
+		    + DB.toString(ed.edDate)
+		    + ", "
+		    + DB.toString(ed.edAuthor)
+		    + ", "
+		    + DB.toString(ed.edReceiver)
+		    + ", "
+		    + DB.toString(ed.edNo)
+		    + ", "
+		    + DB.toString(ed.edDate)
+		    + ", "
+		    + DB.toString(ed.edAuthor)
+		    + ", '19',\r\n"
+		    + DB.toString(ed.edNo)
+		    + ", "
+		    + DB.toString(ed.edDate)
+		    + ", " + DB.toString(ed.edAuthor) + ")";
 	    db.st.executeUpdate(query);
 
 	    ListIterator<PaymentDocument> iter = ed.pdList.listIterator();
 	    while (iter.hasNext())
-		iter.next().insertIntoDbVer(idPacet, filename);
+		iter.next().insertIntoDbUfebs(idPacket273, ed.edNo, ed.edDate,
+			ed.edAuthor, ed.filename);
+
+	    // ListIterator<PaymentDocument> iter = ed.pdList.listIterator();
+	    // while (iter.hasNext())
+	    // iter.next().insertIntoDbVer(idPacet, filename);
 
 	    db.close();
 
