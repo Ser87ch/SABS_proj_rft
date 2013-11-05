@@ -193,6 +193,13 @@ abstract public class Packet {
 	return pc;
     }
 
+    public static List<Generate<ED774_VER>> createGenFromED774(int size) {
+	List<Generate<ED774_VER>> pc = new ArrayList<Generate<ED774_VER>>();
+	for (int i = 0; i < size; i++)
+	    pc.add(new ED708_VER().getGenerateED774());
+	return pc;
+    }
+
     public static List<Generate<ED273>> createGenFromED273(
 	    GenerateFromXMLList source) {
 	List<Generate<ED273>> pc = new ArrayList<Generate<ED273>>();

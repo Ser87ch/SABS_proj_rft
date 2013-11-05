@@ -55,6 +55,19 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 	refEdAuthor = el.getAttribute("EDAuthor");
     }
 
+    public String toString(String razd) {
+	String str = edReceiver + razd;
+	for (int i = 0; i < (Integer.parseInt(infoCode) - 1); i++)
+	    str += "{ExtDown}";
+
+	str += razd + annotation + razd + Integer.toString(refEdNo) + razd
+		+ new SimpleDateFormat("ddMMyyyy").format(refEdDate) + razd
+		+ refEdAuthor + razd + Integer.toString(iEdNo) + razd
+		+ new SimpleDateFormat("ddMMyyyy").format(iEdDate) + razd
+		+ iEdAuthor + razd;
+	return str;
+    }
+
     @Override
     public boolean generateFrom(ED273 source) {
 	edNo = source.pdList.get(ed273No).edNo + 111;
@@ -184,7 +197,7 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
     public static class ED274CodeList {
 	public static List<Code> eList;
 
-	public static void readXML(String src) {
+	public static void readXML(String src, boolean isVvod) {
 
 	    Element root = XML.getXMLRootElement(src);
 
@@ -196,13 +209,19 @@ public class ED274 extends Packet implements Generate<ED273>, ReadED {
 	    eList = new ArrayList<Code>();
 
 	    for (int i = 0; i < nl.getLength(); i++) {
+
 		Element el = (Element) nl.item(i);
+		if (!(isVvod ^ el.hasAttribute("isVvod"))) {
+		    int edNo = Integer.parseInt(el.getAttribute("EDNo"));
+		    String infoCode = el.getAttribute("InfoCode");
 
-		int edNo = Integer.parseInt(el.getAttribute("EDNo"));
-		String infoCode = el.getAttribute("InfoCode");
-
-		eList.add(new Code(edNo, infoCode));
+		    eList.add(new Code(edNo, infoCode));
+		}
 	    }
+	}
+
+	public static void readXML(String src) {
+	    readXML(src, false);
 	}
 
 	public static Code getInfoCode(int edNo) {

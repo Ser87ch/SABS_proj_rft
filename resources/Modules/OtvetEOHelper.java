@@ -20,15 +20,40 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>OtvetEO</b><br>
- * Generated     : <b>2013/06/27 13:46:33</b><br>
+ * Generated     : <b>2013/10/31 12:32:48</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  июн€ 27, 2013
- * @author Admin
+ * @since  окт€бр€ 31, 2013
+ * @author admin
  */
 public abstract class OtvetEOHelper extends RationalTestScript
 {
+	/**
+	 * ”ведомлениеќ–езультатахѕриема »сполнению¬ыставл€емогоЌаќплату»нкассовогоѕоручени€: with default state.
+	 *		.text : ”ведомление о результатах приема к исполнению выставл€емого на оплату  инкассово ...
+	 * 		.class : TfmEpayED274
+	 * 		.processName : purs_loader.exe
+	 * 		.name : ”ведомление о результатах приема к исполнению выставл€емого на оплату  инкассово ...
+	 */
+	protected TopLevelSubitemTestObject ED274window() 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("ED274window"));
+	}
+	/**
+	 * ”ведомлениеќ–езультатахѕриема »сполнению¬ыставл€емогоЌаќплату»нкассовогоѕоручени€: with specific test context and state.
+	 *		.text : ”ведомление о результатах приема к исполнению выставл€емого на оплату  инкассово ...
+	 * 		.class : TfmEpayED274
+	 * 		.processName : purs_loader.exe
+	 * 		.name : ”ведомление о результатах приема к исполнению выставл€емого на оплату  инкассово ...
+	 */
+	protected TopLevelSubitemTestObject ED274window(TestObject anchor, long flags) 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("ED274window"), anchor, flags);
+	}
+	
 	/**
 	 * ќтключитьѕанель: with default state.
 	 *		.text : ќтключить панель

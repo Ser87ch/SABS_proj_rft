@@ -143,6 +143,30 @@ public class ED208 extends Packet implements ReadED, Generate<ED243> {
 	return true;
     }
 
+    public boolean generateFrom(ED274 source) {
+	edNo = source.edNo + 5500;
+	edDate = source.edDate;
+	edAuthor = source.edReceiver;
+	edReceiver = source.edAuthor;
+
+	resultCode = CodeList.getResultCodeByNo(source.iEdNo);
+	if (resultCode.equals("")) {
+	    resultCode = CodeList.getResultCodeByNo(source.refEdNo);
+	    ctrlCode = CodeList.getCtrlCodeByNo(source.refEdNo);
+	    annotation = CodeList.getAnnotationByNo(source.refEdNo);
+	}
+	ctrlCode = CodeList.getCtrlCodeByNo(source.iEdNo);
+	annotation = CodeList.getAnnotationByNo(source.iEdNo);
+
+	iEdAuthor = source.edAuthor;
+	iEdDate = source.edDate;
+	iEdNo = source.edNo;
+	if (resultCode.equals(""))
+	    return false;
+	else
+	    return true;
+    }
+
     @Override
     public void setFileName() {
 	throw new UnsupportedOperationException();
