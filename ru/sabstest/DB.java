@@ -169,7 +169,7 @@ public class DB implements Closeable {
 	    String query = "INSERT INTO [dbo].[epay_Packet]\r\n"
 		    + "( [ID_Depart], [ID_ARM], [User_Insert], [InOutMode], [FileName], [Mesto], [KodObr], [Shifr], [Upakovka]) \r\n"
 		    + "VALUES(null, 0, null, 0, " + DB.toString(filename)
-		    + ", 'R', 0, 0, 0)";
+		    + ", 'R', 0, 1, 1)";
 	    db.st.executeUpdate(query);
 	    db.close();
 	} catch (Exception e) {
