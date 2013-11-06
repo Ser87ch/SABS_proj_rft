@@ -79,10 +79,10 @@ public class CreateSignedXML extends CreateSignedXMLHelper {
 
 	    if (!pl.isVER())
 		run(Settings.path + "\\bin\\clienXML.exe -kd " + dest
-			+ " C:\\  998", Settings.path + "\\bin");
+			+ " C:\\  999", Settings.path + "\\bin");
 	    else
 		run(Settings.path + "\\bin\\clienXML.exe -kdv " + dest
-			+ " C:\\  999", Settings.path + "\\bin");
+			+ " C:\\  998", Settings.path + "\\bin");
 	}
 	// else
 	// {
