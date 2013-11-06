@@ -1,8 +1,8 @@
 package Modules;
 
 import resources.Modules.PervVvodHelper;
+import ru.sabstest.GenerateFromXMLList;
 import ru.sabstest.Log;
-import ru.sabstest.Pack;
 import ru.sabstest.PacketEPD;
 import ru.sabstest.PaymentDocument;
 import ru.sabstest.Settings;
@@ -15,7 +15,7 @@ public class PervVvod extends PervVvodHelper {
 	String num = (String) args[1];
 
 	callScript("SABS.VFD", new String[] { Settings.Login.pervvod.key });
-
+	// ExecutorService es = Executors.newCachedThreadPool();
 	Runnable r = new Runnable() {
 
 	    @Override
@@ -27,16 +27,19 @@ public class PervVvod extends PervVvodHelper {
 
 	    }
 	};
+	// es.execute(r);
 	r.run();
-
 	SABSwindow().waitForExistence();
 
 	Menutree().click(atName("¬вод документов"));
 	SABSwindow().inputKeys("{TAB}");
 	SABSwindow().inputKeys("{ExtDown}{ExtDown}{ENTER}");
 
-	PacketEPD pl = new PacketEPD();
-	pl.readEncodedFile(Pack.getDocPervVvod(num), false);
+	GenerateFromXMLList rl = new GenerateFromXMLList();
+	rl.generateFromXML(Settings.testProj + "settings\\generation\\" + num
+		+ ".xml");
+	PacketEPD pl = (PacketEPD) rl.pList.get(0);// new PacketEPD();
+	// pl.readEncodedFile(Pack.getDocPervVvod(num), false);
 
 	Docswindow().inputKeys("{F2}");
 

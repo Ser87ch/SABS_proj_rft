@@ -1,8 +1,8 @@
 package Modules;
 
 import resources.Modules.ContrVvodHelper;
+import ru.sabstest.GenerateFromXMLList;
 import ru.sabstest.Log;
-import ru.sabstest.Pack;
 import ru.sabstest.PacketEPD;
 import ru.sabstest.PaymentDocument;
 import ru.sabstest.Settings;
@@ -28,8 +28,11 @@ public class ContrVvod extends ContrVvodHelper {
 	sleep(1);
 	SABSwindow().inputKeys("{ExtDown}{Enter}");
 
-	PacketEPD pl = new PacketEPD();
-	pl.readEncodedFile(Pack.getDocPervVvod(num), false);
+	GenerateFromXMLList rl = new GenerateFromXMLList();
+	rl.generateFromXML(Settings.testProj + "settings\\generation\\" + num
+		+ ".xml");
+	PacketEPD pl = (PacketEPD) rl.pList.get(0);// new PacketEPD();
+	// pl.readEncodedFile(Pack.getDocPervVvod(num), false);
 
 	ContrDocwindow().inputKeys("{F2}");
 
