@@ -208,8 +208,11 @@ public class Settings {
 	public static LoginInfo pervvod;
 	public static LoginInfo contrvvod;
 	public static LoginInfo formes;
+	public static String formesGUkey;
+	public static String formesGUprofile;
 	public static LoginInfo contres;
-
+	public static String contresGUkey;
+	public static String contresGUprofile;
 	// DM+
 	public static LoginInfo eocontr;
 	public static LoginInfo eootvet;
@@ -321,12 +324,16 @@ public class Settings {
 		    XML.getChildValueString("pwd", login),
 		    XML.getChildValueString("sign", login),
 		    XML.getChildValueString("key", login));
+	    formesGUkey = XML.getChildValueString("keygu", login);
+	    formesGUprofile = XML.getChildValueString("signgu", login);
 
 	    login = (Element) root.getElementsByTagName("contres").item(0);
 	    contres = new LoginInfo(XML.getChildValueString("user", login),
 		    XML.getChildValueString("pwd", login),
 		    XML.getChildValueString("sign", login),
 		    XML.getChildValueString("key", login));
+	    contresGUkey = XML.getChildValueString("keygu", login);
+	    contresGUprofile = XML.getChildValueString("signgu", login);
 
 	    // DM+
 	    login = (Element) root.getElementsByTagName("eocontr").item(0);

@@ -25,6 +25,12 @@ public class ContrES extends ContrESHelper {
 	if (st.contains("VERnach") || st.contains("VERotv")) {
 	    Menutree().click(atName("Контроль ЭС "));
 
+	    callScript("SABS.VFD", new String[] { Settings.Login.contresGUkey });
+	    OKGUbutton().click();
+
+	    profilecomboBox().click(ARROW);
+	    profilecomboBox().click(atText(Settings.Login.contresGUprofile));
+	    okbutton().click();
 	    if (st.contains("VERnach")) {
 		ESpanel().click(atPoint(45, 15));
 		while (Errorwindow().exists())

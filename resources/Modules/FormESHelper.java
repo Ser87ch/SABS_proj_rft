@@ -20,12 +20,12 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>FormES</b><br>
- * Generated     : <b>2013/07/01 13:52:18</b><br>
+ * Generated     : <b>2013/11/06 13:36:20</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  июля 01, 2013
- * @author Admin
+ * @since  ноября 06, 2013
+ * @author admin
  */
 public abstract class FormESHelper extends RationalTestScript
 {
@@ -100,6 +100,31 @@ public abstract class FormESHelper extends RationalTestScript
 	{
 		return new GuiSubitemTestObject(
                         getMappedTestObject("Menutree"), anchor, flags);
+	}
+	
+	/**
+	 * Да: with default state.
+	 *		.text : Да
+	 * 		.class : .Pushbutton
+	 * 		.name : Да
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject OKGUbutton() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("OKGUbutton"));
+	}
+	/**
+	 * Да: with specific test context and state.
+	 *		.text : Да
+	 * 		.class : .Pushbutton
+	 * 		.name : Да
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject OKGUbutton(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("OKGUbutton"), anchor, flags);
 	}
 	
 	/**
@@ -178,6 +203,31 @@ public abstract class FormESHelper extends RationalTestScript
 	}
 	
 	/**
+	 * OK: with default state.
+	 *		.text : OK
+	 * 		.class : .Pushbutton
+	 * 		.name : OK
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject okbutton2() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("okbutton2"));
+	}
+	/**
+	 * OK: with specific test context and state.
+	 *		.text : OK
+	 * 		.class : .Pushbutton
+	 * 		.name : OK
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject okbutton2(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("okbutton2"), anchor, flags);
+	}
+	
+	/**
 	 * ЗачислитьКлиенту: with default state.
 	 *		.text : Зачислить клиенту
 	 * 		.class : .Pushbutton
@@ -200,6 +250,31 @@ public abstract class FormESHelper extends RationalTestScript
 	{
 		return new GuiTestObject(
                         getMappedTestObject("payClientbutton"), anchor, flags);
+	}
+	
+	/**
+	 * ComboBox: with default state.
+	 *		.text : null
+	 * 		.class : ComboBox
+	 * 		.name : null
+	 * 		.classIndex : 0
+	 */
+	protected TextSelectGuiSubitemTestObject profilecomboBox() 
+	{
+		return new TextSelectGuiSubitemTestObject(
+                        getMappedTestObject("profilecomboBox"));
+	}
+	/**
+	 * ComboBox: with specific test context and state.
+	 *		.text : null
+	 * 		.class : ComboBox
+	 * 		.name : null
+	 * 		.classIndex : 0
+	 */
+	protected TextSelectGuiSubitemTestObject profilecomboBox(TestObject anchor, long flags) 
+	{
+		return new TextSelectGuiSubitemTestObject(
+                        getMappedTestObject("profilecomboBox"), anchor, flags);
 	}
 	
 	/**

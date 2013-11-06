@@ -17,8 +17,9 @@ public class Gen708774 extends Gen708774Helper {
 		+ "settings\\generation\\" + num + ".xml");
 
 	ReadEDList rl = new ReadEDList();
-	rl.readFolderByType(Settings.path + "post\\kPuO\\", "ED773_VER");
-
+	// rl.readFolderByType(Settings.path + "post\\kPuO\\", "ED773_VER");
+	rl.readFolderByType(Settings.fullfolder + "\\output\\" + num + "\\",
+		"ED773_VER");
 	GenerateFromED773List pl = new GenerateFromED773List();
 	pl.generateFromReadEDList(rl);
 	callScript("SABS.CreateSignedXML", new Object[] {

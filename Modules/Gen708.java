@@ -20,14 +20,19 @@ public class Gen708 extends Gen708Helper {
 	ReadEDList rl = new ReadEDList();
 
 	if (!st.contains("774")) {
-	    rl.readFolderByType(Settings.path + "post\\kPuO\\", "ED744_VER");
-
+	    // rl.readFolderByType(Settings.path + "post\\kPuO\\", "ED744_VER");
+	    rl.readFolderByType(
+		    Settings.fullfolder + "\\output\\" + num + "\\",
+		    "ED744_VER");
 	    GenerateFromED744List pl = new GenerateFromED744List();
 	    pl.generateFromReadEDList(rl);
 	    callScript("SABS.CreateSignedXML", new Object[] {
 		    Settings.path + "post\\kPuI\\", pl });
 	} else {
-	    rl.readFolderByType(Settings.path + "post\\kPuO\\", "ED774_VER");
+	    // rl.readFolderByType(Settings.path + "post\\kPuO\\", "ED774_VER");
+	    rl.readFolderByType(
+		    Settings.fullfolder + "\\output\\" + num + "\\",
+		    "ED774_VER");
 	    ED208.CodeList.readXML(Settings.testProj + "settings\\generation\\"
 		    + num + ".xml");
 	    GenerateFromED774List pl = new GenerateFromED774List();

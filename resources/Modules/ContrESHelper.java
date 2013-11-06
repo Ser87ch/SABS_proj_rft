@@ -20,12 +20,12 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>ContrES</b><br>
- * Generated     : <b>2013/06/27 13:04:47</b><br>
+ * Generated     : <b>2013/11/06 13:35:52</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  июня 27, 2013
- * @author Admin
+ * @since  ноября 06, 2013
+ * @author admin
  */
 public abstract class ContrESHelper extends RationalTestScript
 {
@@ -103,6 +103,31 @@ public abstract class ContrESHelper extends RationalTestScript
 	}
 	
 	/**
+	 * Да: with default state.
+	 *		.text : Да
+	 * 		.class : .Pushbutton
+	 * 		.name : Да
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject OKGUbutton() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("OKGUbutton"));
+	}
+	/**
+	 * Да: with specific test context and state.
+	 *		.text : Да
+	 * 		.class : .Pushbutton
+	 * 		.name : Да
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject OKGUbutton(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("OKGUbutton"), anchor, flags);
+	}
+	
+	/**
 	 * ОК: with default state.
 	 *		.text : ОК
 	 * 		.class : .Pushbutton
@@ -150,6 +175,56 @@ public abstract class ContrESHelper extends RationalTestScript
 	{
 		return new TopLevelSubitemTestObject(
                         getMappedTestObject("SABSwindow"), anchor, flags);
+	}
+	
+	/**
+	 * OK: with default state.
+	 *		.text : OK
+	 * 		.class : .Pushbutton
+	 * 		.name : OK
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject okbutton() 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("okbutton"));
+	}
+	/**
+	 * OK: with specific test context and state.
+	 *		.text : OK
+	 * 		.class : .Pushbutton
+	 * 		.name : OK
+	 * 		.classIndex : 0
+	 */
+	protected GuiTestObject okbutton(TestObject anchor, long flags) 
+	{
+		return new GuiTestObject(
+                        getMappedTestObject("okbutton"), anchor, flags);
+	}
+	
+	/**
+	 * ComboBox: with default state.
+	 *		.text : null
+	 * 		.class : ComboBox
+	 * 		.name : null
+	 * 		.classIndex : 0
+	 */
+	protected TextSelectGuiSubitemTestObject profilecomboBox() 
+	{
+		return new TextSelectGuiSubitemTestObject(
+                        getMappedTestObject("profilecomboBox"));
+	}
+	/**
+	 * ComboBox: with specific test context and state.
+	 *		.text : null
+	 * 		.class : ComboBox
+	 * 		.name : null
+	 * 		.classIndex : 0
+	 */
+	protected TextSelectGuiSubitemTestObject profilecomboBox(TestObject anchor, long flags) 
+	{
+		return new TextSelectGuiSubitemTestObject(
+                        getMappedTestObject("profilecomboBox"), anchor, flags);
 	}
 	
 	
