@@ -245,6 +245,7 @@ abstract public class Packet {
     public int insertIntoDBPacket(DB db, int sum, String type) {
 	int idPacket = 0;
 	String uic = Settings.bik.substring(2) + "000";
+	String uicRKC = "4583001999";
 	if (isVER)
 	    try {
 
@@ -276,10 +277,10 @@ abstract public class Packet {
 			+ " 0, null, null, null, "
 			+ DB.toString(uic)
 			+ ", "
-			+ DB.toString(uic)
+			+ DB.toString(uicRKC)
 			+ ", 1, \r\n"
 			+ // Mesto MesFrom?
-			" 5, null, '20120202', 3, 1, 0, 0,\r\n"
+			" 5, null, '20120202', 3, 1, 1, 1,\r\n"
 			+ " 0, 4, 3, 0, 1, null, null,\r\n"
 			+ " null, null, null, 20, '', NULL, NULL, NULL, '4')";
 		db.st.executeUpdate(query);
