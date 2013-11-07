@@ -60,6 +60,8 @@ public class ClientList {
 		return as;
 	    }
 	}
-	return null;
+	Sign[] as = { new Sign(Settings.Sign.keyobr, Settings.Sign.signobr),
+		new Sign(Settings.Sign.keycontr, Settings.Sign.signcontr) };
+	return as;
     }
 }

@@ -20,15 +20,40 @@ import com.rational.test.ft.vp.IFtVerificationPoint;
 import com.ibm.rational.test.ft.object.interfaces.sapwebportal.*;
 /**
  * Script Name   : <b>StartSABS</b><br>
- * Generated     : <b>2013/04/02 15:47:06</b><br>
+ * Generated     : <b>2013/11/07 10:57:07</b><br>
  * Description   : Helper class for script<br>
  * Original Host : Windows XP x86 5.1 build 2600 Service Pack 3 <br>
  * 
- * @since  апреля 02, 2013
- * @author Admin
+ * @since  ноября 07, 2013
+ * @author admin
  */
 public abstract class StartSABSHelper extends RationalTestScript
 {
+	/**
+	 * ВыберитеПрофиль: with default state.
+	 *		.text : Выберите профиль
+	 * 		.class : #32770
+	 * 		.processName : ConvXml.exe
+	 * 		.name : Выберите профиль
+	 */
+	protected TopLevelSubitemTestObject Profilewindow() 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("Profilewindow"));
+	}
+	/**
+	 * ВыберитеПрофиль: with specific test context and state.
+	 *		.text : Выберите профиль
+	 * 		.class : #32770
+	 * 		.processName : ConvXml.exe
+	 * 		.name : Выберите профиль
+	 */
+	protected TopLevelSubitemTestObject Profilewindow(TestObject anchor, long flags) 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("Profilewindow"), anchor, flags);
+	}
+	
 	/**
 	 * ComboBox: with default state.
 	 *		.text : null
@@ -52,6 +77,31 @@ public abstract class StartSABSHelper extends RationalTestScript
 	{
 		return new TextSelectGuiSubitemTestObject(
                         getMappedTestObject("comboBoxcomboBox"), anchor, flags);
+	}
+	
+	/**
+	 * Подтверждение: with default state.
+	 *		.text : Подтверждение
+	 * 		.class : #32770
+	 * 		.processName : purs_loader.exe
+	 * 		.name : Подтверждение
+	 */
+	protected TopLevelSubitemTestObject confwindow() 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("confwindow"));
+	}
+	/**
+	 * Подтверждение: with specific test context and state.
+	 *		.text : Подтверждение
+	 * 		.class : #32770
+	 * 		.processName : purs_loader.exe
+	 * 		.name : Подтверждение
+	 */
+	protected TopLevelSubitemTestObject confwindow(TestObject anchor, long flags) 
+	{
+		return new TopLevelSubitemTestObject(
+                        getMappedTestObject("confwindow"), anchor, flags);
 	}
 	
 	/**
