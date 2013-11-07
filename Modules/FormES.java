@@ -42,6 +42,15 @@ public class FormES extends FormESHelper {
 
 	    ESpanel().click(atPoint(45, 15));
 
+	    if (!st.contains("Otv")) {
+		callScript("SABS.VFD",
+			new String[] { Settings.Login.formesGUkey });
+		OKGUbutton().click();
+		profilecomboBox().click(ARROW);
+		profilecomboBox().click(atText(Settings.Login.formesGUprofile));
+		okbutton2().click();
+	    }
+
 	    sleep(2.0);
 
 	    while (Errorwindow().exists())
