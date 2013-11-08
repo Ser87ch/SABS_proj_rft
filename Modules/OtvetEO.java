@@ -6,14 +6,11 @@ import java.util.List;
 import resources.Modules.OtvetEOHelper;
 import ru.sabstest.ED273;
 import ru.sabstest.ED274;
-import ru.sabstest.ED773_VER;
 import ru.sabstest.Generate;
 import ru.sabstest.GenerateFromED273List;
 import ru.sabstest.GenerateFromXMLList;
 import ru.sabstest.Log;
 import ru.sabstest.Pack;
-import ru.sabstest.ReadED;
-import ru.sabstest.ReadEDList;
 import ru.sabstest.Settings;
 
 public class OtvetEO extends OtvetEOHelper {
@@ -45,12 +42,14 @@ public class OtvetEO extends OtvetEOHelper {
 	    ED274.ED274CodeList.readXML(Settings.testProj
 		    + "settings\\generation\\" + num + ".xml", true);
 	    GenerateFromXMLList rl = new GenerateFromXMLList();
-	    ReadEDList rel = new ReadEDList();
-	    rel.readFolderByType(Settings.datafolder + "input\\" + num,
-		    "ED773_VER");
-
-	    for (ReadED r : rel.pList)
-		rl.add(((ED773_VER) r).ed);
+	    // ReadEDList rel = new ReadEDList();
+	    // rel.readFolderByType(Settings.datafolder + "input\\" + num,
+	    // "ED773_VER");
+	    //
+	    // for (ReadED r : rel.pList)
+	    // rl.add(((ED773_VER) r).ed)
+	    rl.generateFromXML(Settings.testProj + "settings\\generation\\"
+		    + num + ".xml");
 
 	    GenerateFromED273List pl = new GenerateFromED273List();
 	    pl.generateFromGenerateFromXML(rl);
