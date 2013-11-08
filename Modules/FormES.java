@@ -20,7 +20,7 @@ public class FormES extends FormESHelper {
 
 	Menutree().click(atName("Обработка ЭС"));
 
-	if (st.contains("Otv")) {
+	if (st.contains("Otv") && OKGUbutton().exists()) {
 	    callScript("SABS.VFD", new String[] { Settings.Login.formesGUkey });
 	    OKGUbutton().click();
 	    profilecomboBox().click(ARROW);
@@ -42,7 +42,7 @@ public class FormES extends FormESHelper {
 
 	    ESpanel().click(atPoint(45, 15));
 
-	    if (!st.contains("Otv")) {
+	    if (!st.contains("Otv") && OKGUbutton().exists()) {
 		callScript("SABS.VFD",
 			new String[] { Settings.Login.formesGUkey });
 		OKGUbutton().click();
