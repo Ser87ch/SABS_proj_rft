@@ -3,9 +3,12 @@ package Modules;
 import java.util.Arrays;
 import java.util.List;
 
+import org.w3c.dom.Element;
+
 import resources.Modules.OtvetEOHelper;
 import ru.sabstest.ED273;
 import ru.sabstest.ED274;
+import ru.sabstest.ED773_VER;
 import ru.sabstest.Generate;
 import ru.sabstest.GenerateFromED273List;
 import ru.sabstest.GenerateFromXMLList;
@@ -48,8 +51,12 @@ public class OtvetEO extends OtvetEOHelper {
 	    //
 	    // for (ReadED r : rel.pList)
 	    // rl.add(((ED773_VER) r).ed)
-	    rl.generateFromXML(Settings.testProj + "settings\\generation\\"
+	    GenerateFromXMLList rl2 = new GenerateFromXMLList();
+	    rl2.generateFromXML(Settings.testProj + "settings\\generation\\"
 		    + num + ".xml");
+
+	    for (Generate<Element> g : rl2.pList)
+		rl.add(((ED773_VER) g).ed);
 
 	    GenerateFromED273List pl = new GenerateFromED273List();
 	    pl.generateFromGenerateFromXML(rl);
