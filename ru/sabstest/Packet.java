@@ -88,56 +88,59 @@ abstract public class Packet {
     public static ReadED createReadEDByFile(String type) {
 	ReadED pc = null;
 
-	Type t = Type.valueOf(type);
+	try {
+	    Type t = Type.valueOf(type);
 
-	switch (t) {
-	case PacketEPD:
-	    pc = new PacketEPD();
-	    break;
-	case PacketEPDVER:
-	    pc = new PacketEPD();
-	    break;
-	case PacketESIDVER_RYM:
-	    pc = new PacketESIDVER();
-	    break;
-	case PacketEPDVER_B:
-	    pc = new PacketEPDVER_B();
-	    break;
-	case PacketESID:
-	    pc = new PacketESID();
-	    break;
-	case ED208:
-	    pc = new ED208();
-	    break;
-	case ED243:
-	    pc = new ED243();
-	    break;
-	case ED244:
-	    pc = new ED244();
-	    break;
-	case ED273:
-	    pc = new ED273();
-	    break;
-	case ED274:
-	    pc = new ED274();
-	    break;
-	case ED708_VER:
-	    pc = new ED708_VER();
-	    break;
-	case ED743_VER:
-	    pc = new ED743_VER();
-	    break;
-	case ED744_VER:
-	    pc = new ED744_VER();
-	    break;
-	case ED773_VER:
-	    pc = new ED773_VER();
-	    break;
-	case ED774_VER:
-	    pc = new ED774_VER();
-	    break;
+	    switch (t) {
+	    case PacketEPD:
+		pc = new PacketEPD();
+		break;
+	    case PacketEPDVER:
+		pc = new PacketEPD();
+		break;
+	    case PacketESIDVER_RYM:
+		pc = new PacketESIDVER();
+		break;
+	    case PacketEPDVER_B:
+		pc = new PacketEPDVER_B();
+		break;
+	    case PacketESID:
+		pc = new PacketESID();
+		break;
+	    case ED208:
+		pc = new ED208();
+		break;
+	    case ED243:
+		pc = new ED243();
+		break;
+	    case ED244:
+		pc = new ED244();
+		break;
+	    case ED273:
+		pc = new ED273();
+		break;
+	    case ED274:
+		pc = new ED274();
+		break;
+	    case ED708_VER:
+		pc = new ED708_VER();
+		break;
+	    case ED743_VER:
+		pc = new ED743_VER();
+		break;
+	    case ED744_VER:
+		pc = new ED744_VER();
+		break;
+	    case ED773_VER:
+		pc = new ED773_VER();
+		break;
+	    case ED774_VER:
+		pc = new ED774_VER();
+		break;
+	    }
+	} catch (Exception e) {
+	    return null;
 	}
-
 	return pc;
     }
 
