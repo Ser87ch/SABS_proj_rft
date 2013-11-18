@@ -62,7 +62,7 @@ public class OtvetEO extends OtvetEOHelper {
 	    pl.generateFromGenerateFromXML(rl);
 
 	    for (Generate<ED273> g : pl.pList) {
-		ESpanel().click(atPoint(391, 13));
+		ESpanel().click(atPoint(400, 13));
 		String str = ((ED274) g).toString("{TAB}");
 		ED274window().inputKeys(str);
 		ED274window().inputKeys("{ENTER}");

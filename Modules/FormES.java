@@ -20,13 +20,15 @@ public class FormES extends FormESHelper {
 
 	Menutree().click(atName("Обработка ЭС"));
 
-	if (st.contains("Otv") && OKGUbutton().exists()) {
-	    callScript("SABS.VFD", new String[] { Settings.Login.formesGUkey });
-	    OKGUbutton().click();
-	    profilecomboBox().click(ARROW);
-	    profilecomboBox().click(atText(Settings.Login.formesGUprofile));
-	    okbutton2().click();
-
+	if (st.contains("Otv")) {
+	    if (OKGUbutton().exists()) {
+		callScript("SABS.VFD",
+			new String[] { Settings.Login.formesGUkey });
+		OKGUbutton().click();
+		profilecomboBox().click(ARROW);
+		profilecomboBox().click(atText(Settings.Login.formesGUprofile));
+		okbutton2().click();
+	    }
 	    ESpanel().click(atPoint(65, 15));
 
 	    sleep(2.0);
