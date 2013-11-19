@@ -42,7 +42,7 @@ public class ContrES extends ContrESHelper {
 		while (Errorwindow().exists())
 		    OKerrorbutton().click();
 	    }
-
+	    sleep(2.0);
 	    Menutree().click(atName("Ёлектронные расчеты"));
 	}
 
@@ -60,7 +60,7 @@ public class ContrES extends ContrESHelper {
 		while (Errorwindow().exists())
 		    OKerrorbutton().click();
 	    }
-
+	    sleep(2.0);
 	    Menutree().click(atName("Ёлектронные расчеты"));
 	}
 
