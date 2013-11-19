@@ -70,7 +70,8 @@ public class FormES extends FormESHelper {
 	    ESpanel().click(atPoint(87, 6));
 	    SABSwindow().inputKeys("{TAB}{TAB}{TAB}{ExtLeft}");
 
-	    while (returnDocbutton(ANY, NO_FLAGS).isEnabled()) {
+	    while (returnDocbutton(ANY, NO_FLAGS).exists()
+		    && returnDocbutton(ANY, NO_FLAGS).isEnabled()) {
 		returnDocbutton().click();
 		payClientbutton().click();
 
