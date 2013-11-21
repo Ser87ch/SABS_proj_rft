@@ -21,6 +21,7 @@ public class FormES extends FormESHelper {
 	Menutree().click(atName("Обработка ЭС"));
 
 	if (st.contains("Otv")) {
+	    sleep(2.0);
 	    if (OKGUbutton().exists()) {
 		callScript("SABS.VFD",
 			new String[] { Settings.Login.formesGUkey });
