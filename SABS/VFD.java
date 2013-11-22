@@ -6,7 +6,7 @@ import ru.sabstest.Log;
 public class VFD extends VFDHelper {
 
     public void testMain(Object[] args) {
-	int nWait1 = 4, nWait2 = 2;
+	int nWait1 = 2, nWait2 = 2;
 
 	sleep(nWait1);
 	run("c:\\vfd\\vfd.exe close b:", "c:\\vfd\\");

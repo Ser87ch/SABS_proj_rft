@@ -21,7 +21,7 @@ public class FormES extends FormESHelper {
 	Menutree().click(atName("Обработка ЭС"));
 
 	if (st.contains("Otv")) {
-	    sleep(2.0);
+	    sleep(1.0);
 	    if (OKGUbutton().exists()) {
 		callScript("SABS.VFD",
 			new String[] { Settings.Login.formesGUkey });
@@ -37,7 +37,7 @@ public class FormES extends FormESHelper {
 	    }
 	    ESpanel().click(atPoint(65, 15));
 
-	    sleep(2.0);
+	    sleep(1.0);
 
 	    while (Errorwindow().exists())
 		OKerrorbutton().click();
@@ -66,7 +66,7 @@ public class FormES extends FormESHelper {
 		// okbutton2().click();
 	    }
 
-	    sleep(2.0);
+	    sleep(1.0);
 
 	    while (Errorwindow().exists())
 		OKerrorbutton().click();
