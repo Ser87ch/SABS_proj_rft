@@ -12,6 +12,15 @@ public class StartSABS extends StartSABSHelper {
 	    String pwd = (String) args[1];
 	    String sign = (String) args[2];
 
+	    run(Settings.path + "\\bin\\ConvXML.exe", Settings.path + "\\bin");
+
+	    sleep(1);
+
+	    run(Settings.path + "\\bin\\clienXML.exe -ipv0 " + sign + " 0",
+		    Settings.path + "\\bin");
+
+	    sleep(1);
+
 	    run(Settings.path + "\\bin\\purs_loader.exe", Settings.path
 		    + "\\bin");
 
@@ -31,12 +40,12 @@ public class StartSABS extends StartSABSHelper {
 
 	    sleep(1);
 
-	    comboBoxcomboBox().click(ARROW);
-
-	    comboBoxcomboBox().click(atText(sign));
-
-	    sleep(1);
-	    okbutton2().click();
+	    // comboBoxcomboBox().click(ARROW);
+	    //
+	    // comboBoxcomboBox().click(atText(sign));
+	    //
+	    // sleep(1);
+	    // okbutton2().click();
 
 	    Log.msg("САБС запущен.");
 

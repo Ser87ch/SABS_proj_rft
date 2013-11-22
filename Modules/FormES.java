@@ -45,7 +45,8 @@ public class FormES extends FormESHelper {
 
 	    ESpanel().click(atPoint(45, 15));
 
-	    if (!st.contains("Otv") && OKGUbutton().exists()) {
+	    sleep(2.0);
+	    if (OKGUbutton().exists()) {
 		callScript("SABS.VFD",
 			new String[] { Settings.Login.formesGUkey });
 		OKGUbutton().click();
