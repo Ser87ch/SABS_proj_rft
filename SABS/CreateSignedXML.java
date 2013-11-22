@@ -38,11 +38,11 @@ public class CreateSignedXML extends CreateSignedXMLHelper {
 
 	    callScript("SABS.VFD", new String[] { key });
 	    sleep(2);
-	    run(Settings.path + "\\bin\\clienXML.exe -i  My c:\\ 0",
+	    run(Settings.path + "\\bin\\clienXML.exe -ipv0 " + profile + " 0",
 		    Settings.path + "\\bin");
-
-	    selectProfilecomboBox().select(profile);
-	    okbutton().click();
+	    //
+	    // selectProfilecomboBox().select(profile);
+	    // okbutton().click();
 
 	    // if(loadKeywindow().exists())
 	    // {
@@ -63,11 +63,11 @@ public class CreateSignedXML extends CreateSignedXMLHelper {
 
 	    callScript("SABS.VFD", new String[] { key2 });
 	    sleep(2);
-	    run(Settings.path + "\\bin\\clienXML.exe -i  My c:\\ 0",
+	    run(Settings.path + "\\bin\\clienXML.exe -ipv0 " + profile2 + " 0",
 		    Settings.path + "\\bin");
 
-	    selectProfilecomboBox().select(profile2);
-	    okbutton().click();
+	    // selectProfilecomboBox().select(profile2);
+	    // okbutton().click();
 
 	    // if(loadKeywindow().exists())
 	    // {
