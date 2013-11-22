@@ -25,10 +25,15 @@ public class FormES extends FormESHelper {
 	    if (OKGUbutton().exists()) {
 		callScript("SABS.VFD",
 			new String[] { Settings.Login.formesGUkey });
+		run(Settings.path + "\\bin\\clienXML.exe -ipv1 "
+			+ Settings.Login.formesGUprofile + " 0", Settings.path
+			+ "\\bin");
+
+		sleep(1);
 		OKGUbutton().click();
-		profilecomboBox().click(ARROW);
-		profilecomboBox().click(atText(Settings.Login.formesGUprofile));
-		okbutton2().click();
+		// profilecomboBox().click(ARROW);
+		// profilecomboBox().click(atText(Settings.Login.formesGUprofile));
+		// okbutton2().click();
 	    }
 	    ESpanel().click(atPoint(65, 15));
 
@@ -49,10 +54,16 @@ public class FormES extends FormESHelper {
 	    if (OKGUbutton().exists()) {
 		callScript("SABS.VFD",
 			new String[] { Settings.Login.formesGUkey });
+		run(Settings.path + "\\bin\\clienXML.exe -ipv1 "
+			+ Settings.Login.formesGUprofile + " 0", Settings.path
+			+ "\\bin");
+
+		sleep(1);
+
 		OKGUbutton().click();
-		profilecomboBox().click(ARROW);
-		profilecomboBox().click(atText(Settings.Login.formesGUprofile));
-		okbutton2().click();
+		// profilecomboBox().click(ARROW);
+		// profilecomboBox().click(atText(Settings.Login.formesGUprofile));
+		// okbutton2().click();
 	    }
 
 	    sleep(2.0);

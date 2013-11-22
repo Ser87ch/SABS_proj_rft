@@ -26,11 +26,17 @@ public class ContrES extends ContrESHelper {
 	    Menutree().click(atName("Контроль ЭС "));
 
 	    callScript("SABS.VFD", new String[] { Settings.Login.contresGUkey });
+
+	    run(Settings.path + "\\bin\\clienXML.exe -ipv1 "
+		    + Settings.Login.contresGUprofile + " 0", Settings.path
+		    + "\\bin");
+
+	    sleep(1);
 	    OKGUbutton().click();
 
-	    profilecomboBox().click(ARROW);
-	    profilecomboBox().click(atText(Settings.Login.contresGUprofile));
-	    okbutton().click();
+	    // profilecomboBox().click(ARROW);
+	    // profilecomboBox().click(atText(Settings.Login.contresGUprofile));
+	    // okbutton().click();
 	    if (st.contains("VERnach")) {
 		ESpanel().click(atPoint(45, 15));
 		while (Errorwindow().exists())
