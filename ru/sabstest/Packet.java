@@ -14,8 +14,8 @@ abstract public class Packet {
 
     public String filename;
 
-    public Sign firstSign;
-    public Sign secondSign;
+    Sign firstSign;
+    Sign secondSign;
 
     public boolean isVER = true;
 

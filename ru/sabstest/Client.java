@@ -18,8 +18,8 @@ public class Client {
 
     public String edAuthor;
 
-    public Sign firstSign;
-    public Sign secondSign;
+    Sign firstSign;
+    Sign secondSign;
 
     @Override
     public int hashCode() {

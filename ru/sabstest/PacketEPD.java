@@ -19,11 +19,12 @@ import org.w3c.dom.NodeList;
  * 
  */
 public class PacketEPD extends Packet implements Generate<Element>, ReadED {
-    private List<PaymentDocument> pdList;
 
     public int edQuantity;
     public int sum;
     public String systemCode;
+
+    public List<PaymentDocument> pdList;
 
     public PacketEPD() {
 
