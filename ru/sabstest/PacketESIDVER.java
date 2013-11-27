@@ -58,7 +58,8 @@ public class PacketESIDVER extends Packet implements Generate<PacketEPD>,
 
     @Override
     public void setFileName() {
-	filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate)
+	filename = Settings.kcoi
+		+ new SimpleDateFormat("yyyyMMdd").format(edDate)
 		+ String.format("%09d", edNo) + ".PacketESIDVER_RYM";
     }
 
@@ -191,7 +192,7 @@ public class PacketESIDVER extends Packet implements Generate<PacketEPD>,
 	    db.connect();
 
 	    String uic = Settings.bik.substring(2) + "000";
-	    String uicRKC = "4583001999";
+	    String uicRKC = Settings.kcoi;
 
 	    String query = "INSERT INTO [dbo].[epay_Packet]\r\n"
 		    + "([ID_Depart], [ID_ARM], [User_Insert], [InOutMode],\r\n"

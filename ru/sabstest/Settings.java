@@ -29,6 +29,7 @@ public class Settings {
     public static String fullfolder = "";
     public static String datafolder = "";
     public static String rkc = "";
+    public static String kcoi = "4583001999";
     // DM+
     public static String dumpname = "";
     // public static String mainwindowname = "";

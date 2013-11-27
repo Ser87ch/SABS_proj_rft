@@ -248,7 +248,7 @@ abstract public class Packet {
     public int insertIntoDBPacket(DB db, int sum, String type) {
 	int idPacket = 0;
 	String uic = Settings.bik.substring(2) + "000";
-	String uicRKC = "4583001999";
+	String uicRKC = Settings.kcoi;
 	if (isVER)
 	    try {
 

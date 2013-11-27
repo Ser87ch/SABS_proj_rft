@@ -44,7 +44,8 @@ public class ED743_VER extends Holder<ED243> implements Generate<Element> {
 
     @Override
     public void setFileName() {
-	filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate)
+	filename = Settings.kcoi
+		+ new SimpleDateFormat("yyyyMMdd").format(edDate)
 		+ String.format("%09d", edNo) + ".ED743_VER";
 
     }

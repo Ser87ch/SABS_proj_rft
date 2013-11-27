@@ -38,7 +38,8 @@ public class ED708_VER extends Holder<ED208> implements Generate<ED743_VER> {
 
     @Override
     public void setFileName() {
-	filename = edAuthor + new SimpleDateFormat("yyyyMMdd").format(edDate)
+	filename = Settings.kcoi
+		+ new SimpleDateFormat("yyyyMMdd").format(edDate)
 		+ String.format("%09d", edNo) + ".ED708_VER";
     }
 
