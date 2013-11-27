@@ -15,20 +15,11 @@ public class PervVvod extends PervVvodHelper {
 	String num = (String) args[1];
 
 	callScript("SABS.VFD", new String[] { Settings.Login.pervvod.key });
-	// ExecutorService es = Executors.newCachedThreadPool();
-	Runnable r = new Runnable() {
 
-	    @Override
-	    public void run() {
-		callScript("SABS.StartSABS",
-			new String[] { Settings.Login.pervvod.user,
-				Settings.Login.pervvod.pwd,
-				Settings.Login.pervvod.sign });
+	callScript("SABS.StartSABS", new String[] {
+		Settings.Login.pervvod.user, Settings.Login.pervvod.pwd,
+		Settings.Login.pervvod.sign });
 
-	    }
-	};
-	// es.execute(r);
-	r.run();
 	SABSwindow().waitForExistence();
 
 	Menutree().click(atName("¬вод документов"));
