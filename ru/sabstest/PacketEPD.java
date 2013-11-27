@@ -352,8 +352,8 @@ public class PacketEPD extends Packet implements Generate<Element>, ReadED {
 		    Settings.pwd);
 	    db.connect();
 
-	    String uic = Settings.bik.substring(2) + "000";
-	    String uicRKC = Settings.kcoi;
+	    String uic = Settings.bik.substring(2) + "000" + "00";
+	    String uicRKC = Settings.kcoi + "00";
 	    String query = "INSERT INTO [dbo].[epay_Packet]\r\n"
 		    + "([ID_Depart], [ID_ARM], [User_Insert], [InOutMode],\r\n"
 		    + " [Date_Oper], [EDNo], [EDDate], [EDAuthor], [EDReceiver], [EDQuantity],\r\n"

@@ -251,7 +251,8 @@ abstract public class Packet {
 	String uicRKC = Settings.kcoi;
 	if (isVER)
 	    try {
-
+		uic = uic + "00";
+		uicRKC = uicRKC + "00";
 		String query = "INSERT INTO [dbo].[epay_Packet]\r\n"
 			+ "([ID_Depart], [ID_ARM], [User_Insert], [InOutMode],\r\n"
 			+ " [Date_Oper], [EDNo], [EDDate], [EDAuthor], [EDReceiver], [EDQuantity],\r\n"

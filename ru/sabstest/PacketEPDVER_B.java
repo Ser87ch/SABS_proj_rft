@@ -182,8 +182,8 @@ public class PacketEPDVER_B extends Packet implements ReadED,
 		    Settings.pwd);
 	    db.connect();
 
-	    String uic = Settings.bik.substring(2) + "000";
-	    String uicRKC = Settings.kcoi;
+	    String uic = Settings.bik.substring(2) + "000" + "00";
+	    String uicRKC = Settings.kcoi + "00";
 
 	    String query = "INSERT INTO [dbo].[epay_Packet]\r\n"
 		    + "([ID_Depart], [ID_ARM], [User_Insert], [InOutMode],\r\n"
@@ -211,9 +211,9 @@ public class PacketEPDVER_B extends Packet implements ReadED,
 		    + DB.toString(filename)
 		    + ", 0, 0, \r\n"
 		    + " 0, null, null, null, "
-		    + DB.toString(uic + "00")
+		    + DB.toString(uic)
 		    + ", "
-		    + DB.toString(uicRKC + "00")
+		    + DB.toString(uicRKC)
 		    + ", 1, \r\n"
 		    + // Mesto MesFrom?
 		    " 5, null, '20120202', 3, 1, 1, 1,\r\n"
