@@ -22,9 +22,7 @@ public class Main {
 	    Init.load();
 	    Settings.readXML(Settings.testProj + "settings\\general.xml");
 
-	    XML.createXMLFromBase64(
-		    "C:\\test\\452500000020130701000000200.ED773_VER",
-		    "C:\\test\\1.xml");
+	    XML.createXMLFromBase64("C:\\test\\X0010107.401", "C:\\test\\1.xml");
 	    // XML.createXMLFromBase64("C:\\test\\1\\003700200020130701000000040.ED743_VER",
 	    // "C:\\test\\1\\743.xml");
 	    // XML.createXMLFromBase64("C:\\test\\1\\458200200020130701000000023.ED708_VER",

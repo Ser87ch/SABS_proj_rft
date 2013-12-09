@@ -63,6 +63,13 @@ public class MainWindow {
 		return;
 	    }
 
+	    if (sizeEt != sizeOut) {
+		JOptionPane.showMessageDialog(null,
+			"Количество файлов не совпадает.", "Сообщение",
+			JOptionPane.ERROR_MESSAGE);
+		return;
+	    }
+
 	    rOut = new ReadEDList();
 	    rEt = new ReadEDList();
 
