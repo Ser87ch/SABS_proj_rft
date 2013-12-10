@@ -108,6 +108,10 @@ public class XML {
 
     }
 
+    public static Element getXMLRootElement(File fl) {
+	return getXMLRootElement(fl.getAbsolutePath());
+    }
+
     public static Element getXMLRootElementFromStringUTF(String src) {
 	Element root = null;
 	try {

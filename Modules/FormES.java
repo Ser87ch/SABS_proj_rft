@@ -5,14 +5,13 @@ import java.util.List;
 
 import resources.Modules.FormESHelper;
 import ru.sabstest.Log;
-import ru.sabstest.Pack;
 import ru.sabstest.Settings;
 
 public class FormES extends FormESHelper {
 
     public void testMain(Object[] args) {
 	List<String> st = Arrays.asList((String[]) args[0]);
-	String num = (String) args[1];
+	// String num = (String) args[1];
 
 	callScript("SABS.VFD", new String[] { Settings.Login.formes.key });
 	callScript("SABS.StartSABS", new String[] { Settings.Login.formes.user,
@@ -108,7 +107,7 @@ public class FormES extends FormESHelper {
 
 	callScript("SABS.CloseSABS");
 
-	if (st.contains("CopyFromSABS"))
-	    Pack.copyFromSABS(num, true);
+	// if (st.contains("CopyFromSABS"))
+	// Pack.copyFromSABS(num, true);
     }
 }

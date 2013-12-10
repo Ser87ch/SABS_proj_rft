@@ -1,5 +1,10 @@
 package Modules;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -73,5 +78,80 @@ public class ContrES extends ContrESHelper {
 	Log.msg("ЭС проконтролировано.");
 
 	callScript("SABS.CloseSABS");
+
+	if (st.contains("VERnach"))
+	    copyFromSABS(num, true);
+	else if (st.contains("UFEBSnach"))
+	    copyFromSABS(num, false);
+    }
+
+    private void copyFromSABS(String num, boolean isVER) {
+	File[] files;
+	if (isVER)
+	    files = new File(Settings.path + "post\\kPuO\\").listFiles();
+	else
+	    files = new File(Settings.path + "post\\kUfO\\").listFiles();
+
+	run(Settings.path + "\\bin\\ConvXML.exe", Settings.path + "\\bin");
+
+	for (File fl : files) {
+	    String key, profile;
+
+	    if (isVER) {
+		key = Settings.Sign.keycontr;
+		profile = Settings.Sign.signcontr;
+	    } else {
+		key = Settings.Login.contres.key;
+		profile = Settings.Login.contrvvod.sign;
+	    }
+	    callScript("SABS.VFD", new String[] { key });
+	    sleep(1);
+
+	    run(Settings.path + "\\bin\\clienXML.exe -ipv0 " + profile + " 0",
+		    Settings.path + "\\bin");
+	    sleep(1);
+
+	    run(Settings.path + "\\bin\\clienXML.exe -xtf "
+		    + fl.getAbsolutePath() + " 1 1", Settings.path + "\\bin");
+	    sleep(1);
+
+	    File deFile = new File(fl.getParentFile(), "XmlFileKA.dat");
+
+	    try {
+		BufferedReader br = new BufferedReader(new FileReader(deFile));
+
+		String xml = br.readLine();
+		br.close();
+
+		int signIndex = xml.lastIndexOf("o000000");
+
+		xml = xml.substring(0, signIndex);
+
+		File nf = new File(Settings.fullfolder + "\\output\\" + num
+			+ "\\" + fl.getName());
+
+		if (nf.exists())
+		    nf.delete();
+
+		BufferedWriter bw = new BufferedWriter(new FileWriter(nf));
+
+		bw.write(xml);
+		bw.flush();
+		bw.close();
+
+	    } catch (Exception e) {
+
+		e.printStackTrace();
+	    }
+
+	    // Pack.copyFile(deFile.getAbsolutePath(), Settings.fullfolder
+	    // + "\\output\\" + num + "\\" + fl.getName());
+
+	    deFile.delete();
+	    deFile = new File(fl.getParentFile(), "XmlFileZK.dat");
+	    if (deFile.exists())
+		deFile.delete();
+	}
+
     }
 }

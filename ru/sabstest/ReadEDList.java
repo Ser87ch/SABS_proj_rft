@@ -55,25 +55,27 @@ public class ReadEDList {
 	    for (File fl : files) {
 
 		Element root = XML.getXMLRootElement(fl.getAbsolutePath());
-		String type = root.getElementsByTagNameNS("*", "DocType")
-			.item(0).getTextContent();
-		try {
-		    if (type.equals("PacketEPDVER_B"))
-			type = Packet.getEncodedElement(fl.getAbsolutePath(),
-				true).getLocalName();
-		    else
-			type = Packet.getEncodedElement(fl.getAbsolutePath(),
-				false).getLocalName();
-		} catch (Exception e) {
-		    continue;
-		}
+		String type = root.getLocalName();
+		// String type = root.getElementsByTagNameNS("*", "DocType")
+		// .item(0).getTextContent();
+		// try {
+		// if (type.equals("PacketEPDVER_B"))
+		// type = Packet.getEncodedElement(fl.getAbsolutePath(),
+		// true).getLocalName();
+		// else
+		// type = Packet.getEncodedElement(fl.getAbsolutePath(),
+		// false).getLocalName();
+		// } catch (Exception e) {
+		// continue;
+		// }
 		ReadED p = Packet.createReadEDByFile(type);
 
 		if (p != null) {
-		    if (type.equals("PacketEPDVER_B"))
-			p.readEncodedFile(fl, true);
-		    else
-			p.readEncodedFile(fl, false);
+		    // if (type.equals("PacketEPDVER_B"))
+		    // p.readEncodedFile(fl, true);
+		    // else
+		    // p.readEncodedFile(fl, false);
+		    p.readXML(XML.getXMLRootElement(fl));
 		    pList.add(p);
 		}
 	    }
@@ -101,21 +103,22 @@ public class ReadEDList {
 
 		Element root = XML
 			.getXMLRootElement(pathname.getAbsolutePath());
-		String docType = root.getElementsByTagNameNS("*", "DocType")
-			.item(0).getTextContent();
-
-		try {
-		    if (docType.equals("PacketEPDVER_B"))
-			docType = Packet.getEncodedElement(
-				pathname.getAbsolutePath(), true)
-				.getLocalName();
-		    else
-			docType = Packet.getEncodedElement(
-				pathname.getAbsolutePath(), false)
-				.getLocalName();
-		} catch (Exception e) {
-		    return false;
-		}
+		String docType = root.getLocalName();
+		// String docType = root.getElementsByTagNameNS("*", "DocType")
+		// .item(0).getTextContent();
+		//
+		// try {
+		// if (docType.equals("PacketEPDVER_B"))
+		// docType = Packet.getEncodedElement(
+		// pathname.getAbsolutePath(), true)
+		// .getLocalName();
+		// else
+		// docType = Packet.getEncodedElement(
+		// pathname.getAbsolutePath(), false)
+		// .getLocalName();
+		// } catch (Exception e) {
+		// return false;
+		// }
 
 		if (docType.equals(type))
 		    return true;

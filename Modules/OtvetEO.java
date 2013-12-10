@@ -13,7 +13,6 @@ import ru.sabstest.Generate;
 import ru.sabstest.GenerateFromED273List;
 import ru.sabstest.GenerateFromXMLList;
 import ru.sabstest.Log;
-import ru.sabstest.Pack;
 import ru.sabstest.Settings;
 
 public class OtvetEO extends OtvetEOHelper {
@@ -74,7 +73,7 @@ public class OtvetEO extends OtvetEOHelper {
 
 	callScript("SABS.CloseSABS");
 
-	if (st.contains("CopyFromSABS"))
-	    Pack.copyFromSABS(num, false);
+	// if (st.contains("CopyFromSABS"))
+	// Pack.copyFromSABS(num, false);
     }
 }
