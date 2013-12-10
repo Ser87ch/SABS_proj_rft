@@ -102,7 +102,7 @@ public class ContrES extends ContrESHelper {
 		profile = Settings.Sign.signcontr;
 	    } else {
 		key = Settings.Login.contres.key;
-		profile = Settings.Login.contrvvod.sign;
+		profile = Settings.Login.contres.sign;
 	    }
 	    callScript("SABS.VFD", new String[] { key });
 	    sleep(1);
