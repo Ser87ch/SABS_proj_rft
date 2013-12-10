@@ -92,10 +92,10 @@ public class ContrES extends ContrESHelper {
 	else
 	    files = new File(Settings.path + "post\\kUfO\\").listFiles();
 
-	run(Settings.path + "\\bin\\ConvXML.exe", Settings.path + "\\bin");
-
 	for (File fl : files) {
 	    String key, profile;
+
+	    run(Settings.path + "\\bin\\ConvXML.exe", Settings.path + "\\bin");
 
 	    if (isVER) {
 		key = Settings.Sign.keycontr;
