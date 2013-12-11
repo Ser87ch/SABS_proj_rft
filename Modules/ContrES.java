@@ -101,9 +101,8 @@ public class ContrES extends ContrESHelper {
 		key = Settings.Sign.keycontr;
 		profile = Settings.Sign.signcontr;
 	    } else {
-		String clCode = fl.getName().substring(9);
-		key = "contr_ok_" + clCode + ".fdd";
-		profile = "CONTR_OK_" + clCode;
+		key = Settings.Login.contres.key;
+		profile = Settings.Login.contres.sign;
 	    }
 	    callScript("SABS.VFD", new String[] { key });
 	    sleep(1);
