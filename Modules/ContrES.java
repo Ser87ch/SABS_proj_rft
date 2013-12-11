@@ -113,9 +113,10 @@ public class ContrES extends ContrESHelper {
 
 	    run(Settings.path + "\\bin\\clienXML.exe -xtf "
 		    + fl.getAbsolutePath() + " 1 1", Settings.path + "\\bin");
-	    sleep(1);
 
 	    File deFile = new File(fl.getParentFile(), "XmlFileKA.dat");
+	    while (!deFile.exists())
+		sleep(0.5);
 
 	    try {
 		BufferedReader br = new BufferedReader(new FileReader(deFile));
