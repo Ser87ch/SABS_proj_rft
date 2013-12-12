@@ -1,9 +1,7 @@
 package Modules;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.List;
@@ -119,10 +117,7 @@ public class ContrES extends ContrESHelper {
 		sleep(0.5);
 
 	    try {
-		BufferedReader br = new BufferedReader(new FileReader(deFile));
-
-		String xml = br.readLine();
-		br.close();
+		String xml = Pack.readFile(deFile.getAbsolutePath());
 
 		int signIndex = xml.lastIndexOf("o000000");
 
