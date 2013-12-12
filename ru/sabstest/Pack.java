@@ -162,7 +162,8 @@ public class Pack {
     }
 
     public static String readFile(String file) throws IOException {
-	BufferedReader reader = new BufferedReader(new FileReader(file));
+	FileReader fr = new FileReader(file);
+	BufferedReader reader = new BufferedReader(fr);
 	String line = null;
 	StringBuilder stringBuilder = new StringBuilder();
 	String ls = System.getProperty("line.separator");
@@ -172,6 +173,8 @@ public class Pack {
 	    stringBuilder.append(ls);
 	}
 
+	reader.close();
+	fr.close();
 	return stringBuilder.toString();
     }
 }
