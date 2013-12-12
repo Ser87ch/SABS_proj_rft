@@ -79,7 +79,7 @@ public class ContrES extends ContrESHelper {
 
 	if (st.contains("VERnach"))
 	    copyFromSABS(num, true);
-	else if (st.contains("UFEBSnach"))
+	if (st.contains("UFEBSnach"))
 	    copyFromSABS(num, false);
     }
 
