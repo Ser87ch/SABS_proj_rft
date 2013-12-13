@@ -60,7 +60,7 @@ public class ReadEDList {
 		    root = XML.getXMLRootElement(fl.getAbsolutePath());
 		else
 		    try {
-			root = XML.getXMLRootElementFromString1251(Pack
+			root = XML.getXMLRootElementFromStringUTF(Pack
 				.readFile(fl.getAbsolutePath()));
 		    } catch (IOException e) {
 			e.printStackTrace();
