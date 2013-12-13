@@ -92,18 +92,19 @@ public class ContrES extends ContrESHelper {
 
 	run(Settings.path + "\\bin\\ConvXML.exe", Settings.path + "\\bin");
 
-	for (File fl : files) {
-	    String key, profile;
+	String key, profile;
 
-	    if (isVER) {
-		key = Settings.Sign.keycontr;
-		profile = Settings.Sign.signcontr;
-	    } else {
-		key = Settings.Login.contres.key;
-		profile = Settings.Login.contres.sign;
-	    }
-	    callScript("SABS.VFD", new String[] { key });
-	    sleep(1);
+	if (isVER) {
+	    key = Settings.Sign.keycontr;
+	    profile = Settings.Sign.signcontr;
+	} else {
+	    key = Settings.Login.contres.key;
+	    profile = Settings.Login.contres.sign;
+	}
+	callScript("SABS.VFD", new String[] { key });
+	sleep(1);
+
+	for (File fl : files) {
 
 	    run(Settings.path + "\\bin\\clienXML.exe -ipv0 " + profile + " 0",
 		    Settings.path + "\\bin");
