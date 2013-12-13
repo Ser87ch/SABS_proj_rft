@@ -2,6 +2,7 @@ package ru.sabstest;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -53,8 +54,18 @@ public class ReadEDList {
 
 	if (files != null && files.length > 0) {
 	    for (File fl : files) {
+		Element root = null;
 
-		Element root = XML.getXMLRootElement(fl.getAbsolutePath());
+		if (fl.getName().endsWith("PacketEPDVER_B"))
+		    root = XML.getXMLRootElement(fl.getAbsolutePath());
+		else
+		    try {
+			root = XML.getXMLRootElementFromString1251(Pack
+				.readFile(fl.getAbsolutePath()));
+		    } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
 		String type = root.getLocalName();
 		// String type = root.getElementsByTagNameNS("*", "DocType")
 		// .item(0).getTextContent();
