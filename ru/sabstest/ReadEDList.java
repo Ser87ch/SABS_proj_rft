@@ -85,7 +85,7 @@ public class ReadEDList {
 		    // p.readEncodedFile(fl, true);
 		    // else
 		    // p.readEncodedFile(fl, false);
-		    p.readXML(XML.getXMLRootElement(fl));
+		    p.readXML(root);
 		    ((Packet) p).filename = fl.getName();
 		    pList.add(p);
 		}
