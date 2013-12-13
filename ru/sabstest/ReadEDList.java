@@ -56,14 +56,13 @@ public class ReadEDList {
 	    for (File fl : files) {
 		Element root = null;
 
-		if (fl.getName().endsWith("PacketEPDVER_B"))
+		if (!fl.getName().endsWith("PacketEPDVER_B"))
 		    root = XML.getXMLRootElement(fl.getAbsolutePath());
 		else
 		    try {
 			root = XML.getXMLRootElementFromString1251(Pack
 				.readFile(fl.getAbsolutePath()));
 		    } catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		    }
 		String type = root.getLocalName();
